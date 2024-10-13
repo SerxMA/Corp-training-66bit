@@ -1,0 +1,5 @@
+.bit-logo {
+	& g {
+		fill: var(--accent-primary);
+	}
+}

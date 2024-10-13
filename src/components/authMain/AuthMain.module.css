@@ -1,0 +1,40 @@
+.auth-main {
+	display: flex;
+	flex-direction: column;
+	align-items: normal;
+	row-gap: 1rem;
+
+	& button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		column-gap: 0.5rem;
+
+		padding: 0.875rem 1rem;
+		border-radius: 0.5rem;
+
+		background-color: var(--accent-primary);
+
+		font: var(--button-text16);
+		line-height: 1.25;
+		letter-spacing: 0.32px;
+		color: var(--content-constant);
+	}
+
+	& label {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		align-self: baseline;
+		column-gap: 0.5rem;
+
+		font: var(--button-text16);
+		line-height: 1.25;
+		letter-spacing: 0.32px;
+		color: var(--content-primary);
+	}
+
+	& input {
+		/* Кастомизировать ПОТОМ... */
+	}
+}

@@ -1,0 +1,15 @@
+.auth-title {
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+
+	margin: 0 auto;
+
+	& svg {
+		margin: 0 auto;
+	}
+
+	& h2 {
+		color: var(--content-primary);
+	}
+}
