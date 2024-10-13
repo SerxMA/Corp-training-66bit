@@ -1,0 +1,115 @@
+:root {
+	font-size: 1em;
+
+	--black: #000000;
+	--black-grey: #212529;
+	--white: #ffffff;
+
+	--main-content: var(--black-grey);
+
+	--main-color-text: var(--main-content);
+	--main-color-border: var(--main-content);
+
+	--heading1: 600 3rem/1.25 Inter;
+	--hading2: 600 2rem/1.25 Inter;
+	--hading3: 600 1.5rem/1.25 Inter;
+	--semiBold20: 600 1.25rem/1.4 Inter;
+	--semiBold16: 600 1rem/1.5 Inter;
+	--bodyMedium18: 500 1.125rem/1.5 Inter;
+	--bodyMedium14: 500 0.875rem/1.42875 Inter;
+	--bodyRegular18: 400 1.125rem/1.5 Inter;
+	--bodyRegular14: 400 0.875rem/1.42875 Inter;
+}
+.dark {
+	/* CODE... */
+}
+
+/* connect fonts */
+/* Inter */
+@font-face {
+	font-family: 'Inter';
+	src: url('../fonts/inter/Inter_18pt-Regular.woff2') format('woff2'),
+		url('../fonts/inter/Inter_18pt-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Inter';
+	src: url('../fonts/inter/Inter_18pt-Medium.woff2') format('woff2'),
+		url('../fonts/inter/Inter_18pt-Medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Inter';
+	src: url('../fonts/inter/Inter_18pt-SemiBold.woff2') format('woff2'),
+		url('../fonts/inter/Inter_18pt-SemiBold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Lato';
+	src: url('../fonts/lato/Lato-Bold.woff2') format('woff2'),
+		url('../fonts/lato/Lato-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+		url('../fonts/roboto/Roboto-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+/* my reset */
+h1,
+h2,
+h3,
+p,
+a,
+button {
+	color: var(--main-color-text);
+}
+h1 {
+	font: var(--heading1);
+}
+h2 {
+	font: var(--hading2);
+}
+h3 {
+	font: var(--hading3);
+}
+a {
+	cursor: pointer;
+}
+button {
+	font: var(--semiBold20);
+}
+img {
+	user-select: none;
+}
+
+/* main css */
+body {
+	background-color: var(--main-bg);
+
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+}
+body,
+#root,
+.App {
+	min-height: 100vh;
+}
+.App {
+	display: flex;
+	flex-direction: column;
+
+	max-width: 1920px;
+	margin: 0 auto;
+}
+
+/* media */
