@@ -1,0 +1,29 @@
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.32px;
+    gap: 0.5rem;
+    background-color: var(--blue-crayola);
+    padding: 1rem ;
+    border-radius: 0.5rem;
+    color: var(--white);
+}
+
+div {
+    align-items: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: baseline;
+}

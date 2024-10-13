@@ -4,15 +4,16 @@
 	--black: #000000;
 	--black-grey: #212529;
 	--white: #ffffff;
+	--blue-crayola: #2a83f2;
 
 	--main-content: var(--black-grey);
 
 	--main-color-text: var(--main-content);
 	--main-color-border: var(--main-content);
 
-	--heading1: 600 3rem/1.25 Inter;
-	--hading2: 600 2rem/1.25 Inter;
-	--hading3: 600 1.5rem/1.25 Inter;
+	--heading1: 600 3rem/1.25 Roboto;
+	--hading2: 600 2rem/1.25 Roboto;
+	--hading3: 600 1.5rem/1.25 Roboto;
 	--semiBold20: 600 1.25rem/1.4 Inter;
 	--semiBold16: 600 1rem/1.5 Inter;
 	--bodyMedium18: 500 1.125rem/1.5 Inter;
@@ -107,6 +108,7 @@ body,
 .App {
 	display: flex;
 	flex-direction: column;
+
 
 	max-width: 1920px;
 	margin: 0 auto;

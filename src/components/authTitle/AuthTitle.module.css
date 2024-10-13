@@ -1,0 +1,10 @@
+.auth-title {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 auto;
+
+    & svg {
+        margin: 0 auto;
+    }
+}
