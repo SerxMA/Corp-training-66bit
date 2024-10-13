@@ -1,14 +1,17 @@
 .wrapper {
-    align-self: center;
-    margin: auto 0;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.5rem;
-    padding: 2rem;
-    background-color: #f9f9fb;
-    border: 1px solid #e9eaeb;
-    box-shadow: 0px 4px 30px 0px rgba(33, 37, 41, 0.07);
-    min-width: 464px;
-    min-height: 288px;
-    gap: 2.5rem
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	gap: 2.5rem;
+
+	min-width: 464px;
+	min-height: 288px;
+	padding: 2rem;
+	margin: auto 0;
+	border-radius: 0.5rem;
+	border: 1px solid #e9eaeb;
+
+	background-color: #f9f9fb;
+
+	box-shadow: 0px 4px 30px 0px rgba(33, 37, 41, 0.07);
 }

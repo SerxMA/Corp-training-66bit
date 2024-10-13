@@ -1,29 +1,32 @@
-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Lato', sans-serif;
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: 0.32px;
-    gap: 0.5rem;
-    background-color: var(--blue-crayola);
-    padding: 1rem ;
-    border-radius: 0.5rem;
-    color: var(--white);
-}
+.auth-main {
+	display: flex;
+	flex-direction: column;
+	align-items: normal;
+	gap: 1.25rem;
 
-div {
-    align-items: normal;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
+	& button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
 
-label {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    align-self: baseline;
+		padding: 1rem;
+		border-radius: 0.5rem;
+
+		background-color: var(--blue-crayola);
+
+		font-family: 'Lato', sans-serif;
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: 0.32px;
+		color: var(--white);
+	}
+
+	& label {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		align-self: baseline;
+		gap: 0.5rem;
+	}
 }
