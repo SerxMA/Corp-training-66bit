@@ -9,22 +9,22 @@ const detectColorMode = () => {
 	return 'light';
 };
 
-const getStorageValue = () => {
-	const saved = localStorage.getItem('theme');
-	const initial = JSON.parse(saved);
+const getStorageThemeValue = () => {
+	const savedTheme = localStorage.getItem('theme');
+	const initial = JSON.parse(savedTheme);
 	return initial || detectColorMode();
 };
 
 const useTheme = () => {
-	const [value, setValue] = useState(() => {
-		return getStorageValue();
+	const [theme, setTheme] = useState(() => {
+		return getStorageThemeValue();
 	});
 
 	useEffect(() => {
-		localStorage.setItem('theme', JSON.stringify(value));
-	}, [value]);
+		localStorage.setItem('theme', JSON.stringify(theme));
+	}, [theme]);
 
-	return [value, setValue];
+	return [theme, setTheme];
 };
 
 export default useTheme;
