@@ -1,96 +1,27 @@
 :root {
 	font-size: 1em;
 
-	/* content */
-	--content-constant: #ffffff;
-	--content-primary: #212529;
-	--content-subPrimary: #444647;
-	--content-secondary: #76787a;
-	--content-disabled: #bcbfc2;
-	--content-border: #d2d4d6;
-	--content-background: #e9eaeb;
+	--black: #000000;
+	--black-grey: #212529;
+	--white: #ffffff;
 
-	/* accent */
-	--accent-primary: #2a83f2;
-	--accent-subPrimary: #5098f2;
-	--accent-secondary: #77aef2;
-	--accent-disabled: #9fc5f5;
-	--accent-border: #cbdff7;
-	--accent-background: #e6effa;
+	--main-content: var(--black-grey);
 
-	/* system */
-	--system-success-primary: #24ce9f;
-	--system-success-background: #d2faef;
-	--system-error-primary: #f22a41;
-	--system-error-background: #ffd6db;
-	--system-warning-primary: #f2b325;
-	--sustem-warning-background: #fcf0d4;
+	--main-color-text: var(--main-content);
+	--main-color-border: var(--main-content);
 
-	/* backgroung */
-	--background-primary: #ffffff;
-	--background-secondary: #f7f8fa;
-	--background-modal: #ffffff;
-	--background-overlay-dark: rgba(33, 37, 41, 0.72);
-	--background-overlay-light: rgba(33, 37, 41, 0.52);
-
-	/* colors */
-	--red-main: #f22a41;
-	--red-background: #ffd6d8;
-	--green-main: #24ce9f;
-	--green-background: #d2faef;
-	--purple-main: #8c8cff;
-	--purple-background: #e6e6fe;
-	--orange-main: #f2b325;
-	--orange-background: #fcf0d4;
-	--blue-main: #2a83f2;
-	--blue-background: #e6effa;
-
-	/* fonts */
-	--heading1: 600 2.5rem/1.3 'Roboto Flex';
-	--hading2: 600 2rem/1.25 'Roboto Flex';
-	--hading3: 600 1.5rem/1.3333 'Roboto Flex';
-	--hading4: 600 1.25rem/1.4 'Roboto Flex';
-	--button-text20: 600 1.25rem/1.4 'Roboto Flex';
-	--button-text16: 600 1rem/1.5 'Roboto Flex';
-	--body-medium16: 500 1rem/1.25 'Roboto Flex';
-	--body-medium14: 500 0.875rem/1.42857 'Roboto Flex';
-	--body-regular16: 400 1rem/1.25 'Roboto Flex';
-	--body-regular14: 400 0.875rem/1.42857 'Roboto Flex';
+	--heading1: 600 3rem/1.25 Inter;
+	--hading2: 600 2rem/1.25 Inter;
+	--hading3: 600 1.5rem/1.25 Inter;
+	--semiBold20: 600 1.25rem/1.4 Inter;
+	--semiBold16: 600 1rem/1.5 Inter;
+	--bodyMedium18: 500 1.125rem/1.5 Inter;
+	--bodyMedium14: 500 0.875rem/1.42875 Inter;
+	--bodyRegular18: 400 1.125rem/1.5 Inter;
+	--bodyRegular14: 400 0.875rem/1.42875 Inter;
 }
 .dark {
-	/* content */
-	--content-primary: #ffffff;
-	--content-subPrimary: #c2c2c2;
-	--content-secondary: #8f8f8f;
-	--content-disabled: #474747;
-	--content-border: #333333;
-	--content-background: #292929;
-
-	/* accent */
-	--accent-primary: #8c8cff;
-	--accent-subPrimary: #7777d9;
-	--accent-secondary: #6262b3;
-	--accent-disabled: #464680;
-	--accent-border: #383866;
-	--accent-background: #2a2a4d;
-
-	/* system */
-	--system-success-background: #083327;
-	--system-error-primary: #f22a41;
-	--system-error-background: #38090e;
-	--sustem-warning-background: #332608;
-
-	/* backgroung */
-	--background-primary: #141414;
-	--background-secondary: #191919;
-	--background-modal: #232323;
-
-	/* colors */
-	--red-background: #38090e;
-	--green-background: #083327;
-	--purple-background: #2a2a4d;
-	--orange-background: #332608;
-	--blue-background: #081c35;
+	/* CODE... */
 }
 
 /* connect fonts */
@@ -116,7 +47,7 @@
 	font-weight: 600;
 	font-style: normal;
 }
-/* Lato */
+
 @font-face {
 	font-family: 'Lato';
 	src: url('../fonts/lato/Lato-Bold.woff2') format('woff2'),
@@ -124,18 +55,24 @@
 	font-weight: 700;
 	font-style: normal;
 }
-/* Roboto */
+
 @font-face {
-	font-family: 'Roboto Flex';
-	src: url('../fonts/roboto/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.woff2')
-			format('woff2'),
-		url('../fonts/roboto/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.woff')
-			format('woff');
-	font-weight: 400 700;
+	font-family: 'Roboto';
+	src: url('../fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+		url('../fonts/roboto/Roboto-Bold.woff') format('woff');
+	font-weight: 700;
 	font-style: normal;
 }
 
 /* my reset */
+h1,
+h2,
+h3,
+p,
+a,
+button {
+	color: var(--main-color-text);
+}
 h1 {
 	font: var(--heading1);
 }
@@ -148,8 +85,8 @@ h3 {
 a {
 	cursor: pointer;
 }
-p {
-	font: var(--body-regular16);
+button {
+	font: var(--semiBold20);
 }
 img {
 	user-select: none;
@@ -157,7 +94,7 @@ img {
 
 /* main css */
 body {
-	background-color: var(--background-primary);
+	background-color: var(--main-bg);
 
 	font-family: 'Inter', sans-serif;
 	font-weight: 400;
@@ -174,3 +111,5 @@ body,
 	max-width: 1920px;
 	margin: 0 auto;
 }
+
+/* media */
