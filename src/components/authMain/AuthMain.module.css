@@ -13,7 +13,7 @@
 		padding: 0.875rem 1rem;
 		border-radius: 0.5rem;
 
-		background-color: var(--accent-primary, #2a83f2);
+		background-color: var(--accent-primary);
 
 		font: var(--button-text16);
 		line-height: 1.25;
@@ -31,7 +31,7 @@
 		font: var(--button-text16);
 		line-height: 1.25;
 		letter-spacing: 0.32px;
-		color: var(--content-primary, #212529);
+		color: var(--content-primary);
 	}
 
 	& input {
