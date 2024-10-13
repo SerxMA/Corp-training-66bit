@@ -10,7 +10,7 @@ const AuthMain = () => {
 			</button>
 			<label htmlFor="remember_me">
 				<input type="checkbox" id="remember_me" />
-				<span> Запомнить меня</span>
+				<span>Запомнить меня</span>
 			</label>
 		</div>
 	);
