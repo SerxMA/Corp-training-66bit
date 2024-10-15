@@ -1,5 +1,5 @@
-import AuthTitle from '../../components/authTitle/AuthTitle';
-import AuthMain from '../../components/authMain/AuthMain';
+import AuthTitle from '../../components/authentication/authTitle/AuthTitle';
+import AuthMain from '../../components/authentication/authMain/AuthMain';
 
 import styles from './Authentication.module.css';
 

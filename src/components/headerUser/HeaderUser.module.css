@@ -1,0 +1,11 @@
+.header-wrapper {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+
+    width: 100%;
+
+    background-color: var(--background-primary);
+
+    outline: 1px solid var(--Content-color-content-background, var(--content-background));
+}

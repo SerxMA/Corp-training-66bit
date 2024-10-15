@@ -1,0 +1,12 @@
+.avatar-btn {
+    display: flex;
+    align-items: center;
+
+    padding: 0.125rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 6.25rem;
+
+    outline: 1px solid var(--Content-color-content-background, var(--content-background));
+
+}
