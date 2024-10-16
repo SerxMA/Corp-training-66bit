@@ -7,5 +7,5 @@
     max-width: 21.25rem;
     width: 100%;
 
-    border-right: 1px solid var(--Content-color-content-background, var(--content-background));
+    border-right: 1px solid var(--content-background);
 }

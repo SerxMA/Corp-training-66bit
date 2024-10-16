@@ -7,5 +7,5 @@
 
     border-radius: 0.25rem;
 
-    background: var(--Background-color-background-secondary, var(--background-secondary));
+    background: var(--background-secondary);
 }
