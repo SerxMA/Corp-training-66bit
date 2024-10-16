@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 import Certificates from './icons/certificates/Certificates';
 import ChartPie from './icons/chartPie/ChartPie';
 import Grid from './icons/grid/Grid';
@@ -7,9 +9,9 @@ import Staff from './icons/staff/Staff';
 import styles from './NavItem.module.css';
 
 const ITEM_TYPE = {
-	courses: { href: '', Icon: Grid, text: 'Курсы', disabled: false },
+	courses: { href: '/', Icon: Grid, text: 'Курсы', disabled: false },
 	statement: {
-		href: '',
+		href: '/statement',
 		Icon: Statement,
 		text: 'Ведомость',
 		disabled: false,
@@ -18,8 +20,8 @@ const ITEM_TYPE = {
 	certificates: {
 		href: '#',
 		Icon: Certificates,
-		text: 'Сертиифкаты',
-		disabled: false,
+		text: 'Сертификаты',
+		disabled: true,
 	},
 	staff: {
 		href: '#',
@@ -30,37 +32,42 @@ const ITEM_TYPE = {
 };
 
 const NavItem = ({ type }) => {
-	const loction = true; //Заглушка
 	const { href, Icon, text, disabled } = ITEM_TYPE[type];
 
 	return (
 		<li className={styles['nav-item']}>
-			<a
-				href={disabled ? undefined : href}
-				className={disabled ? styles['disabled-link'] : ''}
+			<NavLink
+				to={disabled ? undefined : href}
+				className={() => (disabled ? styles['disabled-link'] : '')}
 			>
-				<Icon
-					color={
-						disabled
-							? 'var(--content-disabled)'
-							: loction
-							? 'var(--purple-main)'
-							: undefined
-					}
-				/>
-				<span
-					style={{
-						color: disabled
-							? 'var(--content-disabled)'
-							: loction
-							? 'var(--purple-main)'
-							: undefined,
-					}}
-				>
-					{text}
-				</span>
-				{disabled && <span className={styles['soon-text']}>Скоро</span>}
-			</a>
+				{({ isActive }) => (
+					<>
+						<Icon
+							color={
+								disabled
+									? 'var(--content-disabled)'
+									: isActive
+									? 'var(--purple-main)'
+									: undefined
+							}
+						/>
+						<span
+							style={{
+								color: disabled
+									? 'var(--content-disabled)'
+									: isActive
+									? 'var(--purple-main)'
+									: undefined,
+							}}
+						>
+							{text}
+						</span>
+						{disabled && (
+							<span className={styles['soon-text']}>Скоро</span>
+						)}
+					</>
+				)}
+			</NavLink>
 		</li>
 	);
 };
