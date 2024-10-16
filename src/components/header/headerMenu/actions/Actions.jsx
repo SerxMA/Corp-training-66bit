@@ -10,7 +10,7 @@ import styles from './Actions.module.css'
 
 const Actions = () => {
 
-    const actions = [
+    const ACTIONS = [
         {path: '/notifications', Icon: Bell},
         {path: '/messages', Icon: Message},
         {path: '/settings', Icon: Settings},
@@ -21,7 +21,7 @@ const Actions = () => {
     return (
         <div className={styles['actions-wrapper']}>
             {
-            actions.map((action, index) => (
+            ACTIONS.map((action, index) => (
                 <ActionButton key={index} path={action.path} Icon={action.Icon} />
             ))}
         </div>
