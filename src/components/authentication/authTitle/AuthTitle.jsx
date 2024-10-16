@@ -1,4 +1,4 @@
-import BitLogo from '../bitLogo/BitLogo';
+import BitLogo from '../bitLogoMini/BitLogoMini';
 
 import styles from './AuthTitle.module.css';
 

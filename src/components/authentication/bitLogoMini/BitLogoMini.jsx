@@ -1,4 +1,4 @@
-import styles from './BitLogo.module.css';
+import styles from './BitLogoMini.module.css';
 
 const BitLogo = () => {
 	return (
