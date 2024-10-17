@@ -1,14 +1,15 @@
-import styles from './Header.module.css'
-import LogoBlock from './logoBlock/LogoBlock';
-import HeaderMenu from './headerMenu/HeaderMenu';
+import LogoBlock from './components/logoBlock/LogoBlock';
+import HeaderMenu from './components/headerMenu/HeaderMenu';
+
+import styles from './Header.module.css';
 
 const Header = () => {
-    return (
-        <div className={styles['header-wrapper']}>
-            <LogoBlock/>
-            <HeaderMenu />
-        </div>
-    );
+	return (
+		<div className={styles['header-wrapper']}>
+			<LogoBlock />
+			<HeaderMenu />
+		</div>
+	);
 };
 
 export default Header;
