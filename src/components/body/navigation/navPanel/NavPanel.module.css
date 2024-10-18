@@ -2,6 +2,7 @@
 	width: 340px;
 	height: 100vh;
 	border-right: 1px solid var(--content-background);
+	position: fixed;
 
 	background-color: var(--background-primary);
 }

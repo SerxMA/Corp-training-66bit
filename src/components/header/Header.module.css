@@ -8,4 +8,6 @@
     background-color: var(--background-primary);
 
     outline: 1px solid var(--Content-color-content-background, var(--content-background));
+
+    z-index: 10000;
 }
