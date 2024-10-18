@@ -1,13 +1,12 @@
 .header-wrapper {
-    display: flex;
-    position: fixed;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 
-    width: 100%;
+	width: 100%;
+	position: fixed;
+	border-bottom: 1px solid var(--content-background);
 
-    background-color: var(--background-primary);
+	background-color: var(--background-primary);
 
-    outline: 1px solid var(--Content-color-content-background, var(--content-background));
-
-    z-index: 10000;
+	z-index: 10;
 }

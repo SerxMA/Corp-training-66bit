@@ -1,8 +1,8 @@
 .nav-panel {
-	width: 340px;
-	height: 100vh;
-	border-right: 1px solid var(--content-background);
 	position: fixed;
+	width: 340px;
+	height: 100%;
+	border-right: 1px solid var(--content-background);
 
 	background-color: var(--background-primary);
 }
