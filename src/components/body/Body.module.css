@@ -1,8 +1,0 @@
-.content-wrapper {
-    display: flex;
-    flex-direction: row;
-
-    margin-top: 3.5rem;
-
-    background-color: var(--background-secondary);
-}
