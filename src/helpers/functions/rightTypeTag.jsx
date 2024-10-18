@@ -19,7 +19,7 @@ const rightTypeTag = (type, color) => {
 			return { text: 'Аналитика', image: <Statistic color={color} /> };
 		case 'ux':
 			return { text: 'UI/UX дизайн', image: <Ux color={color} /> };
-		case 'g-design':
+		case 'design':
 			return {
 				text: 'Графический дизайн',
 				image: <Brush color={color} />,

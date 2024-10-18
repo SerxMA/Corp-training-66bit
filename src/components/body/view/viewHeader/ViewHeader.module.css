@@ -4,12 +4,10 @@
 	gap: 0.5rem;
 
 	position: fixed;
-	width: calc(100% - 340px);
+	width: calc(100% - 20rem);
 	height: auto;
 	padding: 0.5rem;
 	border-bottom: 1px solid var(--content-background);
 
 	background-color: var(--background-secondary);
-
-	z-index: 10;
 }

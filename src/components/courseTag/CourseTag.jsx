@@ -3,15 +3,16 @@ import rightTypeTag from '../../helpers/functions/rightTypeTag';
 import styles from './CourseTag.module.css';
 
 const colorMapping = {
-	blue: { bgc: 'var(--blue-background)', text: 'var(--blue-main)' },
-	red: { bgc: 'var(--red-background)', text: 'var(--red-main)' },
-	green: { bgc: 'var(--green-background)', text: 'var(--green-main)' },
-	orange: { bgc: 'var(--orange-background)', text: 'var(--orange-main)' },
-	purple: { bgc: 'var(--purple-background)', text: 'var(--purple-main)' },
+	analytics: { bgc: 'var(--blue-background)', text: 'var(--blue-main)' },
+	learning: { bgc: 'var(--red-background)', text: 'var(--red-main)' },
+	front: { bgc: 'var(--orange-background)', text: 'var(--orange-main)' },
+	back: { bgc: 'var(--orange-background)', text: 'var(--orange-main)' },
+	ux: { bgc: 'var(--purple-background)', text: 'var(--purple-main)' },
+	design: { bgc: 'var(--purple-background)', text: 'var(--purple-main)' },
 };
 
-const CourseTag = ({ color, type }) => {
-	const colors = colorMapping[color];
+const CourseTag = ({ type }) => {
+	const colors = colorMapping[type];
 	const { text, image } = rightTypeTag(type, colors.text);
 
 	return (
@@ -20,7 +21,7 @@ const CourseTag = ({ color, type }) => {
 			style={{ backgroundColor: colors.bgc, stroke: colors.text }}
 		>
 			{image}
-			<span style={{ color: colors.text }}>{text}</span>
+			<span style={{ color: colors.text }} className={styles['text']}>{text}</span>
 		</div>
 	);
 };

@@ -4,8 +4,8 @@
 
     padding: 0.625rem 0.75rem;
     height: 56px;
-    max-width: 21.25rem;
     width: 100%;
+    max-width: 20rem;
 
     border-right: 1px solid var(--content-background);
 }
