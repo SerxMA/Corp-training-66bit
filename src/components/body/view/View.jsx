@@ -1,7 +1,5 @@
 import ViewHeader from './viewHeader/ViewHeader';
-
 import styles from './View.module.css';
-import CourseCard from './courseCard/CourseCard';
 
 const View = () => {
 

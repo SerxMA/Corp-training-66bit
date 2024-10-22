@@ -1,0 +1,22 @@
+.filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 2rem;
+
+    padding: 1rem;
+    gap: 0.5rem;
+
+    border-radius: 0.25rem;
+    background: var(--accent-background);
+    color: var(--accent-primary);
+}
+
+.filter-btn:hover {
+    background: var(--accent-border);
+}
+
+.filter-btn:active {
+    background: var(--accent-disabled);
+}
