@@ -5,10 +5,10 @@ import {
 } from 'react-router-dom';
 
 import Authentication from './pages/authentication/Authentication';
-import UserMain from './pages/userMain/UserMain';
-import Layout from './components/layout/Layout';
-import MyCourses from './components/myCourses/MyCourses';
-import AllCourses from './components/allCourses/AllCourses';
+import UserMainLayout from './layouts/userMainLayout/UserMainLayout';
+import UniversalLayout from './layouts/universalLayout/UniversalLayout';
+import MyCourses from './pages/myCourses/MyCourses';
+import AllCourses from './pages/allCourses/AllCourses';
 
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/',
-		element: <Layout />,
+		element: <UniversalLayout />,
 		children: [
 			{
 				path: 'courses/',
-				element: <UserMain />,
+				element: <UserMainLayout />,
 				children: [
 					{
 						path: '',

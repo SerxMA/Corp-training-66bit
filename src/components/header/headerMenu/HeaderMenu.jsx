@@ -1,11 +1,13 @@
 import styles from './HeaderMenu.module.css'
-import Avatar from './avatar/Avatar';
 import Actions from './actions/Actions';
+import avatar from '../../../assets/images/Avatar.jpg'
 
 const HeaderMenu = () => {
     return (
         <div className={styles['header-actions']}>
-            <Avatar />
+            <button className={styles['avatar-btn']}>
+                <img src={avatar} alt="Avatar"/>
+            </button>
             <Actions />
         </div>
     );

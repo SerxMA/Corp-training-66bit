@@ -3,10 +3,9 @@ import Bell from './actionButton/icons/Bell'
 import Message from './actionButton/icons/Message'
 import Settings from './actionButton/icons/Settings'
 import Help from './actionButton/icons/Help'
-import Moon from './actionButton/icons/Moon'
+import Switcher from './themeSwitcher/ThemeSwitcher';
 
 import styles from './Actions.module.css'
-import Switcher from './actionButton/Switcher';
 
 const ACTIONS = [
     {path: '/notifications', Icon: Bell},

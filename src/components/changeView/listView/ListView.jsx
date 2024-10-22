@@ -1,4 +1,4 @@
-const ViewIcon = () => {
+const ListView = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
             width="20" 
@@ -19,4 +19,4 @@ const ViewIcon = () => {
     );
 };
 
-export default ViewIcon;
+export default ListView;

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import useTheme from '../../../../../customHooks/useTheme';
-import Moon from './icons/Moon'
+import Moon from '../actionButton/icons/Moon'
 
-const Switcher = () => {
+const ThemeSwitcher = () => {
 
     const [theme, setTheme] = useTheme();
 
@@ -19,4 +19,4 @@ const Switcher = () => {
     );
 };
 
-export default Switcher;
+export default ThemeSwitcher;

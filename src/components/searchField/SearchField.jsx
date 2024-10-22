@@ -21,8 +21,10 @@ const SearchField = () => {
             <div className={styles['loupe']} onClick={handleButtonClick}>
                 <Loupe  />
             </div>
-            {isExpanded && 
-            <input type="text" className={styles['search-input']} placeholder="Найти курс" value={term} onChange={handleChange}/>}
+            {   
+                isExpanded && 
+                <input type="text" className={styles['search-input']} placeholder="Найти курс" value={term} onChange={handleChange}/>
+            }
         </div>
     );
 };

@@ -1,11 +1,11 @@
-import NavItem from '../navItem/NavItem';
+import NavItem from './navItem/NavItem';
 
-import styles from './NavPanel.module.css';
+import styles from './Navigation.module.css';
 
 const USER_LIST = ['courses', 'statement', 'analytics', 'certificates'];
 const ADMIN_LIST = ['courses', 'statement', 'analytics', 'staff'];
 
-const NavPanel = () => {
+const Navigation = () => {
 	return (
 		<div className={styles['nav-panel']}>
 			<nav className={styles['nav']}>
@@ -19,4 +19,4 @@ const NavPanel = () => {
 	);
 };
 
-export default NavPanel;
+export default Navigation;

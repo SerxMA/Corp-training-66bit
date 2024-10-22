@@ -1,4 +1,4 @@
-import Gitlab from '../gitlab/Gitlab';
+import Gitlab from './gitlab/Gitlab';
 
 import styles from './AuthMain.module.css';
 
