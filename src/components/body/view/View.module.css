@@ -7,7 +7,7 @@
 	height: 100vh;
 	margin-left: 340px;
 }
-.temp-content {
+.courses-wrapper {
 	min-height: calc(100vh - 124px);
 	margin-top: 124px;
 

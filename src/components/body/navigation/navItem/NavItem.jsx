@@ -9,7 +9,7 @@ import Staff from './icons/staff/Staff';
 import styles from './NavItem.module.css';
 
 const ITEM_TYPE = {
-	courses: { href: '/', Icon: Grid, text: 'Курсы', disabled: false },
+	courses: { href: '/courses', Icon: Grid, text: 'Курсы', disabled: false },
 	statement: {
 		href: '/statement',
 		Icon: Statement,
