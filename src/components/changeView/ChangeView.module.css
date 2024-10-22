@@ -1,28 +1,33 @@
 .rows-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.5rem;
 
-    padding: 0.375rem 1rem;
-    
-    column-gap: 0.5rem;
-    border: 1px solid var(--content-background);
-    border-radius: 0.5rem;
+	padding: 0.375rem 1rem;
+	border: 1px solid var(--content-background);
+	border-radius: 0.5rem;
 
-    color: var(--content-secondary);
+	font: var(--semiBold14);
+	color: var(--content-secondary);
+	letter-spacing: 0.42px;
 
-    box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.10);
+	box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.1);
+
+	& svg {
+		flex-shrink: 0;
+	}
 }
 
 .rows-btn:hover {
-    background-color: var(--content-background);
-    color: var(--content-subPrimary);
+	background-color: var(--content-background);
+	color: var(--content-subPrimary);
 
-    & path {
-        stroke: var(--content-subPrimary);
-    }
+	& path {
+		stroke: var(--content-subPrimary);
+	}
 }
 
 .rows-btn:active {
-    background-color: var(--content-border);
+	background-color: var(--content-border);
 }

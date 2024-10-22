@@ -50,12 +50,16 @@
 	--hading2: 600 2rem/1.25 'Roboto Flex';
 	--hading3: 600 1.5rem/1.3333 'Roboto Flex';
 	--hading4: 600 1.25rem/1.4 'Roboto Flex';
+	--semiBold16: 600 1rem/1.25 'Lato';
+	--semiBold14: 600 0.875rem/1.42857 'Lato';
+	--semiBold12: 600 0.75rem/1.33333 'Roboto Flex';
 	--button-text20: 600 1.25rem/1.4 'Roboto Flex';
 	--button-text16: 600 1rem/1.5 'Roboto Flex';
 	--body-medium16: 500 1rem/1.25 'Roboto Flex';
 	--body-medium14: 500 0.875rem/1.42857 'Roboto Flex';
 	--body-regular16: 400 1rem/1.25 'Roboto Flex';
 	--body-regular14: 400 0.875rem/1.42857 'Roboto Flex';
+	--body-regular12: 400 0.75rem/1.33333 'Inter';
 }
 .dark {
 	/* content */
@@ -117,6 +121,13 @@
 	font-style: normal;
 }
 /* Lato */
+@font-face {
+	font-family: 'Lato';
+	src: url('../fonts/lato/Lato-Semibold.woff2') format('woff2'),
+		url('../fonts/lato/Lato-Semibold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
 @font-face {
 	font-family: 'Lato';
 	src: url('../fonts/lato/Lato-Bold.woff2') format('woff2'),

@@ -2,8 +2,8 @@
 	display: flex;
 	align-items: center;
 
+	max-width: 50%; /* Нужно +- 448px */
 	height: 2rem;
-
 	border-radius: 0.5rem;
 	border: 1px solid var(--content-background);
 
@@ -12,24 +12,36 @@
 	box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.1);
 }
 
+.search-container:not(.expanded) {
+	animation: hideInput 0.3s forwards ease-in-out;
+}
+
 .loupe {
 	display: flex;
-	padding: 0.375rem;
 	flex-shrink: 0; /* Запрещает уменьшение размера лупы */
+
+	padding: 0.375rem;
+
 	cursor: pointer;
 }
 
 .search-input {
-	font-size: 14px;
+	flex-grow: 1;
+
+	width: 0;
 	height: 2rem;
 
-	color: var(--content-primary);
 	font: var(--body-regular14);
+	color: var(--content-primary);
+
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
 }
 
 .search-container:hover {
-	outline: 3px solid var(--accent-background);
 	border-radius: 0.5rem;
+	outline: 3px solid var(--accent-background);
+
 	transition: border 0.1s ease-in-out;
 }
 
@@ -38,5 +50,26 @@
 }
 
 .expanded {
-	flex-grow: 1;
+	animation: showInput 0.3s forwards ease-in-out;
+}
+
+.expanded input {
+	opacity: 1;
+}
+
+@keyframes showInput {
+	0% {
+		width: 34px;
+	}
+	100% {
+		width: 100%;
+	}
+}
+@keyframes hideInput {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 34px;
+	}
 }
