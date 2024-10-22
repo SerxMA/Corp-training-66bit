@@ -7,3 +7,10 @@
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.5rem;
 }
+
+.text {
+	font-family: "Roboto Flex";
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+}
