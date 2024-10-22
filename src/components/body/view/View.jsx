@@ -8,9 +8,9 @@ const View = () => {
 	return (
 		<div className={styles['view-wrapper']}>
 			<ViewHeader />
-			<div className={styles['courses-wrapper']}>
+			<ul className={styles['courses-wrapper']}>
 				<Outlet />
-			</div>
+			</ul>
 		</div>
 	);
 };
