@@ -47,9 +47,9 @@
 
 	/* fonts */
 	--heading1: 600 2.5rem/1.3 'Roboto Flex';
-	--hading2: 600 2rem/1.25 'Roboto Flex';
-	--hading3: 600 1.5rem/1.3333 'Roboto Flex';
-	--hading4: 600 1.25rem/1.4 'Roboto Flex';
+	--heading2: 600 2rem/1.25 'Roboto Flex';
+	--heading3: 600 1.5rem/1.3333 'Roboto Flex';
+	--heading4: 600 1.25rem/1.4 'Roboto Flex';
 	--button-text20: 600 1.25rem/1.4 'Roboto Flex';
 	--button-text16: 600 1rem/1.5 'Roboto Flex';
 	--button-text14: 600 0.875rem/1.42857 'Roboto Flex';

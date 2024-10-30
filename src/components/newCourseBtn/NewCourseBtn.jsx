@@ -7,6 +7,7 @@ const NewCourseBtn = () => {
             <Icon />
             Новый курс
         </button>
+        
     );
 };
 

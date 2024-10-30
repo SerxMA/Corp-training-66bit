@@ -1,0 +1,30 @@
+.top-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    flex: 1 0 0;
+
+    color: var(--content-primary);
+    font: var(--heading2);
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+    padding: 2rem;
+
+    border-radius: 1.25rem;
+    background-color: var(--background-modal);
+    border: 1px solid var(--content-background)
+}
+
+.invisible {
+    display: none;
+}
