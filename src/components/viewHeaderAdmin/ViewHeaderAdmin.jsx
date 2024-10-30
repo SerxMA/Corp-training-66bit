@@ -1,25 +1,15 @@
 import { NavLink } from 'react-router-dom';
 
 import Filter from '../filter/Filter';
-import ChangeView from '../changeView/ChangeView';
 import SearchField from '../searchField/SearchField';
-import styles from './ViewHeader.module.css'
+import styles from './ViewHeaderAdmin.module.css'
+import NewCourseBtn from '../newCourseBtn/NewCourseBtn';
 
-const ViewHeader = () => {
+const ViewHeaderAdmin = () => {
     return (
         <div className={styles['view-header-wrapper']}>
             <div className={styles['tab-view-wrapper']}>
 			    <div className={styles['tabs-wrapper']}>
-                    <NavLink
-                        to={'/courses/my-courses'}
-                        className={({ isActive }) =>
-                            isActive
-                                ? `${styles.tab} ${styles['active-tab']}`
-                                : styles.tab
-                        }
-                    >
-                        Мои курсы
-                    </NavLink>
                     <NavLink
                         to={'/courses/all-courses'}
                         className={({ isActive }) =>
@@ -33,12 +23,12 @@ const ViewHeader = () => {
                 </div>
                 <div className={styles['buttons']}>
                     <SearchField />
-                    <ChangeView />
                     <Filter />
+                    <NewCourseBtn />
 			    </div>
 		    </div>
         </div>
     );
 };
 
-export default ViewHeader;
+export default ViewHeaderAdmin;

@@ -5,7 +5,6 @@ const Filter = () => {
     return (
         <button className={styles['filter-btn']}>
             <FilterIcon />
-            Фильтры
         </button>
     );
 };

@@ -1,0 +1,24 @@
+.view-wrapper {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	width: 100%;
+	min-height: 100%;
+	margin-left: 20rem;
+
+	background-color: var(--background-primary);
+}
+
+.courses-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+
+	padding: 0.5rem;
+	margin-top: 59px;
+	gap: 0.5rem;
+
+	& li {
+		height: 250px;
+	}
+}

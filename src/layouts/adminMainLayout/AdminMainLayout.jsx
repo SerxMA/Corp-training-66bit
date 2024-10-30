@@ -1,21 +1,21 @@
 import { Outlet } from 'react-router-dom';
 
 import NavPanel from '../../components/navigation/Navigation';
-import styles from './UserMainLayout.module.css'
-import ViewHeaderUser from '../../components/viewHeaderUser/ViewHeaderUser';
+import styles from './AdminMainLayout.module.css'
+import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin';
 
-const UserMainLayout = () => {
-  return (
-    <>
+const AdminMainLayout = () => {
+    return (
+        <>
     	<NavPanel />
       	<div className={styles['view-wrapper']}>
-        	<ViewHeaderUser />
+        	<ViewHeaderAdmin />
         	<ul className={styles['courses-wrapper']}>
         		<Outlet />
         	</ul>
       </div>
     </>
-  );
+    );
 };
 
-export default UserMainLayout;
+export default AdminMainLayout;
