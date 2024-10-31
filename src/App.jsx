@@ -2,42 +2,42 @@ import {
 	createBrowserRouter,
 	Navigate,
 	RouterProvider,
-} from 'react-router-dom'
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import { api } from './api/index.js';
 import Authentication from './pages/authentication/Authentication.jsx';
 import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
 import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout.jsx';
 import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
 import AllCourses from './pages/allCourses/AllCourses.jsx';
 import MyCourses from './pages/myCourses/MyCourses.jsx';
-import { getUserRole } from './api/makeRequest';
 
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
 
 const RoleBasedLayout = () => {
-
 	const [role, setRole] = useState('');
 	const [loading, setLoading] = useState(true);
-	
-	const content = loading ? <h1>Загрузка...</h1> : role === 'ADMIN' ? <AdminMainLayout /> : <UserMainLayout />
+
+	const content = loading ? (
+		<h1>Загрузка...</h1>
+	) : role === 'ADMIN' ? (
+		<AdminMainLayout />
+	) : (
+		<UserMainLayout />
+	);
 
 	useEffect(() => {
-		getUserRole()
-		.then( role => {
-			setRole(role)
-		})
-		.finally(
-			setLoading(false)
-		)
-	}, [])
+		api.user
+			.getUserRole({})
+			.then((res) => {
+				setRole(res.data.role);
+			})
+			.finally(() => setLoading(false));
+	}, []);
 
-	return (
-		<>
-			{content}
-		</>
-	);
+	return <>{content}</>;
 };
 
 const router = createBrowserRouter([
@@ -80,7 +80,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
 	return (
 		<div className="App">
 			<RouterProvider router={router} />
