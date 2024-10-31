@@ -1,7 +1,7 @@
-import Gitlab from './gitlab/Gitlab';
-import styles from './AuthMain.module.css';
 import { NavLink } from 'react-router-dom';
 
+import Gitlab from './gitlab/Gitlab.jsx';
+import styles from './AuthMain.module.css';
 
 const AuthMain = () => {
 

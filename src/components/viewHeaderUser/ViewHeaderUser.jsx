@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
-import Filter from '../filter/Filter';
-import SearchField from '../searchField/SearchField';
+import Filter from '../filter/Filter.jsx';
+import SearchField from '../searchField/SearchField.jsx';
 import styles from './ViewHeaderUser.module.css'
 
 const ViewHeaderUser = () => {

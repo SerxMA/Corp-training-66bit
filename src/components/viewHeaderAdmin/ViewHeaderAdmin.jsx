@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
-import Filter from '../filter/Filter';
-import SearchField from '../searchField/SearchField';
+import Filter from '../filter/Filter.jsx';
+import SearchField from '../searchField/SearchField.jsx';
+import NewCourseBtn from '../newCourseBtn/NewCourseBtn.jsx';
 import styles from './ViewHeaderAdmin.module.css'
-import NewCourseBtn from '../newCourseBtn/NewCourseBtn';
 
 const ViewHeaderAdmin = () => {
     return (

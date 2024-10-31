@@ -1,6 +1,6 @@
+import HeaderMenu from './headerMenu/HeaderMenu.jsx';
+import BitLogo from './bitLogo/BitLogo.jsx'
 import styles from './Header.module.css'
-import HeaderMenu from './headerMenu/HeaderMenu';
-import BitLogo from './bitLogo/BitLogo'
 
 const Header = () => {
     return (

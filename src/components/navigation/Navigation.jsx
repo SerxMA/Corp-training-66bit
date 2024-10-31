@@ -1,5 +1,4 @@
-import NavItem from './navItem/NavItem';
-
+import NavItem from './navItem/NavItem.jsx';
 import styles from './Navigation.module.css';
 
 const USER_LIST = ['courses', 'statement', 'analytics', 'certificates'];

@@ -1,5 +1,4 @@
-import BitLogoMini from './bitLogoMini/BitLogoMini';
-
+import BitLogoMini from './bitLogoMini/BitLogoMini.jsx';
 import styles from './AuthTitle.module.css';
 
 const AuthTitle = () => {

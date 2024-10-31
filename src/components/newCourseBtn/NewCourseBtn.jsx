@@ -1,4 +1,4 @@
-import Icon from './icon';
+import Icon from './Icon.jsx';
 import styles from './NewCourseBtn.module.css'
 
 const NewCourseBtn = () => {

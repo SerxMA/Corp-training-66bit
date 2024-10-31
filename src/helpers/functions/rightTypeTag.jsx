@@ -1,8 +1,8 @@
-import Front from '../../components/courseTag/front/Front';
-import Statistic from '../../components/courseTag/statistics/Statistics';
-import DataBase from '../../components/courseTag/database/DataBase';
-import Ux from '../../components/courseTag/ux/Ux';
-import Brush from '../../components/courseTag/brush/Brush';
+import Front from '../../components/courseTag/front/Front.jsx';
+import Statistic from '../../components/courseTag/statistics/Statistics.jsx';
+import DataBase from '../../components/courseTag/database/DataBase.jsx';
+import Ux from '../../components/courseTag/ux/Ux.jsx';
+import Brush from '../../components/courseTag/brush/Brush.jsx';
 
 const rightTypeTag = (type, color) => {
 	switch (type) {

@@ -1,6 +1,6 @@
-import styles from './HeaderMenu.module.css'
-import Actions from './actions/Actions';
+import Actions from './actions/Actions.jsx';
 import avatar from '../../../assets/images/Avatar.jpg'
+import styles from './HeaderMenu.module.css'
 
 const HeaderMenu = () => {
     return (

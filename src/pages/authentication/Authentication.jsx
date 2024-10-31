@@ -1,6 +1,5 @@
-import AuthTitle from '../../components/authentication/authTitle/AuthTitle';
-import AuthMain from '../../components/authentication/authMain/AuthMain';
-
+import AuthTitle from '../../components/authentication/authTitle/AuthTitle.jsx';
+import AuthMain from '../../components/authentication/authMain/AuthMain.jsx';
 import styles from './Authentication.module.css';
 
 const Authentication = () => {

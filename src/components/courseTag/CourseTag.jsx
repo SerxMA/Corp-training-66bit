@@ -1,5 +1,4 @@
-import rightTypeTag from '../../helpers/functions/rightTypeTag';
-
+import rightTypeTag from '../../helpers/functions/rightTypeTag.jsx';
 import styles from './CourseTag.module.css';
 
 const colorMapping = {

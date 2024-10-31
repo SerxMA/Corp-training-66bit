@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
-import NavPanel from '../../components/navigation/Navigation';
+import NavPanel from '../../components/navigation/Navigation.jsx';
+import ViewHeaderUser from '../../components/viewHeaderUser/ViewHeaderUser.jsx';
 import styles from './UserMainLayout.module.css'
-import ViewHeaderUser from '../../components/viewHeaderUser/ViewHeaderUser';
 
 const UserMainLayout = () => {
   return (

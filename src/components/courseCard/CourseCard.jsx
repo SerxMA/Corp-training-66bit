@@ -1,4 +1,4 @@
-import CourseTag from '../../../courseTag/CourseTag';
+import CourseTag from '../courseTag/CourseTag.jsx';
 import styles from './CourseCard.module.css'
 
 const CourseCard = ( img, tag, title, description) => {

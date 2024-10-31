@@ -1,11 +1,10 @@
 import { NavLink } from 'react-router-dom';
 
-import Certificates from './icons/certificates/Certificates';
-import ChartPie from './icons/chartPie/ChartPie';
-import Grid from './icons/grid/Grid';
-import Statement from './icons/statement/Statement';
-import Staff from './icons/staff/Staff';
-
+import Certificates from './icons/certificates/Certificates.jsx';
+import ChartPie from './icons/chartPie/ChartPie.jsx';
+import Grid from './icons/grid/Grid.jsx';
+import Statement from './icons/statement/Statement.jsx';
+import Staff from './icons/staff/Staff.jsx';
 import styles from './NavItem.module.css';
 
 const ITEM_TYPE = {

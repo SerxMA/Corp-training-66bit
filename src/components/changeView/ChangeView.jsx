@@ -1,4 +1,4 @@
-import ViewIcon from './listView/ListView';
+import ViewIcon from './listView/ListView.jsx';
 import styles from './ChangeView.module.css'
 
 const ChangeView = () => {

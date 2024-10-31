@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-import NavPanel from '../../components/navigation/Navigation';
+import NavPanel from '../../components/navigation/Navigation.jsx';
+import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin.jsx';
+import NewCourse from '../../modals/newCourse/NewCourse.jsx';
 import styles from './AdminMainLayout.module.css'
-import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin';
-import NewCourse from '../../modals/newCourse/NewCourse';
 
 const AdminMainLayout = () => {
 
