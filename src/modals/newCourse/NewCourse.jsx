@@ -1,7 +1,8 @@
-import Cross from './Cross';
+import Cross from './Cross.jsx';
 import styles from './NewCourse.module.css'
 
 const NewCourse = () => {
+    
     return (
         <div className={styles['popup']}>
             <div className={styles['top-block']}>

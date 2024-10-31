@@ -3,8 +3,12 @@ import globals from 'globals';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import importPlugin from 'eslint-plugin-import';
 
 export default [
+	js.configs.recommended, 
+	importPlugin.flatConfigs.recommended,
+
 	{ ignores: ['dist'] },
 	{
 		files: ['**/*.{js,jsx}'],
@@ -37,6 +41,23 @@ export default [
 			'prefer-const': 'error',
 			quotes: ['error', 'single'],
 			'jsx-quotes': ['error', 'prefer-double'],
+
+			'import/newline-after-import': [ 
+				'error', 
+				{ count: 1, exactCount: true }, 
+			], 
+			'import/order': [ 
+				'error', 
+				{ 
+				groups: [ 
+				'builtin', 
+				'external', 
+				'internal', 
+				['parent', 'sibling', 'index', 'type', 'unknown'], 
+				], 
+				'newlines-between': 'always', 
+				}, 
+			],
 		},
 	},
 ];

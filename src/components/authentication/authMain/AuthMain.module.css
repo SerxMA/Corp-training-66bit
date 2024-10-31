@@ -4,7 +4,7 @@
 	align-items: normal;
 	row-gap: 1rem;
 
-	& button {
+	& .button-auth {
 		display: flex;
 		align-items: center;
 		justify-content: center;

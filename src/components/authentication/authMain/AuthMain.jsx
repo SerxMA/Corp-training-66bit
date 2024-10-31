@@ -1,13 +1,19 @@
 import Gitlab from './gitlab/Gitlab';
-
 import styles from './AuthMain.module.css';
+import { NavLink } from 'react-router-dom';
+
 
 const AuthMain = () => {
+
 	return (
 		<div className={styles['auth-main']}>
-			<button>
+			<NavLink
+				to="http://localhost:8080/oauth2/authorization/gitlab"
+				className={styles['button-auth']}
+			>
 				<Gitlab /> Авторизация
-			</button>
+			</NavLink>
+
 			<label htmlFor="remember_me">
 				<input type="checkbox" id="remember_me" />
 				<span>Запомнить меня</span>

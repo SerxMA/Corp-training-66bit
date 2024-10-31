@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom';
 import NavPanel from '../../components/navigation/Navigation';
 import styles from './AdminMainLayout.module.css'
 import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin';
-import NewCourseBtn from '../../components/newCourseBtn/NewCourseBtn';
 import NewCourse from '../../modals/newCourse/NewCourse';
 
 const AdminMainLayout = () => {
+
     return (
         <>
     	<NavPanel />

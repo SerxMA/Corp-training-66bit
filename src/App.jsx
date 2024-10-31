@@ -3,21 +3,39 @@ import {
 	Navigate,
 	RouterProvider,
 } from 'react-router-dom'
+import { useState, useEffect } from 'react';
 
-import Authentication from './pages/authentication/Authentication';
-import UserMainLayout from './layouts/userMainLayout/UserMainLayout';
-import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout';
-import UniversalLayout from './layouts/universalLayout/UniversalLayout';
-import MyCourses from './pages/myCourses/MyCourses';
-import AllCourses from './pages/allCourses/AllCourses';
+import Authentication from './pages/authentication/Authentication.jsx';
+import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
+import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout.jsx';
+import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
+import AllCourses from './pages/allCourses/AllCourses.jsx';
+import MyCourses from './pages/myCourses/MyCourses.jsx';
+import { getUserRole } from './api/makeRequest';
 
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
 
-const RoleBasedLayout = ({role}) => {
+const RoleBasedLayout = () => {
+
+	const [role, setRole] = useState('');
+	const [loading, setLoading] = useState(true);
+	
+	const content = loading ? <h1>Загрузка...</h1> : role === 'ADMIN' ? <AdminMainLayout /> : <UserMainLayout />
+
+	useEffect(() => {
+		getUserRole()
+		.then( role => {
+			setRole(role)
+		})
+		.finally(
+			setLoading(false)
+		)
+	}, [])
+
 	return (
 		<>
-			{role === 'admin'? <AdminMainLayout/> : <UserMainLayout/>}
+			{content}
 		</>
 	);
 };
@@ -41,7 +59,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: 'courses/',
-				element: <RoleBasedLayout role={'admin'} />,
+				element: <RoleBasedLayout />,
 				children: [
 					{
 						path: '',
@@ -57,24 +75,6 @@ const router = createBrowserRouter([
 					},
 				],
 			},
-			// {
-			// 	path: 'courses/',
-			// 	element: <UserMainLayout />,
-			// 	children: [
-			// 		{
-			// 			path: '',
-			// 			element: <Navigate to="/courses/my-courses" />,
-			// 		},
-			// 		{
-			// 			path: 'all-courses',
-			// 			element: <AllCourses />,
-			// 		},
-			// 		{
-			// 			path: 'my-courses',
-			// 			element: <MyCourses />,
-			// 		},
-			// 	],
-			// },
 		],
 	},
 ]);
