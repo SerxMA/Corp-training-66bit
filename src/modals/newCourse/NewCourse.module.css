@@ -55,23 +55,30 @@
 
 .input-box span {
     position: absolute;
-    top: 10px;
+    top: 50%;
     left: 10px;
     font-size: 16px;
     color: var(--content-secondary);
     transition: 0.3s ease;
     pointer-events: none;
+    transform: translateY(-50%);
 }
 
 /* Плавающий эффект плейсхолдера */
 .input-box input:focus ~ span,
-.input-box input:not(:placeholder-shown) ~ span,
-.description-area:focus ~ span,
-.description-area:not(:placeholder-shown) ~ span {
-    top: -16px;
+.input-box input:not(:placeholder-shown) ~ span {
+    top: -10px;
     left: 8px;
     font-size: 12px;
-    color: content-secondary;
+    color: var(--content-secondary);
+}
+
+.description-area:focus ~ span,
+.description-area:not(:placeholder-shown) ~ span {
+    top: -17px;
+    left: 8px;
+    font-size: 12px;
+    color: var(--content-secondary);
 }
 
 .description-box {
@@ -86,7 +93,7 @@
 .description-area {
     width: 100%;
     height: 100%; 
-    padding: 10px;
+    padding: 12px;
     border: none;
     background: transparent;
     outline: none;
@@ -97,11 +104,10 @@
 
 .description-box span {
     position: absolute;
-    top: 10px;
+    top: 14px;
     left: 10px;
     font-size: 16px;
     color: var(--content-secondary);
-    font-weight: 300;
     transition: 0.3s ease;
     pointer-events: none;
 }
@@ -133,4 +139,12 @@
 .cross {
     display: flex;
     flex-shrink: 0;
+}
+
+.char-counter {
+    position: absolute;
+    bottom: -18px;
+    left: 8px;
+    font-size: 12px;
+    color: var(--content-secondary);
 }
