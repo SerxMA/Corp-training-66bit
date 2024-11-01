@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Cross from './icons/Cross.jsx';
+import Cross from './icons/cross/Cross.jsx';
 import styles from './ChangeName.module.css';
 
 const ChangeName = () => {
