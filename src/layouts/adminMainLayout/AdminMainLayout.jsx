@@ -4,6 +4,11 @@ import NavPanel from '../../components/navigation/Navigation.jsx';
 import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin.jsx';
 import NewCourse from '../../modals/newCourse/NewCourse.jsx';
 import styles from './AdminMainLayout.module.css'
+<<<<<<< HEAD
+=======
+import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin';
+import NewCourse from '../../modals/newCourse/NewCourse';
+>>>>>>> feature/new-courses
 
 const AdminMainLayout = () => {
 

@@ -1,30 +1,150 @@
-.top-block {
-    display: flex;
-    justify-content: space-between;
-}
-
-.title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    flex: 1 0 0;
-
-    color: var(--content-primary);
-    font: var(--heading2);
-}
-
 .popup {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    
     padding: 2rem;
-
+    max-width: 26rem;
+    min-width: 416px;
+    height: 472px; /* Высота всего окна */
     border-radius: 1.25rem;
     background-color: var(--background-modal);
-    border: 1px solid var(--content-background)
+    border: 1px solid var(--content-background);
+    box-sizing: border-box;
 }
 
-.invisible {
-    display: none;
+.top-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: var(--content-primary);
+    font: var(--heading2);
+}
+
+.describe-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 52px;
+    border-radius: 0.5rem;
+    border: 0.125rem solid var(--content-border);
+    box-sizing: border-box;
+}
+
+.input-box input::placeholder {
+    color: transparent;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    color: var(--content-primary);
+}
+
+.input-box span {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 16px;
+    color: var(--content-secondary);
+    transition: 0.3s ease;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+/* Плавающий эффект плейсхолдера */
+.input-box input:focus ~ span,
+.input-box input:not(:placeholder-shown) ~ span {
+    top: -10px;
+    left: 8px;
+    font-size: 12px;
+    color: var(--content-secondary);
+}
+
+.description-area:focus ~ span,
+.description-area:not(:placeholder-shown) ~ span {
+    top: -17px;
+    left: 8px;
+    font-size: 12px;
+    color: var(--content-secondary);
+}
+
+.description-box {
+    position: relative;
+    width: 100%;
+    height: 208px; 
+    border-radius: 0.5rem;
+    border: 0.125rem solid var(--content-border);
+    box-sizing: border-box;
+}
+
+.description-area {
+    width: 100%;
+    height: 100%; 
+    padding: 12px;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--content-primary);
+    resize: none;
+    box-sizing: border-box;
+}
+
+.description-box span {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    font-size: 16px;
+    color: var(--content-secondary);
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+/* Кнопка */
+.continue-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    height: 52px; /* Высота кнопки */
+    width: 100%;
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.continue-btn:hover {
+    background-color: var(--accent-subPrimary);
+}
+
+.continue-btn:active {
+    background-color: var(--accent-secondary);
+}
+
+.cross {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.char-counter {
+    position: absolute;
+    bottom: -18px;
+    left: 8px;
+    font-size: 12px;
+    color: var(--content-secondary);
 }
