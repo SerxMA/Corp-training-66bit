@@ -20,6 +20,20 @@
 	font: var(--heading2);
 	color: var(--content-primary);
 }
+.describe-block {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.75rem;
+}
+.explanation {
+	font: var(--BodyMedium16);
+	color: var(--content-primary);
+
+	& span {
+		font: var(--BodyRegular12);
+		color: var(--content-secondary);
+	}
+}
 .cross {
 	display: flex;
 	flex-shrink: 0;

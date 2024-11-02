@@ -41,6 +41,11 @@ const ChooseFile = () => {
 				</button>
 			</div>
 			<div className={styles['describe-block']}>
+				<p className={styles.explanation}>
+					Установите иллюстрацию
+					<br />
+					<span>Она будет отображаться на карточке курса</span>
+				</p>
 				<div
 					className={styles['upload-container']}
 					onDragOver={handleDragOver}
