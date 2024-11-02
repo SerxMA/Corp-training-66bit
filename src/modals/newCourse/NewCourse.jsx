@@ -1,18 +1,25 @@
 import { useState } from 'react';
 
-import Arrow from '../Arrow';
-import Cross from './Cross';
+import Arrow from '../Arrow.jsx';
+import Cross from './Cross.jsx';
 import styles from './NewCourse.module.css';
 
 const NewCourse = () => {
 
     const [description, setDescription] = useState('');
-    const maxChars = 360;
+    const [title, setTitle] = useState('');
 
-    const handleDescriptionChange = (event) => {
-        const input = event.target.value;
+    const MAX_CHARS = {
+        description: 360,
+        title: 128
+    };
+
+
+
+    const handleDescriptionChange = (event, maxChars, method) => {
+        const input = event.target.value.trimStart().replace('  ', ' ');
         if (input.length <= maxChars) {
-            setDescription(input);
+            method(input);
         }
     };
 
@@ -25,22 +32,33 @@ const NewCourse = () => {
             </div>
             <div className={styles['describe-block']}>
                 <div className={styles['input-box']}>
-                    <input type="text" name="title" placeholder=" " />
+                    <input
+                        type="text" 
+                        name="title" 
+                        placeholder=""
+                        className={styles['title-input']}
+                        value={title}
+                        onChange={(event) => handleDescriptionChange(event, MAX_CHARS.title, setTitle)}
+                        maxLength={MAX_CHARS.title}
+                    />
                     <span>Название</span>
                 </div>
                 <div className={styles['description-box']}>
                 <textarea
-                        placeholder=" "
+                        placeholder=""
                         className={styles['description-area']}
                         value={description}
-                        onChange={handleDescriptionChange}
-                        maxLength={maxChars}
+                        onChange={(event) => handleDescriptionChange(event, MAX_CHARS.description, setDescription)}
+                        maxLength={MAX_CHARS.description}
                     ></textarea>
                     <span>Описание</span>
-                    <div className={styles['char-counter']}>{description.length} / {maxChars}</div>
+                    <div className={styles['char-counter']}>{description.length} / {MAX_CHARS.description}</div>
                 </div>
             </div>
-            <button className={styles['continue-btn']}>
+            <button 
+                className={`${styles['continue-btn']}
+                ${(description.length && title.length) ? styles['btn_success'] : styles['btn_disabled']} `} 
+                disabled={!(description.length && title.length)} >
                 Продолжить
                 <Arrow />
             </button>
