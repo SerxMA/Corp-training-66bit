@@ -28,7 +28,7 @@
 	row-gap: 0.75rem;
 }
 .question {
-	font: var(--BodyMedium16);
+	font: var(--body-medium16);
 	color: var(--content-primary);
 	letter-spacing: 0.16px;
 	text-align: center;
@@ -38,7 +38,7 @@
 	}
 }
 .desciption {
-	font: var(--BodyRegular14);
+	font: var(--body-regular14);
 	color: var(--content-secondary);
 	letter-spacing: 0.14px;
 	text-align: center;

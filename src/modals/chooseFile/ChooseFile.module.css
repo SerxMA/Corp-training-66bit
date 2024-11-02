@@ -26,11 +26,11 @@
 	row-gap: 0.75rem;
 }
 .explanation {
-	font: var(--BodyMedium16);
+	font: var(--body-medium16);
 	color: var(--content-primary);
 
 	& span {
-		font: var(--BodyRegular12);
+		font: var(--body-regular12);
 		color: var(--content-secondary);
 	}
 }
