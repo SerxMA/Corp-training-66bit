@@ -3,13 +3,15 @@ import { useState } from 'react';
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
 
-const ChangeName = () => {
-	const [name, setName] = useState('');
+const ChangeName = ({ lessonName }) => {
+	const [name, setName] = useState(lessonName ? lessonName : '');
 
 	return (
 		<div className={styles['popup']}>
 			<div className={styles['top-block']}>
-				<h2 className={styles['title']}>Новый урок</h2>
+				<h2 className={styles['title']}>
+					{lessonName ? 'Поменять название' : 'Новый урок'}
+				</h2>
 				<button className={styles['cross']}>
 					<Cross />
 				</button>
