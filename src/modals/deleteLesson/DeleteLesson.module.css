@@ -53,6 +53,7 @@
 	padding: 1rem;
 	border-radius: 0.5rem;
 
+	font: var(--semiBold16);
 	text-align: center;
 
 	cursor: pointer;

@@ -56,7 +56,7 @@
 	--semiBold12: 600 0.75rem/1.3333 'IBM Plex Sans';
 	--body-medium16: 500 1rem/1.25 'IBM Plex Sans';
 	--body-medium14: 500 0.875rem/1.42857 'IBM Plex Sans';
-	--body-medium14: 500 0.75rem/1.42857 'IBM Plex Sans';
+	--body-medium12: 500 0.75rem/1.3333 'IBM Plex Sans';
 	--body-regular16: 400 1rem/1.25 'IBM Plex Sans';
 	--body-regular14: 400 0.875rem/1.42857 'IBM Plex Sans';
 	--body-regular12: 400 0.75rem/1.3333 'IBM Plex Sans';
@@ -174,10 +174,10 @@ h1 {
 	font: var(--heading1);
 }
 h2 {
-	font: var(--hading2);
+	font: var(--heading2);
 }
 h3 {
-	font: var(--hading3);
+	font: var(--heading3);
 }
 a {
 	cursor: pointer;

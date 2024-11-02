@@ -17,7 +17,6 @@
 	justify-content: space-between;
 }
 .title {
-	font: var(--heading2);
 	color: var(--content-primary);
 }
 .cross {
@@ -30,6 +29,19 @@
 	height: 52px;
 	border-radius: 0.5rem;
 	border: 2px solid var(--content-border);
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+
+	&:hover {
+		border-color: var(--accent-border);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:focus-within {
+		border-color: var(--accent-border);
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
 
 	& input::placeholder {
 		color: transparent;
@@ -51,7 +63,6 @@
 		top: 50%;
 		left: 10px;
 
-		font-size: 16px;
 		color: var(--content-secondary);
 
 		transition: 0.3s ease;
@@ -64,8 +75,9 @@
 	top: -10px;
 	left: 8px;
 
-	font-size: 12px;
+	font: var(--body-regular12);
 	color: var(--content-secondary);
+	letter-spacing: 0.12px;
 }
 .btn-wrapper {
 	display: flex;
@@ -77,6 +89,7 @@
 	padding: 1rem;
 	border-radius: 1rem;
 
+	font: var(--semiBold16);
 	text-align: center;
 
 	cursor: pointer;
