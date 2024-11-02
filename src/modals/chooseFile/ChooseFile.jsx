@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Cross from './icons/cross/Cross.jsx';
+import Cross from '../Cross.jsx';
 import ico from '../../assets/images/baseImg.png';
 import styles from './ChooseFile.module.css';
 
