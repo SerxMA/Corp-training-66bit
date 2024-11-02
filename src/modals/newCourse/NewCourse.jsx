@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Arrow from '../Arrow.jsx';
-import Cross from './Cross.jsx';
+import Cross from '../Cross.jsx';
 import styles from './NewCourse.module.css';
 
 const NewCourse = () => {
