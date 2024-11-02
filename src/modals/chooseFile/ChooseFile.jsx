@@ -47,14 +47,16 @@ const ChooseFile = () => {
 					<span>Она будет отображаться на карточке курса</span>
 				</p>
 				<div
-					className={styles['upload-container']}
+					className={`${styles['upload-container']} ${
+						file ? styles['upload-container_succes'] : ''
+					}`}
 					onDragOver={handleDragOver}
 					onDragLeave={handleDragLeave}
 					onDrop={handleDrop}
 				>
 					<img src={ico} alt="Icon" />
 					<div className={styles['input-wrapper']}>
-						<p className="upload-text">
+						<p className={styles['upload-text']}>
 							{file ? file.name : 'Перетащите сюда файл'}
 						</p>
 						<span className={styles.separator}>или</span>
