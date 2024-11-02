@@ -1,0 +1,84 @@
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+    min-width: 390px;
+    height: 760px; /* Высота всего окна */
+    border-radius: 1.25rem;
+    background-color: var(--background-modal);
+    border: 1px solid var(--content-background);
+}
+
+.top-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: var(--content-primary);
+    font: var(--heading2);
+}
+
+.cross {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.visual-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.75rem;
+}
+
+.course-img {
+    object-fit: cover;
+    width: 100%; 
+    height: 420px;
+    border-radius: 1rem;
+}
+
+.description{
+    height: 5rem;
+
+    display: -webkit-box;             /* Используем flexbox-эквивалент для обрезки */
+    -webkit-box-orient: vertical;     /* Ориентируем flex-контейнер вертикально */                /* Скрываем текст, который не помещается */
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;            /* Ограничиваем количество видимых строк */
+    overflow: hidden; 
+    
+    font: var(--body-regular16);
+    letter-spacing: 0.16px;
+
+    color: var(--content-secondary);
+}
+
+.continue-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    gap: 0.5rem;
+    height: 52px; /* Высота кнопки */
+    width: 222px;
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+
+    &:hover { 
+        background-color: var(--accent-subPrimary); 
+       
+        box-shadow: 0px 0px 16px 0px var(--accent-border); 
+       } 
+       &:active { 
+        background-color: var(--accent-secondary); 
+       
+        box-shadow: 0px 0px 16px 0px var(--accent-border); 
+       } 
+}
+
