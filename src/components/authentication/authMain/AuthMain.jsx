@@ -4,6 +4,8 @@ import Gitlab from './gitlab/Gitlab.jsx';
 import styles from './AuthMain.module.css';
 
 const AuthMain = () => {
+	// const location = useLocation();
+	// console.log(location.state?.from || '/');
 
 	return (
 		<div className={styles['auth-main']}>

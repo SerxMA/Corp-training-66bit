@@ -4,7 +4,6 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 
-import { useAuth } from './customHooks/useAuth.js';
 import Authentication from './pages/authentication/Authentication.jsx';
 import Redirect from './pages/redirect/Redirect.jsx';
 import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
@@ -12,30 +11,10 @@ import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout.jsx';
 import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
 import AllCourses from './pages/allCourses/AllCourses.jsx';
 import MyCourses from './pages/myCourses/MyCourses.jsx';
+import CheckRole from './hoc/CheckRole.jsx';
 
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
-
-const RoleBasedLayout = () => {
-	const { role } = useAuth();
-	// Добавить проверку на isAuth
-
-	let content = <h1>тут должна быть 404 страница))</h1>;
-	switch (role) {
-		case 'ADMIN':
-			content = <AdminMainLayout />;
-			break;
-
-		case 'USER':
-			content = <UserMainLayout />;
-			break;
-
-		default:
-			break;
-	}
-
-	return <>{content}</>;
-};
 
 const router = createBrowserRouter([
 	{
@@ -60,7 +39,12 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: 'courses/',
-				element: <RoleBasedLayout />,
+				element: (
+					<CheckRole
+						adminLayer={<AdminMainLayout />}
+						userLayer={<UserMainLayout />}
+					/>
+				),
 				children: [
 					{
 						path: '',
