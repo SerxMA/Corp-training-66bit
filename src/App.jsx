@@ -3,10 +3,10 @@ import {
 	Navigate,
 	RouterProvider,
 } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-import { api } from './api/index.js';
+import { useAuth } from './customHooks/useAuth.js';
 import Authentication from './pages/authentication/Authentication.jsx';
+import Redirect from './pages/redirect/Redirect.jsx';
 import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
 import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout.jsx';
 import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
@@ -17,25 +17,22 @@ import './assets/styles/reset.css';
 import './assets/styles/index.css';
 
 const RoleBasedLayout = () => {
-	const [role, setRole] = useState('');
-	const [loading, setLoading] = useState(true);
+	const { role } = useAuth();
+	// Добавить проверку на isAuth
 
-	const content = loading ? (
-		<h1>Загрузка...</h1>
-	) : role === 'ADMIN' ? (
-		<AdminMainLayout />
-	) : (
-		<UserMainLayout />
-	);
+	let content = <h1>тут должна быть 404 страница))</h1>;
+	switch (role) {
+		case 'ADMIN':
+			content = <AdminMainLayout />;
+			break;
 
-	useEffect(() => {
-		api.user
-			.getUserRole({})
-			.then((res) => {
-				setRole(res.data.role);
-			})
-			.finally(() => setLoading(false));
-	}, []);
+		case 'USER':
+			content = <UserMainLayout />;
+			break;
+
+		default:
+			break;
+	}
 
 	return <>{content}</>;
 };
@@ -44,6 +41,10 @@ const router = createBrowserRouter([
 	{
 		path: '/auth',
 		element: <Authentication />,
+	},
+	{
+		path: '/redirect',
+		element: <Redirect />,
 	},
 	{
 		path: '/main',
