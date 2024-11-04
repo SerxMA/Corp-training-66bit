@@ -1,60 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Arrow from '../Arrow.jsx';
 import Cross from '../Cross.jsx';
 import styles from './NewCourse.module.css';
+import { defaultTags } from '../../helpers/constants/defaultTags.js';
+
+const MAX_CHARS = {
+	description: 360,
+	title: 128,
+	tag: 50,
+};
 
 const NewCourse = ({ onNext }) => {
 	const [description, setDescription] = useState('');
 	const [title, setTitle] = useState('');
 	const [tag, setTag] = useState('');
-	const [statrDropDown, setStatrDropDown] = useState(false);
+	const [showDropDown, setShowDropDown] = useState(false);
 	const [allTags, setAllTags] = useState([]);
 
-	const handleSubmit = () => {
-		onNext({ title, description });
-	};
-
-	const MAX_CHARS = {
-		description: 360,
-		title: 128,
-		tag: 50,
+	const handleNext = () => {
+		onNext({ title, description }); // наверное добавить тег
 	};
 
 	const handleDescriptionChange = (event, maxChars, method) => {
-		const input = event.target.value.trimStart().replace('  ', ' ');
+		let input = event.target.value.trimStart().replace('  ', ' ');
+		if (maxChars === MAX_CHARS.tag) {
+			const isMatch = /^# $/.test(input.slice(-2));
+			if (isMatch) {
+				selectTag(input.slice(0, -2));
+				input = '';
+			}
+		}
+
 		if (input.length <= maxChars) {
 			method(input);
 		}
 	};
 
-	const XXX = (e) => {
-		console.log(e);
-		setAllTags((cv) => [...cv, e.target.textContent]);
-		setStatrDropDown(false);
+	const selectTag = (tag) => {
+		setAllTags((cv) =>
+			cv.find((value) => tag === value) ? [...cv] : [...cv, tag]
+		);
 	};
 
 	const dropDown = (
 		<ul className={styles['tags-list']}>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Back End</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Front End</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Аналитика</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>UX/UI-дизайн</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Грфический дизайн</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Машинное обучение</p>
-			</li>
+			{defaultTags.map((tag) => (
+				<li
+					key={tag.id}
+					className={styles['tag-element']}
+					onClick={() => selectTag(tag.name)}
+				>
+					<p className={styles['tag-text']}>{tag.name}</p>
+				</li>
+			))}
 		</ul>
 	);
 
@@ -76,6 +76,13 @@ const NewCourse = ({ onNext }) => {
 			))}
 		</div>
 	);
+
+	useEffect(() => {
+		const outsideClick = () => setShowDropDown(false);
+		document.addEventListener('click', outsideClick);
+
+		return () => document.removeEventListener('click', outsideClick);
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
@@ -106,25 +113,38 @@ const NewCourse = ({ onNext }) => {
 						<span>Название</span>
 					</div>
 					<div className={styles['tag-box']}>
-						{tagContent}
-						<input
-							type="text"
-							name="tag"
-							placeholder=""
-							className={styles['tag-input']}
-							value={tag}
-							maxLength={MAX_CHARS.tag}
-							onChange={(event) =>
-								handleDescriptionChange(
-									event,
-									MAX_CHARS.tag,
-									setTag
-								)
+						<div className={styles['wrapper-oveflow']}>
+							{tagContent}
+							<input
+								type="text"
+								name="tag"
+								placeholder=""
+								className={styles['tag-input']}
+								value={tag}
+								maxLength={MAX_CHARS.tag}
+								onChange={(event) =>
+									handleDescriptionChange(
+										event,
+										MAX_CHARS.tag,
+										setTag
+									)
+								}
+								onClick={(e) => {
+									setShowDropDown((cv) => !cv);
+									e.stopPropagation();
+								}}
+							/>
+						</div>
+						<span
+							className={
+								allTags.length || tag.length
+									? styles['up-span']
+									: ''
 							}
-							onClick={() => setStatrDropDown((cv) => !cv)}
-						/>
-						<span>Тег</span>
-						{statrDropDown && dropDown}
+						>
+							Придумайте тег или выберите существующий
+						</span>
+						{showDropDown && dropDown}
 					</div>
 					<div className={styles['description-box']}>
 						<textarea
@@ -154,7 +174,7 @@ const NewCourse = ({ onNext }) => {
 							: styles['btn_disabled']
 					}`}
 					disabled={!(description.length && title.length)}
-					onClick={handleSubmit}
+					onClick={handleNext}
 				>
 					Продолжить
 					<Arrow />
