@@ -5,14 +5,16 @@ import Arrow from '../Arrow.jsx';
 import Cross from '../Cross.jsx';
 import styles from './NewCourse.module.css';
 
-const NewCourse = ({onNext}) => {
+const NewCourse = ({ onNext }) => {
 	const [description, setDescription] = useState('');
 	const [title, setTitle] = useState('');
 	const [tag, setTag] = useState('');
+	const [statrDropDown, setStatrDropDown] = useState(false);
+	const [allTags, setAllTags] = useState([]);
 
 	const handleSubmit = () => {
 		onNext({ title, description });
-	  };
+	};
 
 	const MAX_CHARS = {
 		description: 360,
@@ -26,6 +28,54 @@ const NewCourse = ({onNext}) => {
 			method(input);
 		}
 	};
+
+	const XXX = (e) => {
+		console.log(e);
+		setAllTags((cv) => [...cv, e.target.textContent]);
+		setStatrDropDown(false);
+	};
+
+	const dropDown = (
+		<ul className={styles['tags-list']}>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>Back End</p>
+			</li>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>Front End</p>
+			</li>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>Аналитика</p>
+			</li>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>UX/UI-дизайн</p>
+			</li>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>Грфический дизайн</p>
+			</li>
+			<li className={styles['tag-element']} onClick={XXX}>
+				<p className={styles['tag-text']}>Машинное обучение</p>
+			</li>
+		</ul>
+	);
+
+	const tagContent = (
+		<div className={styles['show-tags']}>
+			{allTags.map((tag, index) => (
+				<div
+					key={tag}
+					className={styles['view-tag']}
+					onClick={() =>
+						setAllTags((cv) => cv.filter((value) => tag !== value))
+					}
+				>
+					<p>
+						{tag.replace(/ /g, '\u00A0').replace(/-/g, '\u2011')}
+						&nbsp;#{index + 1}
+					</p>
+				</div>
+			))}
+		</div>
+	);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
@@ -56,13 +106,14 @@ const NewCourse = ({onNext}) => {
 						<span>Название</span>
 					</div>
 					<div className={styles['tag-box']}>
+						{tagContent}
 						<input
 							type="text"
-                            name="tag"
-                            placeholder=""
-                            className={styles['tag-input']}
-                            value={tag}
-                            maxLength={MAX_CHARS.tag}
+							name="tag"
+							placeholder=""
+							className={styles['tag-input']}
+							value={tag}
+							maxLength={MAX_CHARS.tag}
 							onChange={(event) =>
 								handleDescriptionChange(
 									event,
@@ -70,8 +121,10 @@ const NewCourse = ({onNext}) => {
 									setTag
 								)
 							}
-                        />
+							onClick={() => setStatrDropDown((cv) => !cv)}
+						/>
 						<span>Тег</span>
+						{statrDropDown && dropDown}
 					</div>
 					<div className={styles['description-box']}>
 						<textarea
@@ -107,8 +160,9 @@ const NewCourse = ({onNext}) => {
 					<Arrow />
 				</button>
 			</div>
-		</div>, document.body
+		</div>,
+		document.body
 	);
 };
 
-export default NewCourse; 
+export default NewCourse;

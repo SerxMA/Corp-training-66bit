@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
-    position: fixed;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
@@ -60,6 +60,9 @@
 }
 
 .tag-box {
+	display: flex;
+	flex-direction: row;
+
 	position: relative;
 	width: 100%;
 	height: 52px;
@@ -99,9 +102,26 @@
 .tag-input::placeholder {
 	color: transparent;
 }
+.show-tags {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.25rem;
+}
+.view-tag {
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
 
+	background: var(--purple-background);
+
+	font: var(--body-medium14);
+	color: var(--purple-main);
+}
 .tag-input {
-	width: 100%;
+	flex-grow: 1;
+
+	/* width: 100%; */
 	height: 100%;
 	padding: 0.625rem;
 	border: none;
@@ -113,6 +133,41 @@
 	letter-spacing: 0.16px;
 
 	outline: none;
+}
+.tags-list {
+	display: flex;
+	flex-direction: column;
+	row-gap: 2px;
+
+	position: absolute;
+	top: 100%;
+	left: auto;
+	min-width: 180px;
+	padding: 0.25rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--content-background);
+
+	background-color: var(--background-primary);
+
+	box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.1);
+	z-index: 55;
+}
+.tag-element {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+
+	cursor: pointer;
+}
+.tag-text {
+	display: inline-block;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+
+	background-color: var(--orange-background);
+
+	font: var(--body-medium14);
+	color: var(--orange-main);
+	letter-spacing: 0.14px;
 }
 
 .input-box span {
