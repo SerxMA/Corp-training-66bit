@@ -1,8 +1,10 @@
-import { SET_USER } from '../actions/userActions.js';
+export const USER_ACTIONS = {
+	SET_USER: 'SET_USER'
+}
 
 export const setUser = (payload) => {
 	return {
-		type: SET_USER,
+		type: USER_ACTIONS.SET_USER,
 		payload: { ...payload },
 	};
 };

@@ -1,4 +1,4 @@
-import { SET_USER } from '../actions/userActions.js';
+import { USER_ACTIONS } from '../actionCreators/user.js';
 
 const initialState = {
 	username: null,
@@ -9,7 +9,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case SET_USER:
+		case USER_ACTIONS.SET_USER:
 			return {
 				...state,
 				username: action.payload.username,
