@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { api } from '../../api/index.js';
 import { useAuth } from '../../customHooks/useAuth.js';
-import ChooseImgModal from '../chooseFile/ChooseImgModal.jsx';
+import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
