@@ -1,29 +1,3 @@
-.popup {
-	display: flex;
-	flex-direction: column;
-	align-self: baseline;
-	gap: 1.5rem;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-
-	width: 480px;
-	padding: 2rem;
-	border-radius: 1.25rem;
-	border: 1px solid var(--content-background);
-
-	background-color: var(--background-modal);
-}
-.top-block {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-.title {
-	font: var(--heading2);
-	color: var(--content-primary);
-}
 .describe-block {
 	display: flex;
 	flex-direction: column;
@@ -39,10 +13,6 @@
 		color: var(--content-secondary);
 		letter-spacing: 0.12px;
 	}
-}
-.cross {
-	display: flex;
-	flex-shrink: 0;
 }
 .upload-container {
 	display: flex;
@@ -162,14 +132,4 @@
 	background-color: var(--content-background);
 
 	cursor: auto;
-}
-
-.modal-wrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: var(--background-overlay-dark);
-	z-index: 49;
 }
