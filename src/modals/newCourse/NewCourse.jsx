@@ -1,72 +1,69 @@
-import { useState } from 'react';
-import ReactDOM from 'react-dom';
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 
 import Arrow from '../Arrow.jsx';
-import Cross from '../Cross.jsx';
 import styles from './NewCourse.module.css';
+import { defaultTags } from '../../helpers/constants/defaultTags.js';
 
-const NewCourse = ({ onNext }) => {
-	const [description, setDescription] = useState('');
-	const [title, setTitle] = useState('');
+const MAX_CHARS = {
+	description: 360,
+	title: 128,
+	inputTags: 32,
+};
+
+const NewCourse = ({ onNext, changeData, data }) => {
 	const [tag, setTag] = useState('');
-	const [statrDropDown, setStatrDropDown] = useState(false);
-	const [allTags, setAllTags] = useState([]);
+	const [showDropDown, setShowDropDown] = useState(false);
 
-	const handleSubmit = () => {
-		onNext({ title, description });
-	};
+	const changeInputTag = (text) => {
+		let input = text.trimStart().replace('  ', ' ');
 
-	const MAX_CHARS = {
-		description: 360,
-		title: 128,
-		tag: 50,
-	};
-
-	const handleDescriptionChange = (event, maxChars, method) => {
-		const input = event.target.value.trimStart().replace('  ', ' ');
-		if (input.length <= maxChars) {
-			method(input);
+		if (/^# $/.test(input.slice(-2))) {
+			changeTag(input.slice(0, -2));
+			input = '';
+		}
+		if (input.length <= MAX_CHARS.inputTags) {
+			setTag(input);
 		}
 	};
 
-	const XXX = (e) => {
-		console.log(e);
-		setAllTags((cv) => [...cv, e.target.textContent]);
-		setStatrDropDown(false);
+	const changeText = (text, method) => {
+		const input = text.trimStart().replace('  ', ' ');
+
+		if (input.length <= MAX_CHARS[method]) {
+			changeData((cv) => ({ ...cv, [method]: input }));
+		}
+	};
+
+	const changeTag = (tag) => {
+		changeData((cv) =>
+			cv.tags.find((value) => tag === value)
+				? { ...cv, tags: cv.tags.filter((value) => tag !== value) }
+				: { ...cv, tags: [...cv.tags, tag] }
+		);
 	};
 
 	const dropDown = (
 		<ul className={styles['tags-list']}>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Back End</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Front End</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Аналитика</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>UX/UI-дизайн</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Грфический дизайн</p>
-			</li>
-			<li className={styles['tag-element']} onClick={XXX}>
-				<p className={styles['tag-text']}>Машинное обучение</p>
-			</li>
+			{defaultTags.map((tag) => (
+				<li
+					key={tag.id}
+					className={styles['tag-element']}
+					onClick={() => changeTag(tag.name)}
+				>
+					<p className={styles['tag-text']}>{tag.name}</p>
+				</li>
+			))}
 		</ul>
 	);
 
 	const tagContent = (
 		<div className={styles['show-tags']}>
-			{allTags.map((tag, index) => (
+			{data.tags.map((tag, index) => (
 				<div
 					key={tag}
 					className={styles['view-tag']}
-					onClick={() =>
-						setAllTags((cv) => cv.filter((value) => tag !== value))
-					}
+					onClick={() => changeTag(tag)}
 				>
 					<p>
 						{tag.replace(/ /g, '\u00A0').replace(/-/g, '\u2011')}
@@ -77,35 +74,32 @@ const NewCourse = ({ onNext }) => {
 		</div>
 	);
 
-	return ReactDOM.createPortal(
-		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
-				<div className={styles['top-block']}>
-					<h2 className={styles['title']}>Новый курс</h2>
-					<button className={styles['cross']}>
-						<Cross />
-					</button>
+	useEffect(() => {
+		const outsideClick = () => setShowDropDown(false);
+		document.addEventListener('click', outsideClick);
+
+		return () => document.removeEventListener('click', outsideClick);
+	}, []);
+
+	return (
+		<>
+			<div className={styles['describe-block']}>
+				<div className={styles['input-box']}>
+					<input
+						type="text"
+						name="title"
+						placeholder=""
+						className={styles['title-input']}
+						value={data.title}
+						onChange={(event) =>
+							changeText(event.target.value, 'title')
+						}
+						maxLength={MAX_CHARS.title}
+					/>
+					<span>Название</span>
 				</div>
-				<div className={styles['describe-block']}>
-					<div className={styles['input-box']}>
-						<input
-							type="text"
-							name="title"
-							placeholder=""
-							className={styles['title-input']}
-							value={title}
-							onChange={(event) =>
-								handleDescriptionChange(
-									event,
-									MAX_CHARS.title,
-									setTitle
-								)
-							}
-							maxLength={MAX_CHARS.title}
-						/>
-						<span>Название</span>
-					</div>
-					<div className={styles['tag-box']}>
+				<div className={styles['tag-box']}>
+					<div className={styles['wrapper-oveflow']}>
 						{tagContent}
 						<input
 							type="text"
@@ -115,53 +109,63 @@ const NewCourse = ({ onNext }) => {
 							value={tag}
 							maxLength={MAX_CHARS.tag}
 							onChange={(event) =>
-								handleDescriptionChange(
-									event,
-									MAX_CHARS.tag,
-									setTag
-								)
+								changeInputTag(event.target.value)
 							}
-							onClick={() => setStatrDropDown((cv) => !cv)}
+							onClick={(e) => {
+								setShowDropDown((cv) => !cv);
+								e.stopPropagation();
+							}}
 						/>
-						<span>Тег</span>
-						{statrDropDown && dropDown}
 					</div>
-					<div className={styles['description-box']}>
-						<textarea
-							placeholder=""
-							className={styles['description-area']}
-							value={description}
-							onChange={(event) =>
-								handleDescriptionChange(
-									event,
-									MAX_CHARS.description,
-									setDescription
-								)
-							}
-							maxLength={MAX_CHARS.description}
-						></textarea>
-						<span>Описание</span>
-						<div className={styles['char-counter']}>
-							{description.length} / {MAX_CHARS.description}
-						</div>
+					<span
+						className={
+							data.tags.length || tag.length
+								? styles['up-span']
+								: ''
+						}
+					>
+						Придумайте тег или выберите существующий
+					</span>
+					{showDropDown && dropDown}
+				</div>
+				<div className={styles['description-box']}>
+					<textarea
+						placeholder=""
+						className={styles['description-area']}
+						value={data.description}
+						onChange={(event) =>
+							changeText(event.target.value, 'description')
+						}
+						maxLength={MAX_CHARS.description}
+					></textarea>
+					<span>Описание</span>
+					<div className={styles['char-counter']}>
+						{data.description.length} / {MAX_CHARS.description}
 					</div>
 				</div>
-				<button
-					className={`${styles['continue-btn']}
+			</div>
+			<button
+				className={`${styles['continue-btn']}
 					${
-						description.length && title.length
+						data.description.length &&
+						data.title.length &&
+						data.tags.length
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
-					disabled={!(description.length && title.length)}
-					onClick={handleSubmit}
-				>
-					Продолжить
-					<Arrow />
-				</button>
-			</div>
-		</div>,
-		document.body
+				disabled={
+					!(
+						data.description.length &&
+						data.title.length &&
+						data.tags.length
+					)
+				}
+				onClick={onNext}
+			>
+				Продолжить
+				<Arrow />
+			</button>
+		</>
 	);
 };
 

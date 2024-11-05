@@ -1,37 +1,3 @@
-.popup {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-
-	max-width: 26rem;
-	min-width: 390px;
-	height: 532px;
-	padding: 2rem;
-	border-radius: 1.25rem;
-	border: 1px solid var(--content-background);
-
-	background-color: var(--background-modal);
-}
-
-.top-block {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.title {
-	color: var(--content-primary);
-}
-
-.cross {
-	display: flex;
-	flex-shrink: 0;
-}
-
 .describe-block {
 	display: flex;
 	flex-direction: column;
@@ -58,8 +24,10 @@
 		box-shadow: 0px 0px 16px 0px var(--accent-border);
 	}
 }
-
 .tag-box {
+	position: relative;
+}
+.wrapper-oveflow {
 	display: flex;
 	flex-direction: row;
 
@@ -68,6 +36,20 @@
 	height: 52px;
 	border-radius: 0.5rem;
 	border: 2px solid var(--content-border);
+
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		height: 4px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--content-subPrimary);
+		border-radius: 30px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--system-success-primary);
+		border-radius: 30px;
+	}
 
 	&:hover {
 		border-color: var(--accent-border);
@@ -79,7 +61,6 @@
 		box-shadow: 0px 0px 16px 0px var(--accent-border);
 	}
 }
-
 .title-input::placeholder {
 	color: transparent;
 }
@@ -107,6 +88,8 @@
 	flex-direction: row;
 	align-items: center;
 	column-gap: 0.25rem;
+
+	padding-left: 0.5rem;
 }
 .view-tag {
 	display: inline-block;
@@ -121,7 +104,7 @@
 .tag-input {
 	flex-grow: 1;
 
-	/* width: 100%; */
+	min-width: 30%;
 	height: 100%;
 	padding: 0.625rem;
 	border: none;
@@ -204,9 +187,9 @@
 	letter-spacing: 0.12px;
 }
 
-.tag-input:focus ~ span,
-.tag-input:not(:placeholder-shown) ~ span {
-	top: -10px;
+.tag-box .up-span,
+.tag-box:focus-within span {
+	top: -7px;
 	left: 8px;
 
 	font: var(--body-regular12);
@@ -321,15 +304,4 @@
 
 		box-shadow: 0px 0px 16px 0px var(--accent-border);
 	}
-}
-
-.modal-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: var(--background-overlay-dark);
-
-	z-index: 49;
 }
