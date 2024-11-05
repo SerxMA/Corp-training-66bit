@@ -1,0 +1,12 @@
+.dropdown  li{
+    display: block;
+}
+
+.dropdown{
+    width: 100%;
+    display: none;
+}
+
+.is-expanded{
+    display: block;
+}

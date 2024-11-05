@@ -1,0 +1,16 @@
+.lesson {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    gap: 12px;
+    padding: 0.75rem 0.5rem;
+
+    background-color: var(--background-sub-primary);
+
+    cursor: pointer;
+
+    & span {
+        font: var(--body-regular14);
+        color: var(--content-primary);
+    }
+}

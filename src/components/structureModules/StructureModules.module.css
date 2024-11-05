@@ -1,0 +1,38 @@
+.course-title {
+    font: var(--body-medium14);
+    color: var(--content-primary);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+.content-text{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--content-background);
+}
+
+.module-header{
+    display: block;
+    background-color: var(--background-sub-primary);
+    border-radius: 0.5rem;
+    padding-bottom: 7px;
+}
+
+.is-expanded-content{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.is-expanded-module{
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}

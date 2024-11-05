@@ -12,9 +12,10 @@ import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
 import AllCourses from './pages/allCourses/AllCourses.jsx';
 import MyCourses from './pages/myCourses/MyCourses.jsx';
 import CheckRole from './hoc/CheckRole.jsx';
-
+import CurrentCourse from './pages/currentCourse/CurrentCourse.jsx';
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
+import CourseLayout from './layouts/courseLayout/CourseLayout.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
 						element: <Navigate to="/courses/all-courses" />,
 					},
 					{
-						path: 'all-courses',
+						path: 'all-courses/',
 						element: <AllCourses />,
 					},
 					{
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
 						element: <MyCourses />,
 					},
 				],
+			},
+			{
+				path: 'course/:id',
+				element: <CourseLayout />
 			},
 		],
 	},

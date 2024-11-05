@@ -19,11 +19,12 @@
 	--accent-background: #e1ecfa;
 
 	/* system */
-	--system-success-primary: #24ce9f;
+	--system-success-primary: #49cc93;
 	--system-success-background: #d2faef;
 	--system-error-primary: #f22a41;
 	--system-error-background: #ffd6db;
 	--system-warning-primary: #f2b325;
+	--system-danger-primary: #ffa037;
 	--sustem-warning-background: #fcf0d4;
 
 	/* backgroung */

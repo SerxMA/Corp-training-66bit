@@ -1,0 +1,49 @@
+.nav-panel {
+    display: flex;
+    flex-direction: column;
+	position: fixed;
+
+	width: 100%;
+	max-width: 17.5rem;
+	height: 100%;
+
+	border-right: 1px solid var(--content-background);
+
+	background-color: var(--background-primary);
+}
+
+.course-title-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+}
+
+.course-title {
+    display: -webkit-box;             /* Используем flexbox-эквивалент для обрезки */
+    -webkit-box-orient: vertical;     /* Ориентируем flex-контейнер вертикально */
+    overflow: hidden;                 /* Скрываем текст, который не помещается */
+    text-overflow: ellipsis;          /* Добавляем троеточие */
+    -webkit-line-clamp: 2;
+
+    color: var(--content-primary);
+}
+
+.course-structure {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 0.75rem;
+}
+
+.course-structure-edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & h3 {
+        color: var(--content-primary);
+    }
+}
