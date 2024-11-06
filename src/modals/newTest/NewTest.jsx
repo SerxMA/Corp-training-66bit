@@ -214,7 +214,15 @@ const NewTest = ({ setOpen }) => {
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
-					disabled={!MAX_CHARS.question}
+					disabled={
+						!(
+							question &&
+							answers.length &&
+							answers.some((obj) => obj.isTrue) &&
+							pointCorrect >= 0 &&
+							attemptsTest >= 1
+						)
+					}
 				>
 					Готово
 				</button>
