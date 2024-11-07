@@ -26,6 +26,27 @@
 }
 .tag-box {
 	position: relative;
+	padding-right: 3rem;
+	border-radius: 0.5rem;
+	border: 2px solid var(--content-border);
+
+	&:hover {
+		border-color: var(--accent-border);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:focus-within {
+		border-color: var(--accent-border);
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+
+	& svg {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+
+		transform: translateY(-50%);
+	}
 }
 .wrapper-oveflow {
 	display: flex;
@@ -34,8 +55,6 @@
 	position: relative;
 	width: 100%;
 	height: 52px;
-	border-radius: 0.5rem;
-	border: 2px solid var(--content-border);
 
 	overflow-x: auto;
 
@@ -49,16 +68,6 @@
 	&::-webkit-scrollbar-thumb {
 		background: var(--system-success-primary);
 		border-radius: 30px;
-	}
-
-	&:hover {
-		border-color: var(--accent-border);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-	&:focus-within {
-		border-color: var(--accent-border);
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
 	}
 }
 .title-input::placeholder {
