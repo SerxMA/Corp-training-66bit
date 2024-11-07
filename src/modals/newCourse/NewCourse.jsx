@@ -14,14 +14,20 @@ const MAX_CHARS = {
 const NewCourse = ({ onNext, changeData, data }) => {
 	const [tag, setTag] = useState('');
 	const [showDropDown, setShowDropDown] = useState(false);
+	const [showTagSupport, setShowTagSupport] = useState(false);
 
 	const changeInputTag = (text) => {
 		let input = text.trimStart().replace('  ', ' ');
 
-		if (/^# $/.test(input.slice(-2))) {
-			changeTag(input.slice(0, -2));
+		if (
+			input[0] === '#' &&
+			input.length > 2 &&
+			input.slice(-1)[0] === ' '
+		) {
+			changeTag(input.slice(1, -1).replace('-', ' ').replace('\\-', '-'));
 			input = '';
 		}
+
 		if (input.length <= MAX_CHARS.inputTags) {
 			setTag(input);
 		}
@@ -74,8 +80,25 @@ const NewCourse = ({ onNext, changeData, data }) => {
 		</div>
 	);
 
+	const tagSupportContent = (
+		<div className={styles['tag-support']}>
+			<p>Теги</p>
+			<p>
+				Чтобы создать новый тег введите "#" в начале тегаи пробел в
+				конце.
+				<br />
+				Для пробела внутри тега используйте "-".
+				<br />
+				Для "-" внутри тега используйте "\-".
+			</p>
+		</div>
+	);
+
 	useEffect(() => {
-		const outsideClick = () => setShowDropDown(false);
+		const outsideClick = () => {
+			setShowTagSupport(false);
+			setShowDropDown(false);
+		};
 		document.addEventListener('click', outsideClick);
 
 		return () => document.removeEventListener('click', outsideClick);
@@ -132,11 +155,10 @@ const NewCourse = ({ onNext, changeData, data }) => {
 						height="20"
 						viewBox="0 0 20 20"
 						fill="none"
-						onClick={() =>
-							alert(
-								'Теги: Нажмите пробел, чтобы создать новый тег. Для пробела внутри тега используйте "-"'
-							)
-						}
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowTagSupport((cv) => !cv);
+						}}
 					>
 						<path
 							d="M10 7H10.01M9 10H10V14H11M1 10C1 11.1819 1.23279 12.3522 1.68508 13.4442C2.13738 14.5361 2.80031 15.5282 3.63604 16.364C4.47177 17.1997 5.46392 17.8626 6.55585 18.3149C7.64778 18.7672 8.8181 19 10 19C11.1819 19 12.3522 18.7672 13.4442 18.3149C14.5361 17.8626 15.5282 17.1997 16.364 16.364C17.1997 15.5282 17.8626 14.5361 18.3149 13.4442C18.7672 12.3522 19 11.1819 19 10C19 7.61305 18.0518 5.32387 16.364 3.63604C14.6761 1.94821 12.3869 1 10 1C7.61305 1 5.32387 1.94821 3.63604 3.63604C1.94821 5.32387 1 7.61305 1 10Z"
@@ -147,6 +169,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 						/>
 					</svg>
 					{showDropDown && dropDown}
+					{showTagSupport && tagSupportContent}
 				</div>
 				<div className={styles['description-box']}>
 					<textarea
