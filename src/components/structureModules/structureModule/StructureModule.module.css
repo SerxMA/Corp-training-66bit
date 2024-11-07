@@ -1,12 +1,16 @@
-.dropdown  li{
-    display: block;
+.dropdown li {
+	display: block;
+
+	&:hover {
+		background-color: var(--content-background);
+	}
 }
 
-.dropdown{
-    width: 100%;
-    display: none;
+.dropdown {
+	width: 100%;
+	display: none;
 }
 
-.is-expanded{
-    display: block;
+.is-expanded {
+	display: block;
 }

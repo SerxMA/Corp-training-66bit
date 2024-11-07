@@ -1,6 +1,6 @@
 .nav-panel {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	position: fixed;
 
 	width: 100%;
@@ -13,37 +13,42 @@
 }
 
 .course-title-block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    padding: 15px;
+	padding: 15px;
 }
 
 .course-title {
-    display: -webkit-box;             /* Используем flexbox-эквивалент для обрезки */
-    -webkit-box-orient: vertical;     /* Ориентируем flex-контейнер вертикально */
-    overflow: hidden;                 /* Скрываем текст, который не помещается */
-    text-overflow: ellipsis;          /* Добавляем троеточие */
-    -webkit-line-clamp: 2;
+	display: -webkit-box; /* Используем flexbox-эквивалент для обрезки */
+	-webkit-box-orient: vertical; /* Ориентируем flex-контейнер вертикально */
+	overflow: hidden; /* Скрываем текст, который не помещается */
+	text-overflow: ellipsis; /* Добавляем троеточие */
+	-webkit-line-clamp: 2;
 
-    color: var(--content-primary);
+	color: var(--content-primary);
 }
 
 .course-structure {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 
-    padding: 0.75rem;
+	padding: 0.75rem;
 }
 
 .course-structure-edit {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-    & h3 {
-        color: var(--content-primary);
-    }
+	& h3 {
+		color: var(--content-primary);
+	}
+	& svg:hover {
+		& path {
+			stroke: var(--accent-subPrimary);
+		}
+	}
 }

@@ -1,14 +1,24 @@
-import styles from './StructureModule.module.css'
+import styles from './StructureModule.module.css';
 import StructureLesson from '../structureLesson/StructureLesson.jsx';
 
-const StructureModule = ({expandedState}) => {
-    return (
-        <ul className={`${styles['dropdown']} ${expandedState && styles['is-expanded']}`}>
-            <li><StructureLesson /></li>
-            <li><StructureLesson /></li>
-            <li><StructureLesson /></li>
-        </ul>
-    );
+const StructureModule = ({ expandedState, type }) => {
+	return (
+		<ul
+			className={`${styles['dropdown']} ${
+				expandedState && styles['is-expanded']
+			}`}
+		>
+			<li>
+				<StructureLesson type={type} />
+			</li>
+			<li>
+				<StructureLesson type={type} />
+			</li>
+			<li>
+				<StructureLesson type={type} />
+			</li>
+		</ul>
+	);
 };
 
 export default StructureModule;

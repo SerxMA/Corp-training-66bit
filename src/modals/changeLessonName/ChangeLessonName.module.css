@@ -1,15 +1,29 @@
+.modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--background-overlay-dark);
+
+	z-index: 49;
+}
 .popup {
 	display: flex;
 	flex-direction: column;
-	align-self: baseline;
 	gap: 1.5rem;
 
+	position: fixed;
+	top: 50%;
+	left: 50%;
 	width: 480px;
 	padding: 2rem;
 	border-radius: 1.25rem;
 	border: 1px solid var(--content-background);
 
 	background-color: var(--background-modal);
+
+	transform: translateX(-50%) translateY(-50%);
 }
 .top-block {
 	display: flex;

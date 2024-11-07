@@ -1,16 +1,29 @@
 .lesson {
-    display: flex;
-    align-items: center;
-    height: 52px;
-    gap: 12px;
-    padding: 0.75rem 0.5rem;
+	display: flex;
+	align-items: center;
+	height: 52px;
+	gap: 12px;
+	padding: 0.75rem 0.5rem;
 
-    background-color: var(--background-sub-primary);
+	cursor: pointer;
 
-    cursor: pointer;
+	& span {
+		font: var(--body-regular14);
+		color: var(--content-primary);
+	}
+}
+.managment-btn {
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.75rem;
 
-    & span {
-        font: var(--body-regular14);
-        color: var(--content-primary);
-    }
+	margin-left: auto;
+	margin-right: 0.25rem;
+
+	& svg:hover {
+		& path {
+			transition: stroke 0.2s ease-in-out;
+			stroke: var(--accent-subPrimary);
+		}
+	}
 }
