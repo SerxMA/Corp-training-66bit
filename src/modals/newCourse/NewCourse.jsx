@@ -16,6 +16,8 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	const [showDropDown, setShowDropDown] = useState(false);
 	const [showTagSupport, setShowTagSupport] = useState(false);
 
+	console.log(data.tags);
+
 	const changeInputTag = (text) => {
 		let input = text.trimStart().replace('  ', ' ');
 
@@ -24,7 +26,20 @@ const NewCourse = ({ onNext, changeData, data }) => {
 			input.length > 2 &&
 			input.slice(-1)[0] === ' '
 		) {
-			changeTag(input.slice(1, -1).replace('-', ' ').replace('\\-', '-'));
+			const id =
+				Math.max(
+					...defaultTags.map((obj) => obj.id),
+					...(data.tags.length > 0
+						? data.tags.map((obj) => obj.id)
+						: [])
+				) + 1;
+			const obj = {
+				id: id,
+				name: input.slice(1, -1).replace('-', ' '),
+				bgc: 'var(--green-background)',
+				color: 'var(--green-main)',
+			};
+			changeTag(obj);
 			input = '';
 		}
 
@@ -43,8 +58,8 @@ const NewCourse = ({ onNext, changeData, data }) => {
 
 	const changeTag = (tag) => {
 		changeData((cv) =>
-			cv.tags.find((value) => tag === value)
-				? { ...cv, tags: cv.tags.filter((value) => tag !== value) }
+			cv.tags.find((obj) => tag.id === obj.id)
+				? { ...cv, tags: cv.tags.filter((obj) => tag.id !== obj.id) }
 				: { ...cv, tags: [...cv.tags, tag] }
 		);
 	};
@@ -55,9 +70,14 @@ const NewCourse = ({ onNext, changeData, data }) => {
 				<li
 					key={tag.id}
 					className={styles['tag-element']}
-					onClick={() => changeTag(tag.name)}
+					onClick={() => changeTag(tag)}
 				>
-					<p className={styles['tag-text']}>{tag.name}</p>
+					<p
+						className={styles['tag-text']}
+						style={{ color: tag.color, backgroundColor: tag.bgc }}
+					>
+						{tag.name}
+					</p>
 				</li>
 			))}
 		</ul>
@@ -67,12 +87,15 @@ const NewCourse = ({ onNext, changeData, data }) => {
 		<div className={styles['show-tags']}>
 			{data.tags.map((tag, index) => (
 				<div
-					key={tag}
+					key={tag.id}
 					className={styles['view-tag']}
 					onClick={() => changeTag(tag)}
+					style={{ color: tag.color, backgroundColor: tag.bgc }}
 				>
 					<p>
-						{tag.replace(/ /g, '\u00A0').replace(/-/g, '\u2011')}
+						{tag.name
+							.replace(/ /g, '\u00A0')
+							.replace(/-/g, '\u2011')}
 						&nbsp;#{index + 1}
 					</p>
 				</div>

@@ -32,8 +32,7 @@ const WrapperCourseCreator = ({ setOpen }) => {
 		formData.append('description', courseData.description);
 		formData.append('authorName', username);
 		formData.append('image', courseData.file);
-		formData.append('score', 50);
-		formData.append('tags', []);
+		formData.append('tags', courseData.tags);
 		api.course.postNewCourse({ data: formData }).then((res) => {
 			console.log(res);
 		});

@@ -105,10 +105,7 @@
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.25rem;
 
-	background: var(--purple-background);
-
 	font: var(--body-medium14);
-	color: var(--purple-main);
 }
 .tag-input {
 	flex-grow: 1;
@@ -155,10 +152,7 @@
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.25rem;
 
-	background-color: var(--orange-background);
-
 	font: var(--body-medium14);
-	color: var(--orange-main);
 	letter-spacing: 0.14px;
 }
 .tag-support {
