@@ -1,18 +1,37 @@
 .card {
 	display: flex;
 	flex-direction: column;
+	gap: 0.75rem;
 
 	max-width: 450px;
-	padding: 1rem;
-	gap: 0.75rem;
 	height: 26.5rem;
+	padding: 1rem;
 
 	background-color: var(--background-primary);
 
 	border-radius: 1.5rem;
 	border: 1px solid var(--content-background);
 
+	transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+		box-shadow 0.2s ease-in-out;
 	box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.03);
+	cursor: pointer;
+
+	&:hover {
+		border-color: var(--accent-background);
+
+		background-color: var(--background-sub-primary);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:active {
+		border-color: var(--accent-border);
+
+		background-color: var(--background-sub-primary);
+
+		box-shadow: 0px 0px 4px 0px var(--accent-border),
+			0px 32px 128px 128px rgba(255, 255, 255, 0.1) inset;
+	}
 }
 .course-img {
 	height: 13.5rem;
