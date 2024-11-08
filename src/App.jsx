@@ -12,7 +12,6 @@ import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
 import AllCourses from './pages/allCourses/AllCourses.jsx';
 import MyCourses from './pages/myCourses/MyCourses.jsx';
 import CheckRole from './hoc/CheckRole.jsx';
-import CurrentCourse from './pages/currentCourse/CurrentCourse.jsx';
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
 import CourseLayout from './layouts/courseLayout/CourseLayout.jsx';

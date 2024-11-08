@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import NavPanel from '../../components/navigation/Navigation.jsx';
 import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin.jsx';
@@ -13,7 +13,6 @@ const AdminMainLayout = () => {
         	<ViewHeaderAdmin/>
         	<ul className={styles['courses-wrapper']}>
         		<Outlet />
-				<NavLink to={'/course/2'}>course</NavLink>
         	</ul>
         </div>
     </>

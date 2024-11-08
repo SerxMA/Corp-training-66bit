@@ -16,8 +16,6 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	const [showDropDown, setShowDropDown] = useState(false);
 	const [showTagSupport, setShowTagSupport] = useState(false);
 
-	console.log(data.tags);
-
 	const changeInputTag = (text) => {
 		let input = text.trimStart().replace('  ', ' ');
 
@@ -36,8 +34,8 @@ const NewCourse = ({ onNext, changeData, data }) => {
 			const obj = {
 				id: id,
 				name: input.slice(1, -1).replace('-', ' '),
-				bgc: 'var(--green-background)',
-				color: 'var(--green-main)',
+				color: 'var(--green-background)',
+				textColor: 'var(--green-main)',
 			};
 			changeTag(obj);
 			input = '';
@@ -74,7 +72,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 				>
 					<p
 						className={styles['tag-text']}
-						style={{ color: tag.color, backgroundColor: tag.bgc }}
+						style={{ color: tag.textColor, backgroundColor: tag.color }}
 					>
 						{tag.name}
 					</p>
@@ -90,7 +88,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 					key={tag.id}
 					className={styles['view-tag']}
 					onClick={() => changeTag(tag)}
-					style={{ color: tag.color, backgroundColor: tag.bgc }}
+					style={{ color: tag.textColor, backgroundColor: tag.color }}
 				>
 					<p>
 						{tag.name

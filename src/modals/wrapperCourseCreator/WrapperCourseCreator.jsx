@@ -26,14 +26,16 @@ const WrapperCourseCreator = ({ setOpen }) => {
 		setStep((cv) => cv - 1);
 	};
 
+	const tagsWithoutId = courseData.tags.map(({ id, ...rest }) => rest);
+
 	const handleSubmit = async () => {
 		const formData = new FormData();
 		formData.append('title', courseData.title);
 		formData.append('description', courseData.description);
-		formData.append('authorName', username);
+		formData.append('authorName', 's.mihailov');
 		formData.append('image', courseData.file);
-		formData.append('tags', courseData.tags);
-		api.course.postNewCourse({ data: formData }).then((res) => {
+		formData.append('tags', JSON.stringify(tagsWithoutId));
+		api.courses.postNewCourse({ data: formData }).then((res) => {
 			console.log(res);
 		});
 	};

@@ -3,7 +3,6 @@ import ico from '../../assets/images/baseImg.png';
 import styles from './ChooseImgModal.module.css';
 
 const ChooseImgModal = ({ onPrev, onNext, changeData, data }) => {
-	console.log(data.file, 'file');
 
 	const handleDragOver = (e) => {
 		e.preventDefault();

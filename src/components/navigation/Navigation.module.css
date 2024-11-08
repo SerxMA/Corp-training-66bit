@@ -1,7 +1,7 @@
 .nav-panel {
 	position: fixed;
 	width: 100%;
-	max-width: 17.5rem;
+	max-width: 15rem;
 	height: 100%;
 	border-right: 1px solid var(--content-background);
 

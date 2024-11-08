@@ -1,18 +1,19 @@
 import CourseTag from '../courseTag/CourseTag.jsx';
 import styles from './CourseCard.module.css'
 
-const CourseCard = ( img, tag, title, description) => {
+const CourseCard = ({img, tags, title, description}) => {
 
     return (
-        <div className={styles['card']}>
+        <li className={styles['card']}>
             <img src={img} alt="" className={styles['course-img']}/>
-            <CourseTag type={'design'}/>
-            {/* design это заглушка, потом нужно заменить на tag */}
+            {tags.map((tag) => {
+                <CourseTag tag={tag}/>
+            })}
             <h4 className={styles['title']} >{title}</h4>
             <span className={styles['description']}>
                 {description}
             </span>
-        </div>
+        </li>
     );
 };
 
