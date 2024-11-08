@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch } from 'react-redux';
 
 import { api } from '../../api/index.js';
 import { useAuth } from '../../customHooks/useAuth.js';
+import { setCourse } from '../../store/actionCreators/courses.js';
 import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
 
 const WrapperCourseCreator = ({ setOpen }) => {
+	const dispatch = useDispatch();
 	const [step, setStep] = useState(1);
 	const [courseData, setCourseData] = useState({
 		title: '',
@@ -26,17 +29,18 @@ const WrapperCourseCreator = ({ setOpen }) => {
 		setStep((cv) => cv - 1);
 	};
 
-	const tagsWithoutId = courseData.tags.map(({ id, ...rest }) => rest);
-
 	const handleSubmit = async () => {
 		const formData = new FormData();
 		formData.append('title', courseData.title);
 		formData.append('description', courseData.description);
 		formData.append('authorName', username);
 		formData.append('image', courseData.file);
-		formData.append('tags', JSON.stringify(tagsWithoutId));
+		formData.append(
+			'tags',
+			JSON.stringify(courseData.tags.map(({ id, ...rest }) => rest))
+		);
 		api.courses.postNewCourse({ data: formData }).then((res) => {
-			console.log(res);
+			dispatch(setCourse({ course: res.data }));
 			setOpen(false);
 		});
 	};

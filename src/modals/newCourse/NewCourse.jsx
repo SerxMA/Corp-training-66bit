@@ -23,7 +23,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 			.replace(/#/g, (match, offset) =>
 				offset === text.indexOf('#') ? '#' : ''
 			)
-			.replace(/[^\w\s_#-]/g, '');
+			.replace(/[^\w\sА-Яа-яёЁ_#.,()-]/g, '');
 		if (
 			input[0] === '#' &&
 			input.length > 2 &&
@@ -56,7 +56,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 			.trimStart()
 			.replace('  ', ' ')
 			.replace(/#/g, '')
-			.replace(/[^\w\s_-]/g, '');
+			.replace(/[^\w\sА-Яа-яёЁ_,.()-]/g, '');
 
 		if (input.length <= MAX_CHARS[method]) {
 			changeData((cv) => ({ ...cv, [method]: input }));

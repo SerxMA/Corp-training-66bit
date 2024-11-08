@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import CourseCard from '../../components/courseCard/CourseCard.jsx';
 import { api } from '../../api/index.js';
+import { getCourses } from '../../store/actionCreators/courses.js';
+import CourseCard from '../../components/courseCard/CourseCard.jsx';
 
 const AllCourses = () => {
-	const [courses, setCourses] = useState([]);
-
-	console.log(courses);
+	const dispatch = useDispatch();
+	const { courses } = useSelector((state) => state.courses);
 
 	useEffect(() => {
 		api.courses.getAllCourses({}).then((res) => {
-			setCourses(res.data);
+			dispatch(getCourses({ courses: res.data }));
 		});
 	}, []);
 
