@@ -2,12 +2,11 @@ import styles from './CourseTag.module.css';
 
 const CourseTag = ({ tag }) => {
 	return (
-		<div
-			className={styles.tag}
-			style={{ backgroundColor: tag.color, stroke: tag.textColor }}
-		>
-			<span style={{ color: tag.name }} className={styles['text']}>{text}</span>
-		</div>
+		<li className={styles.tag} style={{ backgroundColor: tag.color }}>
+			<span style={{ color: tag.textColor }} className={styles['text']}>
+				{tag.name}
+			</span>
+		</li>
 	);
 };
 

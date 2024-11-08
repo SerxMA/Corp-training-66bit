@@ -8,7 +8,7 @@ import { defaultTags } from '../../helpers/constants/defaultTags.js';
 const MAX_CHARS = {
 	description: 360,
 	title: 128,
-	inputTags: 32,
+	inputTags: 24,
 };
 
 const NewCourse = ({ onNext, changeData, data }) => {
@@ -17,8 +17,13 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	const [showTagSupport, setShowTagSupport] = useState(false);
 
 	const changeInputTag = (text) => {
-		let input = text.trimStart().replace('  ', ' ');
-
+		let input = text
+			.trimStart()
+			.replace('  ', ' ')
+			.replace(/#/g, (match, offset) =>
+				offset === text.indexOf('#') ? '#' : ''
+			)
+			.replace(/[^\w\s_#-]/g, '');
 		if (
 			input[0] === '#' &&
 			input.length > 2 &&
@@ -33,7 +38,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 				) + 1;
 			const obj = {
 				id: id,
-				name: input.slice(1, -1).replace('-', ' '),
+				name: input.slice(1, -1).replaceAll('_', ' '),
 				color: 'var(--green-background)',
 				textColor: 'var(--green-main)',
 			};
@@ -47,7 +52,11 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	};
 
 	const changeText = (text, method) => {
-		const input = text.trimStart().replace('  ', ' ');
+		const input = text
+			.trimStart()
+			.replace('  ', ' ')
+			.replace(/#/g, '')
+			.replace(/[^\w\s_-]/g, '');
 
 		if (input.length <= MAX_CHARS[method]) {
 			changeData((cv) => ({ ...cv, [method]: input }));
@@ -55,11 +64,16 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	};
 
 	const changeTag = (tag) => {
-		changeData((cv) =>
-			cv.tags.find((obj) => tag.id === obj.id)
-				? { ...cv, tags: cv.tags.filter((obj) => tag.id !== obj.id) }
-				: { ...cv, tags: [...cv.tags, tag] }
-		);
+		if (data.tags.length < 5) {
+			changeData((cv) =>
+				cv.tags.find((obj) => tag.id === obj.id)
+					? {
+							...cv,
+							tags: cv.tags.filter((obj) => tag.id !== obj.id),
+					  }
+					: { ...cv, tags: [...cv.tags, tag] }
+			);
+		}
 	};
 
 	const dropDown = (
@@ -72,7 +86,10 @@ const NewCourse = ({ onNext, changeData, data }) => {
 				>
 					<p
 						className={styles['tag-text']}
-						style={{ color: tag.textColor, backgroundColor: tag.color }}
+						style={{
+							color: tag.textColor,
+							backgroundColor: tag.color,
+						}}
 					>
 						{tag.name}
 					</p>
@@ -105,12 +122,12 @@ const NewCourse = ({ onNext, changeData, data }) => {
 		<div className={styles['tag-support']}>
 			<p>Теги</p>
 			<p>
-				Чтобы создать новый тег введите "#" в начале тегаи пробел в
+				Чтобы создать новый тег введите "#" в начале тега и пробел в
 				конце.
 				<br />
-				Для пробела внутри тега используйте "-".
+				Для пробела внутри тега используйте "_".
 				<br />
-				Для "-" внутри тега используйте "\-".
+				Максимальное кол.-во тегов "5".
 			</p>
 		</div>
 	);
@@ -157,6 +174,7 @@ const NewCourse = ({ onNext, changeData, data }) => {
 							}
 							onClick={(e) => {
 								setShowDropDown((cv) => !cv);
+								setShowTagSupport(false);
 								e.stopPropagation();
 							}}
 						/>
@@ -177,8 +195,9 @@ const NewCourse = ({ onNext, changeData, data }) => {
 						viewBox="0 0 20 20"
 						fill="none"
 						onClick={(e) => {
-							e.stopPropagation();
 							setShowTagSupport((cv) => !cv);
+							setShowDropDown(false);
+							e.stopPropagation();
 						}}
 					>
 						<path

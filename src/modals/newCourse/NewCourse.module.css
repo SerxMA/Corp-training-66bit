@@ -106,6 +106,8 @@
 	border-radius: 0.25rem;
 
 	font: var(--body-medium14);
+
+	cursor: pointer;
 }
 .tag-input {
 	flex-grow: 1;

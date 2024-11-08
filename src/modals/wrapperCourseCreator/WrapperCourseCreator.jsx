@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { api } from '../../api/index.js';
@@ -32,13 +32,20 @@ const WrapperCourseCreator = ({ setOpen }) => {
 		const formData = new FormData();
 		formData.append('title', courseData.title);
 		formData.append('description', courseData.description);
-		formData.append('authorName', 's.mihailov');
+		formData.append('authorName', username);
 		formData.append('image', courseData.file);
 		formData.append('tags', JSON.stringify(tagsWithoutId));
 		api.courses.postNewCourse({ data: formData }).then((res) => {
 			console.log(res);
+			setOpen(false);
 		});
 	};
+
+	useEffect(() => {
+		document.body.style.overflowY = 'hidden';
+
+		return () => (document.body.style.overflowY = 'auto');
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>

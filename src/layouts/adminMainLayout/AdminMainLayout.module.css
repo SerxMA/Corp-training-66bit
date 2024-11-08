@@ -11,14 +11,10 @@
 }
 
 .courses-wrapper {
-	/* display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 0.5rem;
 
 	padding: 0.5rem;
 	margin-top: 59px;
-	gap: 0.5rem; */
-
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 0.5rem;
 }
