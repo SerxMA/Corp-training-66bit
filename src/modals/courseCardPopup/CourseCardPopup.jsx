@@ -26,7 +26,7 @@ const CourseCardPopup = ({title, img, tag, description, link, setOpen}) => {
                 <div className={styles['description']}>
                     {description}
                 </div>
-                <NavLink className={styles['continue-btn']} to={link}>К материалам курса <Arrow /></NavLink>
+                <NavLink className={styles['continue-btn']} to={`/course/${link}`}>К материалам курса <Arrow /></NavLink>
             </div>
         </div>, document.body
     );

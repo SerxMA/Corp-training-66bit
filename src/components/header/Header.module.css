@@ -19,6 +19,4 @@
     height: 56px;
     width: 100%;
     max-width: 15rem;
-
-    border-right: 1px solid var(--content-background);
 }
