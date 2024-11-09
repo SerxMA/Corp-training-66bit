@@ -18,7 +18,12 @@ const CourseStructure = () => {
 			<div className={styles['course-structure']}>
 				<div className={styles['course-structure-edit']}>
 					<h3>Модули</h3>
-					<button onClick={() => setPopup(true)}>
+					<button
+						onClick={(e) => {
+							setPopup(true);
+							e.stopPropagation();
+						}}
+					>
 						<Edit />
 					</button>
 				</div>

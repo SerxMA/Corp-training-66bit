@@ -46,9 +46,14 @@ const WrapperCourseCreator = ({ setOpen }) => {
 	};
 
 	useEffect(() => {
+		const closePopup = () => setOpen(false);
 		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
 
-		return () => (document.body.style.overflowY = 'auto');
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
 	}, []);
 
 	return ReactDOM.createPortal(
@@ -57,6 +62,7 @@ const WrapperCourseCreator = ({ setOpen }) => {
 				className={`${styles['popup']} ${
 					step === 2 ? styles.popup_wide : ''
 				}`}
+				onClick={(e) => e.stopPropagation()}
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новый курс</h2>

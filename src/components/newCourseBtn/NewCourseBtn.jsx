@@ -7,8 +7,9 @@ import WrapperCourseCreator from '../../modals/wrapperCourseCreator/WrapperCours
 const NewCourseBtn = () => {
 	const [isCourseCreatorOpen, setIsCourseCreatorOpen] = useState(false);
 
-	const handleButtonClick = () => {
+	const handleButtonClick = (e) => {
 		setIsCourseCreatorOpen(true);
+		e.stopPropagation();
 	};
 
 	return (
