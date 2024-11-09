@@ -18,12 +18,13 @@ const AllCourses = () => {
 	return (
 		<>
 			{courses.length > 0 &&
-				courses.map((course, index) => (
+				courses.map((course) => (
 					<CourseCard
-						key={index}
+						key={course.id}
 						img={course?.pictureUrl}
 						tags={course?.tags}
 						title={course.title}
+						id={course.id}
 						description={course.description}
 					/>
 				))}
