@@ -64,16 +64,21 @@ const NewCourse = ({ onNext, changeData, data }) => {
 	};
 
 	const changeTag = (tag) => {
-		if (data.tags.length < 5) {
-			changeData((cv) =>
-				cv.tags.find((obj) => tag.id === obj.id)
+		changeData((cv) =>
+			cv.tags.length < 1
+				? cv.tags.find((obj) => tag.id === obj.id)
 					? {
 							...cv,
 							tags: cv.tags.filter((obj) => tag.id !== obj.id),
 					  }
 					: { ...cv, tags: [...cv.tags, tag] }
-			);
-		}
+				: cv.tags.find((obj) => tag.id === obj.id)
+				? {
+						...cv,
+						tags: cv.tags.filter((obj) => tag.id !== obj.id),
+				  }
+				: { ...cv }
+		);
 	};
 
 	const dropDown = (
