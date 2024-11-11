@@ -1,11 +1,19 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { useAuth } from '../../customHooks/useAuth';
+import { removeUser } from '../../store/actionCreators/user';
 import avatar from '../../assets/images/Avatar.jpg';
 import styles from './UserPopup.module.css';
 
 const UserPopup = ({ setOpen }) => {
+	const dispatch = useDispatch();
 	const { avatarUrl, username, email } = useAuth();
+
+	const logout = (e) => {
+		dispatch(removeUser());
+		e.stopPropagation();
+	};
 
 	useEffect(() => {
 		const closePopup = () => setOpen(false);
@@ -24,7 +32,7 @@ const UserPopup = ({ setOpen }) => {
 				<p>{email}</p>
 			</div>
 			<svg
-				onClick={(e) => e.stopPropagation()}
+				onClick={logout}
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
 				height="24"

@@ -18,6 +18,12 @@ const userReducer = (state = initialState, action) => {
 				avatarUrl: action.payload.avatarUrl,
 			};
 
+		case USER_ACTIONS.REMOVE_USER:
+			return {
+				...state,
+				...initialState,
+			};
+
 		default:
 			return { ...state };
 	}
