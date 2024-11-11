@@ -71,7 +71,7 @@ const AddPeoplePopup = ({ setOpen, type }) => {
 								}`}
 								onClick={() => toggleStatePeople(obj.id)}
 							></div>
-							<div className={styles['peaple-card']}>
+							<div className={styles['people-card']}>
 								<img
 									src={avatar}
 									alt="Профиль"
