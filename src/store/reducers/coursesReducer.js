@@ -15,7 +15,7 @@ const coursesReducer = (state = initialState, action) => {
 		case COURSES_ACTIONS.GET_COURSES:
 			return {
 				...state,
-				courses: [...action.payload.courses],
+				courses: [...action.payload.courses.content],
 			};
 
 		default:

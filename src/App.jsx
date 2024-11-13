@@ -62,7 +62,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'course/:id',
-				element: <CourseLayout />,
+				element: (<CheckRole
+					adminLayer={<CourseLayout />}
+					userLayer={<CourseLayout />}
+				/>),
 			},
 		],
 	},
