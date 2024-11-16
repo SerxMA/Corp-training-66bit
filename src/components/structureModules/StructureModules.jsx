@@ -1,18 +1,28 @@
 import { useState } from 'react';
 
-import Plus from './Plus.jsx';
-import DrDown from './DrDown.jsx';
+import Edit from './icons/Edit.jsx';
+import Trash from './icons/Trash.jsx';
+import Plus from './icons/Plus.jsx';
+import DrDown from './icons/DrDown.jsx';
 import ProgressCircle from './ProgressCicrcle.jsx';
-import styles from './StructureModules.module.css';
 import StructureModule from './structureModule/StructureModule.jsx';
-import ChangeLessonName from '../../modals/changeLessonName/ChangeLessonName.jsx';
+import ChangeName from '../../modals/changeName/ChangeName.jsx';
+import DeleteEntity from '../../modals/deleteEntity/DeleteEntity.jsx';
+import styles from './StructureModules.module.css';
 
 const StructureModules = ({ type }) => {
 	const [expanded, setExapnded] = useState(false);
+	const [editModule, setEditModule] = useState(false);
+	const [deleteModule, setDeleteModule] = useState(false);
 	const [newLesson, setNewLesson] = useState(false);
 
 	const handleClick = () => {
 		setExapnded(!expanded);
+	};
+
+	const openPopup = (e, setOpen) => {
+		e.stopPropagation();
+		setOpen(true);
 	};
 
 	return (
@@ -32,23 +42,48 @@ const StructureModules = ({ type }) => {
 					<span className={styles['course-title']}>Title</span>
 					<div className={styles['manage-btn']}>
 						{type === 'edit' && (
-							<button
-								onClick={(e) => {
-									e.stopPropagation();
-									setNewLesson(true);
-								}}
-							>
-								<Plus />
-							</button>
+							<>
+								<button
+									onClick={(e) => openPopup(e, setEditModule)}
+								>
+									<Edit />
+								</button>
+								<button
+									onClick={(e) =>
+										openPopup(e, setDeleteModule)
+									}
+								>
+									<Trash />
+								</button>
+								<button
+									onClick={(e) => openPopup(e, setNewLesson)}
+								>
+									<Plus />
+								</button>
+							</>
 						)}
-						<DrDown />
+						<button>
+							<DrDown />
+						</button>
 					</div>
 				</div>
 			</div>
 			<StructureModule expandedState={expanded} type={type} />
-			{newLesson && (
-				<ChangeLessonName setOpen={setNewLesson} type={'lesson'} />
+			{editModule && (
+				<ChangeName
+					setOpen={setEditModule}
+					type={'module'}
+					content={'Title'}
+				/>
 			)}
+			{deleteModule && (
+				<DeleteEntity
+					setOpen={setDeleteModule}
+					type={'module'}
+					content={'Title'}
+				/>
+			)}
+			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} />}
 		</div>
 	);
 };

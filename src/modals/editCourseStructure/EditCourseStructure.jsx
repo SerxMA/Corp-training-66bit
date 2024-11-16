@@ -25,7 +25,7 @@ const EditCourseStructure = ({ setOpen }) => {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className={styles['top-block']}>
-					<h2 className={styles['title']}>Редактировать структуру</h2>
+					<h2 className={styles['title']}>Структура курса</h2>
 					<button
 						className={styles['cross']}
 						onClick={() => setOpen(false)}

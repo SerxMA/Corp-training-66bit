@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 import ProgressCircle from '../ProgressCicrcle.jsx';
-import Edit from './icons/Edit.jsx';
-import Move from './icons/Move.jsx';
-import Trash from './icons/Trash.jsx';
-import ChangeLessonName from '../../../modals/changeLessonName/ChangeLessonName.jsx';
+import Edit from '../icons/Edit.jsx';
+import Move from '../icons/Move.jsx';
+import Trash from '../icons/Trash.jsx';
+import ChangeName from '../../../modals/changeName/ChangeName.jsx';
+import DeleteEntity from '../../../modals/deleteEntity/DeleteEntity.jsx';
 import styles from './StructureLesson.module.css';
-import DeleteLesson from '../../../modals/deleteLesson/DeleteLesson.jsx';
 
 const StructureLesson = ({ type }) => {
 	const [edit, setEdit] = useState(false);
@@ -30,14 +30,18 @@ const StructureLesson = ({ type }) => {
 				</div>
 			)}
 			{edit && (
-				<ChangeLessonName
+				<ChangeName
 					setOpen={setEdit}
 					type={'lesson'}
 					content={'Lesson 1'}
 				/>
 			)}
 			{trash && (
-				<DeleteLesson setOpen={setTrash} lessonName={'Lesson 1'} />
+				<DeleteEntity
+					setOpen={setTrash}
+					type={'lesson'}
+					content={'Lesson 1'}
+				/>
 			)}
 		</div>
 	);

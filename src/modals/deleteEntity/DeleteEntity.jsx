@@ -2,10 +2,21 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import ico from '../../assets/images/danger.png';
-import styles from './DeleteLesson.module.css';
+import styles from './DeleteEntity.module.css';
 
-const DeleteLesson = ({ setOpen, lessonName }) => {
-	const [second, setSecond] = useState(5);
+const identificationType = {
+	course: { sec: 10, string: 'курс' },
+	module: { sec: 5, string: 'модуль' },
+	lesson: { sec: -1, string: 'урок' },
+};
+
+// type DeleteEntityProps = {
+// 	setOpen: () => void,
+// 	type: 'course' | 'module' | 'lesson',
+// 	content: String,
+// };
+const DeleteEntity = ({ setOpen, type, content }) => {
+	const [second, setSecond] = useState(identificationType[type]?.sec || -1);
 	const timer = () => {
 		const intervalId = setInterval(() => {
 			setSecond((cv) => {
@@ -30,14 +41,17 @@ const DeleteLesson = ({ setOpen, lessonName }) => {
 				</div>
 				<div className={styles.body}>
 					<p className={styles.question}>
-						Вы уверены, что хотите удалить
+						Вы уверены, что хотите удалить{' '}
+						{identificationType[type]?.string || 'неизвестный тип'}
 						<br />
-						<span>{lessonName}?</span>
+						<span>{content}?</span>
 					</p>
 					<p className={styles.desciption}>
 						Это действие не может быть отменено.
 						<br />
-						Удалив урок, вы потеряете все внесенные данные.
+						Удалив{' '}
+						{identificationType[type]?.string || 'неизвестный тип'},
+						вы потеряете все внесенные данные.
 					</p>
 				</div>
 				<div className={styles['btn-wrapper']}>
@@ -64,4 +78,4 @@ const DeleteLesson = ({ setOpen, lessonName }) => {
 	);
 };
 
-export default DeleteLesson;
+export default DeleteEntity;

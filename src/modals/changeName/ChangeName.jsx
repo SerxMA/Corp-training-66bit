@@ -2,18 +2,18 @@ import { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
-import styles from './ChangeLessonName.module.css';
+import styles from './ChangeName.module.css';
 
 const MAX_CHARS = {
 	title: 128,
 };
 
-// type ChangeLessonNameProps = {
+// type ChangeNameProps = {
 // 	setOpen: () => void;
 // 	type: 'lesson' | 'module';
 // 	content: undefined | String;
 // }
-const ChangeLessonName = ({ setOpen, type, content }) => {
+const ChangeName = ({ setOpen, type, content }) => {
 	const [title, setTitle] = useState(content ? content : '');
 
 	const changeText = (text, method) => {
@@ -84,4 +84,4 @@ const ChangeLessonName = ({ setOpen, type, content }) => {
 	);
 };
 
-export default ChangeLessonName;
+export default ChangeName;

@@ -1,5 +1,5 @@
-import styles from './StructureModule.module.css';
 import StructureLesson from '../structureLesson/StructureLesson.jsx';
+import styles from './StructureModule.module.css';
 
 const StructureModule = ({ expandedState, type }) => {
 	return (
