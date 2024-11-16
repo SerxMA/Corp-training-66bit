@@ -30,7 +30,11 @@ const StructureLesson = ({ type }) => {
 				</div>
 			)}
 			{edit && (
-				<ChangeLessonName setOpen={setEdit} lessonName={'Lesson 1'} />
+				<ChangeLessonName
+					setOpen={setEdit}
+					type={'lesson'}
+					content={'Lesson 1'}
+				/>
 			)}
 			{trash && (
 				<DeleteLesson setOpen={setTrash} lessonName={'Lesson 1'} />

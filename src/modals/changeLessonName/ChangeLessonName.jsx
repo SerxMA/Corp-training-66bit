@@ -4,15 +4,40 @@ import ReactDOM from 'react-dom';
 import Cross from '../Cross.jsx';
 import styles from './ChangeLessonName.module.css';
 
-const ChangeLessonName = ({ setOpen, lessonName }) => {
-	const [name, setName] = useState(lessonName ? lessonName : '');
+const MAX_CHARS = {
+	title: 128,
+};
+
+// type ChangeLessonNameProps = {
+// 	setOpen: () => void;
+// 	type: 'lesson' | 'module';
+// 	content: undefined | String;
+// }
+const ChangeLessonName = ({ setOpen, type, content }) => {
+	const [title, setTitle] = useState(content ? content : '');
+
+	const changeText = (text, method) => {
+		const input = text
+			.trimStart()
+			.replace('  ', ' ')
+			.replace(/[^\w\sА-Яа-яёЁ_,.()-]/g, '');
+
+		if (input.length <= MAX_CHARS[method]) {
+			setTitle(input);
+		}
+	};
+
+	const titleContent = {
+		lesson: `${content ? 'Редактировать' : 'Новый'} урок`,
+		module: `${content ? 'Редактировать' : 'Новый'} модуль`,
+	};
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
 			<div className={styles['popup']}>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>
-						{lessonName ? 'Редактировать урок' : 'Новый урок'}
+						{titleContent[type] || 'Неизвестный тип'}
 					</h2>
 					<button
 						className={styles['cross']}
@@ -21,20 +46,19 @@ const ChangeLessonName = ({ setOpen, lessonName }) => {
 						<Cross />
 					</button>
 				</div>
-				<div className={styles['input-box']}>
-					<input
-						type="text"
-						name="title"
-						placeholder=" "
-						required
-						value={name}
-						onChange={(e) =>
-							setName(
-								e.target.value.trimStart().replace('  ', ' ')
-							)
-						}
-					/>
-					<span>Название</span>
+				<div className={styles['describe-block']}>
+					<div className={styles['input-box']}>
+						<input
+							type="text"
+							placeholder=" "
+							required
+							value={title}
+							onChange={(e) =>
+								changeText(e.target.value, 'title')
+							}
+						/>
+						<span>Название</span>
+					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
 					<button
@@ -45,11 +69,11 @@ const ChangeLessonName = ({ setOpen, lessonName }) => {
 					</button>
 					<button
 						className={`${styles['btn']} ${
-							name.length
+							title.length
 								? styles.btn_success
 								: styles.btn_disabled
 						}`}
-						disabled={!name.length}
+						disabled={!title.length}
 					>
 						Готово
 					</button>

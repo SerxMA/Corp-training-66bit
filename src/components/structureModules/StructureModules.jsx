@@ -46,7 +46,9 @@ const StructureModules = ({ type }) => {
 				</div>
 			</div>
 			<StructureModule expandedState={expanded} type={type} />
-			{newLesson && <ChangeLessonName setOpen={setNewLesson} />}
+			{newLesson && (
+				<ChangeLessonName setOpen={setNewLesson} type={'lesson'} />
+			)}
 		</div>
 	);
 };
