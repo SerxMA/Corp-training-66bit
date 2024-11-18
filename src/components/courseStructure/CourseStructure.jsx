@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import Modules from '../modules/Modules.jsx';
-import styles from './CourseStructure.module.css';
 import Edit from './Edit.jsx';
+import Modules from '../modules/Modules.jsx';
 import EditCourseStructure from '../../modals/editCourseStructure/EditCourseStructure.jsx';
+import styles from './CourseStructure.module.css';
 
-const CourseStructure = ({modules}) => {
+const CourseStructure = ({ modules }) => {
 	const [popup, setPopup] = useState(false);
 
 	return (
@@ -29,7 +29,13 @@ const CourseStructure = ({modules}) => {
 				</div>
 				<Modules modulesList={modules} />
 			</div>
-			{popup && <EditCourseStructure modulesList={modules} setOpen={setPopup}/>}
+			{popup && (
+				<EditCourseStructure
+					modulesList={modules}
+					courseName={'Графический дизайн для начинающих в фигме'}
+					setOpen={setPopup}
+				/>
+			)}
 		</div>
 	);
 };

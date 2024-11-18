@@ -11,7 +11,7 @@ const MAX_CHARS = {
 	inputTags: 24,
 };
 
-const NewCourse = ({ onNext, changeData, data }) => {
+const NewCourse = ({ onNext, changeData, data, type }) => {
 	const [tag, setTag] = useState('');
 	const [showDropDown, setShowDropDown] = useState(false);
 	const [showTagSupport, setShowTagSupport] = useState(false);
@@ -250,8 +250,8 @@ const NewCourse = ({ onNext, changeData, data }) => {
 				}
 				onClick={onNext}
 			>
-				Продолжить
-				<Arrow />
+				{type ? 'Готово' : 'Продолжить'}
+				{!type && <Arrow />}
 			</button>
 		</>
 	);

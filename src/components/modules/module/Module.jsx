@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Plus from '../Plus.jsx';
 import DrDown from '../DrDown.jsx';
 import ProgressCircle from '../ProgressCicrcle.jsx';
-import styles from './Module.module.css';
-import Lessons from '../lessons/Lessons.jsx';
-import ChangeLessonName from '../../../modals/changeLessonName/ChangeLessonName.jsx';
 import Edit from '../lesson/icons/Edit.jsx';
 import Trash from '../lesson/icons/Trash.jsx';
+import Lessons from '../lessons/Lessons.jsx';
+import DeleteEntity from '../../../modals/deleteEntity/DeleteEntity.jsx';
+import ChangeName from '../../../modals/changeName/ChangeName.jsx';
+import styles from './Module.module.css';
 
 const Module = ({ type, content }) => {
 	const [expanded, setExapnded] = useState(false);
@@ -17,6 +18,11 @@ const Module = ({ type, content }) => {
 
 	const handleClick = () => {
 		setExapnded(!expanded);
+	};
+
+	const openPopup = (e, setOpen) => {
+		e.stopPropagation();
+		setOpen(true);
 	};
 
 	return (
@@ -33,32 +39,51 @@ const Module = ({ type, content }) => {
 			>
 				<ProgressCircle isGreen={true} />
 				<div className={styles['content-text']}>
-					<span className={styles['course-title']}>{content.title}</span>
+					<span className={styles['course-title']}>
+						{content.title}
+					</span>
 					<div className={styles['manage-btn']}>
 						{type === 'edit' && (
 							<>
-							<button
-								onClick={(e) => {
-									e.stopPropagation();
-									setNewLesson(true);
-								}}
-							>
-								<Plus />
-							</button>
-							<button onClick={() => setEdit(true)}>
-								<Edit />
-							</button>
-							<button onClick={() => setTrash(true)}>
-								<Trash />
-							</button>
+								<button onClick={(e) => openPopup(e, setEdit)}>
+									<Edit />
+								</button>
+								<button onClick={(e) => openPopup(e, setTrash)}>
+									<Trash />
+								</button>
+								<button
+									onClick={(e) => openPopup(e, setNewLesson)}
+								>
+									<Plus />
+								</button>
 							</>
 						)}
-						<DrDown />
+						<button className={styles['drop-down-arrow']}>
+							<DrDown />
+						</button>
 					</div>
 				</div>
 			</div>
-			<Lessons expandedState={expanded} type={type} topics={content.topics} />
-			{newLesson && <ChangeLessonName setOpen={setNewLesson} />}
+			<Lessons
+				expandedState={expanded}
+				type={type}
+				topics={content.topics}
+			/>
+			{edit && (
+				<ChangeName
+					setOpen={setEdit}
+					type={'module'}
+					content={content.title}
+				/>
+			)}
+			{trash && (
+				<DeleteEntity
+					setOpen={setTrash}
+					type={'module'}
+					content={content.title}
+				/>
+			)}
+			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} />}
 		</div>
 	);
 };

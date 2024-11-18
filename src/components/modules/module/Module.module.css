@@ -4,11 +4,24 @@
 }
 .manage-btn {
 	display: flex;
-	column-gap: 0.5rem;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.125rem;
+
 	& svg:hover {
 		& path {
 			stroke: var(--accent-subPrimary);
 		}
+	}
+}
+.drop-down-arrow {
+	& svg {
+		transition: transform 0.2s ease-in-out;
+	}
+}
+.is-expanded-content .drop-down-arrow {
+	& svg {
+		transform: rotateZ(180deg);
 	}
 }
 .content {

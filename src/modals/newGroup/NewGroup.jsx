@@ -59,6 +59,7 @@ const NewGroup = ({ setOpen }) => {
 						disabled={!group}
 					>
 						Создать
+						{/* Поменять (см. Фигму) */}
 					</button>
 				</div>
 			</div>
