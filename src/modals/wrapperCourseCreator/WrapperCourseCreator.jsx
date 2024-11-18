@@ -10,9 +10,9 @@ import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
 
-const WrapperCourseCreator = ({ setOpen }) => {
+const WrapperCourseCreator = ({ setOpen, stage }) => {
 	const dispatch = useDispatch();
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
 		title: '',
 		description: '',
@@ -65,7 +65,9 @@ const WrapperCourseCreator = ({ setOpen }) => {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className={styles['top-block']}>
-					<h2 className={styles['title']}>Новый курс</h2>
+					<h2 className={styles['title']}>
+						{stage ? 'Изменить' : 'Новый курс'}
+					</h2>
 					<button
 						className={styles['cross']}
 						onClick={() => setOpen(false)}
@@ -75,17 +77,19 @@ const WrapperCourseCreator = ({ setOpen }) => {
 				</div>
 				{step === 1 && (
 					<NewCourse
-						onNext={handleNext}
+						onNext={stage ? () => setOpen(false) : handleNext}
 						changeData={setCourseData}
 						data={courseData}
+						type={stage}
 					/>
 				)}
 				{step === 2 && (
 					<ChooseImgModal
-						onNext={handleSubmit}
-						onPrev={handlePrev}
+						onNext={stage ? () => setOpen(false) : handleSubmit}
+						onPrev={stage ? () => setOpen(false) : handlePrev}
 						changeData={setCourseData}
 						data={courseData}
+						type={stage}
 					/>
 				)}
 			</div>

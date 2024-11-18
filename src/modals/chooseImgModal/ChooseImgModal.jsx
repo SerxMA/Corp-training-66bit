@@ -2,8 +2,7 @@
 import ico from '../../assets/images/baseImg.png';
 import styles from './ChooseImgModal.module.css';
 
-const ChooseImgModal = ({ onPrev, onNext, changeData, data }) => {
-
+const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
@@ -59,7 +58,7 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data }) => {
 					className={`${styles.btn} ${styles.btn_cancel}`}
 					onClick={onPrev}
 				>
-					Назад
+					{type ? 'Отмена' : 'Назад'}
 				</button>
 				<button
 					className={`${styles.btn} ${
@@ -68,7 +67,7 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data }) => {
 					disabled={!data.file}
 					onClick={onNext}
 				>
-					Создать курс
+					{type ? 'Готово' : 'Создать курс'}
 				</button>
 			</div>
 		</>
