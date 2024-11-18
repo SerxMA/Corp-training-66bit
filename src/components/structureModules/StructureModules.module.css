@@ -14,6 +14,16 @@
 		}
 	}
 }
+.drop-down-arrow {
+	& svg {
+		transition: transform 0.2s ease-in-out;
+	}
+}
+.is-expanded-content .drop-down-arrow {
+	& svg {
+		transform: rotateZ(180deg);
+	}
+}
 .content {
 	display: flex;
 	align-items: center;

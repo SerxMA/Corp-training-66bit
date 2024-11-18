@@ -62,7 +62,7 @@ const StructureModules = ({ type }) => {
 								</button>
 							</>
 						)}
-						<button>
+						<button className={styles['drop-down-arrow']}>
 							<DrDown />
 						</button>
 					</div>
