@@ -3,6 +3,8 @@
 	color: var(--content-primary);
 }
 .manage-btn {
+	display: flex;
+	column-gap: 0.5rem;
 	& svg:hover {
 		& path {
 			stroke: var(--accent-subPrimary);
@@ -26,7 +28,7 @@
 	border-bottom: 1px solid var(--content-background);
 }
 
-.module-header {
+.module-container {
 	display: block;
 	background-color: var(--background-sub-primary);
 	border-radius: 0.5rem;

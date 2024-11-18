@@ -4,7 +4,7 @@ import CourseTag from '../courseTag/CourseTag.jsx';
 import styles from './CourseCard.module.css';
 import CourseCardPopup from '../../modals/courseCardPopup/CourseCardPopup.jsx';
 
-const CourseCard = ({ img, tags, title, description }) => {
+const CourseCard = ({ img, tags, title, description, id }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
 	const handleClick = (e) => {
@@ -29,6 +29,7 @@ const CourseCard = ({ img, tags, title, description }) => {
 					title={title}
 					img={img}
 					tag={tags[0]}
+					id={id}
 					description={description}
 					setOpen={setIsPopupOpen}
 				/>

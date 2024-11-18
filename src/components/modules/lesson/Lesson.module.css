@@ -3,7 +3,7 @@
 	align-items: center;
 	height: 52px;
 	gap: 12px;
-	padding: 0.75rem 0.5rem;
+	padding: 0.75rem;
 
 	cursor: pointer;
 
@@ -15,7 +15,7 @@
 .managment-btn {
 	display: flex;
 	flex-direction: row;
-	column-gap: 0.75rem;
+	column-gap: 0.5rem;
 
 	margin-left: auto;
 	margin-right: 0.25rem;

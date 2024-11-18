@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import StructureModules from '../structureModules/StructureModules.jsx';
+import Modules from '../modules/Modules.jsx';
 import styles from './CourseStructure.module.css';
 import Edit from './Edit.jsx';
 import EditCourseStructure from '../../modals/editCourseStructure/EditCourseStructure.jsx';
 
-const CourseStructure = () => {
+const CourseStructure = ({modules}) => {
 	const [popup, setPopup] = useState(false);
 
 	return (
@@ -27,9 +27,9 @@ const CourseStructure = () => {
 						<Edit />
 					</button>
 				</div>
-				<StructureModules />
+				<Modules modulesList={modules} />
 			</div>
-			{popup && <EditCourseStructure setOpen={setPopup} />}
+			{popup && <EditCourseStructure modulesList={modules} setOpen={setPopup}/>}
 		</div>
 	);
 };

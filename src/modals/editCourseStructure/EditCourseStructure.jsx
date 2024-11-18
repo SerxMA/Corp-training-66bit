@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
-import StructureModules from '../../components/structureModules/StructureModules.jsx';
+import Modules from '../../components/modules/module/Module.jsx';
 import styles from './EditCourseStructure.module.css';
+import Module from '../../components/modules/module/Module.jsx';
 
-const EditCourseStructure = ({ setOpen }) => {
+const EditCourseStructure = ({ setOpen, modulesList }) => {
 	useEffect(() => {
 		const closePopup = () => setOpen(false);
 
@@ -35,8 +36,13 @@ const EditCourseStructure = ({ setOpen }) => {
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['table-box']}>
-						<StructureModules type={'edit'} />
-						<StructureModules type={'edit'} />
+					<ul style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+						{
+							modulesList.map((module, index) => (
+								<Module content={module} type={'edit'} key={index} />
+							))
+						}
+					</ul>
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
