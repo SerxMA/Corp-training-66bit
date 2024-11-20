@@ -7,7 +7,7 @@ import ChangeName from '../../../modals/changeName/ChangeName.jsx';
 import DeleteEntity from '../../../modals/deleteEntity/DeleteEntity.jsx';
 import styles from './Lesson.module.css';
 
-const Lesson = ({ type, topic }) => {
+const Lesson = ({ type, topic, setIsDataChanged }) => {
 	const [edit, setEdit] = useState(false);
 	const [trash, setTrash] = useState(false);
 
@@ -30,6 +30,9 @@ const Lesson = ({ type, topic }) => {
 					setOpen={setEdit}
 					content={topic.title}
 					type={'lesson'}
+					position={topic.position}
+					id={topic.id}
+					setIsDataChanged={setIsDataChanged}
 				/>
 			)}
 			{trash && (

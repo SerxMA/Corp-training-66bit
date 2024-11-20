@@ -3,17 +3,13 @@ import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
+import { api } from '../../api/index.js';
 
 const MAX_CHARS = {
 	title: 128,
 };
 
-// type ChangeNameProps = {
-// 	setOpen: () => void;
-// 	type: 'lesson' | 'module';
-// 	content: undefined | String;
-// }
-const ChangeName = ({ setOpen, type, content }) => {
+const ChangeName = ({ setOpen, type, content, setIsDataChanged, position, id }) => {
 	const [title, setTitle] = useState(content ? content : '');
 
 	const changeText = (text, method) => {
@@ -30,6 +26,39 @@ const ChangeName = ({ setOpen, type, content }) => {
 	const titleContent = {
 		lesson: `${content ? 'Редактировать' : 'Новый'} урок`,
 		module: `${content ? 'Редактировать' : 'Новый'} модуль`,
+	};
+
+	const apiEntities = {
+		lesson: api['lessons'].editLesson,
+		module: api['modules'].editModule
+	}
+
+	const action = content ? 'PUT' : 'POST';
+
+	const data = {
+		title: title,
+		position: position
+	}
+
+	const createEntity = async () => {
+		const config = {
+			method: action,
+			data: data,
+		}
+		if (!content) {
+			config.params = type === 'lesson' ? {moduleId: id} : {courseId: window.location.pathname.match(/\/course\/(\d+)/)[1]}
+		}
+		else {
+			config.url = `/${type === 'lesson' ? id : id}`
+		}
+
+		apiEntities[type](config)
+		.then((res) => {
+			if (res.status === 201 || res.status === 200) {
+				setIsDataChanged(true);
+				setOpen(false);
+			}
+		});
 	};
 
 	return ReactDOM.createPortal(
@@ -74,6 +103,7 @@ const ChangeName = ({ setOpen, type, content }) => {
 								: styles.btn_disabled
 						}`}
 						disabled={!title.length}
+						onClick={createEntity}
 					>
 						Готово
 					</button>

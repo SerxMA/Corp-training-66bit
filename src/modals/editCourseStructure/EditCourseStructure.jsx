@@ -8,7 +8,7 @@ import Module from '../../components/modules/module/Module.jsx';
 import styles from './EditCourseStructure.module.css';
 import ChangeName from '../changeName/ChangeName.jsx';
 
-const EditCourseStructure = ({ setOpen, modulesList, courseName }) => {
+const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChanged }) => {
 	const [courseActions, setCourseActions] = useState(false);
 	const [newModule, setNewModule] = useState(false);
 
@@ -84,6 +84,7 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName }) => {
 										content={module}
 										type={'edit'}
 										key={index}
+										setIsDataChanged={setIsDataChanged}
 									/>
 								))
 							) : (
@@ -108,7 +109,7 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName }) => {
 						Готово
 					</button>
 				</div>
-			{newModule && <ChangeName setOpen={setNewModule} type={'module'} />}
+			{newModule && <ChangeName setOpen={setNewModule} type={'module'} setIsDataChanged={setIsDataChanged}/>}
 			</div>
 		</div>,
 		document.body

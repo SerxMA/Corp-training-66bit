@@ -5,7 +5,7 @@ import Modules from '../modules/Modules.jsx';
 import EditCourseStructure from '../../modals/editCourseStructure/EditCourseStructure.jsx';
 import styles from './CourseStructure.module.css';
 
-const CourseStructure = ({ modules }) => {
+const CourseStructure = ({ modules, setIsDataChanged }) => {
 	const [popup, setPopup] = useState(false);
 
 	return (
@@ -27,13 +27,14 @@ const CourseStructure = ({ modules }) => {
 						<Edit />
 					</button>
 				</div>
-				<Modules modulesList={modules} />
+				<Modules modulesList={modules} setIsDataChanged={setIsDataChanged}/>
 			</div>
 			{popup && (
 				<EditCourseStructure
 					modulesList={modules}
 					courseName={'Графический дизайн для начинающих в фигме'}
 					setOpen={setPopup}
+					setIsDataChanged={setIsDataChanged}
 				/>
 			)}
 		</div>

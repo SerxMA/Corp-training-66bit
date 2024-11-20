@@ -10,7 +10,7 @@ import DeleteEntity from '../../../modals/deleteEntity/DeleteEntity.jsx';
 import ChangeName from '../../../modals/changeName/ChangeName.jsx';
 import styles from './Module.module.css';
 
-const Module = ({ type, content }) => {
+const Module = ({ type, content, setIsDataChanged }) => {
 	const [expanded, setExapnded] = useState(false);
 	const [newLesson, setNewLesson] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -68,12 +68,16 @@ const Module = ({ type, content }) => {
 				expandedState={expanded}
 				type={type}
 				topics={content.topics}
+				setIsDataChanged={setIsDataChanged}
 			/>
 			{edit && (
 				<ChangeName
 					setOpen={setEdit}
 					type={'module'}
 					content={content.title}
+					position={content.position}
+					id={content.id}
+					setIsDataChanged={setIsDataChanged}
 				/>
 			)}
 			{trash && (
@@ -83,7 +87,7 @@ const Module = ({ type, content }) => {
 					content={content.title}
 				/>
 			)}
-			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} />}
+			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} setIsDataChanged={setIsDataChanged} id={content.id}/>}
 		</div>
 	);
 };
