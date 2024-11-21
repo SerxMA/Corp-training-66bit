@@ -18,7 +18,7 @@ const Redirect = () => {
 
 	useEffect(() => {
 		api.user
-			.getUserRole({})
+			.getUser({})
 			.then((res) => {
 				dispatch(setUser(res.data));
 			})

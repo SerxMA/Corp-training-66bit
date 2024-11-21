@@ -51,7 +51,7 @@ const WrapperCourseCreator = ({
 		}
 
 		const tempObj = {
-			first: api.courses.postNewCourse,
+			first: api.courses.postCourse,
 			second: api.courses.putCourse,
 		};
 		const config = { data: formData };

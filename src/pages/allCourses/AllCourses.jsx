@@ -10,7 +10,7 @@ const AllCourses = () => {
 	const { courses } = useSelector((state) => state.courses);
 
 	useEffect(() => {
-		api.courses.getAllCourses({}).then((res) => {
+		api.courses.getCourses({}).then((res) => {
 			dispatch(getCourses({ courses: res.data }));
 		});
 	}, []);

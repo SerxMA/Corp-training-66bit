@@ -1,22 +1,23 @@
-import { getAllCourseModules } from './getAllCourseModules';
-import { getAllCourses } from './getAllCourses';
-import { getUserRole } from './getUserRole';
-import { postNewCourse } from './postNewCourse';
-import { editModule } from './editModule';
-import { editLesson } from './editLesson';
-import { getCourse } from './getCourse';
-import { deleteEntity } from './deleteEntity';
-import { putCourse } from './putCourse';
+import { getUser } from './user';
+import {
+	deleteCourse,
+	getCourse,
+	getCourses,
+	postCourse,
+	putCourse,
+} from './courses';
+import { deleteModule, getModules, postModule, putModule } from './modules';
+import { deleteLesson, postLesson, putLesson } from './lessons';
 
 export const api = {
-	user: { getUserRole },
+	user: { getUser },
 	courses: {
-		postNewCourse,
-		getAllCourses,
+		postCourse,
+		getCourses,
 		getCourse,
-		deleteEntity,
 		putCourse,
+		deleteCourse,
 	},
-	modules: { getAllCourseModules, editModule },
-	lessons: { editLesson },
+	modules: { postModule, getModules, putModule, deleteModule },
+	lessons: { postLesson, putLesson, deleteLesson },
 };

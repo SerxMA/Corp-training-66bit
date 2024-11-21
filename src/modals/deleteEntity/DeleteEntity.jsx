@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api';
+import { deleteCourse } from '../../store/actions/course';
+import { deleteEntity } from '../../store/actions/modules';
 import ico from '../../assets/images/danger.png';
 import styles from './DeleteEntity.module.css';
 
 const identificationType = {
-	course: { sec: 10, string: 'курс', url: '/courses' },
-	module: { sec: 5, string: 'модуль', url: '/modules' },
-	lesson: { sec: -1, string: 'урок', url: '/topics' },
+	course: { sec: 10, string: 'курс' },
+	module: { sec: 5, string: 'модуль' },
+	lesson: { sec: -1, string: 'урок' },
 };
 
-const DeleteEntity = ({ setOpen, type, content, id, setIsDataChanged }) => {
+const DeleteEntity = ({ setOpen, type, content, id }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading, error } = useSelector((state) => state.modules);
+	const navigate = useNavigate();
+
 	const [second, setSecond] = useState(identificationType[type]?.sec || -1);
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
+
 	const timer = () => {
 		const intervalId = setInterval(() => {
 			setSecond((cv) => {
@@ -26,23 +34,38 @@ const DeleteEntity = ({ setOpen, type, content, id, setIsDataChanged }) => {
 		}, 1000);
 	};
 
+	const handleSubmit = () => {
+		// Проверить со всеми типами
+		if (type === 'course') {
+			dispatch(
+				deleteCourse(
+					window.location.pathname.match(/\/course\/(\d+)/)[1]
+				)
+			);
+			navigate('/courses/all-courses');
+		} else {
+			dispatch(
+				deleteEntity(
+					type,
+					id,
+					window.location.pathname.match(/\/course\/(\d+)/)[1]
+				)
+			).then(() => {
+				setClickCompleted(true);
+			});
+		}
+	};
+
 	useEffect(() => {
 		timer();
 	}, []);
 
-	const navigate = useNavigate();
-
-	const handleSubmit = () => {
-		api.courses
-			.deleteEntity({ url: identificationType[type].url + `/${id}` })
-			.then(() => {
-				setOpen(false);
-				setIsDataChanged(true); // при удалении курса излишне
-				if (type === 'course') {
-					navigate('/courses/all-courses');
-				}
-			});
-	};
+	useEffect(() => {
+		if (clickCompleted && !isError && !isLoading) {
+			setOpen(false);
+		}
+		!isLoading && setClickCompleted(false);
+	}, [clickCompleted, isError, isLoading, error, setOpen]);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>

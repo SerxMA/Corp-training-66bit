@@ -57,7 +57,6 @@ const CourseStructureActions = ({
 					setOpen={setDeleteCourse}
 					type={'course'}
 					content={courseName}
-					setIsDataChanged={setIsDataChanged}
 					id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
 				/>
 			)}

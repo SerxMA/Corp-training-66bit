@@ -86,10 +86,16 @@ const Module = ({ type, content, setIsDataChanged }) => {
 					type={'module'}
 					content={content.title}
 					id={content.id}
-					setIsDataChanged={setIsDataChanged}
 				/>
 			)}
-			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} setIsDataChanged={setIsDataChanged} id={content.id}/>}
+			{newLesson && (
+				<ChangeName
+					setOpen={setNewLesson}
+					type={'lesson'}
+					setIsDataChanged={setIsDataChanged}
+					id={content.id}
+				/>
+			)}
 		</div>
 	);
 };

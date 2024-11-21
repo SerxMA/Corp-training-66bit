@@ -1,27 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Edit from './Edit.jsx';
 import Modules from '../modules/Modules.jsx';
 import EditCourseStructure from '../../modals/editCourseStructure/EditCourseStructure.jsx';
 import styles from './CourseStructure.module.css';
-import { api } from '../../api/index.js';
 
 const CourseStructure = ({ modules, setIsDataChanged, id }) => {
 	const [popup, setPopup] = useState(false);
-	const [course, setCourse] = useState({});
+	const { course } = useSelector((state) => state.course);
+
+	console.log(course);
+
 	const [isCourseChanged, setIsCourseChanged] = useState(false);
 
-	useEffect(() => {
-		api.courses
-			.getCourse({ url: `/${id}` })
-			.then((res) => {
-				setCourse(res.data);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-		setIsCourseChanged(false);
-	}, [isCourseChanged]);
+	// useEffect(() => {
+	// 	api.courses
+	// 		.getCourse({ url: `/${id}` })
+	// 		.then((res) => {
+	// 			setCourse(res.data);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err);
+	// 		});
+	// 	setIsCourseChanged(false);
+	// }, [isCourseChanged]);
 
 	return (
 		<div className={styles['nav-panel']}>

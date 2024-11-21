@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { postEntity, putEntity } from '../../store/actions/modules.js';
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
-import { api } from '../../api/index.js';
 
 const MAX_CHARS = {
 	title: 128,
 };
 
-const ChangeName = ({ setOpen, type, content, setIsDataChanged, position, id }) => {
-	const [title, setTitle] = useState(content ? content : '');
+const ChangeName = ({ setOpen, type, content, position, id }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading, error } = useSelector((state) => state.modules);
 
+	const [title, setTitle] = useState(content ? content : '');
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
+
+	// Переиспользуемая функция
 	const changeText = (text, method) => {
 		const input = text
 			.trimStart()
@@ -28,38 +34,35 @@ const ChangeName = ({ setOpen, type, content, setIsDataChanged, position, id }) 
 		module: `${content ? 'Редактировать' : 'Новый'} модуль`,
 	};
 
-	const apiEntities = {
-		lesson: api['lessons'].editLesson,
-		module: api['modules'].editModule
-	}
-
-	const action = content ? 'PUT' : 'POST';
-
 	const data = {
 		title: title,
-		position: position
-	}
+		position: position,
+	};
 
 	const createEntity = async () => {
 		const config = {
-			method: action,
 			data: data,
-		}
+		};
+		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
 		if (!content) {
-			config.params = type === 'lesson' ? {moduleId: id} : {courseId: window.location.pathname.match(/\/course\/(\d+)/)[1]}
-		}
-		else {
-			config.url = `/${type === 'lesson' ? id : id}`
-		}
+			config.params =
+				type === 'lesson' ? { moduleId: id } : { courseId: courseId };
 
-		apiEntities[type](config)
-		.then((res) => {
-			if (res.status === 201 || res.status === 200) {
-				setIsDataChanged(true);
-				setOpen(false);
-			}
-		});
+			dispatch(postEntity(type, courseId, config));
+			setClickCompleted(true);
+		} else {
+			config.url = `/${id}`;
+			dispatch(putEntity(type, courseId, config));
+			setClickCompleted(true);
+		}
 	};
+
+	useEffect(() => {
+		if (clickCompleted && !isError && !isLoading) {
+			setOpen(false);
+		}
+		!isLoading && setClickCompleted(false);
+	}, [clickCompleted, isError, isLoading, error, setOpen]);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
