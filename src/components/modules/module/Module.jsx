@@ -85,6 +85,8 @@ const Module = ({ type, content, setIsDataChanged }) => {
 					setOpen={setTrash}
 					type={'module'}
 					content={content.title}
+					id={content.id}
+					setIsDataChanged={setIsDataChanged}
 				/>
 			)}
 			{newLesson && <ChangeName setOpen={setNewLesson} type={'lesson'} setIsDataChanged={setIsDataChanged} id={content.id}/>}

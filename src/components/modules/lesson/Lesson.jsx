@@ -40,6 +40,8 @@ const Lesson = ({ type, topic, setIsDataChanged }) => {
 					setOpen={setTrash}
 					content={topic.title}
 					type={'lesson'}
+					setIsDataChanged={setIsDataChanged}
+					id={topic.id}
 				/>
 			)}
 		</div>

@@ -30,7 +30,7 @@ const CourseLayout = () => {
 
     return (
         <div>
-            <CourseStructure modules={modules} setIsDataChanged={setIsDataChanged}/>
+            <CourseStructure modules={modules} setIsDataChanged={setIsDataChanged} id={window.location.pathname.match(/\/course\/(\d+)/)[1]}/>
         </div>
     );
 };

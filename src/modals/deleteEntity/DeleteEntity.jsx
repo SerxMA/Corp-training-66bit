@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { api } from '../../api';
 import ico from '../../assets/images/danger.png';
 import styles from './DeleteEntity.module.css';
 
 const identificationType = {
-	course: { sec: 10, string: 'курс' },
-	module: { sec: 5, string: 'модуль' },
-	lesson: { sec: -1, string: 'урок' },
+	course: { sec: 10, string: 'курс', url: '/courses' },
+	module: { sec: 5, string: 'модуль', url: '/modules'},
+	lesson: { sec: -1, string: 'урок', url:  '/topics'},
 };
 
-// type DeleteEntityProps = {
-// 	setOpen: () => void,
-// 	type: 'course' | 'module' | 'lesson',
-// 	content: String,
-// };
-const DeleteEntity = ({ setOpen, type, content }) => {
+const DeleteEntity = ({ setOpen, type, content, id, setIsDataChanged }) => {
 	const [second, setSecond] = useState(identificationType[type]?.sec || -1);
 	const timer = () => {
 		const intervalId = setInterval(() => {
@@ -32,6 +29,21 @@ const DeleteEntity = ({ setOpen, type, content }) => {
 	useEffect(() => {
 		timer();
 	}, []);
+
+	const navigate = useNavigate();
+
+	const handleSubmit = () => {
+		api.courses.deleteEntity({url: identificationType[type].url+`/${id}`})
+		.then(() => {
+			setOpen(false)
+			setIsDataChanged(true)
+			if (type === 'course') {
+				navigate('/courses/all-courses')
+			}
+		})
+	}
+
+
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
@@ -62,6 +74,7 @@ const DeleteEntity = ({ setOpen, type, content }) => {
 						Отмена
 					</button>
 					<button
+						onClick={handleSubmit}
 						className={`${styles['btn']} ${
 							second < 0
 								? styles.btn_success

@@ -45,7 +45,7 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChange
 						<Dots />
 					</button>
 					{courseActions && (
-						<CourseStructureActions courseName={courseName} />
+						<CourseStructureActions courseName={courseName} setIsDataChanged={setIsDataChanged}/>
 					)}
 				</div>
 				<div className={styles['describe-block']}>
@@ -100,7 +100,7 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChange
 						className={`${styles.btn} ${styles.btn_cancel}`}
 						onClick={() => setOpen(false)}
 					>
-						Отмена
+						Назад
 					</button>
 					<button
 						className={`${styles.btn} ${styles['btn_success']}`}

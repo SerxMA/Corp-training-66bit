@@ -7,7 +7,7 @@ import WrapperCourseCreator from '../wrapperCourseCreator/WrapperCourseCreator.j
 import DeleteEntity from '../deleteEntity/DeleteEntity.jsx';
 import styles from './CourseStructureActions.module.css';
 
-const CourseStructureActions = ({ courseName }) => {
+const CourseStructureActions = ({ courseName, setIsDataChanged }) => {
 	const [changeInfo, setChangeInfo] = useState(false);
 	const [changeImg, setChangeImg] = useState(false);
 	const [deleteCourse, setDeleteCourse] = useState(false);
@@ -30,16 +30,18 @@ const CourseStructureActions = ({ courseName }) => {
 				<p>Удалить курс</p>
 			</li>
 			{changeInfo && (
-				<WrapperCourseCreator setOpen={setChangeInfo} stage={1} />
+				<WrapperCourseCreator setOpen={setChangeInfo} stage={1} id={window.location.pathname.match(/\/course\/(\d+)/)[1]}/>
 			)}
 			{changeImg && (
-				<WrapperCourseCreator setOpen={setChangeImg} stage={2} />
+				<WrapperCourseCreator setOpen={setChangeImg} stage={2} id={window.location.pathname.match(/\/course\/(\d+)/)[1]}/>
 			)}
 			{deleteCourse && (
 				<DeleteEntity
 					setOpen={setDeleteCourse}
 					type={'course'}
 					content={courseName}
+					setIsDataChanged={setIsDataChanged}
+					id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
 				/>
 			)}
 		</ul>

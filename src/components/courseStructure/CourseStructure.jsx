@@ -1,18 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Edit from './Edit.jsx';
 import Modules from '../modules/Modules.jsx';
 import EditCourseStructure from '../../modals/editCourseStructure/EditCourseStructure.jsx';
 import styles from './CourseStructure.module.css';
+import { api } from '../../api/index.js';
 
-const CourseStructure = ({ modules, setIsDataChanged }) => {
+const CourseStructure = ({ modules, setIsDataChanged, id }) => {
 	const [popup, setPopup] = useState(false);
+	const [course, setCourse] = useState({});
+
+	useEffect(() => {
+		api.courses.getCourse({url: `/${id}`})
+		.then((res) => {
+			setCourse(res.data)
+		})
+		.catch((err) => {
+			console.error(err)
+		})
+	}, [])
 
 	return (
 		<div className={styles['nav-panel']}>
 			<div className={styles['course-title-block']}>
 				<h3 className={styles['course-title']}>
-					Графический дизайн для начинающих в фигме
+					{course.title}
 				</h3>
 			</div>
 			<div className={styles['course-structure']}>
@@ -27,12 +39,12 @@ const CourseStructure = ({ modules, setIsDataChanged }) => {
 						<Edit />
 					</button>
 				</div>
-				<Modules modulesList={modules} setIsDataChanged={setIsDataChanged}/>
+				<Modules modulesList={modules} />
 			</div>
 			{popup && (
 				<EditCourseStructure
 					modulesList={modules}
-					courseName={'Графический дизайн для начинающих в фигме'}
+					courseName={course.title}
 					setOpen={setPopup}
 					setIsDataChanged={setIsDataChanged}
 				/>

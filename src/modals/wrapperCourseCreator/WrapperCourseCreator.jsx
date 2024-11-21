@@ -10,7 +10,7 @@ import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
 
-const WrapperCourseCreator = ({ setOpen, stage }) => {
+const WrapperCourseCreator = ({ setOpen, stage, id }) => {
 	const dispatch = useDispatch();
 	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
