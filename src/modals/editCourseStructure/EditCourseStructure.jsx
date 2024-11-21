@@ -8,7 +8,14 @@ import Module from '../../components/modules/module/Module.jsx';
 import styles from './EditCourseStructure.module.css';
 import ChangeName from '../changeName/ChangeName.jsx';
 
-const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChanged }) => {
+const EditCourseStructure = ({
+	setOpen,
+	modulesList,
+	courseName,
+	courseObj,
+	setIsDataChanged,
+	setIsCourseChanged,
+}) => {
 	const [courseActions, setCourseActions] = useState(false);
 	const [newModule, setNewModule] = useState(false);
 
@@ -45,7 +52,12 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChange
 						<Dots />
 					</button>
 					{courseActions && (
-						<CourseStructureActions courseName={courseName} setIsDataChanged={setIsDataChanged}/>
+						<CourseStructureActions
+							courseName={courseName}
+							courseObj={courseObj}
+							setIsDataChanged={setIsDataChanged}
+							setIsCourseChanged={setIsCourseChanged}
+						/>
 					)}
 				</div>
 				<div className={styles['describe-block']}>
@@ -109,7 +121,13 @@ const EditCourseStructure = ({ setOpen, modulesList, courseName, setIsDataChange
 						Готово
 					</button>
 				</div>
-			{newModule && <ChangeName setOpen={setNewModule} type={'module'} setIsDataChanged={setIsDataChanged}/>}
+				{newModule && (
+					<ChangeName
+						setOpen={setNewModule}
+						type={'module'}
+						setIsDataChanged={setIsDataChanged}
+					/>
+				)}
 			</div>
 		</div>,
 		document.body

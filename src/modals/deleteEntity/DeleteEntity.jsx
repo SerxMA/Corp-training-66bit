@@ -8,8 +8,8 @@ import styles from './DeleteEntity.module.css';
 
 const identificationType = {
 	course: { sec: 10, string: 'курс', url: '/courses' },
-	module: { sec: 5, string: 'модуль', url: '/modules'},
-	lesson: { sec: -1, string: 'урок', url:  '/topics'},
+	module: { sec: 5, string: 'модуль', url: '/modules' },
+	lesson: { sec: -1, string: 'урок', url: '/topics' },
 };
 
 const DeleteEntity = ({ setOpen, type, content, id, setIsDataChanged }) => {
@@ -33,17 +33,16 @@ const DeleteEntity = ({ setOpen, type, content, id, setIsDataChanged }) => {
 	const navigate = useNavigate();
 
 	const handleSubmit = () => {
-		api.courses.deleteEntity({url: identificationType[type].url+`/${id}`})
-		.then(() => {
-			setOpen(false)
-			setIsDataChanged(true)
-			if (type === 'course') {
-				navigate('/courses/all-courses')
-			}
-		})
-	}
-
-
+		api.courses
+			.deleteEntity({ url: identificationType[type].url + `/${id}` })
+			.then(() => {
+				setOpen(false);
+				setIsDataChanged(true); // при удалении курса излишне
+				if (type === 'course') {
+					navigate('/courses/all-courses');
+				}
+			});
+	};
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
