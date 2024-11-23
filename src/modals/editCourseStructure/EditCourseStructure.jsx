@@ -4,18 +4,11 @@ import ReactDOM from 'react-dom';
 import Dots from '../Dots.jsx';
 import CourseStructureActions from '../courseStructureActions/CourseStructureActions.jsx';
 import SearchField from '../../components/searchField/SearchField.jsx';
-import Module from '../../components/modules/module/Module.jsx';
-import styles from './EditCourseStructure.module.css';
 import ChangeName from '../changeName/ChangeName.jsx';
+import Modules from '../../components/modules/Modules.jsx';
+import styles from './EditCourseStructure.module.css';
 
-const EditCourseStructure = ({
-	setOpen,
-	modulesList,
-	courseName,
-	courseObj,
-	setIsDataChanged,
-	setIsCourseChanged,
-}) => {
+const EditCourseStructure = ({ setOpen, course }) => {
 	const [courseActions, setCourseActions] = useState(false);
 	const [newModule, setNewModule] = useState(false);
 
@@ -52,12 +45,7 @@ const EditCourseStructure = ({
 						<Dots />
 					</button>
 					{courseActions && (
-						<CourseStructureActions
-							courseName={courseName}
-							courseObj={courseObj}
-							setIsDataChanged={setIsDataChanged}
-							setIsCourseChanged={setIsCourseChanged}
-						/>
+						<CourseStructureActions course={course} />
 					)}
 				</div>
 				<div className={styles['describe-block']}>
@@ -83,28 +71,7 @@ const EditCourseStructure = ({
 						</button>
 					</div>
 					<div className={styles['table-box']}>
-						<ul
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '0.5rem',
-							}}
-						>
-							{modulesList && modulesList.length ? (
-								modulesList.map((module, index) => (
-									<Module
-										content={module}
-										type={'edit'}
-										key={index}
-										setIsDataChanged={setIsDataChanged}
-									/>
-								))
-							) : (
-								<h2 className={styles['modules-placeholder']}>
-									Модулей нет
-								</h2>
-							)}
-						</ul>
+						<Modules type={'edit'} />
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
@@ -125,7 +92,7 @@ const EditCourseStructure = ({
 					<ChangeName
 						setOpen={setNewModule}
 						type={'module'}
-						setIsDataChanged={setIsDataChanged}
+						id={course.id}
 					/>
 				)}
 			</div>

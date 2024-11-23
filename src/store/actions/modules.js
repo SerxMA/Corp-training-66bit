@@ -35,7 +35,15 @@ export const getModules = (courseId) => {
 					courseId: courseId,
 				},
 			});
-			dispatch(getModulesSuccess(response.data));
+			const sortResponse = structuredClone(response.data)
+				.sort((a, b) => a.position - b.position)
+				.map((obj) => ({
+					...obj,
+					topics: obj.topics
+						.slice()
+						.sort((a, b) => a.position - b.position),
+				}));
+			dispatch(getModulesSuccess(sortResponse));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
 			alert(

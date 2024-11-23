@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 
+import { changeText } from '../../helpers/functions/formatText.js';
+import { defaultTags } from '../../helpers/constants/defaultTags.js';
 import Arrow from '../Arrow.jsx';
 import styles from './NewCourse.module.css';
-import { defaultTags } from '../../helpers/constants/defaultTags.js';
 
 const MAX_CHARS = {
 	description: 360,
@@ -20,7 +21,7 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 		let input = text
 			.trimStart()
 			.replace('  ', ' ')
-			.replace(/#/g, (match, offset) =>
+			.replace(/#/g, (_, offset) =>
 				offset === text.indexOf('#') ? '#' : ''
 			)
 			.replace(/[^\w\sА-Яа-яёЁ_#.,()-]/g, '');
@@ -51,16 +52,10 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 		}
 	};
 
-	const changeText = (text, method) => {
-		const input = text
-			.trimStart()
-			.replace('  ', ' ')
-			.replace(/#/g, '')
-			.replace(/[^\w\sА-Яа-яёЁ_,.()-]/g, '');
-
-		if (input.length <= MAX_CHARS[method]) {
-			changeData((cv) => ({ ...cv, [method]: input }));
-		}
+	const change = (text, method) => {
+		changeText(text, MAX_CHARS[method], (input) =>
+			changeData((cv) => ({ ...cv, [method]: input }))
+		);
 	};
 
 	const changeTag = (tag) => {
@@ -107,7 +102,7 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 		<div className={styles['show-tags']}>
 			{data.tags.map((tag, index) => (
 				<div
-					key={tag.id}
+					key={index}
 					className={styles['view-tag']}
 					onClick={() => changeTag(tag)}
 					style={{ color: tag.textColor, backgroundColor: tag.color }}
@@ -127,12 +122,12 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 		<div className={styles['tag-support']}>
 			<p>Теги</p>
 			<p>
-				Чтобы создать новый тег введите "#" в начале тега и пробел в
-				конце.
+				Чтобы создать новый тег введите &laquo;#&raquo; в&nbsp;начале
+				тега и&nbsp;пробел в&nbsp;конце.
 				<br />
-				Для пробела внутри тега используйте "_".
+				Для пробела внутри тега используйте &laquo;_&raquo;.
 				<br />
-				Максимальное кол.-во тегов "1".
+				Максимальное кол.-во тегов &laquo;1&raquo;.
 			</p>
 		</div>
 	);
@@ -158,7 +153,7 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 						className={styles['title-input']}
 						value={data.title}
 						onChange={(event) =>
-							changeText(event.target.value, 'title')
+							change(event.target.value, 'title')
 						}
 						maxLength={MAX_CHARS.title}
 					/>
@@ -222,7 +217,7 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 						className={styles['description-area']}
 						value={data.description}
 						onChange={(event) =>
-							changeText(event.target.value, 'description')
+							change(event.target.value, 'description')
 						}
 						maxLength={MAX_CHARS.description}
 					></textarea>

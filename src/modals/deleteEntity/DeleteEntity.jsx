@@ -35,24 +35,15 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 	};
 
 	const handleSubmit = () => {
-		// Проверить со всеми типами
+		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
 		if (type === 'course') {
-			dispatch(
-				deleteCourse(
-					window.location.pathname.match(/\/course\/(\d+)/)[1]
-				)
+			dispatch(deleteCourse(courseId)).then(() =>
+				setClickCompleted(true)
 			);
-			navigate('/courses/all-courses');
 		} else {
-			dispatch(
-				deleteEntity(
-					type,
-					id,
-					window.location.pathname.match(/\/course\/(\d+)/)[1]
-				)
-			).then(() => {
-				setClickCompleted(true);
-			});
+			dispatch(deleteEntity(type, id, courseId)).then(() =>
+				setClickCompleted(true)
+			);
 		}
 	};
 
@@ -62,10 +53,12 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 
 	useEffect(() => {
 		if (clickCompleted && !isError && !isLoading) {
-			setOpen(false);
+			type === 'course'
+				? navigate('/courses/all-courses')
+				: setOpen(false);
 		}
 		!isLoading && setClickCompleted(false);
-	}, [clickCompleted, isError, isLoading, error, setOpen]);
+	}, [clickCompleted, isError, isLoading, error]);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>

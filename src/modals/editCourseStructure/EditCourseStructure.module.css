@@ -89,9 +89,6 @@
 	min-height: 100px;
 	overflow-y: auto;
 }
-.modules-placeholder {
-	color: var(--content-subPrimary);
-}
 .btn-wrapper {
 	display: flex;
 	flex-direction: row;

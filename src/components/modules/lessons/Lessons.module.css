@@ -5,12 +5,13 @@
 		background-color: var(--content-background);
 	}
 }
-
 .dropdown {
 	width: 100%;
 	display: none;
 }
-
 .is-expanded {
 	display: block;
+}
+.topics-placeholder {
+	color: var(--content-subPrimary);
 }

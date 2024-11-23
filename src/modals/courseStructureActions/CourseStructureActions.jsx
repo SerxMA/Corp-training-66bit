@@ -7,15 +7,12 @@ import WrapperCourseCreator from '../wrapperCourseCreator/WrapperCourseCreator.j
 import DeleteEntity from '../deleteEntity/DeleteEntity.jsx';
 import styles from './CourseStructureActions.module.css';
 
-const CourseStructureActions = ({
-	courseName,
-	courseObj,
-	setIsDataChanged,
-	setIsCourseChanged,
-}) => {
+const CourseStructureActions = ({ course }) => {
 	const [changeInfo, setChangeInfo] = useState(false);
 	const [changeImg, setChangeImg] = useState(false);
 	const [deleteCourse, setDeleteCourse] = useState(false);
+
+	const courseId = course?.id;
 
 	return (
 		<ul
@@ -38,26 +35,24 @@ const CourseStructureActions = ({
 				<WrapperCourseCreator
 					setOpen={setChangeInfo}
 					stage={1}
-					courseObj={courseObj}
-					id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
-					setIsCourseChanged={setIsCourseChanged}
+					course={course}
+					id={courseId}
 				/>
 			)}
 			{changeImg && (
 				<WrapperCourseCreator
 					setOpen={setChangeImg}
 					stage={2}
-					courseObj={courseObj}
-					id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
-					setIsCourseChanged={setIsCourseChanged}
+					course={course}
+					id={courseId}
 				/>
 			)}
 			{deleteCourse && (
 				<DeleteEntity
 					setOpen={setDeleteCourse}
 					type={'course'}
-					content={courseName}
-					id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
+					content={course?.title}
+					id={courseId}
 				/>
 			)}
 		</ul>

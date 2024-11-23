@@ -1,39 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import CourseStructure from '../../components/courseStructure/CourseStructure.jsx';
 import { getModules } from '../../store/actions/modules.js';
 import { getCourse } from '../../store/actions/course.js';
+import CourseStructure from '../../components/courseStructure/CourseStructure.jsx';
 
 const CourseLayout = () => {
 	const dispatch = useDispatch();
-	const { modules } = useSelector((state) => state.modules);
 
-	const [isDataChanged, setIsDataChanged] = useState(false);
-
-	console.log(modules);
-
-	// по идее можно в один useEffect завернуть
-	// перенести получение инфо о курсе СЮДА
 	useEffect(() => {
-		dispatch(
-			getModules(window.location.pathname.match(/\/course\/(\d+)/)[1])
-		);
-		dispatch(
-			getCourse(window.location.pathname.match(/\/course\/(\d+)/)[1])
-		);
-		// fetchModules();
+		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
+		dispatch(getModules(courseId));
+		dispatch(getCourse(courseId));
 	}, []);
 
-	return (
-		<div>
-			<CourseStructure
-				modules={modules}
-				setIsDataChanged={setIsDataChanged}
-				id={window.location.pathname.match(/\/course\/(\d+)/)[1]}
-			/>
-		</div>
-	);
+	return <CourseStructure />;
 };
 
 export default CourseLayout;

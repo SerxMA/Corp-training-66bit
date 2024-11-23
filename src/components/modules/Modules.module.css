@@ -1,0 +1,9 @@
+.modules {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.modules-placeholder {
+	color: var(--content-subPrimary);
+}

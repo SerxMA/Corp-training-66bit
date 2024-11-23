@@ -1,6 +1,6 @@
 ## change:
 
--   store/courseReducer - привести к норм.форме :)
--   layouts/courseLayout - похимичить с useEffect`ом
--   all - убрать лишние пропсы setIsDataChanged и setCourseChanged(+-)
--   modals/changeName - функция обработки текста переиспользется, найти, объединить
+-   store/coursesReducer - привести к норм.форме :)
+-   components/Modules - поработать с переполнением, при отрисовки длинного текста(модулей и тем)
+-   modals/deleteEntity - поработать с переполнением, при отрисовки длинного текста(модулей, тем и курсов)
+-   modals/wrapperCourseCreator - при передачи stage(при изменении курса) доделать связь с бэком

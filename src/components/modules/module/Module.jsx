@@ -10,7 +10,7 @@ import DeleteEntity from '../../../modals/deleteEntity/DeleteEntity.jsx';
 import ChangeName from '../../../modals/changeName/ChangeName.jsx';
 import styles from './Module.module.css';
 
-const Module = ({ type, content, setIsDataChanged }) => {
+const Module = ({ type, module }) => {
 	const [expanded, setExapnded] = useState(false);
 	const [newLesson, setNewLesson] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -40,7 +40,7 @@ const Module = ({ type, content, setIsDataChanged }) => {
 				<ProgressCircle isGreen={true} />
 				<div className={styles['content-text']}>
 					<span className={styles['course-title']}>
-						{content.title}
+						{module.title}
 					</span>
 					<div className={styles['manage-btn']}>
 						{type === 'edit' && (
@@ -67,33 +67,30 @@ const Module = ({ type, content, setIsDataChanged }) => {
 			<Lessons
 				expandedState={expanded}
 				type={type}
-				topics={content.topics}
-				setIsDataChanged={setIsDataChanged}
+				topics={module.topics}
 			/>
 			{edit && (
 				<ChangeName
 					setOpen={setEdit}
 					type={'module'}
-					content={content.title}
-					position={content.position}
-					id={content.id}
-					setIsDataChanged={setIsDataChanged}
+					content={module.title}
+					position={module.position}
+					id={module.id}
 				/>
 			)}
 			{trash && (
 				<DeleteEntity
 					setOpen={setTrash}
 					type={'module'}
-					content={content.title}
-					id={content.id}
+					content={module.title}
+					id={module.id}
 				/>
 			)}
 			{newLesson && (
 				<ChangeName
 					setOpen={setNewLesson}
 					type={'lesson'}
-					setIsDataChanged={setIsDataChanged}
-					id={content.id}
+					id={module.id}
 				/>
 			)}
 		</div>

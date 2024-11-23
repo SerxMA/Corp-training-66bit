@@ -10,19 +10,13 @@ import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
 
-const WrapperCourseCreator = ({
-	setOpen,
-	stage,
-	id,
-	courseObj,
-	setIsCourseChanged,
-}) => {
+const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 	const dispatch = useDispatch();
 	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
-		title: courseObj ? courseObj.title : '',
-		description: courseObj ? courseObj.description : '',
-		tags: courseObj ? courseObj.tags : [],
+		title: course ? course.title : '',
+		description: course ? course.description : '',
+		tags: course ? course.tags : [],
 		file: null,
 	});
 	const { username } = useAuth();
@@ -56,12 +50,14 @@ const WrapperCourseCreator = ({
 		};
 		const config = { data: formData };
 		if (stage) config.url = id;
-		tempObj[stage ? 'second' : 'first'](config).then((res) => {
-			stage
-				? setIsCourseChanged(true)
-				: dispatch(setCourse({ course: res.data }));
-			setOpen(false);
-		});
+		tempObj[stage ? 'second' : 'first'](config)
+			.then((res) => {
+				stage
+					? console.log('Заглушка')
+					: dispatch(setCourse({ course: res.data }));
+				setOpen(false);
+			})
+			.catch(() => console.log('Тут есть заглушка'));
 	};
 
 	useEffect(() => {

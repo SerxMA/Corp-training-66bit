@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { postEntity, putEntity } from '../../store/actions/modules.js';
+import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
 
@@ -10,43 +11,26 @@ const MAX_CHARS = {
 	title: 128,
 };
 
-const ChangeName = ({ setOpen, type, content, position, id }) => {
+const ChangeName = ({ setOpen, type, id, content, position }) => {
 	const dispatch = useDispatch();
 	const { isError, isLoading, error } = useSelector((state) => state.modules);
 
 	const [title, setTitle] = useState(content ? content : '');
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
-	// Переиспользуемая функция
-	const changeText = (text, method) => {
-		const input = text
-			.trimStart()
-			.replace('  ', ' ')
-			.replace(/[^\w\sА-Яа-яёЁ_,.()-]/g, '');
-
-		if (input.length <= MAX_CHARS[method]) {
-			setTitle(input);
-		}
-	};
-
 	const titleContent = {
 		lesson: `${content ? 'Редактировать' : 'Новый'} урок`,
 		module: `${content ? 'Редактировать' : 'Новый'} модуль`,
 	};
 
-	const data = {
-		title: title,
-		position: position,
-	};
-
 	const createEntity = async () => {
 		const config = {
-			data: data,
+			data: { title: title, position: position },
 		};
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
 		if (!content) {
 			config.params =
-				type === 'lesson' ? { moduleId: id } : { courseId: courseId };
+				type === 'lesson' ? { moduleId: id } : { courseId: id };
 
 			dispatch(postEntity(type, courseId, config));
 			setClickCompleted(true);
@@ -86,7 +70,11 @@ const ChangeName = ({ setOpen, type, content, position, id }) => {
 							required
 							value={title}
 							onChange={(e) =>
-								changeText(e.target.value, 'title')
+								changeText(
+									e.target.value,
+									MAX_CHARS['title'],
+									(input) => setTitle(input)
+								)
 							}
 						/>
 						<span>Название</span>
