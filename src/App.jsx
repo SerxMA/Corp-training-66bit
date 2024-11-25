@@ -62,10 +62,18 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'course/:id',
-				element: (<CheckRole
-					adminLayer={<CourseLayout />}
-					userLayer={<CourseLayout />}
-				/>),
+				element: (
+					<CheckRole
+						adminLayer={<CourseLayout />}
+						userLayer={<CourseLayout />}
+					/>
+				),
+				// children: [
+				// 	{
+				// 		path: '',
+				// 		element: '',
+				// 	},
+				// ],
 			},
 		],
 	},

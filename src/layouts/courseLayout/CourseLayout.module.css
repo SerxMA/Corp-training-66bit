@@ -1,0 +1,14 @@
+.content {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	margin-left: 280px;
+}
+.thisPeredelatiOOO {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.75rem;
+
+	padding: 0.75rem;
+}

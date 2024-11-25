@@ -1,0 +1,33 @@
+.task-wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.25rem;
+
+	padding: 1.25rem;
+	border-radius: 0.75rem;
+	border: 1px solid var(--content-background-2);
+
+	background-color: var(--background-modal);
+
+	color: var(--Content-content-subPrimary, #555759);
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+
+	box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.03);
+}
+.task-header {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.5rem;
+
+	& > h2 {
+		color: var(--content-primary);
+	}
+}
+.task-tags {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.75rem;
+}

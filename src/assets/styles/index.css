@@ -9,6 +9,7 @@
 	--content-disabled: #bcbfc2;
 	--content-border: #d2d4d6;
 	--content-background: #eff0f0;
+	--content-background-2: #f7f7f8;
 
 	/* accent */
 	--accent-primary: #2a83f2;
@@ -70,6 +71,7 @@
 	--content-disabled: #666666;
 	--content-border: #4d4d4d;
 	--content-background: #383838;
+	--content-background-2: #383838;
 
 	/* accent */
 	--accent-primary: #8c8cff;
