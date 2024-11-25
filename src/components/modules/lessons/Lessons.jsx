@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 import styles from './Lessons.module.css';
 import Lesson from '../lesson/Lesson.jsx';
 
@@ -10,9 +12,9 @@ const Lessons = ({ expandedState, type, topics }) => {
 		>
 			{topics.length ? (
 				topics.map((topic, index) => (
-					<li key={index}>
+					<NavLink to={`${topic.id}`} key={index} >
 						<Lesson topic={topic} type={type} />
-					</li>
+					</ NavLink>
 				))
 			) : (
 				<h4 className={styles['topics-placeholder']}>Тем нет</h4>

@@ -1,0 +1,11 @@
+.content-wrapper {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	width: 100%;
+	min-height: 100%;
+	margin-left: 17.5rem;
+
+	background-color: var(--background-sub-primary);
+}

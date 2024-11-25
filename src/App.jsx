@@ -15,6 +15,7 @@ import CheckRole from './hoc/CheckRole.jsx';
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
 import CourseLayout from './layouts/courseLayout/CourseLayout.jsx';
+import CourseContent from './components/courseContent/CourseContent.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -66,6 +67,12 @@ const router = createBrowserRouter([
 					adminLayer={<CourseLayout />}
 					userLayer={<CourseLayout />}
 				/>),
+				children: [
+					{
+						path: ':topicId',
+						element: <CourseContent />
+					}
+				]
 			},
 		],
 	},
