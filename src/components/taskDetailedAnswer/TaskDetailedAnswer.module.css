@@ -1,0 +1,92 @@
+.question {
+	color: var(--content-secondary);
+	font: var(--body-medium16);
+	letter-spacing: 0.16px;
+}
+.input-box {
+	position: relative;
+	max-width: 328px;
+	height: 52px;
+	border-radius: 0.5rem;
+	border: 2px solid var(--content-border);
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+
+	&:hover {
+		border-color: var(--accent-border);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:focus-within {
+		border-color: var(--accent-border);
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+
+	& input::placeholder {
+		color: transparent;
+	}
+	& input {
+		width: 100%;
+		height: 100%;
+		padding: 10px;
+		border: none;
+
+		background: transparent;
+
+		color: var(--content-primary);
+
+		outline: none;
+	}
+	& span {
+		position: absolute;
+		top: 50%;
+		left: 10px;
+
+		color: var(--content-secondary);
+
+		transition: 0.3s ease;
+		transform: translateY(-50%);
+		pointer-events: none;
+	}
+}
+.input-box input:focus ~ span,
+.input-box input:not(:placeholder-shown) ~ span {
+	top: -10px;
+	left: 8px;
+
+	font: var(--body-regular12);
+	color: var(--content-secondary);
+	letter-spacing: 0.12px;
+}
+.btn {
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: var(--accent-primary);
+
+	max-width: 256px;
+
+	font: var(--semiBold16);
+	color: var(--content-constant);
+
+	transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.btn_success {
+	&:hover {
+		background-color: var(--accent-subPrimary);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:active {
+		background-color: var(--accent-secondary);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+}
+.btn_disabled {
+	color: var(--content-disabled);
+
+	background-color: var(--content-background);
+
+	cursor: auto;
+}
