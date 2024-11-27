@@ -1,4 +1,4 @@
-import { MODULES_ACTIONS } from '../actionCreators/modules';
+import { MODULES_ACTIONS } from '../actionCreators/modules.js';
 
 const initialState = {
 	modules: [],
@@ -32,6 +32,11 @@ const modulesReducer = (state = initialState, action) => {
 				isLoading: true,
 				isError: false,
 				error: '',
+			};
+
+		case MODULES_ACTIONS.RESET_MODULES:
+			return {
+				...initialState,
 			};
 
 		default:

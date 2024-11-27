@@ -3,6 +3,7 @@ export const COURSE_ACTIONS = {
 	GET_COURSE_FAILED: 'GET_COURSE_FAILED',
 	GET_COURSE_STARTED: 'GET_COURSE_STARTED',
 	DELETE_COURSE_SUCCESS: 'DELETE_COURSE_SUCCESS',
+	RESET_COURSE: 'RESET_COURSE',
 };
 
 export const getCourseSuccess = (payload) => {
@@ -29,5 +30,11 @@ export const getCourseFailed = (error) => {
 export const getCourseStarted = () => {
 	return {
 		type: COURSE_ACTIONS.GET_COURSE_STARTED,
+	};
+};
+
+export const resetCourse = () => {
+	return {
+		type: COURSE_ACTIONS.RESET_COURSE,
 	};
 };

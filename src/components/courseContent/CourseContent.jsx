@@ -1,26 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { api } from '../../api';
-import styles from './CourseContent.module.css'
+import styles from './CourseContent.module.css';
 
 const CourseContent = () => {
+	const { topicId } = useParams();
+	const [elements, setElements] = useState([]);
+	console.log(elements);
 
-    const [elements, setElements] = useState([]);
+	useEffect(() => {
+		api.content
+			.getContent({
+				params: {
+					topicId: topicId,
+				},
+			})
+			.then((res) => {
+				setElements(res.data);
+			});
+	}, [topicId]);
 
-    useEffect(() => {
-        api.content.getContent({ params: {topicId: window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1]} })
-    .then((res) => {
-        setElements(res.data)
-        console.log(res)
-    })
-    }, [])
-
-    return (
-        <div className={styles['content-wrapper']}>
-            <ul className={styles['content-list']}>
-            </ul>
-        </div>
-    );
+	return (
+		<div className={styles['content-wrapper']}>
+			<ul className={styles['content-list']}></ul>
+		</div>
+	);
 };
 
 export default CourseContent;

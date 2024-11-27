@@ -39,6 +39,11 @@ const courseReducer = (state = initialState, action) => {
 				error: '',
 			};
 
+		case COURSE_ACTIONS.RESET_COURSE:
+			return {
+				...initialState,
+			};
+
 		default:
 			return { ...state };
 	}

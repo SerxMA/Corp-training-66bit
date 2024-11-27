@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 
+import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
 import styles from './NewGroup.module.css';
 
@@ -10,10 +12,48 @@ const MAX_CHARS = {
 
 const NewGroup = ({ setOpen }) => {
 	const [group, setGroup] = useState('');
+	const course = useSelector((state) => state.course);
+	console.log(course);
+
+	const postGroup = () => {
+		api.groups
+			.postGroup({
+				params: { courseId: course.course.id },
+				data: {
+					name: group,
+					usernames: [],
+					deadlines: [
+						{
+							moduleId: 8,
+							startTime: new Date(
+								'2024-11-13T12:30:05'
+							).toISOString(),
+							endTime: new Date(
+								'2024-11-13T12:30:10'
+							).toISOString(),
+						},
+					],
+				},
+			})
+			.then()
+			.catch();
+	};
+
+	useEffect(() => {
+		const outsideClick = () => {
+			setOpen(false);
+		};
+		document.addEventListener('click', outsideClick);
+
+		return () => document.removeEventListener('click', outsideClick);
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новая группа</h2>
 					<button
@@ -56,6 +96,7 @@ const NewGroup = ({ setOpen }) => {
 								? styles['btn_success']
 								: styles['btn_disabled']
 						}`}
+						onClick={postGroup}
 						disabled={!group}
 					>
 						Создать

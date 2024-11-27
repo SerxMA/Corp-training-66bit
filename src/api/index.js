@@ -8,7 +8,13 @@ import {
 } from './courses';
 import { deleteModule, getModules, postModule, putModule } from './modules';
 import { deleteLesson, postLesson, putLesson } from './lessons';
-import { deleteContentElement, getContent, postContentElement, putContentElement } from './content';
+import {
+	deleteContentElement,
+	getContent,
+	postContentElement,
+	putContentElement,
+} from './content';
+import { postGroup } from './groups';
 
 export const api = {
 	user: { getUser },
@@ -19,21 +25,24 @@ export const api = {
 		putCourse,
 		deleteCourse,
 	},
-	modules: { 
+	modules: {
 		postModule,
-		getModules, 
-		putModule, 
-		deleteModule 
+		getModules,
+		putModule,
+		deleteModule,
 	},
-	lessons: { 
-		postLesson, 
-		putLesson, 
-		deleteLesson 
+	lessons: {
+		postLesson,
+		putLesson,
+		deleteLesson,
+	},
+	groups: {
+		postGroup,
 	},
 	content: {
 		getContent,
 		postContentElement,
 		putContentElement,
-		deleteContentElement
-	}
+		deleteContentElement,
+	},
 };
