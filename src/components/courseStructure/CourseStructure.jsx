@@ -27,7 +27,9 @@ const CourseStructure = () => {
 						<Edit />
 					</button>
 				</div>
-				<Modules />
+				<div className={styles['table-box']}>
+					<Modules />
+				</div>
 			</div>
 			{editCourse && (
 				<EditCourseStructure course={course} setOpen={setEditCourse} />

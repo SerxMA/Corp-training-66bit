@@ -76,6 +76,10 @@
 
 		padding: 1rem 0;
 		border-bottom: 1px solid var(--content-border);
+
+		font: var(--body-regular16);
+		color: var(--content-primary);
+		letter-spacing: 0.16px;
 	}
 	& button {
 		align-self: center;

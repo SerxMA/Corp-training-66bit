@@ -88,6 +88,18 @@
 	max-height: 476px;
 	min-height: 100px;
 	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--content-subPrimary);
+		border-radius: 30px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--system-success-primary);
+		border-radius: 30px;
+	}
 }
 .btn-wrapper {
 	display: flex;

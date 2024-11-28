@@ -38,8 +38,10 @@ const AddNewContent = ({ position }) => {
 		const checkPosition = () => {
 			if (buttonRef.current) {
 				const buttonRect = buttonRef.current.getBoundingClientRect();
-				const spaceAbove = buttonRect.top;
-				if (spaceAbove > 330) {
+				const scrollY =
+					window.scrollY || document.documentElement.scrollTop;
+				const elementTop = buttonRect.top + scrollY;
+				if (elementTop - scrollY > 395) {
 					setIsPositionedTop(true);
 				} else {
 					setIsPositionedTop(false);
@@ -48,9 +50,11 @@ const AddNewContent = ({ position }) => {
 		};
 		checkPosition();
 		window.addEventListener('resize', checkPosition);
+		window.addEventListener('scroll', checkPosition);
 
 		return () => {
 			window.removeEventListener('resize', checkPosition);
+			window.removeEventListener('scroll', checkPosition);
 		};
 	}, []);
 

@@ -11,7 +11,6 @@
 
 	background-color: var(--background-primary);
 }
-
 .course-title-block {
 	display: flex;
 	align-items: center;
@@ -19,7 +18,6 @@
 
 	padding: 15px;
 }
-
 .course-title {
 	display: -webkit-box; /* Используем flexbox-эквивалент для обрезки */
 	-webkit-box-orient: vertical; /* Ориентируем flex-контейнер вертикально */
@@ -29,7 +27,6 @@
 
 	color: var(--content-primary);
 }
-
 .course-structure {
 	display: flex;
 	flex-direction: column;
@@ -37,7 +34,23 @@
 
 	padding: 0.75rem;
 }
+.table-box {
+	max-height: 476px;
+	min-height: 100px;
+	overflow-y: auto;
 
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--content-subPrimary);
+		border-radius: 30px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--system-success-primary);
+		border-radius: 30px;
+	}
+}
 .course-structure-edit {
 	display: flex;
 	justify-content: space-between;

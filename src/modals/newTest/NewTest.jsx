@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api/index.js';
+import { postContents } from '../../store/actions/contents.js';
 import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
@@ -13,6 +14,8 @@ const MAX_CHARS = {
 };
 
 const NewTest = ({ setOpen, type, position }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [answersType, setAnswersType] = useState(type ? type : 'one');
 	const [question, setQuestion] = useState('');
 	const [answers, setAnswers] = useState([
@@ -20,6 +23,7 @@ const NewTest = ({ setOpen, type, position }) => {
 	]);
 	const [pointCorrect, setPointCorrect] = useState(0);
 	const [attemptsTest, setAttemptsTest] = useState(1);
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const addAnswer = () => {
 		setAnswers((cv) =>
@@ -108,18 +112,22 @@ const NewTest = ({ setOpen, type, position }) => {
 		const formData = new FormData();
 		formData.append('content', contentBlob);
 
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
 			params: {
-				topicId:
-					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+				topicId: topicId,
 			},
 		};
-		api.content
-			.postContentElement(config)
-			.then(() => setOpen(false))
-			.catch();
+		dispatch(postContents(topicId, config)).then(() => {
+			setClickCompleted(true);
+		});
 	};
+
+	useEffect(() => {
+		clickCompleted && !isError && !isLoading && setOpen(false);
+	}, [clickCompleted, isError, isLoading]);
 
 	const answerListContent = (
 		<ul className={styles['answers-list']}>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api/index.js';
+import { postContents } from '../../store/actions/contents.js';
 import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 
@@ -11,10 +12,13 @@ const MAX_CHARS = {
 };
 
 const NewTask = ({ setOpen, type, position }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [question, setQuestion] = useState('');
 	const [answer, setAnswer] = useState('');
 	const [pointCorrect, setPointCorrect] = useState(0);
 	const [attemptsTest, setAttemptsTest] = useState(1);
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const titleContent =
 		type === 'one'
@@ -43,17 +47,17 @@ const NewTask = ({ setOpen, type, position }) => {
 		const formData = new FormData();
 		formData.append('content', contentBlob);
 
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
 			params: {
-				topicId:
-					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+				topicId: topicId,
 			},
 		};
-		api.content
-			.postContentElement(config)
-			.then(() => setOpen(false))
-			.catch();
+		dispatch(postContents(topicId, config)).then(() => {
+			setClickCompleted(true);
+		});
 	};
 
 	useEffect(() => {
@@ -66,6 +70,10 @@ const NewTask = ({ setOpen, type, position }) => {
 			document.body.style.overflowY = 'auto';
 		};
 	}, []);
+
+	useEffect(() => {
+		clickCompleted && !isError && !isLoading && setOpen(false);
+	}, [clickCompleted, isError, isLoading]);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
@@ -143,18 +151,20 @@ const NewTask = ({ setOpen, type, position }) => {
 							/>
 							<span>Баллов за верный ответ</span>
 						</div>
-						<div className={styles['attempts-test-box']}>
-							<input
-								type="number"
-								placeholder=""
-								className={styles['number-input']}
-								value={attemptsTest}
-								onChange={(e) =>
-									setAttemptsTest(e.target.value)
-								}
-							/>
-							<span>Попыток на тест</span>
-						</div>
+						{type === 'one' && (
+							<div className={styles['attempts-test-box']}>
+								<input
+									type="number"
+									placeholder=""
+									className={styles['number-input']}
+									value={attemptsTest}
+									onChange={(e) =>
+										setAttemptsTest(e.target.value)
+									}
+								/>
+								<span>Попыток на тест</span>
+							</div>
+						)}
 					</div>
 				</div>
 				<button

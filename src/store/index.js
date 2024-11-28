@@ -8,6 +8,7 @@ import userReducer from './reducers/userReducer';
 import coursesReducer from './reducers/coursesReducer';
 import modulesReducer from './reducers/modulesReducer';
 import courseReducer from './reducers/courseReducer';
+import contentsReducer from './reducers/contentsReducer';
 
 const persistConfig = {
 	key: 'root',
@@ -22,6 +23,7 @@ const store = configureStore({
 		courses: coursesReducer,
 		course: courseReducer,
 		modules: modulesReducer,
+		contents: contentsReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({ serializableCheck: false }).concat(thunk),

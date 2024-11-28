@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { postContents } from '../../store/actions/contents.js';
+import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './NewText.module.css';
-import { changeText } from '../../helpers/functions/formatText.js';
-import { api } from '../../api/index.js';
 
 const MAX_CHARS = {
 	title: 180,
@@ -12,8 +13,11 @@ const MAX_CHARS = {
 };
 
 const NewText = ({ setOpen, position }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [title, setTitle] = useState('');
 	const [text, setText] = useState('');
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const handleSubmit = () => {
 		const content = {
@@ -25,21 +29,22 @@ const NewText = ({ setOpen, position }) => {
 		const contentBlob = new Blob([JSON.stringify(content)], {
 			type: 'application/json; charset=UTF-8',
 		});
+		console.log(content);
 
 		const formData = new FormData();
 		formData.append('content', contentBlob);
 
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
 			params: {
-				topicId:
-					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+				topicId: topicId,
 			},
 		};
-		api.content
-			.postContentElement(config)
-			.then(() => setOpen(false))
-			.catch();
+		dispatch(postContents(topicId, config)).then(() => {
+			setClickCompleted(true);
+		});
 	};
 
 	useEffect(() => {
@@ -52,6 +57,10 @@ const NewText = ({ setOpen, position }) => {
 			document.body.style.overflowY = 'auto';
 		};
 	}, []);
+
+	useEffect(() => {
+		clickCompleted && !isError && !isLoading && setOpen(false);
+	}, [clickCompleted, isError, isLoading]);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>

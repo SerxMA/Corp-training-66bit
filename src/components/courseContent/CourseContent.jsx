@@ -1,42 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api';
-import styles from './CourseContent.module.css';
+import { getContents } from '../../store/actions/contents.js';
 import AddNewContent from '../addNewContent/AddNewContent.jsx';
 import TaskWrapper from '../taskWrapper/TaskWrapper.jsx';
+import styles from './CourseContent.module.css';
 
 const CourseContent = () => {
-	const [elements, setElements] = useState([]);
+	const dispatch = useDispatch();
+	const { contents } = useSelector((state) => state.contents);
 	const { topicId } = useParams();
 
+	console.log(contents);
+
 	useEffect(() => {
-		api.content
-			.getContent({
-				params: {
-					topicId: topicId,
-				},
-			})
-			.then((res) => {
-				setElements(res.data.sort((a, b) => a.position - b.position));
-				console.log(res);
-			});
+		dispatch(getContents(topicId));
 	}, [topicId]);
 
 	return (
 		<div className={styles['content-wrapper']}>
 			<ul className={styles['content-list']}>
 				<AddNewContent position={0} />
-				{elements.length ? (
-					elements.map((element, index) => (
+				{contents.length ? (
+					contents.map((content, index) => (
 						<div key={index} className={styles.thisOneElement}>
-							<TaskWrapper element={element} />
+							<TaskWrapper element={content} />
 							<AddNewContent position={index + 1} />
 						</div>
 					))
 				) : (
 					<li>
-						<div>Нет элементов</div>
+						<h3>Добавьте задания</h3>
 					</li>
 				)}
 			</ul>
