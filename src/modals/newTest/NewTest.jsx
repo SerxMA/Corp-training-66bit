@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
@@ -11,8 +11,8 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTest = ({ setOpen }) => {
-	const [answersType, setAnswersType] = useState('one');
+const NewTest = ({ setOpen, type }) => {
+	const [answersType, setAnswersType] = useState(type ? type : 'one');
 	const [question, setQuestion] = useState('');
 	const [answers, setAnswers] = useState([
 		{ id: 1, isTrue: false, answer: '' },
@@ -115,9 +115,23 @@ const NewTest = ({ setOpen }) => {
 		</ul>
 	);
 
+	useEffect(() => {
+		const closePopup = () => setOpen(false);
+		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
+
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
+	}, []);
+
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новый тест</h2>
 					<button
@@ -193,6 +207,7 @@ const NewTest = ({ setOpen }) => {
 							<p>Множественный ответ</p>
 							<label className={styles.switch}>
 								<input
+									checked={answersType === 'multi'}
 									type="checkbox"
 									onChange={toggleSwitchChange}
 								/>

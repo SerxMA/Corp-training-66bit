@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import ico from '../../assets/images/baseImg.png';
@@ -7,8 +7,6 @@ import styles from './ChooseFile.module.css';
 
 const ChooseFile = ({ setOpen, type }) => {
 	const [file, setFile] = useState(null);
-
-	console.log(file, 'file');
 
 	const handleDragOver = (e) => {
 		e.preventDefault();
@@ -25,9 +23,23 @@ const ChooseFile = ({ setOpen, type }) => {
 		setFile(selectedFile);
 	};
 
+	useEffect(() => {
+		const closePopup = () => setOpen(false);
+		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
+
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
+	}, []);
+
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>
 						{type === 'photo' ? 'Новое фото' : 'Новое видео'}

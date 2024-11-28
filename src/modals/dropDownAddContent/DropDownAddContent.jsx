@@ -7,41 +7,52 @@ import Edit from './icons/edit/Edit.jsx';
 import Attach from './icons/attach/Attach.jsx';
 import styles from './DropDownAddContent.module.css';
 
-const DropDownAddContent = () => {
+const DropDownAddContent = ({ isTop, setOpen, config }) => {
+	const handleClick = (e, key) => {
+		setOpen(false);
+		config[key](true);
+		e.stopPropagation();
+	};
+
 	return (
-		<div className={styles['drop-down']}>
+		<div
+			className={`${styles['drop-down']} ${
+				isTop ? '' : styles['position-bottom']
+			}`}
+			onClick={(e) => e.stopPropagation()}
+		>
 			<div className={styles.content}>
 				<span>Материалы</span>
-				<button>
+				<button onClick={(e) => handleClick(e, 'photo')}>
 					<Photo />
 					Фото
 				</button>
-				<button>
+				<button onClick={(e) => handleClick(e, 'video')}>
 					<Video />
 					Видео
 				</button>
-				<button>
+				<button onClick={(e) => handleClick(e, 'fileText')}>
 					<FileText />
 					Текст
 				</button>
 			</div>
 			<div className={styles.tasks}>
 				<span>Задания</span>
-				<button>
+				<button onClick={(e) => handleClick(e, 'oneOptionTest')}>
 					<OneOptionTest />
 					Одиночный ответ
 				</button>
-				<button>
+				<button onClick={(e) => handleClick(e, 'moreOptionTest')}>
 					<MoreOptionTest />
 					Множественный ответ
 				</button>
-				<button>
+				<button onClick={(e) => handleClick(e, 'edit')}>
 					<Edit />
 					Краткий ответ
 				</button>
-				<button>
+				<button onClick={(e) => handleClick(e, 'attach')}>
 					<Attach />
-					Развернутый ответ
+					Свободная форма
 				</button>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
@@ -19,12 +19,26 @@ const NewTask = ({ setOpen, type }) => {
 		type === 'one'
 			? 'Задание с кратким ответом'
 			: type === 'multi'
-			? 'Задание с развернутым ответом'
+			? 'Задание в свободной форме'
 			: 'Неверный ТИП!';
+
+	useEffect(() => {
+		const closePopup = () => setOpen(false);
+		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
+
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>{titleContent}</h2>
 					<button
