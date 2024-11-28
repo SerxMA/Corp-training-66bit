@@ -1,20 +1,50 @@
 import AttemptsTag from '../attemptsTag/AttemptsTag.jsx';
 import PointsTag from '../pointsTag/PointsTag.jsx';
+import TaskDetailedAnswer from '../taskDetailedAnswer/TaskDetailedAnswer.jsx';
+import TaskFreeformAnswer from '../taskFreeformAnswer/taskFreeformAnswer.jsx';
+import TaskMultiAnswer from '../taskMultiAnswer/TaskMultiAnswer.jsx';
+import TaskSingleAnswer from '../taskSingleAnswer/TaskSingleAnswer.jsx';
 import styles from './TaskWrapper.module.css';
 
-const TaskWrapper = ({ type, title, points, attempts, children }) => {
+const TaskWrapper = ({ element }) => {
+	const {
+		type,
+		title,
+		score: points,
+		countAttempts: attempts,
+		description,
+		questions,
+	} = element;
+
 	const titleContent = {
-		yourTitle: title,
-		text: 'Текстовая лекция',
-		singleAnswer: 'Тест с одиночным ответом',
-		multiAnswer: 'Тест с множественным ответом',
-		detailedAnswer: 'Задание с кратким ответом',
-		freeformAnswer: 'Задание с развернутым ответом',
+		SINGLE_ANSWER: {
+			title: 'Тест с одиночным ответом',
+			childen: (
+				<TaskSingleAnswer question={description} answers={questions} />
+			),
+		},
+		MULTI_ANSWER: {
+			title: 'Тест с множественным ответом',
+			childen: (
+				<TaskMultiAnswer question={description} answers={questions} />
+			),
+		},
+		DETAILED_ANSWER: {
+			title: 'Задание с кратким ответом',
+			childen: <TaskDetailedAnswer question={description} />,
+		},
+		FREEFORM_ANSWER: {
+			title: 'Задание с развернутым ответом',
+			childen: <TaskFreeformAnswer question={description} />,
+		},
+		// VIDEO,
+		// PICTURE,
+		TEXT: { title: title, childen: `${description}` },
 	};
 	return (
 		<div className={styles['task-wrapper']}>
 			<div className={styles['task-header']}>
-				<h2>{titleContent[type]}</h2>
+				<h2>{titleContent[type].title}</h2>
 				{(points || attempts) && (
 					<div className={styles['task-tags']}>
 						{points && <PointsTag>{points}</PointsTag>}
@@ -22,7 +52,7 @@ const TaskWrapper = ({ type, title, points, attempts, children }) => {
 					</div>
 				)}
 			</div>
-			{children}
+			{titleContent[type].childen}
 		</div>
 	);
 };

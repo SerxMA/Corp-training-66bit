@@ -56,12 +56,10 @@ const AddNewContent = () => {
 
 	useEffect(() => {
 		const closePopup = () => setIsOpen(false);
-		document.body.style.overflowY = 'hidden';
 		document.addEventListener('click', closePopup);
 
 		return () => {
 			document.removeEventListener('click', closePopup);
-			document.body.style.overflowY = 'auto';
 		};
 	}, []);
 

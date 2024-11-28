@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 
@@ -21,6 +22,36 @@ const NewTask = ({ setOpen, type }) => {
 			: type === 'multi'
 			? 'Задание в свободной форме'
 			: 'Неверный ТИП!';
+
+	const handleSubmit = () => {
+		const content = {
+			title: titleContent,
+			position: 0,
+			type: type === 'one' ? 'DETAILED_ANSWER' : 'FREEFORM_ANSWER',
+			description: question,
+			score: pointCorrect,
+		};
+		if (type === 'one') {
+			content.countAttempts = attemptsTest;
+			content.answers = [answer];
+		}
+		console.log(content);
+		const contentBlob = new Blob([JSON.stringify(content)], {
+			type: 'application/json; charset=UTF-8',
+		});
+
+		const formData = new FormData();
+		formData.append('content', contentBlob);
+
+		const config = {
+			data: formData,
+			params: {
+				topicId:
+					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+			},
+		};
+		api.content.postContentElement(config).then().catch();
+	};
 
 	useEffect(() => {
 		const closePopup = () => setOpen(false);
@@ -133,6 +164,7 @@ const NewTask = ({ setOpen, type }) => {
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
+					onClick={handleSubmit}
 					disabled={
 						!(
 							question &&

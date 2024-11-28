@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from './TaskMultiAnswer.module.css';
 
-const TaskMultiAnswer = ({ multiAnswer }) => {
+const TaskMultiAnswer = ({ question, answers }) => {
 	const [selectedOptions, setSelectedOptions] = useState([]);
 	const handleCheckboxChange = (id) => {
 		setSelectedOptions((prevSelected) =>
@@ -16,10 +16,10 @@ const TaskMultiAnswer = ({ multiAnswer }) => {
 	return (
 		<>
 			<p className={styles.question}>
-				{multiAnswer?.question || 'Это тестовый вопрос ы?'}
+				{question || 'Это тестовый вопрос ы?'}
 			</p>
 			<ul className={styles.answers}>
-				{multiAnswer?.answers.map((answer) => (
+				{answers?.map((answer) => (
 					<li key={answer.id} className={styles.answer}>
 						<label>
 							<input
@@ -28,7 +28,7 @@ const TaskMultiAnswer = ({ multiAnswer }) => {
 								onChange={() => handleCheckboxChange(answer.id)}
 							/>
 							<span className={styles['custom-checkbox']}></span>
-							{answer.text}
+							{answer.question}
 						</label>
 					</li>
 				)) ||

@@ -7,7 +7,7 @@ const MAX_CHARS = {
 	answer: 256,
 };
 
-const TaskFreeformAnswer = ({ freeformAnswer }) => {
+const TaskFreeformAnswer = ({ question }) => {
 	const [file, setFile] = useState(null);
 	const [answer, setAnswer] = useState('');
 
@@ -23,7 +23,7 @@ const TaskFreeformAnswer = ({ freeformAnswer }) => {
 	return (
 		<>
 			<p className={styles.question}>
-				{freeformAnswer?.question || 'Это тестовый вопрос ы?'}
+				{question || 'Это тестовый вопрос ы?'}
 			</p>
 			<div className={styles['description-box']}>
 				<textarea

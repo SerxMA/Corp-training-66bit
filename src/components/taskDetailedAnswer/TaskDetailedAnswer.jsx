@@ -6,13 +6,13 @@ import styles from './TaskDetailedAnswer.module.css';
 const MAX_CHARS = {
 	answer: 128,
 };
-const TaskDetailedAnswer = ({ detailedAnswer }) => {
+const TaskDetailedAnswer = ({ question }) => {
 	const [answer, setAnswer] = useState('');
 
 	return (
 		<>
 			<p className={styles.question}>
-				{detailedAnswer?.question || 'Это тестовый вопрос ы?'}
+				{question || 'Это тестовый вопрос ы?'}
 			</p>
 			<div className={styles['input-box']}>
 				<input

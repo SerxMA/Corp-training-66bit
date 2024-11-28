@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
@@ -81,6 +82,40 @@ const NewTest = ({ setOpen, type }) => {
 		if (!event.target.checked) {
 			setAnswers((cv) => cv.map((obj) => ({ ...obj, isTrue: false })));
 		}
+	};
+
+	const handleSubmit = () => {
+		const content = {
+			title:
+				answersType === 'one'
+					? 'Тест с одиночным ответом'
+					: 'Тест с множественным ответом',
+			position: 0,
+			type: answersType === 'one' ? 'SINGLE_ANSWER' : 'MULTI_ANSWER',
+			description: question,
+			countAttempts: attemptsTest,
+			score: pointCorrect,
+			questions: answers.map((answer) => answer.answer),
+			answers: answers
+				.filter((answer) => answer.isTrue)
+				.map((answer) => answer.answer),
+		};
+		console.log(content);
+		const contentBlob = new Blob([JSON.stringify(content)], {
+			type: 'application/json; charset=UTF-8',
+		});
+
+		const formData = new FormData();
+		formData.append('content', contentBlob);
+
+		const config = {
+			data: formData,
+			params: {
+				topicId:
+					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+			},
+		};
+		api.content.postContentElement(config).then().catch();
 	};
 
 	const answerListContent = (
@@ -229,6 +264,7 @@ const NewTest = ({ setOpen, type }) => {
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
+					onClick={handleSubmit}
 					disabled={
 						!(
 							question &&

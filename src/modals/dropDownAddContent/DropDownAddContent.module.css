@@ -17,7 +17,7 @@
 
 	box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.1);
 	transform: translateX(-50%);
-	z-index: 50;
+	z-index: 9;
 	cursor: auto;
 }
 .position-bottom {

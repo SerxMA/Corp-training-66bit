@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from './TaskSingleAnswer.module.css';
 
-const TaskSingleAnswer = ({ singleAnswer }) => {
+const TaskSingleAnswer = ({ question, answers }) => {
 	const [isOptionSelected, setIsOptionSelected] = useState(false);
 
 	const handleOptionChange = () => {
@@ -11,10 +11,10 @@ const TaskSingleAnswer = ({ singleAnswer }) => {
 	return (
 		<>
 			<p className={styles.question}>
-				{singleAnswer?.question || 'Это тестовый вопрос ы?'}
+				{question || 'Это тестовый вопрос ы?'}
 			</p>
 			<ul className={styles.answers}>
-				{singleAnswer?.answers.map((answer) => (
+				{answers?.map((answer) => (
 					<li key={answer.id} className={styles.answer}>
 						<label>
 							<input
@@ -23,7 +23,7 @@ const TaskSingleAnswer = ({ singleAnswer }) => {
 								onChange={handleOptionChange}
 							/>
 							<span className={styles['custom-radio']}></span>
-							{answer.text}
+							{answer.question}
 						</label>
 					</li>
 				)) ||
