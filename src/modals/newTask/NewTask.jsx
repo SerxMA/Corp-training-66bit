@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 
@@ -19,12 +20,56 @@ const NewTask = ({ setOpen, type }) => {
 		type === 'one'
 			? 'Задание с кратким ответом'
 			: type === 'multi'
-			? 'Задание с развернутым ответом'
+			? 'Задание в свободной форме'
 			: 'Неверный ТИП!';
+
+	const handleSubmit = () => {
+		const content = {
+			title: titleContent,
+			position: 0,
+			type: type === 'one' ? 'DETAILED_ANSWER' : 'FREEFORM_ANSWER',
+			description: question,
+			score: pointCorrect,
+		};
+		if (type === 'one') {
+			content.countAttempts = attemptsTest;
+			content.answers = [answer];
+		}
+		console.log(content);
+		const contentBlob = new Blob([JSON.stringify(content)], {
+			type: 'application/json; charset=UTF-8',
+		});
+
+		const formData = new FormData();
+		formData.append('content', contentBlob);
+
+		const config = {
+			data: formData,
+			params: {
+				topicId:
+					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+			},
+		};
+		api.content.postContentElement(config).then().catch();
+	};
+
+	useEffect(() => {
+		const closePopup = () => setOpen(false);
+		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
+
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>{titleContent}</h2>
 					<button
@@ -119,6 +164,7 @@ const NewTask = ({ setOpen, type }) => {
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
+					onClick={handleSubmit}
 					disabled={
 						!(
 							question &&

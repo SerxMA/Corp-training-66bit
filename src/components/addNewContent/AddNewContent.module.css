@@ -1,0 +1,9 @@
+.btn-add {
+	display: flex;
+	align-items: center;
+
+	color: var(--content-secondary);
+}
+.plus-wrapper {
+	position: relative;
+}

@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import { api } from '../../api';
 import styles from './CourseContent.module.css';
+import AddNewContent from '../addNewContent/AddNewContent.jsx';
+import TaskWrapper from '../taskWrapper/TaskWrapper.jsx';
 
 const CourseContent = () => {
-	const { topicId } = useParams();
 	const [elements, setElements] = useState([]);
-	console.log(elements);
+	const { topicId } = useParams();
 
 	useEffect(() => {
 		api.content
@@ -18,12 +19,27 @@ const CourseContent = () => {
 			})
 			.then((res) => {
 				setElements(res.data);
+				console.log(res);
 			});
-	}, [topicId]);
+	}, []);
 
 	return (
 		<div className={styles['content-wrapper']}>
-			<ul className={styles['content-list']}></ul>
+			<ul className={styles['content-list']}>
+				<AddNewContent />
+				{elements.length ? (
+					elements.map((element, index) => (
+						<div key={index} className={styles.thisOneElement}>
+							<TaskWrapper element={element} />
+							<AddNewContent />
+						</div>
+					))
+				) : (
+					<li>
+						<div>Нет элементов</div>
+					</li>
+				)}
+			</ul>
 		</div>
 	);
 };

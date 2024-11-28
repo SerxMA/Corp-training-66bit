@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
@@ -11,8 +12,8 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTest = ({ setOpen }) => {
-	const [answersType, setAnswersType] = useState('one');
+const NewTest = ({ setOpen, type }) => {
+	const [answersType, setAnswersType] = useState(type ? type : 'one');
 	const [question, setQuestion] = useState('');
 	const [answers, setAnswers] = useState([
 		{ id: 1, isTrue: false, answer: '' },
@@ -83,6 +84,40 @@ const NewTest = ({ setOpen }) => {
 		}
 	};
 
+	const handleSubmit = () => {
+		const content = {
+			title:
+				answersType === 'one'
+					? 'Тест с одиночным ответом'
+					: 'Тест с множественным ответом',
+			position: 0,
+			type: answersType === 'one' ? 'SINGLE_ANSWER' : 'MULTI_ANSWER',
+			description: question,
+			countAttempts: attemptsTest,
+			score: pointCorrect,
+			questions: answers.map((answer) => answer.answer),
+			answers: answers
+				.filter((answer) => answer.isTrue)
+				.map((answer) => answer.answer),
+		};
+		console.log(content);
+		const contentBlob = new Blob([JSON.stringify(content)], {
+			type: 'application/json; charset=UTF-8',
+		});
+
+		const formData = new FormData();
+		formData.append('content', contentBlob);
+
+		const config = {
+			data: formData,
+			params: {
+				topicId:
+					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
+			},
+		};
+		api.content.postContentElement(config).then().catch();
+	};
+
 	const answerListContent = (
 		<ul className={styles['answers-list']}>
 			{answers.map((answer) => (
@@ -115,9 +150,23 @@ const NewTest = ({ setOpen }) => {
 		</ul>
 	);
 
+	useEffect(() => {
+		const closePopup = () => setOpen(false);
+		document.body.style.overflowY = 'hidden';
+		document.addEventListener('click', closePopup);
+
+		return () => {
+			document.removeEventListener('click', closePopup);
+			document.body.style.overflowY = 'auto';
+		};
+	}, []);
+
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новый тест</h2>
 					<button
@@ -193,6 +242,7 @@ const NewTest = ({ setOpen }) => {
 							<p>Множественный ответ</p>
 							<label className={styles.switch}>
 								<input
+									checked={answersType === 'multi'}
 									type="checkbox"
 									onChange={toggleSwitchChange}
 								/>
@@ -214,6 +264,7 @@ const NewTest = ({ setOpen }) => {
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
+					onClick={handleSubmit}
 					disabled={
 						!(
 							question &&

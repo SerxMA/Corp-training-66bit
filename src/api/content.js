@@ -6,7 +6,7 @@ export const getContent = (config) =>
 	makeRequest({ method: 'GET', url: URL, ...config });
 
 export const postContentElement = (config) =>
-	makeRequest({ method: 'POST', url: URL, ...config });
+	makeRequest({ ...config, method: 'POST', url: URL });
 
 export const putContentElement = (config) => {
 	config.url = URL + `${config.url}`;
