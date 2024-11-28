@@ -45,10 +45,12 @@ const TaskWrapper = ({ element }) => {
 		<div className={styles['task-wrapper']}>
 			<div className={styles['task-header']}>
 				<h2>{titleContent[type].title}</h2>
-				{(points || attempts) && (
+				{(points || points === 0 || attempts) && (
 					<div className={styles['task-tags']}>
-						{points && <PointsTag>{points}</PointsTag>}
-						{attempts && <AttemptsTag>{attempts}</AttemptsTag>}
+						{(!!points || points === 0) && (
+							<PointsTag>{points}</PointsTag>
+						)}
+						{!!attempts && <AttemptsTag>{attempts}</AttemptsTag>}
 					</div>
 				)}
 			</div>
