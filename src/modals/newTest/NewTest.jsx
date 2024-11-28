@@ -12,7 +12,7 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTest = ({ setOpen, type }) => {
+const NewTest = ({ setOpen, type, position }) => {
 	const [answersType, setAnswersType] = useState(type ? type : 'one');
 	const [question, setQuestion] = useState('');
 	const [answers, setAnswers] = useState([
@@ -90,7 +90,7 @@ const NewTest = ({ setOpen, type }) => {
 				answersType === 'one'
 					? 'Тест с одиночным ответом'
 					: 'Тест с множественным ответом',
-			position: 0,
+			position: position,
 			type: answersType === 'one' ? 'SINGLE_ANSWER' : 'MULTI_ANSWER',
 			description: question,
 			countAttempts: attemptsTest,
@@ -115,7 +115,10 @@ const NewTest = ({ setOpen, type }) => {
 					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
 			},
 		};
-		api.content.postContentElement(config).then().catch();
+		api.content
+			.postContentElement(config)
+			.then(() => setOpen(false))
+			.catch();
 	};
 
 	const answerListContent = (

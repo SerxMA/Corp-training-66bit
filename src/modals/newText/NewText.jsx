@@ -11,14 +11,14 @@ const MAX_CHARS = {
 	text: 3000,
 };
 
-const NewText = ({ setOpen }) => {
+const NewText = ({ setOpen, position }) => {
 	const [title, setTitle] = useState('');
 	const [text, setText] = useState('');
 
 	const handleSubmit = () => {
 		const content = {
 			title: title,
-			position: 0,
+			position: position,
 			type: 'TEXT',
 			description: text,
 		};
@@ -36,7 +36,10 @@ const NewText = ({ setOpen }) => {
 					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
 			},
 		};
-		api.content.postContentElement(config).then().catch();
+		api.content
+			.postContentElement(config)
+			.then(() => setOpen(false))
+			.catch();
 	};
 
 	useEffect(() => {

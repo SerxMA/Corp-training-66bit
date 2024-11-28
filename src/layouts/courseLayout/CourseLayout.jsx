@@ -27,7 +27,10 @@ const CourseLayout = () => {
 
 	useEffect(() => {
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
-		if (modules.length) {
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
+
+		if (!topicId && modules.length) {
 			const topicModule = modules.find((module) => module.topics.length);
 			topicModule &&
 				navigate(`/course/${courseId}/${topicModule.topics[0].id}`);

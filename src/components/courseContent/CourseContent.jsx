@@ -18,20 +18,20 @@ const CourseContent = () => {
 				},
 			})
 			.then((res) => {
-				setElements(res.data);
+				setElements(res.data.sort((a, b) => a.position - b.position));
 				console.log(res);
 			});
-	}, []);
+	}, [topicId]);
 
 	return (
 		<div className={styles['content-wrapper']}>
 			<ul className={styles['content-list']}>
-				<AddNewContent />
+				<AddNewContent position={0} />
 				{elements.length ? (
 					elements.map((element, index) => (
 						<div key={index} className={styles.thisOneElement}>
 							<TaskWrapper element={element} />
-							<AddNewContent />
+							<AddNewContent position={index + 1} />
 						</div>
 					))
 				) : (

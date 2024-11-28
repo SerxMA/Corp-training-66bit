@@ -5,7 +5,7 @@ import ico from '../../assets/images/baseImg.png';
 import Cross from '../Cross.jsx';
 import styles from './ChooseFile.module.css';
 
-const ChooseFile = ({ setOpen, type }) => {
+const ChooseFile = ({ setOpen, type, position }) => {
 	const [file, setFile] = useState(null);
 
 	const handleDragOver = (e) => {

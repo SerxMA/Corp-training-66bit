@@ -10,7 +10,7 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTask = ({ setOpen, type }) => {
+const NewTask = ({ setOpen, type, position }) => {
 	const [question, setQuestion] = useState('');
 	const [answer, setAnswer] = useState('');
 	const [pointCorrect, setPointCorrect] = useState(0);
@@ -26,7 +26,7 @@ const NewTask = ({ setOpen, type }) => {
 	const handleSubmit = () => {
 		const content = {
 			title: titleContent,
-			position: 0,
+			position: position,
 			type: type === 'one' ? 'DETAILED_ANSWER' : 'FREEFORM_ANSWER',
 			description: question,
 			score: pointCorrect,
@@ -50,7 +50,10 @@ const NewTask = ({ setOpen, type }) => {
 					window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1],
 			},
 		};
-		api.content.postContentElement(config).then().catch();
+		api.content
+			.postContentElement(config)
+			.then(() => setOpen(false))
+			.catch();
 	};
 
 	useEffect(() => {

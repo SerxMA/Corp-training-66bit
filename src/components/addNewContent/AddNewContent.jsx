@@ -7,7 +7,7 @@ import NewTask from '../../modals/newTask/NewTask.jsx';
 import styles from './AddNewContent.module.css';
 import NewTest from '../../modals/newTest/NewTest.jsx';
 
-const AddNewContent = () => {
+const AddNewContent = ({ position }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isPositionedTop, setIsPositionedTop] = useState(true);
 	const [photo, setPhoto] = useState(false);
@@ -93,17 +93,45 @@ const AddNewContent = () => {
 					config={stateConfig}
 				/>
 			)}
-			{photo && <ChooseFile setOpen={setPhoto} type={'photo'} />}
-			{video && <ChooseFile setOpen={setVideo} type={'video'} />}
-			{fileText && <NewText setOpen={setFileText} />}
+			{photo && (
+				<ChooseFile
+					setOpen={setPhoto}
+					type={'photo'}
+					position={position}
+				/>
+			)}
+			{video && (
+				<ChooseFile
+					setOpen={setVideo}
+					type={'video'}
+					position={position}
+				/>
+			)}
+			{fileText && <NewText setOpen={setFileText} position={position} />}
 			{oneOptionTest && (
-				<NewTest setOpen={setOneOptionTest} type={'one'} />
+				<NewTest
+					setOpen={setOneOptionTest}
+					type={'one'}
+					position={position}
+				/>
 			)}
 			{moreOptionTest && (
-				<NewTest setOpen={setMoreOptionTest} type={'multi'} />
+				<NewTest
+					setOpen={setMoreOptionTest}
+					type={'multi'}
+					position={position}
+				/>
 			)}
-			{edit && <NewTask setOpen={setEdit} type={'one'} />}
-			{attach && <NewTask setOpen={setAttach} type={'multi'} />}
+			{edit && (
+				<NewTask setOpen={setEdit} type={'one'} position={position} />
+			)}
+			{attach && (
+				<NewTask
+					setOpen={setAttach}
+					type={'multi'}
+					position={position}
+				/>
+			)}
 		</div>
 	);
 };
