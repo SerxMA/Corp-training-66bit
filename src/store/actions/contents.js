@@ -15,7 +15,7 @@ export const postContents = (topicId, config) => {
 			dispatch(getContentsFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -39,7 +39,7 @@ export const getContents = (topicId) => {
 			dispatch(getContentsFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -56,7 +56,7 @@ export const putContents = (topicId, config) => {
 			dispatch(getContentsFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -73,7 +73,7 @@ export const deleteContents = (topicId, config) => {
 			dispatch(getContentsFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}

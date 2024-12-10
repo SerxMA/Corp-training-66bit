@@ -2,20 +2,43 @@ import { COURSES_ACTIONS } from '../actionCreators/courses.js';
 
 const initialState = {
 	courses: [],
+	totalPages: 1,
+	isLoading: false,
+	isError: false,
+	error: '',
 };
 
 const coursesReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case COURSES_ACTIONS.SET_COURSE:
+		case COURSES_ACTIONS.GET_COURSES_SUCCESS:
 			return {
 				...state,
-				courses: [...state.courses, action.payload.course],
+				courses: action.payload.content,
+				totalPages: action.payload.totalPages,
+				isLoading: false,
+				isError: false,
+				error: '',
 			};
 
-		case COURSES_ACTIONS.GET_COURSES:
+		case COURSES_ACTIONS.GET_COURSES_FAILED:
 			return {
 				...state,
-				courses: [...action.payload.courses.content],
+				isLoading: false,
+				isError: true,
+				error: action.payload,
+			};
+
+		case COURSES_ACTIONS.GET_COURSES_STARTED:
+			return {
+				...state,
+				isLoading: true,
+				isError: false,
+				error: '',
+			};
+
+		case COURSES_ACTIONS.RESET_COURSES:
+			return {
+				...initialState,
 			};
 
 		default:

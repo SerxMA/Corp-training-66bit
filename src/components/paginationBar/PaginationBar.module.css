@@ -1,0 +1,22 @@
+.pagination {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 1.25rem;
+
+	padding: 0 0.75rem 0.5rem;
+}
+.pages {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.25rem;
+}
+.btn_disabled {
+	color: var(--content-disabled);
+
+	background-color: var(--content-background);
+
+	cursor: auto;
+}

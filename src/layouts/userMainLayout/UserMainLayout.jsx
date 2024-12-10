@@ -10,9 +10,7 @@ const UserMainLayout = () => {
 			<NavPanel />
 			<div className={styles['view-wrapper']}>
 				<ViewHeaderUser />
-				<ul className={styles['courses-wrapper']}>
-					<Outlet />
-				</ul>
+				<Outlet />
 			</div>
 		</>
 	);

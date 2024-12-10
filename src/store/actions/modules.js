@@ -19,7 +19,7 @@ export const postEntity = (type, courseId, config) => {
 			dispatch(getModulesFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -48,7 +48,7 @@ export const getModules = (courseId) => {
 			dispatch(getModulesFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -69,7 +69,7 @@ export const putEntity = (type, courseId, config) => {
 			dispatch(getModulesFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -92,7 +92,7 @@ export const deleteEntity = (type, id, courseId) => {
 			dispatch(getModulesFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}

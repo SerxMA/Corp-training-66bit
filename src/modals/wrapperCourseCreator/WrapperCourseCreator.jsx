@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api/index.js';
 import { useAuth } from '../../customHooks/useAuth.js';
-import { setCourse } from '../../store/actionCreators/courses.js';
+import { postCourse } from '../../store/actions/courses.js';
 import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
@@ -12,6 +11,7 @@ import styles from './WrapperCourseCreator.module.css';
 
 const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 	const dispatch = useDispatch();
+	const { isError, isLoading } = useSelector((state) => state.courses);
 	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
 		title: course ? course.title : '',
@@ -19,6 +19,7 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 		tags: course ? course.tags : [],
 		file: null,
 	});
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 	const { username } = useAuth();
 
 	const handleNext = () => {
@@ -44,21 +45,35 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 			formData.append('image', courseData.file);
 		}
 
-		const tempObj = {
-			first: api.courses.postCourse,
-			second: api.courses.putCourse,
-		};
+		// const tempObj = {
+		// 	first: api.courses.postCourse,
+		// 	second: api.courses.putCourse,
+		// };
 		const config = { data: formData };
-		if (stage) config.url = id;
-		tempObj[stage ? 'second' : 'first'](config)
-			.then((res) => {
-				stage
-					? console.log('Заглушка')
-					: dispatch(setCourse({ course: res.data }));
-				setOpen(false);
-			})
-			.catch(() => console.log('Тут есть заглушка'));
+		if (stage) {
+			config.url = id;
+			// dispatch(outCourse()).then(() => {
+			// 	setClickCompleted(true);
+			// });
+		} else {
+			dispatch(postCourse(config)).then(() => {
+				setClickCompleted(true);
+			});
+		}
+		setOpen(false);
+		// tempObj[stage ? 'second' : 'first'](config)
+		// 	.then((res) => {
+		// 		stage
+		// 			? console.log('Заглушка')
+		// 			: dispatch(setCourse({ course: res.data }));
+		// 		setOpen(false);
+		// 	})
+		// 	.catch(() => console.log('Тут есть заглушка'));
 	};
+
+	useEffect(() => {
+		clickCompleted && !isError && !isLoading && setOpen(false);
+	}, [clickCompleted, isError, isLoading]);
 
 	useEffect(() => {
 		const closePopup = () => setOpen(false);

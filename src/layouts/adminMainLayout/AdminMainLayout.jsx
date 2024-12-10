@@ -5,18 +5,15 @@ import ViewHeaderAdmin from '../../components/viewHeaderAdmin/ViewHeaderAdmin.js
 import styles from './AdminMainLayout.module.css';
 
 const AdminMainLayout = () => {
-
-    return (
-        <>
-    	<NavPanel />
-      	<div className={styles['view-wrapper']}>
-        	<ViewHeaderAdmin/>
-        	<ul className={styles['courses-wrapper']}>
-        		<Outlet />
-        	</ul>
-        </div>
-    </>
-    );
+	return (
+		<>
+			<NavPanel />
+			<div className={styles['view-wrapper']}>
+				<ViewHeaderAdmin />
+				<Outlet />
+			</div>
+		</>
+	);
 };
 
 export default AdminMainLayout;

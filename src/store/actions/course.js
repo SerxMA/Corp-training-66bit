@@ -18,7 +18,7 @@ export const getCourse = (courseId) => {
 			dispatch(getCourseFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
@@ -36,7 +36,7 @@ export const deleteCourse = (courseId) => {
 			dispatch(getCourseFailed(error.message));
 			alert(
 				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response.data.message || ''
+					error.response?.data.message || ''
 				}"`
 			);
 		}
