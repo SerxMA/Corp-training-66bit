@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactPlayer from 'react-player';
 
 import { useAuth } from '../../customHooks/useAuth.js';
 import AttemptsTag from '../attemptsTag/AttemptsTag.jsx';
@@ -20,6 +21,7 @@ const TaskWrapper = ({ element }) => {
 		title,
 		score: points,
 		countAttempts: attempts,
+		fileUrl,
 		description,
 		questions,
 		position,
@@ -31,7 +33,7 @@ const TaskWrapper = ({ element }) => {
 	const content = {
 		SINGLE_ANSWER: {
 			title: 'Тест с одиночным ответом',
-			childen: (
+			children: (
 				<TaskSingleAnswer question={description} answers={questions} />
 			),
 			edit: (
@@ -46,7 +48,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		MULTI_ANSWER: {
 			title: 'Тест с множественным ответом',
-			childen: (
+			children: (
 				<TaskMultiAnswer question={description} answers={questions} />
 			),
 			edit: (
@@ -61,7 +63,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		DETAILED_ANSWER: {
 			title: 'Задание с кратким ответом',
-			childen: <TaskDetailedAnswer question={description} />,
+			children: <TaskDetailedAnswer question={description} />,
 			edit: (
 				<NewTask
 					setOpen={setEdit}
@@ -74,7 +76,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		FREEFORM_ANSWER: {
 			title: 'Задание с развернутым ответом',
-			childen: <TaskFreeformAnswer question={description} />,
+			children: <TaskFreeformAnswer question={description} />,
 			edit: (
 				<NewTask
 					setOpen={setEdit}
@@ -85,11 +87,33 @@ const TaskWrapper = ({ element }) => {
 			),
 			trash: <DeleteEntity setOpen={setTrash} type={'task'} id={id} />,
 		},
-		// VIDEO,
-		// PICTURE,
+		VIDEO: {
+			title: null,
+			children: (
+				<div className={styles['player-wrapper']}>
+					<ReactPlayer
+						light
+						controls
+						url={fileUrl}
+						// url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+						width="100%"
+						height="100%"
+						playing
+					/>
+				</div>
+			),
+			trash: <DeleteEntity setOpen={setTrash} type={'task'} id={id} />,
+		},
+		PICTURE: {
+			children: (
+				<div className={styles['img-wrapper']}>
+					<img src={fileUrl} alt="Задание" />
+				</div>
+			),
+		},
 		TEXT: {
 			title: title,
-			childen: `${description}`,
+			children: `${description}`,
 			edit: (
 				<NewText setOpen={setEdit} position={position} data={element} />
 			),
@@ -98,18 +122,22 @@ const TaskWrapper = ({ element }) => {
 	};
 	return (
 		<div className={styles['task-wrapper']}>
-			<div className={styles['task-header']}>
-				<h2>{content[type].title}</h2>
-				{(points || points === 0 || attempts) && (
-					<div className={styles['task-tags']}>
-						{(!!points || points === 0) && (
-							<PointsTag>{points}</PointsTag>
-						)}
-						{!!attempts && <AttemptsTag>{attempts}</AttemptsTag>}
-					</div>
-				)}
-			</div>
-			{content[type].childen}
+			{type !== 'VIDEO' && type !== 'PICTURE' && (
+				<div className={styles['task-header']}>
+					<h2>{content[type].title}</h2>
+					{(points || points === 0 || attempts) && (
+						<div className={styles['task-tags']}>
+							{(!!points || points === 0) && (
+								<PointsTag>{points}</PointsTag>
+							)}
+							{!!attempts && (
+								<AttemptsTag>{attempts}</AttemptsTag>
+							)}
+						</div>
+					)}
+				</div>
+			)}
+			{content[type].children}
 			{role === 'ADMIN' && (
 				<div className={styles['change-task']}>
 					<button

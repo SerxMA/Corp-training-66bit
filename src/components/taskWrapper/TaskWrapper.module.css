@@ -63,3 +63,23 @@
 		background-color: var(--content-border);
 	}
 }
+.player-wrapper {
+	aspect-ratio: 16 / 9;
+}
+.player-wrapper,
+.img-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+
+	width: calc(100% * 0.6);
+	max-height: 540px;
+	margin: 0 5.375rem 0 2.375rem;
+
+	& img {
+		align-self: center;
+
+		max-height: 540px;
+		object-fit: cover;
+	}
+}

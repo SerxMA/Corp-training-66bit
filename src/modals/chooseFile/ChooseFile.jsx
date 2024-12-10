@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { postContents } from '../../store/actions/contents.js';
 import ico from '../../assets/images/baseImg.png';
 import Cross from '../Cross.jsx';
 import styles from './ChooseFile.module.css';
 
-const ChooseFile = ({ setOpen, type, position }) => {
+const ChooseFile = ({ setOpen, type, position, data }) => {
+	const dispatch = useDispatch();
+	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [file, setFile] = useState(null);
+	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const handleDragOver = (e) => {
 		e.preventDefault();
@@ -22,6 +27,44 @@ const ChooseFile = ({ setOpen, type, position }) => {
 		const selectedFile = e.target.files[0];
 		setFile(selectedFile);
 	};
+
+	const handleSubmit = () => {
+		const content = {
+			title: 'Это заглушка title',
+			position: position,
+			type: type === 'photo' ? 'PICTURE' : 'VIDEO',
+			description: 'Это заглушка description',
+		};
+		const contentBlob = new Blob([JSON.stringify(content)], {
+			type: 'application/json; charset=UTF-8',
+		});
+		console.log(content);
+
+		const formData = new FormData();
+		formData.append('content', contentBlob);
+		formData.append('file', file);
+
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
+		const config = {
+			data: formData,
+		};
+		if (data) {
+			config.url = data.id;
+			// dispatch(putContents(topicId, config)).then(() => {
+			// 	setClickCompleted(true);
+			// });
+		} else {
+			config.params = { topicId: topicId };
+			dispatch(postContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		}
+	};
+
+	useEffect(() => {
+		clickCompleted && !isError && !isLoading && setOpen(false);
+	}, [clickCompleted, isError, isLoading]);
 
 	useEffect(() => {
 		const closePopup = () => setOpen(false);
@@ -86,6 +129,7 @@ const ChooseFile = ({ setOpen, type, position }) => {
 						className={`${styles.btn} ${
 							file ? styles.btn_success : styles.btn_disabled
 						}`}
+						onClick={handleSubmit}
 						disabled={!file}
 					>
 						Готово
