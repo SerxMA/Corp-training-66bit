@@ -7,11 +7,13 @@ import { deleteCourse } from '../../store/actions/course';
 import { deleteEntity } from '../../store/actions/modules';
 import ico from '../../assets/images/danger.png';
 import styles from './DeleteEntity.module.css';
+import { deleteContents } from '../../store/actions/contents';
 
 const identificationType = {
 	course: { sec: 10, string: 'курс' },
 	module: { sec: 5, string: 'модуль' },
 	lesson: { sec: -1, string: 'урок' },
+	task: { sec: -1, string: 'задание' },
 };
 
 const DeleteEntity = ({ setOpen, type, content, id }) => {
@@ -38,6 +40,13 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
 		if (type === 'course') {
 			dispatch(deleteCourse(courseId)).then(() =>
+				setClickCompleted(true)
+			);
+		} else if (type === 'task') {
+			const topicId =
+				window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
+			const config = { url: id };
+			dispatch(deleteContents(topicId, config)).then(() =>
 				setClickCompleted(true)
 			);
 		} else {
@@ -70,8 +79,14 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 					<p className={styles.question}>
 						Вы уверены, что хотите удалить{' '}
 						{identificationType[type]?.string || 'неизвестный тип'}
-						<br />
-						<span>{content}?</span>
+						{content ? (
+							<>
+								<br />
+								<span>{content}?</span>
+							</>
+						) : (
+							'?'
+						)}
 					</p>
 					<p className={styles.desciption}>
 						Это действие не может быть отменено.

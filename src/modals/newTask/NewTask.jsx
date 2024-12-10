@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postContents } from '../../store/actions/contents.js';
+import { postContents, putContents } from '../../store/actions/contents.js';
 import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 
@@ -11,13 +11,16 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTask = ({ setOpen, type, position }) => {
+const NewTask = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
+	console.log(data);
 	const { isError, isLoading } = useSelector((state) => state.contents);
-	const [question, setQuestion] = useState('');
-	const [answer, setAnswer] = useState('');
-	const [pointCorrect, setPointCorrect] = useState(0);
-	const [attemptsTest, setAttemptsTest] = useState(1);
+	const [question, setQuestion] = useState(data ? data.description : '');
+	const [answer, setAnswer] = useState(data ? data.answers?.[0].answer : '');
+	const [pointCorrect, setPointCorrect] = useState(data ? data.score : 0);
+	const [attemptsTest, setAttemptsTest] = useState(
+		data ? data.countAttempts : 1
+	);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const titleContent =
@@ -51,13 +54,18 @@ const NewTask = ({ setOpen, type, position }) => {
 			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
-			params: {
-				topicId: topicId,
-			},
 		};
-		dispatch(postContents(topicId, config)).then(() => {
-			setClickCompleted(true);
-		});
+		if (data) {
+			config.url = data.id;
+			dispatch(putContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		} else {
+			config.params = { topicId: topicId };
+			dispatch(postContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -171,9 +179,8 @@ const NewTask = ({ setOpen, type, position }) => {
 					className={`${styles['btn']}
 					${
 						question &&
-						(type === 'multi' || answer) &&
-						pointCorrect >= 0 &&
-						attemptsTest >= 1
+						(type === 'multi' || (answer && attemptsTest >= 1)) &&
+						pointCorrect >= 0
 							? styles['btn_success']
 							: styles['btn_disabled']
 					}`}
@@ -181,9 +188,9 @@ const NewTask = ({ setOpen, type, position }) => {
 					disabled={
 						!(
 							question &&
-							(type === 'multi' || answer) &&
-							pointCorrect >= 0 &&
-							attemptsTest >= 1
+							(type === 'multi' ||
+								(answer && attemptsTest >= 1)) &&
+							pointCorrect >= 0
 						)
 					}
 				>

@@ -9,11 +9,11 @@ export const postContentElement = (config) =>
 	makeRequest({ ...config, method: 'POST', url: URL });
 
 export const putContentElement = (config) => {
-	config.url = URL + `${config.url}`;
+	config.url = URL + `/${config.url}`;
 	return makeRequest({ method: 'PUT', ...config });
 };
 
 export const deleteContentElement = (config) => {
-	config.url = URL + `${config.url}`;
+	config.url = URL + `/${config.url}`;
 	return makeRequest({ method: 'DELETE', ...config });
 };

@@ -45,3 +45,37 @@ export const getContents = (topicId) => {
 		}
 	};
 };
+
+export const putContents = (topicId, config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getContentsStarted());
+			await api.content.putContentElement(config);
+			dispatch(getContents(topicId));
+		} catch (error) {
+			dispatch(getContentsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
+export const deleteContents = (topicId, config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getContentsStarted());
+			await api.content.deleteContentElement(config);
+			dispatch(getContents(topicId));
+		} catch (error) {
+			dispatch(getContentsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response.data.message || ''
+				}"`
+			);
+		}
+	};
+};

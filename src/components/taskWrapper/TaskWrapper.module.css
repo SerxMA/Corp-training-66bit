@@ -4,6 +4,7 @@
 	align-self: stretch;
 	row-gap: 1.25rem;
 
+	position: relative;
 	padding: 1.25rem;
 	border-radius: 0.75rem;
 	border: 1px solid var(--content-background-2);
@@ -31,4 +32,34 @@
 	flex-direction: row;
 	align-items: center;
 	column-gap: 0.75rem;
+}
+.change-task {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.5rem;
+
+	position: absolute;
+	top: 1.5rem;
+	right: 1.25rem;
+}
+.svg-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-shrink: 0;
+
+	padding: 0.375rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--content-background);
+
+	box-shadow: 0px 0px 16px 0px rgba(33, 37, 41, 0.02);
+	transition: background-color 0.2s ease-in-out;
+
+	&:hover {
+		background-color: var(--content-background);
+	}
+	&:active {
+		background-color: var(--content-border);
+	}
 }

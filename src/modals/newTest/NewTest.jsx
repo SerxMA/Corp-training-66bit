@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postContents } from '../../store/actions/contents.js';
+import { postContents, putContents } from '../../store/actions/contents.js';
 import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
@@ -13,16 +13,29 @@ const MAX_CHARS = {
 	answer: 50,
 };
 
-const NewTest = ({ setOpen, type, position }) => {
+const NewTest = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
+	console.log(data);
 	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [answersType, setAnswersType] = useState(type ? type : 'one');
-	const [question, setQuestion] = useState('');
-	const [answers, setAnswers] = useState([
-		{ id: 1, isTrue: false, answer: '' },
-	]);
-	const [pointCorrect, setPointCorrect] = useState(0);
-	const [attemptsTest, setAttemptsTest] = useState(1);
+	const [question, setQuestion] = useState(data ? data.title : '');
+	const [answers, setAnswers] = useState(
+		data
+			? data.questions.map((obj) => {
+					const newObj = {};
+					newObj.id = obj.id;
+					newObj.isTrue = data.answers.some(
+						(answer) => answer.answer === obj.question
+					);
+					newObj.answer = obj.question;
+					return newObj;
+			  })
+			: [{ id: 1, isTrue: false, answer: '' }]
+	);
+	const [pointCorrect, setPointCorrect] = useState(data ? data.score : 0);
+	const [attemptsTest, setAttemptsTest] = useState(
+		data ? data.countAttempts : 1
+	);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const addAnswer = () => {
@@ -116,13 +129,18 @@ const NewTest = ({ setOpen, type, position }) => {
 			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
-			params: {
-				topicId: topicId,
-			},
 		};
-		dispatch(postContents(topicId, config)).then(() => {
-			setClickCompleted(true);
-		});
+		if (data) {
+			config.url = data.id;
+			dispatch(putContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		} else {
+			config.params = { topicId: topicId };
+			dispatch(postContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		}
 	};
 
 	useEffect(() => {

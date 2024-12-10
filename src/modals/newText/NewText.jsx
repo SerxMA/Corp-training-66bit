@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postContents } from '../../store/actions/contents.js';
+import { postContents, putContents } from '../../store/actions/contents.js';
 import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './NewText.module.css';
@@ -12,12 +12,14 @@ const MAX_CHARS = {
 	text: 3000,
 };
 
-const NewText = ({ setOpen, position }) => {
+const NewText = ({ setOpen, position, data }) => {
 	const dispatch = useDispatch();
 	const { isError, isLoading } = useSelector((state) => state.contents);
-	const [title, setTitle] = useState('');
-	const [text, setText] = useState('');
+	const [title, setTitle] = useState(data ? data.title : '');
+	const [text, setText] = useState(data ? data.description : '');
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
+
+	console.log(data);
 
 	const handleSubmit = () => {
 		const content = {
@@ -38,13 +40,18 @@ const NewText = ({ setOpen, position }) => {
 			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		const config = {
 			data: formData,
-			params: {
-				topicId: topicId,
-			},
 		};
-		dispatch(postContents(topicId, config)).then(() => {
-			setClickCompleted(true);
-		});
+		if (data) {
+			config.url = data.id;
+			dispatch(putContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		} else {
+			config.params = { topicId: topicId };
+			dispatch(postContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
+		}
 	};
 
 	useEffect(() => {
