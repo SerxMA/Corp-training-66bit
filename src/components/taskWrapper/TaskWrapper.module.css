@@ -17,14 +17,25 @@
 	letter-spacing: 0.16px;
 
 	box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.03);
+
+	& p {
+		word-break: break-word;
+
+		overflow: hidden;
+	}
 }
 .task-header {
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.5rem;
 
-	& > h2 {
+	& > h3 {
+		width: 80%;
+
 		color: var(--content-primary);
+		word-break: break-word;
+
+		overflow: hidden;
 	}
 }
 .task-tags {
@@ -64,6 +75,7 @@
 	}
 }
 .player-wrapper {
+	width: calc(100% * 0.6);
 	aspect-ratio: 16 / 9;
 }
 .player-wrapper,
@@ -72,7 +84,6 @@
 	flex-direction: column;
 	align-self: center;
 
-	width: calc(100% * 0.6);
 	max-height: 540px;
 	margin: 0 5.375rem 0 2.375rem;
 

@@ -23,7 +23,7 @@ const TaskSingleAnswer = ({ question, answers }) => {
 								onChange={handleOptionChange}
 							/>
 							<span className={styles['custom-radio']}></span>
-							{answer.question}
+							<p>{answer.question}</p>
 						</label>
 					</li>
 				)) ||
@@ -36,7 +36,7 @@ const TaskSingleAnswer = ({ question, answers }) => {
 									onChange={handleOptionChange}
 								/>
 								<span className={styles['custom-radio']}></span>
-								Вариант {index + 1}
+								<p>Вариант {index + 1}</p>
 							</label>
 						</li>
 					))}

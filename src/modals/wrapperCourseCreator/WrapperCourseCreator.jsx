@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +12,7 @@ import styles from './WrapperCourseCreator.module.css';
 
 const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 	const dispatch = useDispatch();
+	const [searchParams] = useSearchParams();
 	const { isError, isLoading } = useSelector((state) => state.courses);
 	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
@@ -50,13 +52,15 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 		// 	second: api.courses.putCourse,
 		// };
 		const config = { data: formData };
+		const currentPage = searchParams.get('page');
+		console.log(currentPage);
 		if (stage) {
 			config.url = id;
 			// dispatch(outCourse()).then(() => {
 			// 	setClickCompleted(true);
 			// });
 		} else {
-			dispatch(postCourse(config)).then(() => {
+			dispatch(postCourse(config, currentPage - 1)).then(() => {
 				setClickCompleted(true);
 			});
 		}

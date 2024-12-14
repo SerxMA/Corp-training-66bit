@@ -113,7 +113,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		TEXT: {
 			title: title,
-			children: `${description}`,
+			children: <p>{description}</p>,
 			edit: (
 				<NewText setOpen={setEdit} position={position} data={element} />
 			),
@@ -122,7 +122,10 @@ const TaskWrapper = ({ element }) => {
 	};
 	return (
 		<div className={styles['task-wrapper']}>
-			{(points || points === 0 || attempts) && (
+			{type !== 'VIDEO' && type !== 'PICTURE' && (
+				<div className={styles['task-header']}>
+					<h3>{content[type].title}</h3>
+					{(points || points === 0 || attempts) && (
 						<div className={styles['task-tags']}>
 							{(!!points || points === 0) && (
 								<PointsTag>{points}</PointsTag>

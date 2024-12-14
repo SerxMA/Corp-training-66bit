@@ -9,21 +9,27 @@ import PaginationBar from '../../components/paginationBar/PaginationBar.jsx';
 
 const AllCourses = () => {
 	const dispatch = useDispatch();
-	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	const { courses, totalPages } = useSelector((state) => state.courses);
 	const [page, setPage] = useState(
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
 
 	useEffect(() => {
-		if (totalPages >= page && page >= 1) {
+		if (page >= 1) {
 			dispatch(getCourses(page - 1));
 			navigate(`/courses/all-courses?page=${page}`);
 		} else {
 			setPage(1);
 		}
 	}, [page]);
+
+	useEffect(() => {
+		if (totalPages > 1 && page > totalPages) {
+			setPage(1);
+		}
+	}, [totalPages]);
 
 	return (
 		<div className={styles['all-courses']}>

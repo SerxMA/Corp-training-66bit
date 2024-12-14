@@ -3,7 +3,7 @@
 	flex-direction: column;
 	position: relative;
 
-	width: 100%;
+	max-width: calc(100% - 280px);
 	min-height: 100%;
 	margin-left: 17.5rem;
 
