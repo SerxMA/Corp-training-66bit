@@ -137,11 +137,6 @@ const TaskWrapper = ({ element }) => {
 					)}
 				</div>
 			)}
-			{type !== 'VIDEO' && type !== 'PICTURE' && (
-				<div className={styles['task-header']}>
-					<h2>{content[type].title}</h2>
-				</div>
-			)}
 			{content[type].children}
 			{role === 'ADMIN' && (
 				<div className={styles['change-task']}>
