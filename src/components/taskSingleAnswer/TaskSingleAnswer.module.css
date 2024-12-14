@@ -54,6 +54,11 @@
 		&:hover {
 			color: var(--content-subPrimary);
 		}
+
+		& p {
+			word-break: break-word;
+			overflow: hidden;
+		}
 	}
 }
 .custom-radio {

@@ -1,4 +1,7 @@
 .course-title {
+	max-width: 80%;
+	word-break: break-word;
+
 	font: var(--body-medium14);
 	color: var(--content-primary);
 }
@@ -8,9 +11,13 @@
 	align-items: center;
 	column-gap: 0.125rem;
 
-	& svg:hover {
-		& path {
-			stroke: var(--accent-subPrimary);
+	& button {
+		flex-shrink: 0;
+
+		&:hover {
+			& path {
+				stroke: var(--accent-subPrimary);
+			}
 		}
 	}
 }
@@ -37,6 +44,7 @@
 	align-items: center;
 	flex-grow: 1;
 	justify-content: space-between;
+
 	padding-bottom: 4px;
 	border-bottom: 1px solid var(--content-background);
 }

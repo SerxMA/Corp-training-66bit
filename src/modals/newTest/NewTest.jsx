@@ -249,7 +249,9 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={pointCorrect}
+								max={2000000000}
 								onChange={(e) =>
+									e.target.value < 2000000000 &&
 									setPointCorrect(e.target.value)
 								}
 							/>
@@ -261,7 +263,9 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={attemptsTest}
+								max={2000000000}
 								onChange={(e) =>
+									e.target.value < 2000000000 &&
 									setAttemptsTest(e.target.value)
 								}
 							/>

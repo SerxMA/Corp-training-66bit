@@ -1,13 +1,15 @@
 .lesson {
 	display: flex;
 	align-items: center;
-	height: 52px;
 	gap: 12px;
 	padding: 0.75rem;
 
 	cursor: pointer;
 
 	& span {
+		max-width: 80%;
+		word-break: break-word;
+
 		font: var(--body-regular14);
 		color: var(--content-primary);
 	}
@@ -20,10 +22,14 @@
 	margin-left: auto;
 	margin-right: 0.25rem;
 
-	& svg:hover {
-		& path {
-			transition: stroke 0.2s ease-in-out;
-			stroke: var(--accent-subPrimary);
+	& button {
+		flex-shrink: 0;
+
+		&:hover {
+			& path {
+				transition: stroke 0.2s ease-in-out;
+				stroke: var(--accent-subPrimary);
+			}
 		}
 	}
 }

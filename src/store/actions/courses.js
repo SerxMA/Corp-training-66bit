@@ -5,12 +5,12 @@ import {
 	getCoursesSuccess,
 } from '../actionCreators/courses';
 
-export const postCourse = (config) => {
+export const postCourse = (config, page) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getCoursesStarted());
 			await api.courses.postCourse(config);
-			dispatch(getCourses());
+			dispatch(getCourses(page));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
 			alert(

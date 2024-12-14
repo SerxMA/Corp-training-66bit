@@ -24,6 +24,7 @@
 	overflow: hidden; /* Скрываем текст, который не помещается */
 	text-overflow: ellipsis; /* Добавляем троеточие */
 	-webkit-line-clamp: 2;
+	word-break: break-word;
 
 	color: var(--content-primary);
 }

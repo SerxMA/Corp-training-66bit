@@ -3,7 +3,7 @@
 	flex-direction: column;
 	gap: 0.75rem;
 
-	max-width: 450px;
+	/* max-width: 450px;  */ /* Ломает адаптив на малых экранах */
 	height: 26.5rem;
 	padding: 1rem;
 
@@ -57,6 +57,7 @@
 	overflow: hidden; /* Скрываем текст, который не помещается */
 	text-overflow: ellipsis; /* Добавляем троеточие */
 	-webkit-line-clamp: 2; /* Ограничиваем количество видимых строк */
+	word-break: break-word;
 
 	color: var(--content-primary);
 }
@@ -69,6 +70,7 @@
 	overflow: hidden; /* Скрываем текст, который не помещается */
 	text-overflow: ellipsis; /* Добавляем троеточие */
 	-webkit-line-clamp: 3; /* Ограничиваем количество видимых строк */ /* Межстрочный интервал */
+	word-break: break-word;
 
 	font-family: 'Roboto Flex';
 	font-size: 16px;

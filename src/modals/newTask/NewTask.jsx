@@ -153,7 +153,9 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={pointCorrect}
+								max={2000000000}
 								onChange={(e) =>
+									e.target.value < 2000000000 &&
 									setPointCorrect(e.target.value)
 								}
 							/>
@@ -166,7 +168,9 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									placeholder=""
 									className={styles['number-input']}
 									value={attemptsTest}
+									max={2000000000}
 									onChange={(e) =>
+										e.target.value < 2000000000 &&
 										setAttemptsTest(e.target.value)
 									}
 								/>
@@ -180,6 +184,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 					${
 						question &&
 						(type === 'multi' || (answer && attemptsTest >= 1)) &&
+						pointCorrect.length &&
 						pointCorrect >= 0
 							? styles['btn_success']
 							: styles['btn_disabled']
@@ -190,6 +195,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 							question &&
 							(type === 'multi' ||
 								(answer && attemptsTest >= 1)) &&
+							pointCorrect.length &&
 							pointCorrect >= 0
 						)
 					}
