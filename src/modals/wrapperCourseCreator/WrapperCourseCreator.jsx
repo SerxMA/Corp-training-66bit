@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useAuth } from '../../customHooks/useAuth.js';
 import { postCourse } from '../../store/actions/courses.js';
+import { putCourse } from '../../store/actions/course.js';
 import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
@@ -47,32 +48,21 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 			formData.append('image', courseData.file);
 		}
 
-		// const tempObj = {
-		// 	first: api.courses.postCourse,
-		// 	second: api.courses.putCourse,
-		// };
 		const config = { data: formData };
 		const currentPage = searchParams.get('page');
 		console.log(currentPage);
 		if (stage) {
-			config.url = id;
-			// dispatch(outCourse()).then(() => {
-			// 	setClickCompleted(true);
-			// });
+			dispatch(
+				putCourse(id, config, stage === 2 ? 'image' : 'fields')
+			).then(() => {
+				setClickCompleted(true);
+			});
 		} else {
 			dispatch(postCourse(config, currentPage - 1)).then(() => {
 				setClickCompleted(true);
 			});
 		}
 		setOpen(false);
-		// tempObj[stage ? 'second' : 'first'](config)
-		// 	.then((res) => {
-		// 		stage
-		// 			? console.log('Заглушка')
-		// 			: dispatch(setCourse({ course: res.data }));
-		// 		setOpen(false);
-		// 	})
-		// 	.catch(() => console.log('Тут есть заглушка'));
 	};
 
 	useEffect(() => {

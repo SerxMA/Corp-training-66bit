@@ -24,6 +24,25 @@ export const getCourse = (courseId) => {
 		}
 	};
 };
+export const putCourse = (courseId, config, fieldType) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getCourseStarted());
+			await api.courses.putCourse({
+				...config,
+				url: `/${courseId}/${fieldType}`,
+			});
+			dispatch(getCourse(courseId));
+		} catch (error) {
+			dispatch(getCourseFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
 export const deleteCourse = (courseId) => {
 	return async (dispatch) => {
 		try {
