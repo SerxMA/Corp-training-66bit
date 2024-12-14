@@ -31,26 +31,16 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-
+	overflow: auto;
+	scrollbar-width: none;
+	
+	margin-bottom: 52px;
 	padding: 0.75rem;
 }
-.table-box {
-	max-height: 476px;
-	min-height: 100px;
-	overflow-y: auto;
-
-	&::-webkit-scrollbar {
-		width: 4px;
-	}
-	&::-webkit-scrollbar-track {
-		background: var(--content-subPrimary);
-		border-radius: 30px;
-	}
-	&::-webkit-scrollbar-thumb {
-		background: var(--system-success-primary);
-		border-radius: 30px;
-	}
-}
+::-webkit-scrollbar {
+	width: 0; /* Убираем ширину */
+	height: 0; /* Убираем высоту */
+  }
 .course-structure-edit {
 	display: flex;
 	justify-content: space-between;
