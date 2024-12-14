@@ -22,7 +22,7 @@ export const postCourse = (config) => {
 	};
 };
 
-export const getCourses = (page = 0, limit = 3) => {
+export const getCourses = (page = 0, limit = 18) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getCoursesStarted());
