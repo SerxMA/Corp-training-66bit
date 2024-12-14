@@ -122,10 +122,7 @@ const TaskWrapper = ({ element }) => {
 	};
 	return (
 		<div className={styles['task-wrapper']}>
-			{type !== 'VIDEO' && type !== 'PICTURE' && (
-				<div className={styles['task-header']}>
-					<h2>{content[type].title}</h2>
-					{(points || points === 0 || attempts) && (
+			{(points || points === 0 || attempts) && (
 						<div className={styles['task-tags']}>
 							{(!!points || points === 0) && (
 								<PointsTag>{points}</PointsTag>
@@ -135,6 +132,9 @@ const TaskWrapper = ({ element }) => {
 							)}
 						</div>
 					)}
+			{type !== 'VIDEO' && type !== 'PICTURE' && (
+				<div className={styles['task-header']}>
+					<h2>{content[type].title}</h2>
 				</div>
 			)}
 			{content[type].children}
