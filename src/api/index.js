@@ -1,4 +1,4 @@
-import { getUser } from './user';
+import { getUser, removeUser } from './user';
 import {
 	deleteCourse,
 	getCourse,
@@ -17,7 +17,7 @@ import {
 import { postGroup } from './groups';
 
 export const api = {
-	user: { getUser },
+	user: { getUser, removeUser },
 	courses: {
 		postCourse,
 		getCourses,

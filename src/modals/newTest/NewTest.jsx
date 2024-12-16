@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
+import { findAnswersDuplicates } from '../../helpers/functions/findAnswersDuplicates.js';
 import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
@@ -63,7 +64,13 @@ const NewTest = ({ setOpen, type, position, data }) => {
 		if (input.length <= MAX_CHARS[method]) {
 			setAnswers((cv) =>
 				cv.map((obj) =>
-					obj.id === id ? { ...obj, answer: input } : obj
+					obj.id === id
+						? {
+								...obj,
+								isTrue: input.length ? obj.isTrue : false,
+								answer: input,
+						  }
+						: obj
 				)
 			);
 		}
@@ -102,44 +109,47 @@ const NewTest = ({ setOpen, type, position, data }) => {
 	};
 
 	const handleSubmit = () => {
-		const content = {
-			title:
-				answersType === 'one'
-					? 'Тест с одиночным ответом'
-					: 'Тест с множественным ответом',
-			position: position,
-			type: answersType === 'one' ? 'SINGLE_ANSWER' : 'MULTI_ANSWER',
-			description: question,
-			countAttempts: attemptsTest,
-			score: pointCorrect,
-			questions: answers.map((answer) => answer.answer),
-			answers: answers
-				.filter((answer) => answer.isTrue)
-				.map((answer) => answer.answer),
-		};
-		console.log(content);
-		const contentBlob = new Blob([JSON.stringify(content)], {
-			type: 'application/json; charset=UTF-8',
-		});
-
-		const formData = new FormData();
-		formData.append('content', contentBlob);
-
-		const topicId =
-			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
-		const config = {
-			data: formData,
-		};
-		if (data) {
-			config.url = data.id;
-			dispatch(putContents(topicId, config)).then(() => {
-				setClickCompleted(true);
+		const filterAnswers = answers.filter((answer) => answer.answer.length);
+		if (findAnswersDuplicates(filterAnswers)) {
+			const content = {
+				title:
+					answersType === 'one'
+						? 'Тест с одиночным ответом'
+						: 'Тест с множественным ответом',
+				position: position,
+				type: answersType === 'one' ? 'SINGLE_ANSWER' : 'MULTI_ANSWER',
+				description: question,
+				countAttempts: attemptsTest,
+				score: pointCorrect,
+				questions: filterAnswers.map((answer) => answer.answer),
+				answers: filterAnswers
+					.filter((answer) => answer.isTrue)
+					.map((answer) => answer.answer),
+			};
+			console.log(content);
+			const contentBlob = new Blob([JSON.stringify(content)], {
+				type: 'application/json; charset=UTF-8',
 			});
-		} else {
-			config.params = { topicId: topicId };
-			dispatch(postContents(topicId, config)).then(() => {
-				setClickCompleted(true);
-			});
+
+			const formData = new FormData();
+			formData.append('content', contentBlob);
+
+			const topicId =
+				window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
+			const config = {
+				data: formData,
+			};
+			if (data) {
+				config.url = data.id;
+				dispatch(putContents(topicId, config)).then(() => {
+					setClickCompleted(true);
+				});
+			} else {
+				config.params = { topicId: topicId };
+				dispatch(postContents(topicId, config)).then(() => {
+					setClickCompleted(true);
+				});
+			}
 		}
 	};
 
@@ -153,8 +163,10 @@ const NewTest = ({ setOpen, type, position, data }) => {
 				<li key={answer.id} className={styles.answer}>
 					<div
 						className={`${styles.state} ${
-							answer.isTrue ? styles.state_on : ''
-						}`}
+							answersType === 'one'
+								? styles.state_circle
+								: styles.state_rectangle
+						} ${answer.isTrue ? styles.state_on : ''}`}
 						onClick={() =>
 							answer.answer && toggleStateAnswer(answer.id)
 						}

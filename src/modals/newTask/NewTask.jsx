@@ -7,8 +7,8 @@ import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 
 const MAX_CHARS = {
-	question: 50,
-	answer: 50,
+	question: 256,
+	answer: 128,
 };
 
 const NewTask = ({ setOpen, type, position, data }) => {

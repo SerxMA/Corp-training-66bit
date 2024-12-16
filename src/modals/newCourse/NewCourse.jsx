@@ -12,9 +12,15 @@ const MAX_CHARS = {
 	inputTags: 24,
 };
 
-const NewCourse = ({ onNext, changeData, data, type }) => {
+const NewCourse = ({
+	onNext,
+	changeData,
+	data,
+	type,
+	showDropDown,
+	setShowDropDown,
+}) => {
 	const [tag, setTag] = useState('');
-	const [showDropDown, setShowDropDown] = useState(false);
 	const [showTagSupport, setShowTagSupport] = useState(false);
 
 	const changeInputTag = (text) => {
@@ -190,12 +196,13 @@ const NewCourse = ({ onNext, changeData, data, type }) => {
 					</span>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						width="20"
-						height="20"
+						width="40"
+						height="40"
 						viewBox="0 0 20 20"
 						fill="none"
+						onMouseEnter={() => setShowTagSupport(true)}
+						onMouseLeave={() => setShowTagSupport(false)}
 						onClick={(e) => {
-							setShowTagSupport((cv) => !cv);
 							setShowDropDown(false);
 							e.stopPropagation();
 						}}

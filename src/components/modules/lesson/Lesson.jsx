@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import Edit from './icons/Edit.jsx';
 import Trash from './icons/Trash.jsx';
@@ -12,7 +13,12 @@ const Lesson = ({ type, topic }) => {
 	const [trash, setTrash] = useState(false);
 
 	return (
-		<div className={styles['lesson']}>
+		<NavLink
+			to={`${topic.id}`}
+			className={({ isActive }) =>
+				`${styles.lesson} ${isActive ? styles.lesson_current : ''}`
+			}
+		>
 			<ProgressCircle isGreen={false} />
 			<span>{topic.title}</span>
 			{type === 'edit' && (
@@ -42,7 +48,7 @@ const Lesson = ({ type, topic }) => {
 					id={topic.id}
 				/>
 			)}
-		</div>
+		</NavLink>
 	);
 };
 

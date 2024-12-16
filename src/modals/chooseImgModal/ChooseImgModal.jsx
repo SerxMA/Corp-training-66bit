@@ -15,7 +15,7 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 
 	const handleFileChange = (e) => {
 		const selectedFile = e.target.files[0];
-		changeData((cv) => ({ ...cv, file: selectedFile }));
+		selectedFile && changeData((cv) => ({ ...cv, file: selectedFile }));
 	};
 
 	return (
@@ -45,6 +45,7 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 							Выберите файл
 							<input
 								type="file"
+								accept=".jpg, .png, jpeg"
 								id="fileInput"
 								style={{ display: 'none' }}
 								onChange={handleFileChange}

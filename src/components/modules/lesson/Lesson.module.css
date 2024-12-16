@@ -14,6 +14,9 @@
 		color: var(--content-primary);
 	}
 }
+.lesson_current {
+	background-color: var(--content-border);
+}
 .managment-btn {
 	display: flex;
 	flex-direction: row;

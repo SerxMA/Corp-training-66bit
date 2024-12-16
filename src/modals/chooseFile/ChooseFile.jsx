@@ -116,6 +116,11 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 								Выберите файл
 								<input
 									type="file"
+									accept={
+										type === 'photo'
+											? '.jpg, .png, jpeg'
+											: '.mp4, .avi, .webm, .ogg, .quicktime'
+									}
 									id="fileInput"
 									style={{ display: 'none' }}
 									onChange={handleFileChange}

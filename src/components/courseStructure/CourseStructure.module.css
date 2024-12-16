@@ -34,14 +34,15 @@
 	gap: 0.5rem;
 	overflow: auto;
 	scrollbar-width: none;
-	
+
 	margin-bottom: 52px;
 	padding: 0.75rem;
+
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
 }
-::-webkit-scrollbar {
-	width: 0; /* Убираем ширину */
-	height: 0; /* Убираем высоту */
-  }
 .course-structure-edit {
 	display: flex;
 	justify-content: space-between;

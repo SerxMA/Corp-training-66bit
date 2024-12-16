@@ -13,7 +13,10 @@ const EditCourseStructure = ({ setOpen, course }) => {
 	const [newModule, setNewModule] = useState(false);
 
 	useEffect(() => {
-		const closePopup = () => setOpen(false);
+		const closePopup = () => {
+			console.log(12343234);
+			setOpen(false);
+		};
 
 		document.body.style.overflowY = 'hidden';
 		document.addEventListener('click', closePopup);

@@ -113,7 +113,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		TEXT: {
 			title: title,
-			children: <p>{description}</p>,
+			children: <p className={styles.text}>{description}</p>,
 			edit: (
 				<NewText setOpen={setEdit} position={position} data={element} />
 			),

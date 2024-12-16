@@ -44,6 +44,11 @@
 	align-items: center;
 	column-gap: 0.75rem;
 }
+.text {
+	color: var(--content-subPrimary);
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+}
 .change-task {
 	display: flex;
 	flex-direction: row;

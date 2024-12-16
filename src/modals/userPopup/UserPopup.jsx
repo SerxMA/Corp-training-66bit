@@ -5,6 +5,7 @@ import { useAuth } from '../../customHooks/useAuth';
 import { removeUser } from '../../store/actionCreators/user';
 import avatar from '../../assets/images/Avatar.jpg';
 import styles from './UserPopup.module.css';
+import { api } from '../../api';
 
 const UserPopup = ({ setOpen }) => {
 	const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const UserPopup = ({ setOpen }) => {
 
 	const logout = (e) => {
 		dispatch(removeUser());
+		api.user.removeUser({});
 		e.stopPropagation();
 	};
 

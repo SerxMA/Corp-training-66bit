@@ -44,6 +44,8 @@
 		position: absolute;
 		top: 50%;
 		right: 1rem;
+		padding: 0.625rem;
+		margin-right: -0.625rem;
 
 		transform: translateY(-50%);
 	}

@@ -21,9 +21,9 @@ const CourseLayout = () => {
 		dispatch(getCourse(courseId));
 
 		return () => {
+			dispatch(resetContents());
 			dispatch(resetModules());
 			dispatch(resetCourse());
-			dispatch(resetContents());
 		};
 	}, []);
 

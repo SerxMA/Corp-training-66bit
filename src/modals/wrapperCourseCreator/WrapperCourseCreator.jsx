@@ -15,6 +15,7 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 	const dispatch = useDispatch();
 	const [searchParams] = useSearchParams();
 	const { isError, isLoading } = useSelector((state) => state.courses);
+	const [showDropDown, setShowDropDown] = useState(false);
 	const [step, setStep] = useState(stage ? stage : 1);
 	const [courseData, setCourseData] = useState({
 		title: course ? course.title : '',
@@ -86,7 +87,10 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 				className={`${styles['popup']} ${
 					step === 2 ? styles.popup_wide : ''
 				}`}
-				onClick={(e) => e.stopPropagation()}
+				onClick={(e) => {
+					setShowDropDown(false);
+					e.stopPropagation();
+				}}
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>
@@ -104,6 +108,8 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 						onNext={stage ? handleSubmit : handleNext}
 						changeData={setCourseData}
 						data={courseData}
+						showDropDown={showDropDown}
+						setShowDropDown={setShowDropDown}
 						type={stage}
 					/>
 				)}
