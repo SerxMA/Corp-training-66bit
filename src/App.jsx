@@ -18,6 +18,7 @@ import CourseContent from './components/courseContent/CourseContent.jsx';
 import CourseParticipants from './components/courseParticipants/CourseParticipants.jsx';
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
+import CourseGroup from './components/courseGroup/CourseGroup.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
 							},
 							{
 								path: 'groups',
-								element: <h1>Заглушка</h1>,
+								element: <CourseGroup />,
 							},
 							{
 								path: 'participants',

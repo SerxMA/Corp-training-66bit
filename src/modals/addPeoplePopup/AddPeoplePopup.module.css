@@ -192,6 +192,8 @@
 	align-items: center;
 
 	& img {
+		max-width: 42px;
+		aspect-ratio: 1 / 1;
 		padding: 2px;
 		border-radius: 50%;
 		border: 1px solid var(--content-background);

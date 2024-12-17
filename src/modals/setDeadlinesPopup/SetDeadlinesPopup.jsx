@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../../api/index.js';
+import { postGroup } from '../../store/actions/groups.js';
 import DeadlinesСalendar from '../deadlinesСalendar/DeadlinesСalendar.jsx';
 import styles from './SetDeadlinesPopup.module.css';
 
 const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
+	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
 	const { course } = useSelector((state) => state.course);
 	const [deadlines, setDeadlines] = useState(false);
@@ -26,15 +27,15 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	console.log(currModules);
 
 	const handleSubmit = () => {
-		console.log(234);
-		api.groups.postGroup({
+		const config = {
 			params: { courseId: course.id },
 			data: {
 				name: data.title,
-				usernames: [],
+				usernames: data.people,
 				deadlines: currModules.map((module) => module.deadlines),
 			},
-		});
+		};
+		dispatch(postGroup(config, course.id));
 		allPopups.map((func) => func());
 		setOpen(false);
 	};

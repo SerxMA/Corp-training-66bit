@@ -13,50 +13,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	const { course } = useSelector((state) => state.course);
 	const [search, setSearch] = useState('');
 	const [next, setNext] = useState(false);
-	const [people, setPeople] = useState([
-		// {
-		// 	id: 1,
-		// 	state: false,
-		// 	username: 'Богдан1 Бикаев',
-		// 	mail: 'login-1@gitlab.ru',
-		// },
-		// {
-		// 	id: 2,
-		// 	state: false,
-		// 	username: 'Богдан2 Бикаев',
-		// 	mail: 'login-2@gitlab.ru',
-		// },
-		// {
-		// 	id: 3,
-		// 	state: false,
-		// 	username: 'Богдан3 Бикаев',
-		// 	mail: 'login-3@gitlab.ru',
-		// },
-		// {
-		// 	id: 4,
-		// 	state: false,
-		// 	username: 'Богдан4 Бикаев',
-		// 	mail: 'login-4@gitlab.ru',
-		// },
-		// {
-		// 	id: 5,
-		// 	state: false,
-		// 	username: 'Богдан5 Бикаев',
-		// 	mail: 'login-5@gitlab.ru',
-		// },
-		// {
-		// 	id: 6,
-		// 	state: false,
-		// 	username: 'Богдан6 Бикаев',
-		// 	mail: 'login-6@gitlab.ru',
-		// },
-		// {
-		// 	id: 7,
-		// 	state: false,
-		// 	username: 'Богдан7 Бикаев',
-		// 	mail: 'login-7@gitlab.ru',
-		// },
-	]);
+	const [people, setPeople] = useState([]);
 
 	const toggleStatePeople = (username) => {
 		setPeople((cv) =>
@@ -84,11 +41,14 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 							></div>
 							<div className={styles['people-card']}>
 								<img
-									src={avatar}
+									src={obj.avatarUrl}
 									alt="Профиль"
 									onClick={() =>
 										toggleStatePeople(obj.username)
 									}
+									onError={(e) => {
+										e.currentTarget.src = avatar;
+									}}
 								/>
 								<div className={styles['people-info']}>
 									<p>{obj.username}</p>
@@ -103,7 +63,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 
 	useEffect(() => {
 		api.members
-			.getMembers({
+			.getMembersExclude({
 				params: { courseId: course.id, inclusive: false },
 			})
 			.then((res) =>
@@ -194,16 +154,9 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 						назад
 					</button>
 					<button
-						className={`${styles['btn']} ${
-							people.length && people.find((obj) => obj.state)
-								? styles['btn_success']
-								: styles['btn_disabled']
-						}`}
+						className={`${styles['btn']} ${styles['btn_success']}`}
 						onClick={
 							data?.title ? () => setNext(true) : handleSubmit
-						}
-						disabled={
-							!(people.length && people.find((obj) => obj.state))
 						}
 					>
 						{data?.title ? (
@@ -223,7 +176,9 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 					allPopups={[...allPopups, setNext]}
 					data={{
 						...data,
-						people: people.filter((people) => people.state),
+						people: people
+							.filter((people) => people.state)
+							.map((people) => people.username),
 					}}
 				/>
 			)}
