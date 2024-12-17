@@ -4,19 +4,20 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 
-import Authentication from './pages/authentication/Authentication.jsx';
-import Redirect from './pages/redirect/Redirect.jsx';
+import CheckRole from './hoc/CheckRole.jsx';
 import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
 import AdminMainLayout from './layouts/adminMainLayout/AdminMainLayout.jsx';
 import UniversalLayout from './layouts/universalLayout/UniversalLayout.jsx';
-import AllCourses from './pages/allCourses/AllCourses.jsx';
-import MyCourses from './pages/myCourses/MyCourses.jsx';
-import CheckRole from './hoc/CheckRole.jsx';
-import './assets/styles/reset.css';
-import './assets/styles/index.css';
 import CourseLayout from './layouts/courseLayout/CourseLayout.jsx';
 import TopicLayout from './layouts/topicLayout/TopicLayout.jsx';
+import Authentication from './pages/authentication/Authentication.jsx';
+import Redirect from './pages/redirect/Redirect.jsx';
+import AllCourses from './pages/allCourses/AllCourses.jsx';
+import MyCourses from './pages/myCourses/MyCourses.jsx';
 import CourseContent from './components/courseContent/CourseContent.jsx';
+import CourseParticipants from './components/courseParticipants/CourseParticipants.jsx';
+import './assets/styles/reset.css';
+import './assets/styles/index.css';
 
 const router = createBrowserRouter([
 	{
@@ -85,7 +86,7 @@ const router = createBrowserRouter([
 							},
 							{
 								path: 'participants',
-								element: <h1>Заглуууу</h1>,
+								element: <CourseParticipants />,
 							},
 						],
 					},

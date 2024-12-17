@@ -32,6 +32,13 @@
 }
 .title {
 	color: var(--content-primary);
+
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-word;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
 }
 .describe-block {
 	display: flex;

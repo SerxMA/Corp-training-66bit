@@ -106,7 +106,13 @@
 	column-gap: 1.5rem;
 }
 .btn {
-	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.5rem;
+
+	width: calc((100% - 1.5rem) / 2);
 	padding: 1rem;
 	border-radius: 0.5rem;
 

@@ -3,9 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import NewGroup from '../../modals/newGroup/NewGroup.jsx';
 import styles from './AdminCourseTabs.module.css';
+import AddPeoplePopup from '../../modals/addPeoplePopup/AddPeoplePopup.jsx';
 
 const AdminCourseTabs = () => {
 	const location = useLocation();
+	const [addParticipants, setAddParticipants] = useState(false);
 	const [newGroup, setNewGroup] = useState(false);
 
 	const isGroups = location.pathname.includes('groups');
@@ -101,7 +103,7 @@ const AdminCourseTabs = () => {
 							e.stopPropagation();
 							isGroups
 								? setNewGroup(true)
-								: 'Добавить участников';
+								: setAddParticipants(true);
 						}}
 					>
 						<svg
@@ -124,6 +126,7 @@ const AdminCourseTabs = () => {
 				)}
 			</div>
 			{newGroup && <NewGroup setOpen={setNewGroup} />}
+			{addParticipants && <AddPeoplePopup setOpen={setAddParticipants} />}
 		</div>
 	);
 };

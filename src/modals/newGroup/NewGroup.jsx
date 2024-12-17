@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
 
-import { api } from '../../api/index.js';
 import Cross from '../Cross.jsx';
+import ContinueArrow from '../../UI/continueArrow/ContinueArrow.jsx';
 import styles from './NewGroup.module.css';
+import AddPeoplePopup from '../addPeoplePopup/AddPeoplePopup.jsx';
 
 const MAX_CHARS = {
 	group: 50,
@@ -12,32 +12,7 @@ const MAX_CHARS = {
 
 const NewGroup = ({ setOpen }) => {
 	const [group, setGroup] = useState('');
-	const course = useSelector((state) => state.course);
-	console.log(course);
-
-	const postGroup = () => {
-		api.groups
-			.postGroup({
-				params: { courseId: course.course.id },
-				data: {
-					name: group,
-					usernames: [],
-					deadlines: [
-						{
-							moduleId: 8,
-							startTime: new Date(
-								'2024-11-13T12:30:05'
-							).toISOString(),
-							endTime: new Date(
-								'2024-11-13T12:30:10'
-							).toISOString(),
-						},
-					],
-				},
-			})
-			.then()
-			.catch();
-	};
+	const [next, setNext] = useState(false);
 
 	useEffect(() => {
 		const outsideClick = () => {
@@ -96,14 +71,22 @@ const NewGroup = ({ setOpen }) => {
 								? styles['btn_success']
 								: styles['btn_disabled']
 						}`}
-						onClick={postGroup}
+						onClick={() => setNext(true)}
 						disabled={!group}
 					>
-						Создать
-						{/* Поменять (см. Фигму) */}
+						Продолжить
+						<ContinueArrow />
 					</button>
 				</div>
 			</div>
+			{next && (
+				<AddPeoplePopup
+					setOpen={setNext}
+					allPopups={[setOpen, setNext]}
+					type={'user'}
+					data={{ title: group }}
+				/>
+			)}
 		</div>,
 		document.body
 	);

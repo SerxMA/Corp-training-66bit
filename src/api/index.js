@@ -15,6 +15,7 @@ import {
 	putContentElement,
 } from './content';
 import { postGroup } from './groups';
+import { getMembers } from './members';
 
 export const api = {
 	user: { getUser, removeUser },
@@ -45,4 +46,5 @@ export const api = {
 		putContentElement,
 		deleteContentElement,
 	},
+	members: { getMembers },
 };

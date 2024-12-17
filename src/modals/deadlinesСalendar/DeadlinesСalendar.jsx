@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom';
 import { DateCalendar, MultiSectionDigitalClock } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 
-import styles from './DeadlinesPopup.module.css';
+import styles from './DeadlinesСalendar.module.css';
 
 const formatDateTime = ({ date, time }) => {
 	const [hours, minutes] = time.split(':');
 	date.setHours(Number(hours), Number(minutes), 0);
-	return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+	return dayjs(date).format('YYYY-MM-DDTHH:mm:ss');
 };
 
-const DeadlinesPopup = ({ setOpen }) => {
+const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline }) => {
 	const [date, setDate] = useState('');
 	console.log(date);
 
 	const dateChange = (newTime, field) => {
 		setDate((cv) => {
-			const currDateField = cv.split(' ');
+			const currDateField = cv.split('T');
 			const revField = field === 'time' ? 'date' : 'time';
 			const revFieldContent =
 				field === 'time'
@@ -36,11 +36,33 @@ const DeadlinesPopup = ({ setOpen }) => {
 		});
 	};
 
+	const saveDeadlines = () => {
+		chengeDeadline((cv) =>
+			cv.map((obj) =>
+				obj.id === id
+					? {
+							...obj,
+							deadlines: {
+								...obj.deadlines,
+								endTime: new Date(date),
+							},
+					  }
+					: obj
+			)
+		);
+		setOpen(false);
+	};
+
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
-					<h2 className={styles['title']}>Название темы</h2>
+					<h2 className={styles['title']}>
+						{title ? title : 'Название темы'}
+					</h2>
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['data-block']}>
@@ -161,6 +183,7 @@ const DeadlinesPopup = ({ setOpen }) => {
 								? styles['btn_success']
 								: styles['btn_disabled']
 						}`}
+						onClick={saveDeadlines}
 						disabled={!date}
 					>
 						Сохранить
@@ -172,4 +195,4 @@ const DeadlinesPopup = ({ setOpen }) => {
 	);
 };
 
-export default DeadlinesPopup;
+export default DeadlinesСalendar;

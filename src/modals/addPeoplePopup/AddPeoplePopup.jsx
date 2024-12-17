@@ -1,85 +1,98 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 
+import { api } from '../../api/index.js';
+import SetDeadlinesPopup from '../setDeadlinesPopup/SetDeadlinesPopup.jsx';
 import Cross from '../Cross.jsx';
+import ContinueArrow from '../../UI/continueArrow/ContinueArrow.jsx';
 import avatar from '../../assets/images/Avatar.jpg';
 import styles from './AddPeoplePopup.module.css';
 
-const AddPeoplePopup = ({ setOpen, type }) => {
+const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
+	const { course } = useSelector((state) => state.course);
 	const [search, setSearch] = useState('');
+	const [next, setNext] = useState(false);
 	const [people, setPeople] = useState([
-		{
-			id: 1,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 2,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 3,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 4,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 5,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 6,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
-		{
-			id: 7,
-			state: false,
-			username: 'Богдан Бикаев',
-			mail: 'login@gitlab.ru',
-		},
+		// {
+		// 	id: 1,
+		// 	state: false,
+		// 	username: 'Богдан1 Бикаев',
+		// 	mail: 'login-1@gitlab.ru',
+		// },
+		// {
+		// 	id: 2,
+		// 	state: false,
+		// 	username: 'Богдан2 Бикаев',
+		// 	mail: 'login-2@gitlab.ru',
+		// },
+		// {
+		// 	id: 3,
+		// 	state: false,
+		// 	username: 'Богдан3 Бикаев',
+		// 	mail: 'login-3@gitlab.ru',
+		// },
+		// {
+		// 	id: 4,
+		// 	state: false,
+		// 	username: 'Богдан4 Бикаев',
+		// 	mail: 'login-4@gitlab.ru',
+		// },
+		// {
+		// 	id: 5,
+		// 	state: false,
+		// 	username: 'Богдан5 Бикаев',
+		// 	mail: 'login-5@gitlab.ru',
+		// },
+		// {
+		// 	id: 6,
+		// 	state: false,
+		// 	username: 'Богдан6 Бикаев',
+		// 	mail: 'login-6@gitlab.ru',
+		// },
+		// {
+		// 	id: 7,
+		// 	state: false,
+		// 	username: 'Богдан7 Бикаев',
+		// 	mail: 'login-7@gitlab.ru',
+		// },
 	]);
 
-	const toggleStatePeople = (id) => {
+	const toggleStatePeople = (username) => {
 		setPeople((cv) =>
 			cv.map((obj) =>
-				obj.id === id ? { ...obj, state: !obj.state } : obj
+				obj.username === username ? { ...obj, state: !obj.state } : obj
 			)
 		);
 	};
+
+	const handleSubmit = () => {};
 
 	const tableContent = (
 		<ul className={styles['people-list']}>
 			{people.length
 				? people.map((obj) => (
-						<li key={obj.id} className={styles['people-elem']}>
+						<li
+							key={obj.username}
+							className={styles['people-elem']}
+						>
 							<div
 								className={`${styles.state} ${
 									obj.state ? styles.state_on : ''
 								}`}
-								onClick={() => toggleStatePeople(obj.id)}
+								onClick={() => toggleStatePeople(obj.username)}
 							></div>
 							<div className={styles['people-card']}>
 								<img
 									src={avatar}
 									alt="Профиль"
-									onClick={() => toggleStatePeople(obj.id)}
+									onClick={() =>
+										toggleStatePeople(obj.username)
+									}
 								/>
 								<div className={styles['people-info']}>
-									<p>{obj.usename}</p>
-									<p>{obj.mail}</p>
+									<p>{obj.username}</p>
+									<p>{obj.email}</p>
 								</div>
 							</div>
 						</li>
@@ -88,9 +101,22 @@ const AddPeoplePopup = ({ setOpen, type }) => {
 		</ul>
 	);
 
+	useEffect(() => {
+		api.members
+			.getMembers({
+				params: { courseId: course.id, inclusive: false },
+			})
+			.then((res) =>
+				setPeople(res.data.map((obj) => ({ ...obj, state: false })))
+			);
+	}, []);
+
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
-			<div className={styles['popup']}>
+			<div
+				className={styles['popup']}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>
 						{type === 'staff'
@@ -165,7 +191,7 @@ const AddPeoplePopup = ({ setOpen, type }) => {
 						className={`${styles.btn} ${styles.btn_cancel}`}
 						onClick={() => setOpen(false)}
 					>
-						Отмена
+						назад
 					</button>
 					<button
 						className={`${styles['btn']} ${
@@ -173,14 +199,34 @@ const AddPeoplePopup = ({ setOpen, type }) => {
 								? styles['btn_success']
 								: styles['btn_disabled']
 						}`}
+						onClick={
+							data?.title ? () => setNext(true) : handleSubmit
+						}
 						disabled={
 							!(people.length && people.find((obj) => obj.state))
 						}
 					>
-						Добавить
+						{data?.title ? (
+							<>
+								Продолжить
+								<ContinueArrow />
+							</>
+						) : (
+							'Добавить'
+						)}
 					</button>
 				</div>
 			</div>
+			{next && (
+				<SetDeadlinesPopup
+					setOpen={setNext}
+					allPopups={[...allPopups, setNext]}
+					data={{
+						...data,
+						people: people.filter((people) => people.state),
+					}}
+				/>
+			)}
 		</div>,
 		document.body
 	);
