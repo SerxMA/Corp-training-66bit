@@ -64,7 +64,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	useEffect(() => {
 		api.members
 			.getMembersExclude({
-				params: { courseId: course.id, inclusive: false },
+				params: { courseId: course.id },
 			})
 			.then((res) =>
 				setPeople(res.data.map((obj) => ({ ...obj, state: false })))
@@ -151,7 +151,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 						className={`${styles.btn} ${styles.btn_cancel}`}
 						onClick={() => setOpen(false)}
 					>
-						назад
+						{data?.title ? 'Назад' : 'Отмена'}
 					</button>
 					<button
 						className={`${styles['btn']} ${styles['btn_success']}`}
@@ -165,7 +165,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 								<ContinueArrow />
 							</>
 						) : (
-							'Добавить'
+							'Готово'
 						)}
 					</button>
 				</div>

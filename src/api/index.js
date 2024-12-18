@@ -14,7 +14,7 @@ import {
 	postContentElement,
 	putContentElement,
 } from './content';
-import { getGroups, postGroup } from './groups';
+import { getGroups, postGroup, deleteGroup } from './groups';
 import { getMembersExclude } from './members';
 
 export const api = {
@@ -40,6 +40,7 @@ export const api = {
 	groups: {
 		postGroup,
 		getGroups,
+		deleteGroup,
 	},
 	content: {
 		getContent,

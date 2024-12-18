@@ -37,3 +37,19 @@ export const getGroups = (config) => {
 		}
 	};
 };
+export const deleteGroup = (config, courseId) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getGroupsStarted());
+			await api.groups.deleteGroup(config);
+			dispatch(getGroups({ params: { courseId } }));
+		} catch (error) {
+			dispatch(getGroupsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};

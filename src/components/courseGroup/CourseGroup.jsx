@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getGroups } from '../../store/actions/groups';
-import Dots from '../../UI/dots/Dots.jsx';
+import GroupRow from '../groupRow/GroupRow.jsx';
 import styles from './CourseGroup.module.css';
 
 const CourseGroup = () => {
 	const dispatch = useDispatch();
 	const { course } = useSelector((state) => state.course);
 	const { groups } = useSelector((state) => state.groups);
+	const [clickGroup, setClickGroup] = useState(0);
 	console.log(course);
 	console.log(groups);
 
@@ -25,13 +26,12 @@ const CourseGroup = () => {
 				</div>
 				{groups.length
 					? groups.map((group) => (
-							<div key={group.id} className={styles.group}>
-								<span>{group.name}</span>
-								<span>{group.countMembers}</span>
-								<button>
-									<Dots />
-								</button>
-							</div>
+							<GroupRow
+								key={group.id}
+								group={group}
+								clickGroup={clickGroup}
+								setClickGroup={setClickGroup}
+							/>
 					  ))
 					: 'Групп нет'}
 			</div>

@@ -29,22 +29,3 @@
 		color: var(--content-secondary);
 	}
 }
-.group {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	column-gap: 1rem;
-
-	min-height: 64px;
-	padding: 0 1rem;
-	border-top: 1px solid var(--content-background);
-
-	background: var(--background-modal);
-
-	& > span {
-		width: calc((100% - 1rem) / 2);
-		font: var(--body-medium14);
-		letter-spacing: 0.14px;
-		color: var(--content-primary);
-	}
-}

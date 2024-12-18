@@ -8,12 +8,15 @@ import { deleteEntity } from '../../store/actions/modules';
 import ico from '../../assets/images/danger.png';
 import styles from './DeleteEntity.module.css';
 import { deleteContents } from '../../store/actions/contents';
+import { deleteGroup } from '../../store/actions/groups';
 
 const identificationType = {
 	course: { sec: 10, string: 'курс' },
 	module: { sec: 5, string: 'модуль' },
 	lesson: { sec: -1, string: 'урок' },
 	task: { sec: -1, string: 'задание' },
+	group: { sec: -1, string: 'группу' },
+	groupExclude: { sec: 5, string: 'группу' },
 };
 
 const DeleteEntity = ({ setOpen, type, content, id }) => {
@@ -38,21 +41,47 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 
 	const handleSubmit = () => {
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
-		if (type === 'course') {
-			dispatch(deleteCourse(courseId)).then(() =>
-				setClickCompleted(true)
-			);
-		} else if (type === 'task') {
-			const topicId =
-				window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
-			const config = { url: id };
-			dispatch(deleteContents(topicId, config)).then(() =>
-				setClickCompleted(true)
-			);
-		} else {
-			dispatch(deleteEntity(type, id, courseId)).then(() =>
-				setClickCompleted(true)
-			);
+		const topicId =
+			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
+		switch (type) {
+			case 'course':
+				dispatch(deleteCourse(courseId)).then(() =>
+					setClickCompleted(true)
+				);
+				break;
+			case 'task':
+				dispatch(deleteContents(topicId, { url: id })).then(() =>
+					setClickCompleted(true)
+				);
+				break;
+			case 'group':
+				dispatch(
+					deleteGroup(
+						{
+							url: id,
+							params: { courseId: courseId, exclude: false },
+						},
+						courseId
+					)
+				).then(() => setClickCompleted(true));
+				break;
+			case 'groupExclude':
+				dispatch(
+					deleteGroup(
+						{
+							url: id,
+							params: { courseId: courseId, exclude: true },
+						},
+						courseId
+					)
+				).then(() => setClickCompleted(true));
+				break;
+
+			default:
+				dispatch(deleteEntity(type, id, courseId)).then(() =>
+					setClickCompleted(true)
+				);
+				break;
 		}
 	};
 
