@@ -12,25 +12,18 @@ const Lesson = ({ type, topic }) => {
 	const [edit, setEdit] = useState(false);
 	const [trash, setTrash] = useState(false);
 
-	return (
-		<NavLink
-			to={`${topic.id}`}
-			className={({ isActive }) =>
-				`${styles.lesson} ${isActive ? styles.lesson_current : ''}`
-			}
-		>
+	return type === 'edit' ? (
+		<div className={styles.lesson}>
 			<ProgressCircle isGreen={false} />
 			<span>{topic.title}</span>
-			{type === 'edit' && (
-				<div className={styles['managment-btn']}>
-					<button onClick={() => setEdit(true)}>
-						<Edit />
-					</button>
-					<button onClick={() => setTrash(true)}>
-						<Trash />
-					</button>
-				</div>
-			)}
+			<div className={styles['managment-btn']}>
+				<button onClick={() => setEdit(true)}>
+					<Edit />
+				</button>
+				<button onClick={() => setTrash(true)}>
+					<Trash />
+				</button>
+			</div>
 			{edit && (
 				<ChangeName
 					setOpen={setEdit}
@@ -48,6 +41,16 @@ const Lesson = ({ type, topic }) => {
 					id={topic.id}
 				/>
 			)}
+		</div>
+	) : (
+		<NavLink
+			to={`${topic.id}`}
+			className={({ isActive }) =>
+				`${styles.lesson} ${isActive ? styles.lesson_current : ''}`
+			}
+		>
+			<ProgressCircle isGreen={false} />
+			<span>{topic.title}</span>
 		</NavLink>
 	);
 };

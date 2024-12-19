@@ -96,6 +96,7 @@ const EditCourseStructure = ({ setOpen, course }) => {
 						setOpen={setNewModule}
 						type={'module'}
 						id={course.id}
+						// position={}
 					/>
 				)}
 			</div>

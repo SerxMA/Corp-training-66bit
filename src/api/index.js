@@ -22,7 +22,7 @@ import {
 	getGroupDedlines,
 	putGroupDedlines,
 } from './groups';
-import { getMembersExclude } from './members';
+import { getMembersExclude, getMembersForNewGroup } from './members';
 
 export const api = {
 	user: { getUser, removeUser },
@@ -58,5 +58,5 @@ export const api = {
 		putContentElement,
 		deleteContentElement,
 	},
-	members: { getMembersExclude },
+	members: { getMembersExclude, getMembersForNewGroup },
 };

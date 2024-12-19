@@ -19,7 +19,7 @@ const NewTest = ({ setOpen, type, position, data }) => {
 	console.log(data);
 	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [answersType, setAnswersType] = useState(type ? type : 'one');
-	const [question, setQuestion] = useState(data ? data.title : '');
+	const [question, setQuestion] = useState(data ? data.description : '');
 	const [answers, setAnswers] = useState(
 		data
 			? data.questions.map((obj) => {

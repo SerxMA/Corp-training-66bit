@@ -81,13 +81,28 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	}, [clickCompleted, isError, isLoading, error]);
 
 	useEffect(() => {
-		api.members
-			.getMembersExclude({
-				params: { courseId: course.id },
-			})
-			.then((res) =>
-				setPeople(res.data.map((obj) => ({ ...obj, state: false })))
-			);
+		data.title
+			? api.members
+					.getMembersForNewGroup({
+						params: { courseId: course.id },
+					})
+					.then((res) =>
+						setPeople(
+							res.data.map((obj) => ({ ...obj, state: false }))
+						)
+					)
+			: api.members
+					.getMembersExclude({
+						params: { courseId: course.id, groupId: data.id },
+					})
+					.then((res) =>
+						setPeople(
+							res.data.map((obj) => ({
+								...obj.user,
+								state: obj.inGroup,
+							}))
+						)
+					);
 	}, []);
 
 	return ReactDOM.createPortal(
