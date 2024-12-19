@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 
+import PersonGroup from '../../UI/personGroup/PersonGroup.jsx';
+import CalendarTime from '../../UI/calendarTime/CalendarTime.jsx';
 import Trash from '../../UI/trash/Trash.jsx';
+import PersonGroupClose from '../../UI/personGroupClose/PersonGroupClose.jsx';
 import styles from './GroupManagment.module.css';
 
 const GroupManagment = ({ isTop, setOpen, config }) => {
@@ -28,11 +31,11 @@ const GroupManagment = ({ isTop, setOpen, config }) => {
 			onClick={(e) => e.stopPropagation()}
 		>
 			<button onClick={(e) => handleClick(e, 'participants')}>
-				<Trash />
+				<PersonGroup />
 				Участники
 			</button>
 			<button onClick={(e) => handleClick(e, 'deadlines')}>
-				<Trash />
+				<CalendarTime />
 				Дедлайны
 			</button>
 			<button onClick={(e) => handleClick(e, 'trash')}>
@@ -40,7 +43,7 @@ const GroupManagment = ({ isTop, setOpen, config }) => {
 				Удалить
 			</button>
 			<button onClick={(e) => handleClick(e, 'trashExclude')}>
-				<Trash />
+				<PersonGroupClose />
 				Удалить и исключить
 			</button>
 		</div>

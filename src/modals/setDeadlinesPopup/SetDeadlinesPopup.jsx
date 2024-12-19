@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postGroup } from '../../store/actions/groups.js';
+import { api } from '../../api/index.js';
+import { postGroup, putGroupDeadlines } from '../../store/actions/groups.js';
+import { convertArrayToDate } from '../../helpers/functions/convertArrayToDate.js';
+import { toISOStringWithOffset } from '../../helpers/functions/toISOStringWithOffset.js';
 import DeadlinesСalendar from '../deadlinesСalendar/DeadlinesСalendar.jsx';
 import styles from './SetDeadlinesPopup.module.css';
 
@@ -10,6 +13,7 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
 	const { course } = useSelector((state) => state.course);
+	const { isError, isLoading, error } = useSelector((state) => state.groups);
 	const [deadlines, setDeadlines] = useState(false);
 	const [currModules, setCurrModules] = useState(
 		modules.map((module) => ({
@@ -23,22 +27,87 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	);
 	const [selectModule, setSelectModule] = useState({});
 	const [search, setSearch] = useState('');
+	const [clickCompleted, setClickCompleted] = useState(false);
 
 	console.log(currModules);
 
-	const handleSubmit = () => {
+	const handleSubmitPost = () => {
 		const config = {
 			params: { courseId: course.id },
 			data: {
 				name: data.title,
 				usernames: data.people,
-				deadlines: currModules.map((module) => module.deadlines),
+				deadlines: currModules.map((module) => ({
+					...module.deadlines,
+					startTime: toISOStringWithOffset(
+						module.deadlines.startTime
+					),
+					endTime: toISOStringWithOffset(module.deadlines.endTime),
+				})),
 			},
 		};
 		dispatch(postGroup(config, course.id));
-		allPopups.map((func) => func());
-		setOpen(false);
+		setClickCompleted(true);
 	};
+
+	const handleSubmitPut = () => {
+		console.log(
+			currModules.map((module) => ({
+				...module.deadlines,
+				startTime: toISOStringWithOffset(module.deadlines.startTime),
+				endTime: toISOStringWithOffset(module.deadlines.endTime),
+			})),
+			'Отправка'
+		);
+		const config = {
+			url: `/${data.id}/deadlines`,
+			data: currModules.map((module) => ({
+				...module.deadlines,
+				startTime: toISOStringWithOffset(module.deadlines.startTime),
+				endTime: toISOStringWithOffset(module.deadlines.endTime),
+			})),
+		};
+		dispatch(putGroupDeadlines(config, course.id));
+		setClickCompleted(true);
+	};
+
+	useEffect(() => {
+		if (clickCompleted && !isError && !isLoading) {
+			allPopups && allPopups.map((func) => func());
+			setOpen(false);
+		}
+
+		!isLoading && setClickCompleted(false);
+	}, [clickCompleted, isError, isLoading, error]);
+
+	useEffect(() => {
+		data.id &&
+			api.groups
+				.getGroupDedlines({ url: `/${data.id}/deadlines` })
+				.then((res) => {
+					res.data.deadlines.map((deadline) =>
+						setCurrModules((cv) =>
+							cv.map((obj) =>
+								obj.deadlines.moduleId === deadline.module.id
+									? {
+											...obj,
+											deadlines: {
+												...obj.deadlines,
+												startTime: convertArrayToDate(
+													deadline.startTime
+												),
+												endTime: convertArrayToDate(
+													deadline.endTime
+												),
+											},
+									  }
+									: obj
+							)
+						)
+					);
+				})
+				.catch((error) => console.log(error));
+	}, []);
 
 	return ReactDOM.createPortal(
 		<div className={styles['modal-wrapper']}>
@@ -124,7 +193,7 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 						className={`${styles.btn} ${styles.btn_cancel}`}
 						onClick={() => setOpen(false)}
 					>
-						Назад
+						{data?.title ? 'Назад' : 'Отмена'}
 					</button>
 					<button
 						className={`${styles['btn']} ${
@@ -136,7 +205,9 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 								? styles['btn_success']
 								: styles['btn_disabled']
 						}`}
-						onClick={handleSubmit}
+						onClick={
+							data?.title ? handleSubmitPost : handleSubmitPut
+						}
 						disabled={
 							!currModules.some(
 								(module) =>
@@ -155,6 +226,12 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 					id={selectModule.id}
 					title={selectModule.title}
 					chengeDeadline={setCurrModules}
+					data={
+						selectModule.deadlines.endTime.getTime() !==
+						new Date(0).getTime()
+							? { date: selectModule.deadlines.endTime }
+							: {}
+					}
 				/>
 			)}
 		</div>,

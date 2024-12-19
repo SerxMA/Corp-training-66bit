@@ -5,11 +5,13 @@ import GroupManagment from '../../modals/groupManagment/GroupManagment.jsx';
 import AddPeoplePopup from '../../modals/addPeoplePopup/AddPeoplePopup.jsx';
 import Dots from '../../UI/dots/Dots.jsx';
 import styles from './GroupRow.module.css';
+import SetDeadlinesPopup from '../../modals/setDeadlinesPopup/SetDeadlinesPopup.jsx';
 
 const GroupRow = ({ group, clickGroup, setClickGroup }) => {
+	const [participants, setParticipants] = useState(false);
+	const [deadlines, setDeadlines] = useState(false);
 	const [trash, setTrash] = useState(false);
 	const [trashExclude, setTrashExclude] = useState(false);
-	const [participants, setParticipants] = useState(false);
 
 	return (
 		<div className={styles.group}>
@@ -27,13 +29,26 @@ const GroupRow = ({ group, clickGroup, setClickGroup }) => {
 						isTop={false}
 						setOpen={setClickGroup}
 						config={{
+							participants: setParticipants,
+							deadlines: setDeadlines,
 							trash: setTrash,
 							trashExclude: setTrashExclude,
-							participants: setParticipants,
 						}}
 					/>
 				)}
 			</button>
+			{participants && (
+				<AddPeoplePopup
+					setOpen={setParticipants}
+					data={{ id: group.id }}
+				/>
+			)}
+			{deadlines && (
+				<SetDeadlinesPopup
+					setOpen={setDeadlines}
+					data={{ id: group.id }}
+				/>
+			)}
 			{trash && (
 				<DeleteEntity
 					setOpen={setTrash}
@@ -50,7 +65,6 @@ const GroupRow = ({ group, clickGroup, setClickGroup }) => {
 					id={group.id}
 				/>
 			)}
-			{participants && <AddPeoplePopup setOpen={setParticipants} />}
 		</div>
 	);
 };

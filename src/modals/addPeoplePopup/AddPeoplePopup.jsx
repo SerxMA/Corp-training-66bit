@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { api } from '../../api/index.js';
 import SetDeadlinesPopup from '../setDeadlinesPopup/SetDeadlinesPopup.jsx';
@@ -8,12 +8,16 @@ import Cross from '../Cross.jsx';
 import ContinueArrow from '../../UI/continueArrow/ContinueArrow.jsx';
 import avatar from '../../assets/images/Avatar.jpg';
 import styles from './AddPeoplePopup.module.css';
+import { putGroupUsers } from '../../store/actions/groups.js';
 
 const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	const { course } = useSelector((state) => state.course);
+	const { isError, isLoading, error } = useSelector((state) => state.groups);
+	const dispatch = useDispatch();
 	const [search, setSearch] = useState('');
 	const [next, setNext] = useState(false);
 	const [people, setPeople] = useState([]);
+	const [clickCompleted, setClickCompleted] = useState(false);
 
 	const toggleStatePeople = (username) => {
 		setPeople((cv) =>
@@ -23,7 +27,16 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 		);
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		const config = {
+			params: { courseId: course.id, groupId: data.id },
+			data: people
+				.filter((people) => people.state)
+				.map((people) => people.username),
+		};
+		dispatch(putGroupUsers(config, course.id));
+		setClickCompleted(true);
+	};
 
 	const tableContent = (
 		<ul className={styles['people-list']}>
@@ -60,6 +73,12 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 				: 'Пользователей нет'}
 		</ul>
 	);
+
+	useEffect(() => {
+		if (clickCompleted && !isError && !isLoading) setOpen(false);
+
+		!isLoading && setClickCompleted(false);
+	}, [clickCompleted, isError, isLoading, error]);
 
 	useEffect(() => {
 		api.members

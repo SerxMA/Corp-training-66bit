@@ -11,8 +11,10 @@ const formatDateTime = ({ date, time }) => {
 	return dayjs(date).format('YYYY-MM-DDTHH:mm:ss');
 };
 
-const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline }) => {
-	const [date, setDate] = useState('');
+const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
+	const [date, setDate] = useState(
+		data.date ? dayjs(data.date).format('YYYY-MM-DDTHH:mm:ss') : ''
+	);
 	console.log(date);
 
 	const dateChange = (newTime, field) => {

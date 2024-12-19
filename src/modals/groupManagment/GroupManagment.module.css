@@ -30,9 +30,14 @@
 		padding: 0.5rem;
 		border-radius: 0.5rem;
 
-		color: var(--content-secondary);
+		color: var(--content-primary);
 
 		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+		&:nth-child(2n):hover,
+		&:nth-child(1n):hover {
+			background-color: var(--background-secondary);
+		}
 
 		&:nth-child(4n):hover,
 		&:nth-child(3n):hover {
