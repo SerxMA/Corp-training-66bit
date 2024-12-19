@@ -88,7 +88,10 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 					})
 					.then((res) =>
 						setPeople(
-							res.data.map((obj) => ({ ...obj, state: false }))
+							res.data.content.map((obj) => ({
+								...obj,
+								state: false,
+							}))
 						)
 					)
 			: api.members
@@ -97,7 +100,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 					})
 					.then((res) =>
 						setPeople(
-							res.data.map((obj) => ({
+							res.data.content.map((obj) => ({
 								...obj.user,
 								state: obj.inGroup,
 							}))

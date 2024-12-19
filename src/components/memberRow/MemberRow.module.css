@@ -1,4 +1,4 @@
-.group {
+.member {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -10,6 +10,9 @@
 
 	background: var(--background-modal);
 
+	&:hover {
+		background-color: var(--backround-secondary);
+	}
 	&:last-child {
 		border-bottom-right-radius: 0.75rem;
 		border-bottom-left-radius: 0.75rem;
@@ -23,5 +26,11 @@
 		font: var(--body-medium14);
 		letter-spacing: 0.14px;
 		color: var(--content-primary);
+
+		&:nth-of-type(3n) {
+			font: var(--body-regular14);
+			letter-spacing: 0.14px;
+			color: var(--content-primary);
+		}
 	}
 }

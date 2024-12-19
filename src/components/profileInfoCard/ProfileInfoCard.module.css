@@ -1,0 +1,38 @@
+.people-card {
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.5rem;
+	align-items: center;
+
+	& img {
+		max-width: 42px;
+		aspect-ratio: 1 / 1;
+		padding: 2px;
+		border-radius: 50%;
+		border: 1px solid var(--content-background);
+
+		background-color: var(--background-primary);
+
+		transition: border 0.2s ease-in-out;
+
+		&:hover {
+			border-color: var(--accent-subPrimary);
+		}
+	}
+}
+.people-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	& p:first-child {
+		font: var(--body-medium14);
+		color: var(--content-primary);
+		letter-spacing: 0.14px;
+	}
+	& p:last-child {
+		font: var(--body-regular12);
+		color: var(--content-secondary);
+		letter-spacing: 0.12px;
+	}
+}

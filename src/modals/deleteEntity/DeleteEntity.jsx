@@ -17,6 +17,7 @@ const identificationType = {
 	task: { sec: -1, string: 'задание' },
 	group: { sec: -1, string: 'группу' },
 	groupExclude: { sec: 5, string: 'группу' },
+	member: { sec: -1, string: 'участника' },
 };
 
 const DeleteEntity = ({ setOpen, type, content, id }) => {
@@ -76,6 +77,10 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 					)
 				).then(() => setClickCompleted(true));
 				break;
+			case 'member':
+				console.log('Заглушка');
+				// CODE...
+				break;
 
 			default:
 				dispatch(deleteEntity(type, id, courseId)).then(() =>
@@ -99,7 +104,10 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 	}, [clickCompleted, isError, isLoading, error]);
 
 	return ReactDOM.createPortal(
-		<div className={styles['modal-wrapper']}>
+		<div
+			className={styles['modal-wrapper']}
+			onClick={(e) => e.stopPropagation()}
+		>
 			<div className={styles['popup']}>
 				<div className={styles['top-block']}>
 					<img src={ico} alt="Знак опасно" />

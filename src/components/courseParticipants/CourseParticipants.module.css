@@ -1,0 +1,113 @@
+.members-menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0.75rem 1rem 1rem 1.5rem;
+	border-top: 1px solid var(--content-background);
+	border-bottom: 1px solid var(--content-background);
+
+	background-color: var(--background-primary);
+
+	opacity: 0;
+
+	transition: opacity 0.3s ease-in-out;
+}
+.members-menu_show {
+	opacity: 1;
+}
+.members-menu_show + .member-wrapper {
+	top: 120px;
+}
+.count {
+	font: var(--body-medium16);
+	letter-spacing: 0.16px;
+	color: var(--content-primary);
+}
+.managments {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 1rem;
+
+	& button {
+		background: transparent;
+
+		font: var(--body-regular14);
+		letter-spacing: 0.14px;
+
+		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+		&:first-child {
+			color: var(--accent-primary);
+
+			&:hover {
+				color: var(--accent-secondary);
+			}
+		}
+		&:nth-child(2n) {
+			color: var(--System-error-primary, #f75c46);
+
+			&:hover {
+				color: var(--system-error-secondary);
+			}
+		}
+		&:last-child {
+			min-height: 2rem;
+			padding: 0.375rem 1rem;
+			border-radius: 0.5rem;
+
+			background-color: var(--content-background);
+
+			font: var(--semiBold14);
+			letter-spacing: unset;
+			color: var(--content-subPrimary);
+
+			&:hover {
+				background-color: var(--content-border);
+			}
+			&:active {
+				background-color: var(--content-disabled);
+			}
+		}
+	}
+}
+.member-wrapper {
+	position: absolute;
+	top: 58px;
+	left: 50%;
+	width: 100%;
+	padding: 1rem;
+	padding-bottom: 0;
+
+	background: var(--background-sub-primary);
+
+	transform: translateX(-50%);
+	transition: top 0.3s ease-in-out;
+}
+.member-table {
+	display: flex;
+	flex-direction: column;
+
+	border-radius: 0.75rem;
+	border: 1px solid var(--content-background);
+
+	box-shadow: 0px 0px 16px 0px rgba(33, 37, 41, 0.02);
+}
+.column-name {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 1rem;
+
+	min-height: 52px;
+	padding: 0.625rem 3.5rem;
+
+	& > span {
+		width: calc((100% - 1rem * 3) / 4);
+		font: var(--body-medium14);
+		letter-spacing: 0.14px;
+		color: var(--content-secondary);
+	}
+}
