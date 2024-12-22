@@ -166,38 +166,4 @@
 .btn-wrapper {
 	display: flex;
 	flex-direction: row;
-	column-gap: 1.5rem;
-}
-.btn {
-	width: 100%;
-	padding: 1rem;
-	border-radius: 0.5rem;
-
-	font: var(--semiBold16);
-	text-align: center;
-
-	cursor: pointer;
-}
-.btn_success {
-	color: var(--content-constant);
-
-	background-color: var(--accent-primary);
-
-	&:hover {
-		background-color: var(--accent-subPrimary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-	&:active {
-		background-color: var(--accent-secondary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-}
-.btn_disabled {
-	color: var(--content-disabled);
-
-	background-color: var(--content-background);
-
-	cursor: auto;
 }

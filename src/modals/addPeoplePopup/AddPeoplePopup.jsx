@@ -5,14 +5,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { api } from '../../api/index.js';
 import SetDeadlinesPopup from '../setDeadlinesPopup/SetDeadlinesPopup.jsx';
 import Cross from '../Cross.jsx';
-import ContinueArrow from '../../UI/continueArrow/ContinueArrow.jsx';
 import avatar from '../../assets/images/Avatar.jpg';
 import styles from './AddPeoplePopup.module.css';
-import { putGroupUsers } from '../../store/actions/groups.js';
+import {
+	putGroupUsers,
+	putGroupUsersFromUsersPage,
+} from '../../store/actions/groups.js';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	const { course } = useSelector((state) => state.course);
-	const { isError, isLoading, error } = useSelector((state) => state.groups);
+	const { isError: isErrorGroups, isLoading: isLoadingGroups } = useSelector(
+		(state) => state.groups
+	);
+	const { isError: isErrorMembers, isLoading: isLoadingMembers } =
+		useSelector((state) => state.members);
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState('');
 	const [next, setNext] = useState(false);
@@ -29,12 +36,17 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 
 	const handleSubmit = () => {
 		const config = {
-			params: { courseId: course.id, groupId: data.id },
+			params: {
+				courseId: course.id,
+				[data ? 'groupId' : 'default']: data ? data.id : true,
+			},
 			data: people
 				.filter((people) => people.state)
 				.map((people) => people.username),
 		};
-		dispatch(putGroupUsers(config, course.id));
+		data
+			? dispatch(putGroupUsers(config, course.id))
+			: dispatch(putGroupUsersFromUsersPage(config, course.id));
 		setClickCompleted(true);
 	};
 
@@ -75,15 +87,51 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	);
 
 	useEffect(() => {
-		if (clickCompleted && !isError && !isLoading) setOpen(false);
+		if (
+			clickCompleted &&
+			(!isErrorGroups || !isErrorMembers) &&
+			(!isLoadingGroups || !isLoadingMembers)
+		)
+			setOpen(false);
 
-		!isLoading && setClickCompleted(false);
-	}, [clickCompleted, isError, isLoading, error]);
+		(!isLoadingGroups || !!isLoadingMembers) && setClickCompleted(false);
+	}, [
+		clickCompleted,
+		isErrorGroups,
+		isLoadingGroups,
+		isErrorMembers,
+		isLoadingMembers,
+	]);
 
 	useEffect(() => {
-		data.title
-			? api.members
-					.getMembersForNewGroup({
+		data
+			? data.title
+				? api.members
+						.getMembersForNewGroup({
+							params: { courseId: course.id },
+						})
+						.then((res) =>
+							setPeople(
+								res.data.content.map((obj) => ({
+									...obj,
+									state: false,
+								}))
+							)
+						)
+				: api.members
+						.getMembersCurrent({
+							params: { courseId: course.id, groupId: data.id },
+						})
+						.then((res) =>
+							setPeople(
+								res.data.content.map((obj) => ({
+									...obj.user,
+									state: obj.inGroup,
+								}))
+							)
+						)
+			: api.members
+					.getMembersExclude({
 						params: { courseId: course.id },
 					})
 					.then((res) =>
@@ -91,18 +139,6 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 							res.data.content.map((obj) => ({
 								...obj,
 								state: false,
-							}))
-						)
-					)
-			: api.members
-					.getMembersExclude({
-						params: { courseId: course.id, groupId: data.id },
-					})
-					.then((res) =>
-						setPeople(
-							res.data.content.map((obj) => ({
-								...obj.user,
-								state: obj.inGroup,
 							}))
 						)
 					);
@@ -184,27 +220,22 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cancel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						{data?.title ? 'Назад' : 'Отмена'}
-					</button>
-					<button
-						className={`${styles['btn']} ${styles['btn_success']}`}
+					</MainButton>
+					<MainButton
+						className={styles['half-parent']}
 						onClick={
 							data?.title ? () => setNext(true) : handleSubmit
 						}
+						sequel={data?.title}
 					>
-						{data?.title ? (
-							<>
-								Продолжить
-								<ContinueArrow />
-							</>
-						) : (
-							'Готово'
-						)}
-					</button>
+						{data?.title ? 'Продолжить' : 'Готово'}
+					</MainButton>
 				</div>
 			</div>
 			{next && (

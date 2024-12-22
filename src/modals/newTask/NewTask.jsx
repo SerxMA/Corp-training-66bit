@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postContents, putContents } from '../../store/actions/contents.js';
 import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	question: 256,
@@ -179,29 +180,31 @@ const NewTask = ({ setOpen, type, position, data }) => {
 						)}
 					</div>
 				</div>
-				<button
-					className={`${styles['btn']}
-					${
-						question &&
-						(type === 'multi' || (answer && attemptsTest >= 1)) &&
-						pointCorrect.length &&
-						pointCorrect >= 0
-							? styles['btn_success']
-							: styles['btn_disabled']
-					}`}
-					onClick={handleSubmit}
-					disabled={
-						!(
+				<div className={styles['btn-wrapper']}>
+					<MainButton
+						onClick={handleSubmit}
+						type={
 							question &&
 							(type === 'multi' ||
 								(answer && attemptsTest >= 1)) &&
 							pointCorrect.length &&
 							pointCorrect >= 0
-						)
-					}
-				>
-					Готово
-				</button>
+								? 'primary'
+								: 'disabled'
+						}
+						disabled={
+							!(
+								question &&
+								(type === 'multi' ||
+									(answer && attemptsTest >= 1)) &&
+								pointCorrect.length &&
+								pointCorrect >= 0
+							)
+						}
+					>
+						Готово
+					</MainButton>
+				</div>
 			</div>
 		</div>,
 		document.body

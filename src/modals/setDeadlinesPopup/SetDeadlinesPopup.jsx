@@ -8,6 +8,7 @@ import { convertArrayToDate } from '../../helpers/functions/convertArrayToDate.j
 import { toISOStringWithOffset } from '../../helpers/functions/toISOStringWithOffset.js';
 import DeadlinesСalendar from '../deadlinesСalendar/DeadlinesСalendar.jsx';
 import styles from './SetDeadlinesPopup.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	const dispatch = useDispatch();
@@ -189,35 +190,35 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cancel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						{data?.title ? 'Назад' : 'Отмена'}
-					</button>
-					<button
-						className={`${styles['btn']} ${
-							currModules.some(
-								(module) =>
-									module.deadlines.endTime.getTime() !==
-									new Date(0).getTime()
-							)
-								? styles['btn_success']
-								: styles['btn_disabled']
-						}`}
+					</MainButton>
+					<MainButton
+						className={styles['half-parent']}
 						onClick={
 							data?.title ? handleSubmitPost : handleSubmitPut
 						}
-						disabled={
-							!currModules.some(
+						type={
+							currModules.some(
 								(module) =>
-									module.deadlines.endTime.getTime() !==
+									module.deadlines.endTime.getTime() ==
 									new Date(0).getTime()
 							)
+								? 'sub-primary'
+								: 'primary'
 						}
+						disabled={currModules.some(
+							(module) =>
+								module.deadlines.endTime.getTime() ==
+								new Date(0).getTime()
+						)}
 					>
 						Готово
-					</button>
+					</MainButton>
 				</div>
 			</div>
 			{deadlines && (

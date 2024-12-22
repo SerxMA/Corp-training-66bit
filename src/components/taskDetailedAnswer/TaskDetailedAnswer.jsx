@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { changeText } from '../../helpers/functions/formatText';
 import styles from './TaskDetailedAnswer.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const MAX_CHARS = {
 	answer: 128,
@@ -30,14 +31,14 @@ const TaskDetailedAnswer = ({ question }) => {
 				/>
 				<span>Ваш ответ</span>
 			</div>
-			<button
-				className={`${styles['btn']} ${
-					!answer ? styles['btn_disabled'] : styles['btn_success']
-				}`}
-				disabled={!answer}
-			>
-				Отправить
-			</button>
+			<div className={styles['btn-wrapper']}>
+				<MainButton
+					type={!answer ? 'disabled' : 'primary'}
+					disabled={!answer}
+				>
+					Отправить
+				</MainButton>
+			</div>
 		</>
 	);
 };

@@ -68,34 +68,9 @@
 
 	transition: border-color 0.2s ease-in-out;
 }
-.btn {
-	padding: 1rem;
-	border-radius: 0.5rem;
-	background-color: var(--accent-primary);
+.btn-wrapper {
+	display: flex;
+	flex-direction: row;
 
-	max-width: 256px;
-
-	font: var(--semiBold16);
-	color: var(--content-constant);
-
-	transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-.btn_success {
-	&:hover {
-		background-color: var(--accent-subPrimary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-	&:active {
-		background-color: var(--accent-secondary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-}
-.btn_disabled {
-	color: var(--content-disabled);
-
-	background-color: var(--content-background);
-
-	cursor: auto;
+	max-width: 250px;
 }

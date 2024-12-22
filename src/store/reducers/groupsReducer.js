@@ -2,6 +2,7 @@ import { GROUPS_ACTIONS } from '../actionCreators/groups';
 
 const initialState = {
 	groups: [],
+	totalPages: 1,
 	isLoading: false,
 	isError: false,
 	error: '',
@@ -12,7 +13,8 @@ const groupsReducer = (state = initialState, action) => {
 		case GROUPS_ACTIONS.GET_GROUPS_SUCCESS:
 			return {
 				...state,
-				groups: action.payload,
+				groups: action.payload.content,
+				totalPages: action.payload.totalPages,
 				isLoading: false,
 				isError: false,
 				error: '',

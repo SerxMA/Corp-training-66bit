@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { changeText } from '../../helpers/functions/formatText';
 import styles from './TaskFreeformAnswer.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const MAX_CHARS = {
 	answer: 256,
@@ -74,14 +75,14 @@ const TaskFreeformAnswer = ({ question }) => {
 					</div>
 				)}
 			</div>
-			<button
-				className={`${styles['btn']} ${
-					!answer ? styles['btn_disabled'] : styles['btn_success']
-				}`}
-				disabled={!answer}
-			>
-				Отправить
-			</button>
+			<div className={styles['btn-wrapper']}>
+				<MainButton
+					type={!answer ? 'disabled' : 'primary'}
+					disabled={!answer}
+				>
+					Отправить
+				</MainButton>
+			</div>
 		</>
 	);
 };

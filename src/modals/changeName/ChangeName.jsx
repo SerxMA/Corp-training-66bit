@@ -6,6 +6,7 @@ import { postEntity, putEntity } from '../../store/actions/modules.js';
 import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	title: 128,
@@ -81,23 +82,21 @@ const ChangeName = ({ setOpen, type, id, content, position }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cencel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						Отмена
-					</button>
-					<button
-						className={`${styles['btn']} ${
-							title.length
-								? styles.btn_success
-								: styles.btn_disabled
-						}`}
-						disabled={!title.length}
+					</MainButton>
+					<MainButton
+						className={styles['half-parent']}
 						onClick={createEntity}
+						type={title.length ? 'primary' : 'disabled'}
+						disabled={!title.length}
 					>
 						Готово
-					</button>
+					</MainButton>
 				</div>
 			</div>
 		</div>,

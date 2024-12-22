@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import styles from './TaskMultiAnswer.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const TaskMultiAnswer = ({ question, answers }) => {
 	const [selectedOptions, setSelectedOptions] = useState([]);
@@ -48,16 +49,14 @@ const TaskMultiAnswer = ({ question, answers }) => {
 						</li>
 					))}
 			</ul>
-			<button
-				className={`${styles['btn']} ${
-					!isOptionSelected
-						? styles['btn_disabled']
-						: styles['btn_success']
-				}`}
-				disabled={!isOptionSelected}
-			>
-				Проверить
-			</button>
+			<div className={styles['btn-wrapper']}>
+				<MainButton
+					type={!isOptionSelected ? 'disabled' : 'primary'}
+					disabled={!isOptionSelected}
+				>
+					Проверить
+				</MainButton>
+			</div>
 		</>
 	);
 };

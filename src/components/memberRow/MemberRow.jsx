@@ -8,6 +8,7 @@ import ProfileInfoCard from '../profileInfoCard/ProfileInfoCard.jsx';
 import styles from './MemberRow.module.css';
 import MemberManagment from '../../modals/memberManagment/MemberManagment.jsx';
 import DeleteEntity from '../../modals/deleteEntity/DeleteEntity.jsx';
+import RelocateMember from '../../modals/relocateMember/RrelocateMember.jsx';
 
 const MemberRow = ({
 	member,
@@ -17,6 +18,7 @@ const MemberRow = ({
 }) => {
 	const { course } = useSelector((state) => state.course);
 	const [trash, setTrash] = useState(false);
+	const [relocate, setRelocate] = useState(false);
 
 	return (
 		<div className={styles.member} onClick={onClick}>
@@ -51,6 +53,7 @@ const MemberRow = ({
 						setOpen={setMemberManagment}
 						config={{
 							trash: setTrash,
+							relocate: setRelocate,
 						}}
 					/>
 				)}
@@ -60,7 +63,25 @@ const MemberRow = ({
 					setOpen={setTrash}
 					type={'member'}
 					content={member.user.username}
-					id={member.user.username}
+					data={[
+						{
+							groupId: member.group.id,
+							username: member.user.username,
+						},
+					]}
+				/>
+			)}
+			{relocate && (
+				<RelocateMember
+					setOpen={setRelocate}
+					group={member.group}
+					users={[
+						{
+							groupId: member.group.id,
+							username: member.user.username,
+						},
+					]}
+					courseId={course.id}
 				/>
 			)}
 		</div>

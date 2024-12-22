@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import ico from '../../assets/images/baseImg.png';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './ChooseImgModal.module.css';
 
 const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
@@ -55,21 +56,21 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 				</div>
 			</div>
 			<div className={styles['btn-wrapper']}>
-				<button
-					className={`${styles.btn} ${styles.btn_cancel}`}
+				<MainButton
+					className={styles['half-parent']}
+					type={'secondary'}
 					onClick={onPrev}
 				>
 					{type ? 'Отмена' : 'Назад'}
-				</button>
-				<button
-					className={`${styles.btn} ${
-						data.file ? styles.btn_success : styles.btn_disabled
-					}`}
-					disabled={!data.file}
+				</MainButton>
+				<MainButton
+					className={styles['half-parent']}
+					type={data.file ? 'primary' : 'disabled'}
 					onClick={onNext}
+					disabled={!data.file}
 				>
 					{type ? 'Готово' : 'Создать курс'}
-				</button>
+				</MainButton>
 			</div>
 		</>
 	);

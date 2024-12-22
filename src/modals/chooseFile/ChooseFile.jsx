@@ -6,6 +6,7 @@ import { postContents } from '../../store/actions/contents.js';
 import ico from '../../assets/images/baseImg.png';
 import Cross from '../Cross.jsx';
 import styles from './ChooseFile.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const ChooseFile = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
@@ -130,15 +131,13 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${
-							file ? styles.btn_success : styles.btn_disabled
-						}`}
+					<MainButton
 						onClick={handleSubmit}
+						type={file ? 'primary' : 'disabled'}
 						disabled={!file}
 					>
 						Готово
-					</button>
+					</MainButton>
 				</div>
 			</div>
 		</div>,

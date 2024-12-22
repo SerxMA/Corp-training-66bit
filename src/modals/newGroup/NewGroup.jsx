@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import Cross from '../Cross.jsx';
-import ContinueArrow from '../../UI/continueArrow/ContinueArrow.jsx';
 import styles from './NewGroup.module.css';
 import AddPeoplePopup from '../addPeoplePopup/AddPeoplePopup.jsx';
+import ArrowRight from '../../UI/svg/arrowRight/ArrowRight.jsx';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	group: 50,
@@ -59,24 +60,22 @@ const NewGroup = ({ setOpen }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cancel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						Отмена
-					</button>
-					<button
-						className={`${styles['btn']} ${
-							group
-								? styles['btn_success']
-								: styles['btn_disabled']
-						}`}
+					</MainButton>
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setNext(true)}
+						type={group ? 'primary' : 'disabled'}
 						disabled={!group}
+						sequel
 					>
 						Продолжить
-						<ContinueArrow />
-					</button>
+					</MainButton>
 				</div>
 			</div>
 			{next && (

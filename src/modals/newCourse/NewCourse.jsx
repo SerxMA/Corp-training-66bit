@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { changeText } from '../../helpers/functions/formatText.js';
 import { defaultTags } from '../../helpers/constants/defaultTags.js';
-import Arrow from '../Arrow.jsx';
 import styles from './NewCourse.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	description: 360,
@@ -234,15 +234,15 @@ const NewCourse = ({
 					</div>
 				</div>
 			</div>
-			<button
-				className={`${styles['continue-btn']}
-					${
-						data.description.length &&
-						data.title.length &&
-						data.tags.length
-							? styles['btn_success']
-							: styles['btn_disabled']
-					}`}
+			<MainButton
+				type={
+					data.description.length &&
+					data.title.length &&
+					data.tags.length
+						? 'primary'
+						: 'disabled'
+				}
+				onClick={onNext}
 				disabled={
 					!(
 						data.description.length &&
@@ -250,11 +250,10 @@ const NewCourse = ({
 						data.tags.length
 					)
 				}
-				onClick={onNext}
+				sequel={!type}
 			>
 				{type ? 'Готово' : 'Продолжить'}
-				{!type && <Arrow />}
-			</button>
+			</MainButton>
 		</>
 	);
 };

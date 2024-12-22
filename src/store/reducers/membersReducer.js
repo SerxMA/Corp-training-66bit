@@ -2,6 +2,7 @@ import { MEMBERS_ACTIONS } from '../actionCreators/members';
 
 const initialState = {
 	members: [],
+	totalPages: 1,
 	isLoading: false,
 	isError: false,
 	error: '',
@@ -12,7 +13,8 @@ const membersReducer = (state = initialState, action) => {
 		case MEMBERS_ACTIONS.GET_MEMBERS_SUCCESS:
 			return {
 				...state,
-				members: action.payload,
+				members: action.payload.content,
+				totalPages: action.payload.totalPages,
 				isLoading: false,
 				isError: false,
 				error: '',

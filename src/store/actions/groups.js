@@ -4,6 +4,7 @@ import {
 	getGroupsStarted,
 	getGroupsSuccess,
 } from '../actionCreators/groups';
+import { getMembers } from './members';
 
 export const postGroup = (config, courseId) => {
 	return async (dispatch) => {
@@ -21,11 +22,14 @@ export const postGroup = (config, courseId) => {
 		}
 	};
 };
-export const getGroups = (config) => {
+export const getGroups = (config, page = 0, limit = 20) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getGroupsStarted());
-			const response = await api.groups.getGroups(config);
+			const response = await api.groups.getGroups({
+				...config,
+				params: { ...config.params, page, limit },
+			});
 			dispatch(getGroupsSuccess(response.data));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
@@ -53,12 +57,60 @@ export const putGroupUsers = (config, courseId) => {
 		}
 	};
 };
+export const putGroupUsersFromUsersPage = (config, courseId) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getGroupsStarted());
+			await api.groups.putGroupUsers(config);
+			dispatch(getMembers({ params: { courseId } }));
+		} catch (error) {
+			dispatch(getGroupsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
 export const putGroupDeadlines = (config, courseId) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getGroupsStarted());
 			await api.groups.putGroupDedlines(config);
 			dispatch(getGroups({ params: { courseId } }));
+		} catch (error) {
+			dispatch(getGroupsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+export const putGroupMoveUsers = (config, courseId) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getGroupsStarted());
+			await api.groups.putGroupMoveUsers(config);
+			dispatch(getMembers({ params: { courseId } }));
+		} catch (error) {
+			dispatch(getGroupsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+export const putGroupExcludeUsers = (config, courseId) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getGroupsStarted());
+			await api.groups.putGroupExcludeUsers(config);
+			dispatch(getMembers({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
 			alert(

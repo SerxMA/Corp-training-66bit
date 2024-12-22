@@ -7,6 +7,7 @@ import SearchField from '../../components/searchField/SearchField.jsx';
 import ChangeName from '../changeName/ChangeName.jsx';
 import Modules from '../../components/modules/Modules.jsx';
 import styles from './EditCourseStructure.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const EditCourseStructure = ({ setOpen, course }) => {
 	const [courseActions, setCourseActions] = useState(false);
@@ -78,18 +79,15 @@ const EditCourseStructure = ({ setOpen, course }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cancel}`}
+					<MainButton
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						Назад
-					</button>
-					<button
-						className={`${styles.btn} ${styles['btn_success']}`}
-						onClick={() => setOpen(false)}
-					>
+					</MainButton>
+					<MainButton onClick={() => setOpen(false)}>
 						Готово
-					</button>
+					</MainButton>
 				</div>
 				{newModule && (
 					<ChangeName

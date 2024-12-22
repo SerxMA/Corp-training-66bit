@@ -83,27 +83,6 @@
 	color: var(--content-secondary);
 }
 
-.continue-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.continue-link {
 	align-self: center;
-	gap: 0.5rem;
-	height: 52px; /* Высота кнопки */
-	width: 222px;
-	background-color: var(--accent-primary);
-	color: #ffffff;
-	border-radius: 0.5rem;
-	flex-shrink: 0;
-
-	&:hover {
-		background-color: var(--accent-subPrimary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-	&:active {
-		background-color: var(--accent-secondary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
 }

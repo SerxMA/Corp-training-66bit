@@ -17,5 +17,15 @@ export const putGroupUsers = (config) =>
 export const putGroupDedlines = (config) =>
 	makeRequest({ ...config, method: 'PUT', url: URL + config.url });
 
+export const putGroupMoveUsers = (config) =>
+	makeRequest({ ...config, method: 'PUT', url: URL + '/users/move' });
+
+export const putGroupExcludeUsers = (config) =>
+	makeRequest({
+		...config,
+		method: 'PUT',
+		url: URL + '/users/exclude',
+	});
+
 export const deleteGroup = (config) =>
 	makeRequest({ ...config, method: 'DELETE', url: URL + '/' + config.url });

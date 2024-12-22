@@ -120,37 +120,7 @@
 	color: var(--content-secondary);
 	letter-spacing: 0.12px;
 }
-.btn {
-	padding: 1rem;
-	border-radius: 0.5rem;
-
-	font: var(--semiBold16);
-	color: var(--content-constant);
-
-	cursor: pointer;
-}
-.btn_disabled {
-	color: var(--content-disabled);
-
-	background-color: var(--content-background);
-
-	cursor: auto;
-
-	& path {
-		stroke: var(--content-disabled);
-	}
-}
-.btn_success {
-	background-color: var(--accent-primary);
-
-	&:hover {
-		background-color: var(--accent-subPrimary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
-	&:active {
-		background-color: var(--accent-secondary);
-
-		box-shadow: 0px 0px 16px 0px var(--accent-border);
-	}
+.btn-wrapper {
+	display: flex;
+	flex-direction: row;
 }

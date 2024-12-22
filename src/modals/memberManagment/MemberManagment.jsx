@@ -13,12 +13,10 @@ const MemberManagment = ({ isTop, setOpen, config }) => {
 
 	useEffect(() => {
 		const closePopup = () => setOpen(0);
-		document.body.style.overflowY = 'hidden';
 		document.addEventListener('click', closePopup);
 
 		return () => {
 			document.removeEventListener('click', closePopup);
-			document.body.style.overflowY = 'auto';
 		};
 	}, []);
 
@@ -29,7 +27,7 @@ const MemberManagment = ({ isTop, setOpen, config }) => {
 			}`}
 			onClick={(e) => e.stopPropagation()}
 		>
-			<button onClick={(e) => handleClick(e, 'move')}>
+			<button onClick={(e) => handleClick(e, 'relocate')}>
 				<Edit />
 				Переместить
 			</button>

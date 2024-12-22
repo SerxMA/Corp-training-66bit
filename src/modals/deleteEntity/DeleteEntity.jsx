@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteCourse } from '../../store/actions/course';
 import { deleteEntity } from '../../store/actions/modules';
+import { deleteContents } from '../../store/actions/contents';
+import { deleteGroup, putGroupExcludeUsers } from '../../store/actions/groups';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import DangerButton from '../../UI/buttons/dangerButton/DangerButton.jsx';
 import ico from '../../assets/images/danger.png';
 import styles from './DeleteEntity.module.css';
-import { deleteContents } from '../../store/actions/contents';
-import { deleteGroup } from '../../store/actions/groups';
 
 const identificationType = {
 	course: { sec: 10, string: 'курс' },
@@ -20,9 +22,18 @@ const identificationType = {
 	member: { sec: -1, string: 'участника' },
 };
 
-const DeleteEntity = ({ setOpen, type, content, id }) => {
+const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 	const dispatch = useDispatch();
-	const { isError, isLoading, error } = useSelector((state) => state.modules);
+	const {
+		isError: isErrorModules,
+		isLoading: isLoadingModules,
+		error: errorModules,
+	} = useSelector((state) => state.modules);
+	const {
+		isError: isErrorMembers,
+		isLoading: isLoadingMembers,
+		error: errorMembers,
+	} = useSelector((state) => state.members);
 	const navigate = useNavigate();
 
 	const [second, setSecond] = useState(identificationType[type]?.sec || -1);
@@ -78,8 +89,13 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 				).then(() => setClickCompleted(true));
 				break;
 			case 'member':
-				console.log('Заглушка');
-				// CODE...
+				dispatch(
+					putGroupExcludeUsers(
+						{ params: { courseId }, data },
+						courseId
+					)
+				);
+				setClickCompleted(true);
 				break;
 
 			default:
@@ -95,13 +111,23 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 	}, []);
 
 	useEffect(() => {
-		if (clickCompleted && !isError && !isLoading) {
+		if (
+			clickCompleted &&
+			(!isErrorModules || isErrorMembers) &&
+			(!isLoadingModules || isLoadingMembers)
+		) {
 			type === 'course'
 				? navigate('/courses/all-courses')
 				: setOpen(false);
 		}
-		!isLoading && setClickCompleted(false);
-	}, [clickCompleted, isError, isLoading, error]);
+		(!isLoadingModules || !isLoadingMembers) && setClickCompleted(false);
+	}, [
+		clickCompleted,
+		isErrorModules,
+		isLoadingModules,
+		isErrorMembers,
+		isLoadingMembers,
+	]);
 
 	return ReactDOM.createPortal(
 		<div
@@ -134,23 +160,21 @@ const DeleteEntity = ({ setOpen, type, content, id }) => {
 					</p>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cencel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						Отмена
-					</button>
-					<button
+					</MainButton>
+					<DangerButton
+						className={styles['half-parent']}
 						onClick={handleSubmit}
-						className={`${styles['btn']} ${
-							second < 0
-								? styles.btn_success
-								: styles.btn_disabled
-						}`}
+						type={second < 0 ? 'secondary' : 'disabled'}
 						disabled={second >= 0}
 					>
 						{second >= 0 ? `Удалить (${second} c.)` : 'Удалить'}
-					</button>
+					</DangerButton>
 				</div>
 			</div>
 		</div>,

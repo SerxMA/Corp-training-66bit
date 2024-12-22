@@ -1,21 +1,45 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getGroups } from '../../store/actions/groups';
 import GroupRow from '../groupRow/GroupRow.jsx';
 import styles from './CourseGroup.module.css';
+import PaginationBar from '../paginationBar/PaginationBar.jsx';
 
 const CourseGroup = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { topicId } = useParams();
+	const [searchParams] = useSearchParams();
 	const { course } = useSelector((state) => state.course);
-	const { groups } = useSelector((state) => state.groups);
+	const { groups, totalPages } = useSelector((state) => state.groups);
+	const [page, setPage] = useState(
+		searchParams.get('page') ? +searchParams.get('page') : 1
+	);
 	const [clickGroup, setClickGroup] = useState(0);
-	console.log(course);
+
+	console.log(totalPages);
 	console.log(groups);
 
 	useEffect(() => {
-		course.id && dispatch(getGroups({ params: { courseId: course.id } }));
-	}, [course]);
+		if (totalPages > 1 && page > totalPages) {
+			setPage(1);
+		}
+	}, [totalPages]);
+
+	useEffect(() => {
+		if (course.id) {
+			if (page >= 1) {
+				dispatch(
+					getGroups({ params: { courseId: course.id } }, page - 1)
+				);
+				navigate(`/course/${course.id}/${topicId}/groups?page=${page}`);
+			} else {
+				setPage(1);
+			}
+		}
+	}, [course, page]);
 
 	return (
 		<div className={styles['group-wrapper']}>
@@ -35,6 +59,11 @@ const CourseGroup = () => {
 					  ))
 					: 'Групп нет'}
 			</div>
+			<PaginationBar
+				maxPage={totalPages}
+				currentPage={page}
+				onPageChange={setPage}
+			/>
 		</div>
 	);
 };

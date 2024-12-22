@@ -5,6 +5,7 @@
 -   убрать везде then для setClickCompleted
 -   задание с развернутым ответом (прикреп файлов) нужно убрать баллы за верный ответ
 -   Заменить везде "background:" на "background-color:", где это необходима
+-   так же проверить все var`ы на соответствие тем что в assets/index.css и тем что в figma
 -   modals/editCourseStructure - при создании нового модуля передавать positions
 -   modals/lesson - если это edit убрать серый bacground и ссылки
 -   500 символов для вопроса в любом тесте

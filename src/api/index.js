@@ -21,9 +21,12 @@ import {
 	putGroupUsers,
 	getGroupDedlines,
 	putGroupDedlines,
+	putGroupExcludeUsers,
+	putGroupMoveUsers,
 } from './groups';
 import {
 	getMembersAll,
+	getMembersCurrent,
 	getMembersExclude,
 	getMembersForNewGroup,
 } from './members';
@@ -54,6 +57,8 @@ export const api = {
 		getGroupDedlines,
 		putGroupUsers,
 		putGroupDedlines,
+		putGroupMoveUsers,
+		putGroupExcludeUsers,
 		deleteGroup,
 	},
 	content: {
@@ -62,5 +67,10 @@ export const api = {
 		putContentElement,
 		deleteContentElement,
 	},
-	members: { getMembersExclude, getMembersForNewGroup, getMembersAll },
+	members: {
+		getMembersCurrent,
+		getMembersExclude,
+		getMembersForNewGroup,
+		getMembersAll,
+	},
 };

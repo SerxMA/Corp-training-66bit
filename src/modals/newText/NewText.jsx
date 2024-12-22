@@ -6,6 +6,7 @@ import { postContents, putContents } from '../../store/actions/contents.js';
 import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './NewText.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	title: 180,
@@ -123,17 +124,15 @@ const NewText = ({ setOpen, position, data }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${
-							title.length && text.length
-								? styles.btn_success
-								: styles.btn_disabled
-						}`}
+					<MainButton
 						onClick={handleSubmit}
+						type={
+							title.length && text.length ? 'primary' : 'disabled'
+						}
 						disabled={!(title.length && text.length)}
 					>
 						Готово
-					</button>
+					</MainButton>
 				</div>
 			</div>
 		</div>,

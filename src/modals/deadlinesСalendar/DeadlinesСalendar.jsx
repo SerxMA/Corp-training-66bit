@@ -4,6 +4,7 @@ import { DateCalendar, MultiSectionDigitalClock } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 
 import styles from './DeadlinesСalendar.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const formatDateTime = ({ date, time }) => {
 	const [hours, minutes] = time.split(':');
@@ -173,23 +174,21 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
-					<button
-						className={`${styles.btn} ${styles.btn_cancel}`}
+					<MainButton
+						className={styles['half-parent']}
 						onClick={() => setOpen(false)}
+						type={'secondary'}
 					>
 						Отмена
-					</button>
-					<button
-						className={`${styles['btn']} ${
-							date
-								? styles['btn_success']
-								: styles['btn_disabled']
-						}`}
+					</MainButton>
+					<MainButton
+						className={styles['half-parent']}
 						onClick={saveDeadlines}
+						type={date ? 'primary' : 'disabled'}
 						disabled={!date}
 					>
 						Сохранить
-					</button>
+					</MainButton>
 				</div>
 			</div>
 		</div>,

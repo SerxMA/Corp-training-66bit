@@ -8,6 +8,7 @@ import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
 import styles from './NewTest.module.css';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const MAX_CHARS = {
 	question: 50,
@@ -298,30 +299,31 @@ const NewTest = ({ setOpen, type, position, data }) => {
 						</div>
 					</div>
 				</div>
-				<button
-					className={`${styles['btn']}
-					${
-						question &&
-						answers.length &&
-						answers.some((obj) => obj.isTrue) &&
-						pointCorrect >= 0 &&
-						attemptsTest >= 1
-							? styles['btn_success']
-							: styles['btn_disabled']
-					}`}
-					onClick={handleSubmit}
-					disabled={
-						!(
+				<div className={styles['btn-wrapper']}>
+					<MainButton
+						onClick={handleSubmit}
+						type={
 							question &&
 							answers.length &&
 							answers.some((obj) => obj.isTrue) &&
 							pointCorrect >= 0 &&
 							attemptsTest >= 1
-						)
-					}
-				>
-					Готово
-				</button>
+								? 'primary'
+								: 'disabled'
+						}
+						disabled={
+							!(
+								question &&
+								answers.length &&
+								answers.some((obj) => obj.isTrue) &&
+								pointCorrect >= 0 &&
+								attemptsTest >= 1
+							)
+						}
+					>
+						Готово
+					</MainButton>
+				</div>
 			</div>
 		</div>,
 		document.body

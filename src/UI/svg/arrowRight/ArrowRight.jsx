@@ -1,4 +1,4 @@
-const ContinueArrow = () => {
+const ArrowRight = ({ className }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ const ContinueArrow = () => {
 			height="24"
 			viewBox="0 0 25 24"
 			fill="none"
+			className={className}
 		>
 			<path
 				d="M5.5 12H19.5M19.5 12L13.5 18M19.5 12L13.5 6"
@@ -18,4 +19,4 @@ const ContinueArrow = () => {
 	);
 };
 
-export default ContinueArrow;
+export default ArrowRight;
