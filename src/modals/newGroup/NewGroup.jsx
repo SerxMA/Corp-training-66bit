@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import Cross from '../Cross.jsx';
 import styles from './NewGroup.module.css';
 import AddPeoplePopup from '../addPeoplePopup/AddPeoplePopup.jsx';
-import ArrowRight from '../../UI/svg/arrowRight/ArrowRight.jsx';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const MAX_CHARS = {
 	group: 50,
@@ -32,12 +31,7 @@ const NewGroup = ({ setOpen }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новая группа</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['group-box']}>

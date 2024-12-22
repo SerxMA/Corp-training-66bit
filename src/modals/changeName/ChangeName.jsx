@@ -7,6 +7,7 @@ import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './ChangeName.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const MAX_CHARS = {
 	title: 128,
@@ -56,12 +57,7 @@ const ChangeName = ({ setOpen, type, id, content, position }) => {
 					<h2 className={styles['title']}>
 						{titleContent[type] || 'Неизвестный тип'}
 					</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['input-box']}>

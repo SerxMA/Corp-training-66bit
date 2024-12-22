@@ -29,13 +29,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	& > svg {
+		flex-shrink: 0;
+		cursor: pointer;
+	}
 }
 .title {
 	color: var(--content-primary);
-}
-.cross {
-	display: flex;
-	flex-shrink: 0;
 }
 .describe-block {
 	display: flex;

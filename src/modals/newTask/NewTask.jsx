@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
-import Cross from '../Cross.jsx';
 import styles from './NewTask.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const MAX_CHARS = {
 	question: 256,
@@ -92,12 +92,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>{titleContent}</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['question-block']}>

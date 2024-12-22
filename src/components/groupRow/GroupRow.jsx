@@ -3,9 +3,9 @@ import { useState } from 'react';
 import DeleteEntity from '../../modals/deleteEntity/DeleteEntity.jsx';
 import GroupManagment from '../../modals/groupManagment/GroupManagment.jsx';
 import AddPeoplePopup from '../../modals/addPeoplePopup/AddPeoplePopup.jsx';
-import Dots from '../../UI/dots/Dots.jsx';
 import styles from './GroupRow.module.css';
 import SetDeadlinesPopup from '../../modals/setDeadlinesPopup/SetDeadlinesPopup.jsx';
+import Dots from '../../UI/svg/dots/Dots.jsx';
 
 const GroupRow = ({ group, clickGroup, setClickGroup }) => {
 	const [participants, setParticipants] = useState(false);

@@ -10,6 +10,7 @@ import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
 import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 	const dispatch = useDispatch();
@@ -96,12 +97,7 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 					<h2 className={styles['title']}>
 						{stage ? 'Изменить' : 'Новый курс'}
 					</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				{step === 1 && (
 					<NewCourse

@@ -1,4 +1,4 @@
-import ChevronCompact from '../../UI/chevronCompact/ChevronCompact.jsx';
+import ChevronCompact from '../../UI/svg/chevronCompact/ChevronCompact.jsx';
 import styles from './PaginationBar.module.css';
 
 const PaginationBar = ({ minPage = 1, maxPage, currentPage, onPageChange }) => {

@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import DropDownGroup from '../../components/dropDownGroup/DropDownGroup.jsx';
 import { getGroups, putGroupMoveUsers } from '../../store/actions/groups.js';
-import RadioButton from '../../UI/radioButton/RadioButton.jsx';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './RelocateMember.module.css';
+import RadioButton from '../../UI/inputs/radioButton/RadioButton.jsx';
 
 const RelocateMember = ({ setOpen, group, users, courseId }) => {
 	const dispatch = useDispatch();

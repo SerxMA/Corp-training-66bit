@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import Checkbox from '../../UI/checkbox/Checkbox.jsx';
-import Dots from '../../UI/dots/Dots.jsx';
-import ProgressBar from '../../UI/progressBar/ProgressBar.jsx';
 import ProfileInfoCard from '../profileInfoCard/ProfileInfoCard.jsx';
 import styles from './MemberRow.module.css';
 import MemberManagment from '../../modals/memberManagment/MemberManagment.jsx';
 import DeleteEntity from '../../modals/deleteEntity/DeleteEntity.jsx';
 import RelocateMember from '../../modals/relocateMember/RrelocateMember.jsx';
+import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
+import Dots from '../../UI/svg/dots/Dots.jsx';
+import ProgressBar from '../../UI/other/progressBar/ProgressBar.jsx';
 
 const MemberRow = ({
 	member,

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import Trash from '../../UI/trash/Trash.jsx';
-import Edit from '../../UI/edit/Edit.jsx';
 import styles from './MemberManagment.module.css';
+import Edit from '../../UI/svg/edit/Edit.jsx';
+import Trash from '../../UI/svg/trash/Trash.jsx';
 
 const MemberManagment = ({ isTop, setOpen, config }) => {
 	const handleClick = (e, key) => {

@@ -34,6 +34,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	& > svg {
+		flex-shrink: 0;
+		cursor: pointer;
+	}
 }
 
 .title {
@@ -46,11 +51,6 @@
 	max-width: 692px;
 	color: var(--content-primary);
 	font: var(--heading2);
-}
-
-.cross {
-	display: flex;
-	flex-shrink: 0;
 }
 
 .visual-block {

@@ -1,4 +1,4 @@
-import { calculatePercentage } from '../../helpers/functions/calculatePercentage';
+import { calculatePercentage } from '../../../helpers/functions/calculatePercentage';
 import styles from './ProgressBar.module.css';
 
 const ProgressBar = ({ maxScore, currentScore }) => {

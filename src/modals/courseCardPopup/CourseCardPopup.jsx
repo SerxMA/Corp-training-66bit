@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
-import Cross from '../Cross.jsx';
 import CourseTag from '../../components/courseTag/CourseTag.jsx';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './CourseCardPopup.module.css';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const CourseCardPopup = ({ title, img, tag, description, id, setOpen }) => {
 	const setIsPopupClosed = () => {
@@ -30,12 +30,7 @@ const CourseCardPopup = ({ title, img, tag, description, id, setOpen }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>{title}</h2>
-					<button
-						className={styles['cross']}
-						onClick={setIsPopupClosed}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={setIsPopupClosed} />
 				</div>
 				<div className={styles['visual-block']}>
 					<img

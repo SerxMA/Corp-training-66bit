@@ -7,6 +7,7 @@ import ico from '../../assets/images/baseImg.png';
 import Cross from '../Cross.jsx';
 import styles from './ChooseFile.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const ChooseFile = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
@@ -88,12 +89,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 					<h2 className={styles['title']}>
 						{type === 'photo' ? 'Новое фото' : 'Новое видео'}
 					</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div

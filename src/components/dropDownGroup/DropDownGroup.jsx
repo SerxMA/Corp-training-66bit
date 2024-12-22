@@ -1,5 +1,5 @@
 import { changeText } from '../../helpers/functions/formatText.js';
-import ChevronCompact from '../../UI/chevronCompact/ChevronCompact.jsx';
+import ChevronCompact from '../../UI/svg/chevronCompact/ChevronCompact.jsx';
 import styles from './DropDownGroup.module.css';
 
 const DropDownGroup = ({

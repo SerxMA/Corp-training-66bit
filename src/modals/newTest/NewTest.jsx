@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
 import { findAnswersDuplicates } from '../../helpers/functions/findAnswersDuplicates.js';
-import Cross from '../Cross.jsx';
 import AddCross from '../AddCross.jsx';
 import DeleteCross from '../deleteCross.jsx';
 import styles from './NewTest.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const MAX_CHARS = {
 	question: 50,
@@ -211,12 +211,7 @@ const NewTest = ({ setOpen, type, position, data }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новый тест</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['question-block']}>

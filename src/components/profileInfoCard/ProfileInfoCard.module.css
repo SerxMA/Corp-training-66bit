@@ -4,8 +4,9 @@
 	column-gap: 0.5rem;
 	align-items: center;
 
-	& img {
-		max-width: 42px;
+	& > img {
+		flex-shrink: 0;
+
 		aspect-ratio: 1 / 1;
 		padding: 2px;
 		border-radius: 50%;
@@ -25,14 +26,32 @@
 	flex-direction: column;
 	align-items: flex-start;
 
+	overflow: hidden;
+
 	& p:first-child {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+
 		font: var(--body-medium14);
 		color: var(--content-primary);
 		letter-spacing: 0.14px;
+
+		overflow: hidden;
 	}
 	& p:last-child {
 		font: var(--body-regular12);
 		color: var(--content-secondary);
 		letter-spacing: 0.12px;
 	}
+}
+/* sizes */
+.big {
+	max-width: var(--size-button-big);
+}
+.medium {
+	max-width: var(--size-button-medium);
+}
+.small {
+	max-width: var(--size-button-small);
 }

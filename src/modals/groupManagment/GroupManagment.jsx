@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-import PersonGroup from '../../UI/personGroup/PersonGroup.jsx';
-import CalendarTime from '../../UI/calendarTime/CalendarTime.jsx';
-import Trash from '../../UI/trash/Trash.jsx';
-import PersonGroupClose from '../../UI/personGroupClose/PersonGroupClose.jsx';
 import styles from './GroupManagment.module.css';
+import CalendarTime from '../../UI/svg/calendarTime/CalendarTime.jsx';
+import PersonGroup from '../../UI/svg/personGroup/PersonGroup.jsx';
+import PersonGroupClose from '../../UI/svg/personGroupClose/PersonGroupClose.jsx';
+import Trash from '../../UI/svg/trash/Trash.jsx';
 
 const GroupManagment = ({ isTop, setOpen, config }) => {
 	const handleClick = (e, key) => {

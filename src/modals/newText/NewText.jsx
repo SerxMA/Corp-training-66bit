@@ -7,6 +7,7 @@ import { changeText } from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './NewText.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
 const MAX_CHARS = {
 	title: 180,
@@ -78,12 +79,7 @@ const NewText = ({ setOpen, position, data }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>Новый текст</h2>
-					<button
-						className={styles['cross']}
-						onClick={() => setOpen(false)}
-					>
-						<Cross />
-					</button>
+					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
 				<div className={styles['describe-block']}>
 					<div className={styles['input-box']}>
