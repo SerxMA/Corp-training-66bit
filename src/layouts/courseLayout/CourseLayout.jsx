@@ -6,6 +6,7 @@ import { getModules } from '../../store/actions/modules.js';
 import { getCourse } from '../../store/actions/course.js';
 import { resetCourse } from '../../store/actionCreators/course.js';
 import { resetGroups } from '../../store/actionCreators/groups.js';
+import { resetMembers } from '../../store/actionCreators/members.js';
 import { resetModules } from '../../store/actionCreators/modules.js';
 import { resetContents } from '../../store/actionCreators/contents.js';
 import CourseStructure from '../../components/courseStructure/CourseStructure.jsx';
@@ -23,6 +24,7 @@ const CourseLayout = () => {
 
 		return () => {
 			dispatch(resetGroups());
+			dispatch(resetMembers());
 			dispatch(resetContents());
 			dispatch(resetModules());
 			dispatch(resetCourse());

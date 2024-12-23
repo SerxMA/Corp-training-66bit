@@ -1,0 +1,33 @@
+.svg {
+	flex-shrink: 0;
+	cursor: pointer;
+}
+/* types */
+.not-selected {
+	& > path {
+		transition: stroke 0.2s ease-in-out;
+	}
+	&:hover > path {
+		stroke: var(--accent-subPrimary);
+	}
+}
+.primary {
+	& > path {
+		stroke: var(--content-primary);
+		transition: stroke 0.2s ease-in-out;
+	}
+	&:hover > path {
+		stroke: var(--accent-subPrimary);
+	}
+}
+.selected {
+	& > path {
+		stroke: var(--accent-subPrimary);
+	}
+}
+.disabled {
+	cursor: auto;
+	& > path {
+		stroke: var(--content-disabled);
+	}
+}
