@@ -41,10 +41,7 @@ const CourseParticipants = () => {
 	}, [totalPages]);
 
 	useEffect(() => {
-		members.length &&
-			setCurrMembers(
-				members.map((member) => ({ ...member, state: false }))
-			);
+		setCurrMembers(members.map((member) => ({ ...member, state: false })));
 	}, [members]);
 
 	useEffect(() => {
@@ -102,22 +99,24 @@ const CourseParticipants = () => {
 						<span>Группа</span>
 						<span>Прогресс</span>
 					</div>
-					{currMembers.length
-						? currMembers.map((member) => (
-								<MemberRow
-									key={member.user.username}
-									member={member}
-									memberManagmentState={memberManagment}
-									setMemberManagment={setMemberManagment}
-									onClick={() =>
-										toggleStateMembers(member.user.username)
-									}
-								/>
-						  ))
-						: 'Участников нет'}
+					{currMembers.length ? (
+						currMembers.map((member) => (
+							<MemberRow
+								key={member.user.username}
+								member={member}
+								memberManagmentState={memberManagment}
+								setMemberManagment={setMemberManagment}
+								onClick={() =>
+									toggleStateMembers(member.user.username)
+								}
+							/>
+						))
+					) : (
+						<p className={styles['no-users']}> Участников нет</p>
+					)}
 				</div>
 				<PaginationBar
-					maxPage={totalPages}
+					maxPage={totalPages > 0 ? totalPages : 1}
 					currentPage={page}
 					onPageChange={setPage}
 				/>
@@ -125,7 +124,7 @@ const CourseParticipants = () => {
 			{trash && (
 				<DeleteEntity
 					setOpen={setTrash}
-					type={'member'}
+					type={'members'}
 					data={currMembers
 						.filter((member) => member.state)
 						.map((member) => ({

@@ -20,20 +20,15 @@ const identificationType = {
 	group: { sec: -1, string: 'группу' },
 	groupExclude: { sec: 5, string: 'группу' },
 	member: { sec: -1, string: 'участника' },
+	members: { sec: -1, string: 'участников' },
 };
 
 const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 	const dispatch = useDispatch();
-	const {
-		isError: isErrorModules,
-		isLoading: isLoadingModules,
-		error: errorModules,
-	} = useSelector((state) => state.modules);
-	const {
-		isError: isErrorMembers,
-		isLoading: isLoadingMembers,
-		error: errorMembers,
-	} = useSelector((state) => state.members);
+	const { isError: isErrorModules, isLoading: isLoadingModules } =
+		useSelector((state) => state.modules);
+	const { isError: isErrorMembers, isLoading: isLoadingMembers } =
+		useSelector((state) => state.members);
 	const navigate = useNavigate();
 
 	const [second, setSecond] = useState(identificationType[type]?.sec || -1);
@@ -97,6 +92,15 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 				);
 				setClickCompleted(true);
 				break;
+			case 'members':
+				dispatch(
+					putGroupExcludeUsers(
+						{ params: { courseId }, data },
+						courseId
+					)
+				);
+				setClickCompleted(true);
+				break;
 
 			default:
 				dispatch(deleteEntity(type, id, courseId)).then(() =>
@@ -113,14 +117,15 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 	useEffect(() => {
 		if (
 			clickCompleted &&
-			(!isErrorModules || isErrorMembers) &&
-			(!isLoadingModules || isLoadingMembers)
+			(!isErrorModules || !isErrorMembers) &&
+			(!isLoadingModules || !isLoadingMembers)
 		) {
+			console.log('ПРОГШЛО');
 			type === 'course'
 				? navigate('/courses/all-courses')
 				: setOpen(false);
 		}
-		(!isLoadingModules || !isLoadingMembers) && setClickCompleted(false);
+		(!isErrorModules || !isErrorMembers) && setClickCompleted(false);
 	}, [
 		clickCompleted,
 		isErrorModules,

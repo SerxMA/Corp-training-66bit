@@ -6,7 +6,7 @@ import PersonGroup from '../../UI/svg/personGroup/PersonGroup.jsx';
 import PersonGroupClose from '../../UI/svg/personGroupClose/PersonGroupClose.jsx';
 import Trash from '../../UI/svg/trash/Trash.jsx';
 
-const GroupManagment = ({ isTop, setOpen, config }) => {
+const GroupManagment = ({ isTop, setOpen, config, defGroup = false }) => {
 	const handleClick = (e, key) => {
 		setOpen(0);
 		config[key](true);
@@ -38,14 +38,18 @@ const GroupManagment = ({ isTop, setOpen, config }) => {
 				<CalendarTime />
 				Дедлайны
 			</button>
-			<button onClick={(e) => handleClick(e, 'trash')}>
-				<Trash />
-				Удалить
-			</button>
-			<button onClick={(e) => handleClick(e, 'trashExclude')}>
-				<PersonGroupClose />
-				Удалить и исключить
-			</button>
+			{!defGroup && (
+				<button onClick={(e) => handleClick(e, 'trash')}>
+					<Trash />
+					Удалить
+				</button>
+			)}
+			{!defGroup && (
+				<button onClick={(e) => handleClick(e, 'trashExclude')}>
+					<PersonGroupClose />
+					Удалить и исключить
+				</button>
+			)}
 		</div>
 	);
 };

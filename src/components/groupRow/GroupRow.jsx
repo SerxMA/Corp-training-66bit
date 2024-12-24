@@ -35,6 +35,7 @@ const GroupRow = ({ group, clickGroup, setClickGroup }) => {
 							trash: setTrash,
 							trashExclude: setTrashExclude,
 						}}
+						defGroup={group.default}
 					/>
 				)}
 			</button>

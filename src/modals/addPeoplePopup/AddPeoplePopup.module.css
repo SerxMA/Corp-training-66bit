@@ -81,6 +81,13 @@
 	padding: 1rem;
 	border-top: 1px solid var(--content-background);
 }
+.no-users {
+	padding: 0.5rem 1rem;
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+	color: var(--content-secondary);
+}
 .btn-wrapper {
 	display: flex;
 	flex-direction: row;

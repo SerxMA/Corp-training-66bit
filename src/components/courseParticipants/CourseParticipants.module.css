@@ -116,3 +116,11 @@
 		color: var(--content-secondary);
 	}
 }
+.no-users {
+	padding: 0.5rem 1rem;
+
+	font: var(--body-regular16);
+	text-align: center;
+	letter-spacing: 0.16px;
+	color: var(--content-secondary);
+}

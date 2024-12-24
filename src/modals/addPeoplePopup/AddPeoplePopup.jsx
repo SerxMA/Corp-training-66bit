@@ -55,25 +55,24 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 
 	const tableContent = (
 		<ul className={styles['people-list']}>
-			{people.length
-				? people.map((obj) => (
-						<li
-							key={obj.username}
-							className={styles['people-elem']}
-						>
-							<Checkbox
-								state={obj.state}
-								onClick={() => toggleStatePeople(obj.username)}
-							/>
-							<ProfileInfoCard
-								avatar={obj.avatarUrl}
-								username={obj.username}
-								email={obj.email}
-								onClick={() => toggleStatePeople(obj.username)}
-							/>
-						</li>
-				  ))
-				: 'Пользователей нет'}
+			{people.length ? (
+				people.map((obj) => (
+					<li key={obj.username} className={styles['people-elem']}>
+						<Checkbox
+							state={obj.state}
+							onClick={() => toggleStatePeople(obj.username)}
+						/>
+						<ProfileInfoCard
+							avatar={obj.avatarUrl}
+							username={obj.username}
+							email={obj.email}
+							onClick={() => toggleStatePeople(obj.username)}
+						/>
+					</li>
+				))
+			) : (
+				<p className={styles['no-users']}> Пользователей нет</p>
+			)}
 		</ul>
 	);
 
