@@ -3,14 +3,19 @@ import Filter from '../../svg/filter/Filter.jsx';
 import Search from '../../svg/search/Search.jsx';
 import styles from './SearchInput.module.css';
 
-const SearchInput = ({ placeholder, value, onChange }) => {
+const SearchInput = ({
+	placeholder = 'placeholder',
+	value,
+	onChange,
+	size = 'big',
+}) => {
 	const close = () => {
 		onChange({ target: { value: '' } });
 	};
 
 	return (
-		<div className={styles['search-box']}>
-			<Search />
+		<div className={`${styles['search-box']} ${styles[size]}`}>
+			<Search size={size} />
 			<input
 				type="text"
 				placeholder=""
@@ -20,7 +25,7 @@ const SearchInput = ({ placeholder, value, onChange }) => {
 			/>
 			<span>{placeholder}</span>
 			{value && <ClearText onClick={close} />}
-			<Filter />
+			{size === 'big' && <Filter />}
 		</div>
 	);
 };

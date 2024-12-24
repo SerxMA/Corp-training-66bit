@@ -6,7 +6,6 @@
 
 	position: relative;
 	width: 100%;
-	height: var(--size-button-big);
 	padding: 0 1rem;
 	border-radius: 0.5rem;
 	border: 2px solid var(--content-border);
@@ -63,4 +62,14 @@
 	letter-spacing: 0.12px;
 
 	opacity: 0;
+}
+/* sizes */
+.big {
+	min-height: var(--size-button-big);
+}
+.medium {
+	min-height: var(--size-button-medium);
+}
+.small {
+	min-height: var(--size-button-small);
 }

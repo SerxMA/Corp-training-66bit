@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { postContents } from '../../store/actions/contents.js';
+import { postContents, putContents } from '../../store/actions/contents.js';
 import ico from '../../assets/images/baseImg.png';
-import Cross from '../Cross.jsx';
 import styles from './ChooseFile.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
@@ -15,6 +14,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 	const [file, setFile] = useState(null);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
+	console.log(data);
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
@@ -53,9 +53,9 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 		};
 		if (data) {
 			config.url = data.id;
-			// dispatch(putContents(topicId, config)).then(() => {
-			// 	setClickCompleted(true);
-			// });
+			dispatch(putContents(topicId, config)).then(() => {
+				setClickCompleted(true);
+			});
 		} else {
 			config.params = { topicId: topicId };
 			dispatch(postContents(topicId, config)).then(() => {

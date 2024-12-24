@@ -12,6 +12,7 @@ import NewText from '../../modals/newText/NewText.jsx';
 import DeleteEntity from '../../modals/deleteEntity/DeleteEntity.jsx';
 import NewTest from '../../modals/newTest/NewTest.jsx';
 import NewTask from '../../modals/newTask/NewTask.jsx';
+import ChooseFile from '../../modals/chooseFile/ChooseFile.jsx';
 import styles from './TaskWrapper.module.css';
 
 const TaskWrapper = ({ element }) => {
@@ -102,6 +103,14 @@ const TaskWrapper = ({ element }) => {
 					/>
 				</div>
 			),
+			edit: (
+				<ChooseFile
+					setOpen={setEdit}
+					type={'video'}
+					position={position}
+					data={element}
+				/>
+			),
 			trash: <DeleteEntity setOpen={setTrash} type={'task'} id={id} />,
 		},
 		PICTURE: {
@@ -110,6 +119,15 @@ const TaskWrapper = ({ element }) => {
 					<img src={fileUrl} alt="Задание" />
 				</div>
 			),
+			edit: (
+				<ChooseFile
+					setOpen={setEdit}
+					type={'photo'}
+					position={position}
+					data={element}
+				/>
+			),
+			trash: <DeleteEntity setOpen={setTrash} type={'task'} id={id} />,
 		},
 		TEXT: {
 			title: title,

@@ -48,7 +48,7 @@ const AllCourses = () => {
 						))}
 					</ul>
 					<PaginationBar
-						maxPage={totalPages}
+						maxPage={totalPages > 0 ? totalPages : 1}
 						currentPage={page}
 						onPageChange={setPage}
 					/>
