@@ -3,7 +3,7 @@ import ChevronCompact from '../../UI/svg/chevronCompact/ChevronCompact.jsx';
 import styles from './DropDownGroup.module.css';
 
 const DropDownGroup = ({
-	text = 'Группа не передана',
+	text = 'Разные группы',
 	setText,
 	stateSVG = false,
 	setStateSVG = () => {},

@@ -10,7 +10,7 @@ const AuthMain = () => {
 	return (
 		<div className={styles['auth-main']}>
 			<NavLink
-				to="http://localhost:8080/oauth2/authorization/gitlab"
+				to="http://localhost:8082/oauth2/authorization/github"
 				className={styles['button-auth']}
 			>
 				<Gitlab /> Авторизация

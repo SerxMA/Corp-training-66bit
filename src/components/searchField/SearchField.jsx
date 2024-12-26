@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Loupe from './loupe/Loupe.jsx';
 import styles from './SearchField.module.css';
+import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
 
 const SearchField = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -35,6 +36,7 @@ const SearchField = () => {
 					onChange={handleChange}
 				/>
 			)}
+			<Tooltip />
 		</div>
 	);
 };

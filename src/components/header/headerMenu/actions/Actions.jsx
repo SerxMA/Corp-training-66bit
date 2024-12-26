@@ -10,17 +10,22 @@ const ACTIONS = [
 	{
 		icon: <Bell size={'medium'} />,
 		state: true,
+		inWorking: true,
 	},
-	{ icon: <Message size={'medium'} />, state: false },
-	{ icon: <Settings size={'medium'} />, state: false },
-	{ icon: <Help size={'medium'} />, state: false },
+	{ icon: <Message size={'medium'} />, state: false, inWorking: true },
+	{ icon: <Settings size={'medium'} />, state: false, inWorking: true },
+	{ icon: <Help size={'medium'} />, state: false, inWorking: true },
 ];
 
 const Actions = () => {
 	return (
 		<div className={styles['actions-wrapper']}>
 			{ACTIONS.map((action, index) => (
-				<ActionButton key={index} isNotif={action.state}>
+				<ActionButton
+					key={index}
+					isNotif={action.state}
+					inWorking={action.inWorking}
+				>
 					{action.icon}
 				</ActionButton>
 			))}

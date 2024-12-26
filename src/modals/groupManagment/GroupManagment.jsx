@@ -15,12 +15,10 @@ const GroupManagment = ({ isTop, setOpen, config, defGroup = false }) => {
 
 	useEffect(() => {
 		const closePopup = () => setOpen(0);
-		document.body.style.overflowY = 'hidden';
 		document.addEventListener('click', closePopup);
 
 		return () => {
 			document.removeEventListener('click', closePopup);
-			document.body.style.overflowY = 'auto';
 		};
 	}, []);
 	return (
@@ -31,7 +29,7 @@ const GroupManagment = ({ isTop, setOpen, config, defGroup = false }) => {
 			onClick={(e) => e.stopPropagation()}
 		>
 			<button onClick={(e) => handleClick(e, 'participants')}>
-				<PersonGroup />
+				<PersonGroup size="small" />
 				Участники
 			</button>
 			<button onClick={(e) => handleClick(e, 'deadlines')}>

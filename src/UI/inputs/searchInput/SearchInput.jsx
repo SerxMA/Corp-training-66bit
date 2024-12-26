@@ -1,3 +1,4 @@
+import Tooltip from '../../other/tooltip/Tooltip.jsx';
 import ClearText from '../../svg/clearText/ClearText.jsx';
 import Filter from '../../svg/filter/Filter.jsx';
 import Search from '../../svg/search/Search.jsx';
@@ -26,6 +27,7 @@ const SearchInput = ({
 			<span>{placeholder}</span>
 			{value && <ClearText onClick={close} />}
 			{size === 'big' && <Filter />}
+			<Tooltip />
 		</div>
 	);
 };

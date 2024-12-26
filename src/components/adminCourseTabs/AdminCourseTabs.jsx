@@ -6,6 +6,7 @@ import NewGroup from '../../modals/newGroup/NewGroup.jsx';
 import AddPeoplePopup from '../../modals/addPeoplePopup/AddPeoplePopup.jsx';
 import styles from './AdminCourseTabs.module.css';
 import SearchInputSmall from '../../UI/inputs/searchInputSmall/SearchInputSmall.jsx';
+import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
 
 const AdminCourseTabs = () => {
 	const location = useLocation();
@@ -74,6 +75,7 @@ const AdminCourseTabs = () => {
 									strokeLinejoin="round"
 								/>
 							</svg>
+							<Tooltip />
 						</div>
 					)}
 				</div>

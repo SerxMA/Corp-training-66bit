@@ -1,20 +1,29 @@
-import NavItem from './navItem/NavItem.jsx';
+import NavigationCell from '../../UI/buttons/navigationCell/NavigationCell.jsx';
 import styles from './Navigation.module.css';
+import { navItems } from '../../helpers/constants/navItems.js';
 
 const USER_LIST = ['courses', 'statement', 'analytics', 'certificates'];
 const ADMIN_LIST = ['courses', 'statement', 'analytics', 'staff'];
 
 const Navigation = () => {
 	return (
-		<div className={styles['nav-panel']}>
-			<nav className={styles['nav']}>
-				<ul className={styles['nav__list']}>
-					{USER_LIST.map((item) => (
-						<NavItem key={item} type={item} />
-					))}
-				</ul>
-			</nav>
-		</div>
+		<nav className={styles['nav']}>
+			<ul className={styles['nav__list']}>
+				{USER_LIST.map((item) => {
+					const { href, Icon, text, disabled } = navItems[item];
+					return (
+						<NavigationCell
+							key={item}
+							Icon={Icon}
+							to={href}
+							disabled={disabled}
+						>
+							{text}
+						</NavigationCell>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 };
 
