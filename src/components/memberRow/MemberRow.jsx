@@ -9,6 +9,7 @@ import RelocateMember from '../../modals/relocateMember/RrelocateMember.jsx';
 import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
 import Dots from '../../UI/svg/dots/Dots.jsx';
 import ProgressBar from '../../UI/other/progressBar/ProgressBar.jsx';
+import CourseTag from '../courseTag/CourseTag.jsx';
 
 const MemberRow = ({
 	member,
@@ -20,6 +21,16 @@ const MemberRow = ({
 	const [trash, setTrash] = useState(false);
 	const [relocate, setRelocate] = useState(false);
 
+	const tag = {
+		name: member.isCompleted ? 'Завершен' : 'Не завершен',
+		textColor: member.isCompleted
+			? 'var(--green-main)'
+			: 'var(--orange-main)',
+		color: member.isCompleted
+			? 'var(--green-background)'
+			: 'var(--orange-background)',
+	};
+
 	return (
 		<div className={styles.member} onClick={onClick}>
 			<Checkbox state={member.state} />
@@ -30,7 +41,10 @@ const MemberRow = ({
 					email={member.user.email}
 				/>
 			</span>
-			<span>Это стата</span>
+			{/* <span>Это стата</span> */}
+			<span>
+				<CourseTag tag={tag} className={styles.tag} />
+			</span>
 			<span>{member.group.name}</span>
 			<span>
 				<ProgressBar

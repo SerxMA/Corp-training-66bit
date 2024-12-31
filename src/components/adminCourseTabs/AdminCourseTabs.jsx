@@ -17,8 +17,6 @@ const AdminCourseTabs = () => {
 	const isGroups = location.pathname.includes('groups');
 	const isPartic = location.pathname.includes('participants');
 
-	console.log(search);
-
 	return (
 		<div className={styles['admin-tabs']}>
 			<div className={styles.tabs}>
