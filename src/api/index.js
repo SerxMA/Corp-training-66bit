@@ -3,8 +3,10 @@ import {
 	deleteCourse,
 	getCourse,
 	getCourses,
+	getAllCoursesUser,
 	postCourse,
 	putCourse,
+	getMyCoursesUser,
 } from './courses';
 import { deleteModule, getModules, postModule, putModule } from './modules';
 import { deleteLesson, postLesson, putLesson } from './lessons';
@@ -37,6 +39,8 @@ export const api = {
 		postCourse,
 		getCourses,
 		getCourse,
+		getAllCoursesUser,
+		getMyCoursesUser,
 		putCourse,
 		deleteCourse,
 	},

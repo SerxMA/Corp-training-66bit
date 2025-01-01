@@ -1,8 +1,8 @@
 .view-header-wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
 	justify-content: center;
+	gap: 0.5rem;
 
 	position: fixed;
 	width: calc(100% - 15rem);
@@ -66,4 +66,3 @@
 	max-width: 711px;
 	width: 100%;
 }
-

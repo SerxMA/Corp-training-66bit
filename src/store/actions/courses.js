@@ -40,3 +40,43 @@ export const getCourses = (page = 0, limit = 18) => {
 		}
 	};
 };
+
+export const getAllCoursesUser = (config, page = 0, limit = 18) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getCoursesStarted());
+			const response = await api.courses.getAllCoursesUser({
+				...config,
+				params: { ...config.params, page, limit },
+			});
+			dispatch(getCoursesSuccess(response.data));
+		} catch (error) {
+			dispatch(getCoursesFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
+export const getMyCoursesUser = (config, page = 0, limit = 18) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getCoursesStarted());
+			const response = await api.courses.getMyCoursesUser({
+				...config,
+				params: { ...config.params, page, limit },
+			});
+			dispatch(getCoursesSuccess(response.data));
+		} catch (error) {
+			dispatch(getCoursesFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};

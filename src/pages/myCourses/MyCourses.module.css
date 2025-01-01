@@ -1,0 +1,14 @@
+.all-courses {
+	display: flex;
+	flex-direction: column;
+
+	min-height: calc(100% - 59px);
+	margin-top: 59px;
+}
+.courses-wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 0.5rem;
+
+	padding: 0.5rem;
+}

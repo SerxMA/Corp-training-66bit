@@ -18,3 +18,11 @@ export const deleteCourse = (config) => {
 	config.url = URL + `${config.url}`;
 	return makeRequest({ method: 'DELETE', ...config });
 };
+
+const URL_USER = 'user/courses';
+
+export const getAllCoursesUser = (config) =>
+	makeRequest({ method: 'GET', url: URL_USER, ...config });
+
+export const getMyCoursesUser = (config) =>
+	makeRequest({ method: 'GET', url: URL_USER, ...config });

@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getCourses } from '../../store/actions/courses.js';
+import { getCourses, getAllCoursesUser } from '../../store/actions/courses.js';
 import CourseCard from '../../components/courseCard/CourseCard.jsx';
 import styles from './AllCourses.module.css';
 import PaginationBar from '../../components/paginationBar/PaginationBar.jsx';
+import { useAuth } from '../../customHooks/useAuth.js';
 
 const AllCourses = () => {
 	const dispatch = useDispatch();
@@ -15,10 +16,17 @@ const AllCourses = () => {
 	const [page, setPage] = useState(
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
+	const { role, username } = useAuth();
 
 	useEffect(() => {
 		if (page >= 1) {
-			dispatch(getCourses(page - 1));
+			dispatch(
+				role === 'ADMIN'
+					? getCourses(page - 1)
+					: getAllCoursesUser({
+							params: { username: username, enrolled: false },
+					  })
+			);
 			navigate(`/courses/all-courses?page=${page}`);
 		} else {
 			setPage(1);
