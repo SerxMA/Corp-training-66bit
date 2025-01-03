@@ -32,10 +32,12 @@ const GroupManagment = ({ isTop, setOpen, config, defGroup = false }) => {
 				<PersonGroup size="small" />
 				Участники
 			</button>
-			<button onClick={(e) => handleClick(e, 'deadlines')}>
-				<CalendarTime />
-				Дедлайны
-			</button>
+			{!defGroup && (
+				<button onClick={(e) => handleClick(e, 'deadlines')}>
+					<CalendarTime />
+					Дедлайны
+				</button>
+			)}
 			{!defGroup && (
 				<button onClick={(e) => handleClick(e, 'trash')}>
 					<Trash />

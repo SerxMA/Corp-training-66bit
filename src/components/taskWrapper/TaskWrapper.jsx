@@ -24,7 +24,7 @@ const TaskWrapper = ({ element }) => {
 		countAttempts: attempts,
 		fileUrl,
 		description,
-		questions,
+		answers,
 		position,
 	} = element;
 	const { role } = useAuth();
@@ -35,7 +35,11 @@ const TaskWrapper = ({ element }) => {
 		SINGLE_ANSWER: {
 			title: 'Тест с одиночным ответом',
 			children: (
-				<TaskSingleAnswer question={description} answers={questions} />
+				<TaskSingleAnswer
+					question={description}
+					answers={answers}
+					role={role}
+				/>
 			),
 			edit: (
 				<NewTest
@@ -50,7 +54,11 @@ const TaskWrapper = ({ element }) => {
 		MULTI_ANSWER: {
 			title: 'Тест с множественным ответом',
 			children: (
-				<TaskMultiAnswer question={description} answers={questions} />
+				<TaskMultiAnswer
+					question={description}
+					answers={answers}
+					role={role}
+				/>
 			),
 			edit: (
 				<NewTest
@@ -64,7 +72,7 @@ const TaskWrapper = ({ element }) => {
 		},
 		DETAILED_ANSWER: {
 			title: 'Задание с кратким ответом',
-			children: <TaskDetailedAnswer question={description} />,
+			children: <TaskDetailedAnswer question={description} role={role} />,
 			edit: (
 				<NewTask
 					setOpen={setEdit}

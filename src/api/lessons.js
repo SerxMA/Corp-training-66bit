@@ -17,3 +17,8 @@ export const deleteLesson = (config) => {
 		...config,
 	});
 };
+
+const URL_USER = 'user/topics';
+
+export const postCurrentTopic = (config) =>
+	makeRequest({ method: 'POST', url: URL_USER, ...config });

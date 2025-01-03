@@ -56,6 +56,13 @@
 		&:hover {
 			color: var(--content-subPrimary);
 		}
+
+		& p {
+			font: var(--body-regular16);
+			color: var(--content-primary);
+			word-break: break-word;
+			overflow: hidden;
+		}
 	}
 }
 .custom-checkbox {

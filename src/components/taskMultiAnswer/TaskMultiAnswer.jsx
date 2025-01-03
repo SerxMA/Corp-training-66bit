@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskMultiAnswer.module.css';
-import MainButton from '../../UI/buttons/mainButton/MainButton';
 
-const TaskMultiAnswer = ({ question, answers }) => {
+const TaskMultiAnswer = ({ question, answers, role }) => {
 	const [selectedOptions, setSelectedOptions] = useState([]);
 	const handleCheckboxChange = (id) => {
 		setSelectedOptions((prevSelected) =>
@@ -29,7 +29,7 @@ const TaskMultiAnswer = ({ question, answers }) => {
 								onChange={() => handleCheckboxChange(answer.id)}
 							/>
 							<span className={styles['custom-checkbox']}></span>
-							{answer.question}
+							<p>{answer.answer}</p>
 						</label>
 					</li>
 				)) ||
@@ -49,14 +49,16 @@ const TaskMultiAnswer = ({ question, answers }) => {
 						</li>
 					))}
 			</ul>
-			<div className={styles['btn-wrapper']}>
-				<MainButton
-					type={!isOptionSelected ? 'disabled' : 'primary'}
-					disabled={!isOptionSelected}
-				>
-					Проверить
-				</MainButton>
-			</div>
+			{role === 'USER' && (
+				<div className={styles['btn-wrapper']}>
+					<MainButton
+						type={!isOptionSelected ? 'disabled' : 'primary'}
+						disabled={!isOptionSelected}
+					>
+						Проверить
+					</MainButton>
+				</div>
+			)}
 		</>
 	);
 };

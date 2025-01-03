@@ -9,6 +9,8 @@ import DeleteCross from '../deleteCross.jsx';
 import styles from './NewTest.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
+import RadioButton from '../../UI/inputs/radioButton/RadioButton.jsx';
+import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
 
 const MAX_CHARS = {
 	question: 50,
@@ -23,15 +25,7 @@ const NewTest = ({ setOpen, type, position, data }) => {
 	const [question, setQuestion] = useState(data ? data.description : '');
 	const [answers, setAnswers] = useState(
 		data
-			? data.questions.map((obj) => {
-					const newObj = {};
-					newObj.id = obj.id;
-					newObj.isTrue = data.answers.some(
-						(answer) => answer.answer === obj.question
-					);
-					newObj.answer = obj.question;
-					return newObj;
-			  })
+			? data.answers.map((obj) => ({ ...obj, isTrue: obj.right }))
 			: [{ id: 1, isTrue: false, answer: '' }]
 	);
 	const [pointCorrect, setPointCorrect] = useState(data ? data.score : 0);
@@ -108,7 +102,6 @@ const NewTest = ({ setOpen, type, position, data }) => {
 			setAnswers((cv) => cv.map((obj) => ({ ...obj, isTrue: false })));
 		}
 	};
-
 	const handleSubmit = () => {
 		const filterAnswers = answers.filter((answer) => answer.answer.length);
 		if (findAnswersDuplicates(filterAnswers)) {
@@ -122,10 +115,10 @@ const NewTest = ({ setOpen, type, position, data }) => {
 				description: question,
 				countAttempts: attemptsTest,
 				score: pointCorrect,
-				questions: filterAnswers.map((answer) => answer.answer),
-				answers: filterAnswers
-					.filter((answer) => answer.isTrue)
-					.map((answer) => answer.answer),
+				answers: filterAnswers.map((answer) => ({
+					answer: answer.answer,
+					isRight: answer.isTrue,
+				})),
 			};
 			console.log(content);
 			const contentBlob = new Blob([JSON.stringify(content)], {
@@ -162,16 +155,21 @@ const NewTest = ({ setOpen, type, position, data }) => {
 		<ul className={styles['answers-list']}>
 			{answers.map((answer) => (
 				<li key={answer.id} className={styles.answer}>
-					<div
-						className={`${styles.state} ${
-							answersType === 'one'
-								? styles.state_circle
-								: styles.state_rectangle
-						} ${answer.isTrue ? styles.state_on : ''}`}
-						onClick={() =>
-							answer.answer && toggleStateAnswer(answer.id)
-						}
-					></div>
+					{answersType === 'one' ? (
+						<RadioButton
+							state={answer.isTrue}
+							onClick={() =>
+								answer.answer && toggleStateAnswer(answer.id)
+							}
+						/>
+					) : (
+						<Checkbox
+							state={answer.isTrue}
+							onClick={() =>
+								answer.answer && toggleStateAnswer(answer.id)
+							}
+						/>
+					)}
 					<input
 						type="text"
 						value={answer.answer}

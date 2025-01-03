@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskSingleAnswer.module.css';
-import MainButton from '../../UI/buttons/mainButton/MainButton';
 
-const TaskSingleAnswer = ({ question, answers }) => {
+const TaskSingleAnswer = ({ question, answers, role }) => {
 	const [isOptionSelected, setIsOptionSelected] = useState(false);
 
 	const handleOptionChange = () => {
@@ -24,7 +24,7 @@ const TaskSingleAnswer = ({ question, answers }) => {
 								onChange={handleOptionChange}
 							/>
 							<span className={styles['custom-radio']}></span>
-							<p>{answer.question}</p>
+							<p>{answer.answer}</p>
 						</label>
 					</li>
 				)) ||
@@ -42,14 +42,16 @@ const TaskSingleAnswer = ({ question, answers }) => {
 						</li>
 					))}
 			</ul>
-			<div className={styles['btn-wrapper']}>
-				<MainButton
-					type={!isOptionSelected ? 'disabled' : 'primary'}
-					disabled={!isOptionSelected}
-				>
-					Проверить
-				</MainButton>
-			</div>
+			{role === 'USER' && (
+				<div className={styles['btn-wrapper']}>
+					<MainButton
+						type={!isOptionSelected ? 'disabled' : 'primary'}
+						disabled={!isOptionSelected}
+					>
+						Проверить
+					</MainButton>
+				</div>
+			)}
 		</>
 	);
 };

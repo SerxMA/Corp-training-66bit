@@ -11,6 +11,8 @@ import courseReducer from './reducers/courseReducer';
 import contentsReducer from './reducers/contentsReducer';
 import groupsReducer from './reducers/groupsReducer';
 import membersReducer from './reducers/membersReducer';
+import myGroupReducer from './reducers/myGroupReducer';
+import userCourseReducer from './reducers/userCourseReducer';
 
 const persistConfig = {
 	key: 'root',
@@ -24,9 +26,11 @@ const store = configureStore({
 		user: persistedReducer,
 		courses: coursesReducer,
 		course: courseReducer,
+		userCourse: userCourseReducer,
 		modules: modulesReducer,
 		contents: contentsReducer,
 		groups: groupsReducer,
+		myGroup: myGroupReducer,
 		members: membersReducer,
 	},
 	middleware: (getDefaultMiddleware) =>

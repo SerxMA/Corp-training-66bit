@@ -1,10 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import styles from './LogoGrowIT.module.css';
 
-import styles from './BitLogo.module.css';
-
-const BitLogo = () => {
+const LogoGrowIT = ({ className }) => {
 	return (
-		<NavLink to={'/courses/all-courses'} className={styles.logo}>
+		<div className={`${styles.logo} ${className ? className : ''}`}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="43"
@@ -69,8 +67,8 @@ const BitLogo = () => {
 					strokeWidth="0.212121"
 				/>
 			</svg>
-		</NavLink>
+		</div>
 	);
 };
 
-export default BitLogo;
+export default LogoGrowIT;

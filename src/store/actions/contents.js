@@ -46,6 +46,26 @@ export const getContents = (topicId) => {
 	};
 };
 
+export const getContentsUser = (config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getContentsStarted());
+			const response = await api.content.getContentsUser(config);
+			const sortResponse = structuredClone(response.data).sort(
+				(a, b) => a.position - b.position
+			);
+			dispatch(getContentsSuccess(sortResponse));
+		} catch (error) {
+			dispatch(getContentsFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
 export const putContents = (topicId, config) => {
 	return async (dispatch) => {
 		try {

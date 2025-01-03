@@ -48,8 +48,6 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 
 	const handleSubmit = () => {
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
-		const topicId =
-			window.location.pathname.match(/\/course\/\d+\/(\d+)/)[1];
 		switch (type) {
 			case 'course':
 				dispatch(deleteCourse(courseId)).then(() =>
@@ -57,9 +55,14 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 				);
 				break;
 			case 'task':
-				dispatch(deleteContents(topicId, { url: id })).then(() =>
-					setClickCompleted(true)
-				);
+				dispatch(
+					deleteContents(
+						window.location.pathname.match(
+							/\/course\/\d+\/(\d+)/
+						)[1],
+						{ url: id }
+					)
+				).then(() => setClickCompleted(true));
 				break;
 			case 'group':
 				dispatch(
@@ -120,10 +123,7 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 			(!isErrorModules || !isErrorMembers) &&
 			(!isLoadingModules || !isLoadingMembers)
 		) {
-			console.log('ПРОГШЛО');
-			type === 'course'
-				? navigate('/courses/all-courses')
-				: setOpen(false);
+			type === 'course' ? navigate('/courses') : setOpen(false);
 		}
 		(!isErrorModules || !isErrorMembers) && setClickCompleted(false);
 	}, [

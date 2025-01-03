@@ -10,7 +10,7 @@ export const postCourse = (config, page) => {
 		try {
 			dispatch(getCoursesStarted());
 			await api.courses.postCourse(config);
-			dispatch(getCourses(page));
+			dispatch(getCourses({ params: { page } }));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
 			alert(
@@ -22,13 +22,11 @@ export const postCourse = (config, page) => {
 	};
 };
 
-export const getCourses = (page = 0, limit = 18) => {
+export const getCourses = (config) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getCoursesStarted());
-			const response = await api.courses.getCourses({
-				params: { page, limit },
-			});
+			const response = await api.courses.getCourses(config);
 			dispatch(getCoursesSuccess(response.data));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
@@ -69,7 +67,15 @@ export const getMyCoursesUser = (config, page = 0, limit = 18) => {
 				...config,
 				params: { ...config.params, page, limit },
 			});
-			dispatch(getCoursesSuccess(response.data));
+			dispatch(
+				getCoursesSuccess({
+					content: response.data.content.map((obj) => ({
+						...obj.course,
+						userCourse: obj.userCourse,
+					})),
+					totalPages: response.data.totalPages,
+				})
+			);
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
 			alert(

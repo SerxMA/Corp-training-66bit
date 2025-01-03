@@ -49,6 +49,7 @@ const MyCourses = () => {
 								title={course.title}
 								id={course.id}
 								description={course.description}
+								enrolled
 							/>
 						))}
 					</ul>

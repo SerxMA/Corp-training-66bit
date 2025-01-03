@@ -5,6 +5,7 @@ import {
 	getCourseStarted,
 	getCourseSuccess,
 } from '../actionCreators/course';
+import { getMyGroupSuccess } from '../actionCreators/myGroup';
 
 export const getCourse = (courseId) => {
 	return async (dispatch) => {
@@ -14,6 +15,26 @@ export const getCourse = (courseId) => {
 				url: '/' + courseId,
 			});
 			dispatch(getCourseSuccess(response.data));
+		} catch (error) {
+			dispatch(getCourseFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+export const getCourseUser = (config, userCourseid) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getCourseStarted());
+			const response = await api.courses.getCourseUser({
+				...config,
+				url: '/' + userCourseid,
+			});
+			dispatch(getCourseSuccess(response.data.course));
+			dispatch(getMyGroupSuccess(response.data.group));
 		} catch (error) {
 			dispatch(getCourseFailed(error.message));
 			alert(

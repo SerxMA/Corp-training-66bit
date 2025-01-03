@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import ClearText from '../../svg/clearText/ClearText.jsx';
 import Search from '../../svg/search/Search.jsx';
 import styles from './SearchInputSmall.module.css';
-import Tooltip from '../../other/tooltip/Tooltip.jsx';
 
 const SearchInputSmall = ({ value, onChange }) => {
 	const inputRef = useRef(null);
@@ -28,7 +27,6 @@ const SearchInputSmall = ({ value, onChange }) => {
 				onChange={onChange}
 			/>
 			{!!value.length && <ClearText onClick={close} />}
-			<Tooltip position={'left'} />
 		</div>
 	);
 };

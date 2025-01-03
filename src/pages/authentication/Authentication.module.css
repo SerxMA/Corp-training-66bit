@@ -3,10 +3,15 @@
 	flex-direction: row;
 	align-items: stretch;
 
+	background-color: var(--accent-primary);
 	background-image: url('../../assets/images/bg.png');
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+
+	:global(.dark) & {
+		background-image: url('../../assets/images/bg-d.png');
+	}
 }
 .content {
 	display: flex;
@@ -57,6 +62,10 @@
 	column-gap: 0.5rem;
 
 	position: relative;
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+	color: var(--content-primary);
 
 	cursor: pointer;
 	user-select: none;

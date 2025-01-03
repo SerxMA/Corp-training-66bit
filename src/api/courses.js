@@ -26,3 +26,9 @@ export const getAllCoursesUser = (config) =>
 
 export const getMyCoursesUser = (config) =>
 	makeRequest({ method: 'GET', url: URL_USER, ...config });
+
+export const getUserCourseData = (config) =>
+	makeRequest({ method: 'GET', ...config, url: URL_USER + '/current' });
+
+export const getCourseUser = (config) =>
+	makeRequest({ method: 'GET', ...config, url: URL_USER + config.url });

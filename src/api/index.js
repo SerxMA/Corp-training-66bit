@@ -7,12 +7,27 @@ import {
 	postCourse,
 	putCourse,
 	getMyCoursesUser,
+	getCourseUser,
+	getUserCourseData,
 } from './courses';
-import { deleteModule, getModules, postModule, putModule } from './modules';
-import { deleteLesson, postLesson, putLesson } from './lessons';
+import {
+	deleteModule,
+	getModules,
+	getModulesUser,
+	postCurrentModule,
+	postModule,
+	putModule,
+} from './modules';
+import {
+	deleteLesson,
+	postCurrentTopic,
+	postLesson,
+	putLesson,
+} from './lessons';
 import {
 	deleteContentElement,
 	getContent,
+	getContentsUser,
 	postContentElement,
 	putContentElement,
 } from './content';
@@ -39,6 +54,8 @@ export const api = {
 		postCourse,
 		getCourses,
 		getCourse,
+		getUserCourseData,
+		getCourseUser,
 		getAllCoursesUser,
 		getMyCoursesUser,
 		putCourse,
@@ -46,12 +63,15 @@ export const api = {
 	},
 	modules: {
 		postModule,
+		postCurrentModule,
 		getModules,
+		getModulesUser,
 		putModule,
 		deleteModule,
 	},
 	lessons: {
 		postLesson,
+		postCurrentTopic,
 		putLesson,
 		deleteLesson,
 	},
@@ -67,6 +87,7 @@ export const api = {
 	},
 	content: {
 		getContent,
+		getContentsUser,
 		postContentElement,
 		putContentElement,
 		deleteContentElement,

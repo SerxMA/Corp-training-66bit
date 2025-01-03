@@ -55,6 +55,73 @@ export const getModules = (courseId) => {
 	};
 };
 
+export const getModulesUser = (config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getModulesStarted());
+			const response = await api.modules.getModulesUser(config);
+			const normalData = response.data.map((obj) => ({
+				...obj.module,
+				topics: obj.topics,
+				deadline: obj.deadline,
+				userModule: obj.userModule,
+			}));
+			const sortResponse = structuredClone(normalData)
+				.sort((a, b) => a.position - b.position)
+				.map((obj) => ({
+					...obj,
+					topics: obj.topics
+						.map((objTopic) => ({
+							...objTopic.topic,
+							userTopic: objTopic.userTopic,
+						}))
+						.slice()
+						.sort((a, b) => a.position - b.position),
+				}));
+			dispatch(getModulesSuccess(sortResponse));
+		} catch (error) {
+			dispatch(getModulesFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
+export const postCurrentModule = (config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getModulesStarted());
+			await api.modules.postCurrentModule(config);
+		} catch (error) {
+			dispatch(getModulesFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
+export const postCurrentTopic = (config) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getModulesStarted());
+			await api.modules.postCurrentTopic(config);
+		} catch (error) {
+			dispatch(getModulesFailed(error.message));
+			alert(
+				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
+					error.response?.data.message || ''
+				}"`
+			);
+		}
+	};
+};
+
 export const putEntity = (type, courseId, config) => {
 	const identificationType = {
 		module: api.modules.putModule,

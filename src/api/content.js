@@ -17,3 +17,8 @@ export const deleteContentElement = (config) => {
 	config.url = URL + `/${config.url}`;
 	return makeRequest({ method: 'DELETE', ...config });
 };
+
+const URL_USER = 'user/content';
+
+export const getContentsUser = (config) =>
+	makeRequest({ method: 'GET', url: URL_USER, ...config });

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import { changeText } from '../../helpers/functions/formatText';
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskDetailedAnswer.module.css';
-import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const MAX_CHARS = {
 	answer: 128,
 };
-const TaskDetailedAnswer = ({ question }) => {
+const TaskDetailedAnswer = ({ question, role }) => {
 	const [answer, setAnswer] = useState('');
 
 	return (
@@ -31,14 +31,16 @@ const TaskDetailedAnswer = ({ question }) => {
 				/>
 				<span>Ваш ответ</span>
 			</div>
-			<div className={styles['btn-wrapper']}>
-				<MainButton
-					type={!answer ? 'disabled' : 'primary'}
-					disabled={!answer}
-				>
-					Отправить
-				</MainButton>
-			</div>
+			{role === 'USER' && (
+				<div className={styles['btn-wrapper']}>
+					<MainButton
+						type={!answer ? 'disabled' : 'primary'}
+						disabled={!answer}
+					>
+						Отправить
+					</MainButton>
+				</div>
+			)}
 		</>
 	);
 };

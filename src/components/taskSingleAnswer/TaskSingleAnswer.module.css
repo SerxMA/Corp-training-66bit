@@ -1,6 +1,6 @@
 .question {
 	color: var(--content-secondary);
-	font: var(--body-regular16);
+	font: var(--body-medium16);
 	letter-spacing: 0.16px;
 }
 .answers {
@@ -56,6 +56,8 @@
 		}
 
 		& p {
+			font: var(--body-regular16);
+			color: var(--content-primary);
 			word-break: break-word;
 			overflow: hidden;
 		}

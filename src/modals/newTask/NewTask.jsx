@@ -41,7 +41,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 		};
 		if (type === 'one') {
 			content.countAttempts = attemptsTest;
-			content.answers = [answer];
+			content.answers = [{ answer, isRight: true }];
 		}
 		console.log(content);
 		const contentBlob = new Blob([JSON.stringify(content)], {

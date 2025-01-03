@@ -7,7 +7,15 @@ import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './CourseCardPopup.module.css';
 import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 
-const CourseCardPopup = ({ title, img, tag, description, id, setOpen }) => {
+const CourseCardPopup = ({
+	title,
+	img,
+	tag,
+	description,
+	id,
+	setOpen,
+	enrolled,
+}) => {
 	const setIsPopupClosed = () => {
 		setOpen(false);
 	};
@@ -41,12 +49,18 @@ const CourseCardPopup = ({ title, img, tag, description, id, setOpen }) => {
 					<CourseTag tag={tag} />
 				</div>
 				<div className={styles['description']}>{description}</div>
-				<NavLink
-					className={styles['continue-link']}
-					to={`/course/${id}`}
-				>
-					<MainButton sequel>К материалам курса</MainButton>
-				</NavLink>
+				{enrolled ? (
+					<NavLink
+						className={styles['continue-link']}
+						to={`/course/${id}`}
+					>
+						<MainButton sequel>К материалам курса</MainButton>
+					</NavLink>
+				) : (
+					<MainButton className={styles['continue-link']}>
+						Записаться
+					</MainButton>
+				)}
 			</div>
 		</div>,
 		document.body

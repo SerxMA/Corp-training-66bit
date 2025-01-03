@@ -19,6 +19,7 @@ import CourseParticipants from './components/courseParticipants/CourseParticipan
 import './assets/styles/reset.css';
 import './assets/styles/index.css';
 import CourseGroup from './components/courseGroup/CourseGroup.jsx';
+import UserCourseLayout from './layouts/userCourseLayout/UserCourseLayout.jsx';
 
 const router = createBrowserRouter([
 	{
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
 				element: (
 					<CheckRole
 						adminLayer={<CourseLayout />}
-						userLayer={<CourseLayout />}
+						userLayer={<UserCourseLayout />}
 					/>
 				),
 				children: [

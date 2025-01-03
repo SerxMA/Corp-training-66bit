@@ -17,3 +17,11 @@ export const deleteModule = (config) => {
 	config.url = URL + `${config.url}`;
 	return makeRequest({ method: 'DELETE', ...config });
 };
+
+const URL_USER = 'user/modules';
+
+export const getModulesUser = (config) =>
+	makeRequest({ method: 'GET', url: URL_USER, ...config });
+
+export const postCurrentModule = (config) =>
+	makeRequest({ method: 'POST', url: URL_USER, ...config });

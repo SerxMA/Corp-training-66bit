@@ -16,22 +16,34 @@ const AllCourses = () => {
 	const [page, setPage] = useState(
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
+	const title = searchParams.get('title') ? searchParams.get('title') : '';
 	const { role, username } = useAuth();
 
 	useEffect(() => {
 		if (page >= 1) {
 			dispatch(
 				role === 'ADMIN'
-					? getCourses(page - 1)
+					? getCourses({ params: { page: page - 1, title } })
 					: getAllCoursesUser({
 							params: { username: username, enrolled: false },
 					  })
 			);
-			navigate(`/courses/all-courses?page=${page}`);
 		} else {
 			setPage(1);
 		}
+	}, [page, title]);
+
+	useEffect(() => {
+		if (page >= 1) {
+			title.length
+				? navigate(`/courses/all-courses?page=${page}&title=${title}`)
+				: navigate(`/courses/all-courses?page=${page}`);
+		}
 	}, [page]);
+
+	useEffect(() => {
+		setPage(searchParams.get('page') ? +searchParams.get('page') : 1);
+	}, [searchParams.get('page')]);
 
 	useEffect(() => {
 		if (totalPages > 1 && page > totalPages) {
@@ -52,12 +64,13 @@ const AllCourses = () => {
 								title={course.title}
 								id={course.id}
 								description={course.description}
+								enrolled={role === 'ADMIN'}
 							/>
 						))}
 					</ul>
 					<PaginationBar
 						maxPage={totalPages > 0 ? totalPages : 1}
-						currentPage={page}
+						currentPage={page ? page : 1}
 						onPageChange={setPage}
 					/>
 				</>

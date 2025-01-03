@@ -6,6 +6,7 @@ import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import GitLab from '../../UI/svg/gitLab/GitLab.jsx';
 import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
 import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
+import LogoGrowIT from '../../UI/svg/logoGrowIT/LogoGrowIT.jsx';
 
 const Authentication = () => {
 	const [remember, setRemember] = useState(false);
@@ -17,7 +18,8 @@ const Authentication = () => {
 	return (
 		<div className={styles['auth-wrapper']}>
 			<div className={styles.content}>
-				<img className={styles.logo} src={logo} alt="Логотиип" />
+				<LogoGrowIT className={styles.logo} />
+				{/* <img className={styles.logo} src={logo} alt="Логотиип" /> */}
 				<div className={styles['auth-main']}>
 					<h4>Авторизация</h4>
 					<div className={styles['auth-SSO']}>
@@ -26,7 +28,7 @@ const Authentication = () => {
 							type={'light'}
 							onClick={() =>
 								(window.location.href =
-									'http://localhost:8082/oauth2/authorization/gitlab')
+									'http://localhost:8080/oauth2/authorization/gitlab')
 							}
 						>
 							<GitLab />
@@ -37,7 +39,7 @@ const Authentication = () => {
 							type={'light'}
 							onClick={() =>
 								(window.location.href =
-									'http://localhost:8082/oauth2/authorization/github')
+									'http://localhost:8080/oauth2/authorization/github')
 							}
 						>
 							<GitLab />
