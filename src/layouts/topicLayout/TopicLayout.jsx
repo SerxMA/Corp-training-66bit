@@ -13,7 +13,9 @@ const TopicLayout = () => {
 	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
 	const { userCourse } = useSelector((state) => state.userCourse);
+	const { myGroup } = useSelector((state) => state.myGroup);
 	const { topicId } = useParams();
+	const { id } = useParams();
 	const { role } = useAuth();
 
 	useEffect(() => {
@@ -26,22 +28,51 @@ const TopicLayout = () => {
 			);
 			if (currentModule && !currentModule.userModule) {
 				dispatch(
-					postCurrentModule({
-						params: {
-							courseId: userCourse.id,
-							moduleId: currentModule.id,
+					postCurrentModule(
+						{
+							params: {
+								courseId: userCourse.id,
+								moduleId: currentModule.id,
+							},
 						},
-					})
+						{
+							params: {
+								courseId: id,
+								userCourseId: userCourse.id,
+								groupId: myGroup.id,
+							},
+						}
+					)
 				);
 			}
-			if (currentModule && currentTopic && !currentTopic.userTopic) {
+			console.log(
+				currentModule,
+				currentTopic,
+				!currentTopic.userTopic,
+				currentModule.userModule
+			);
+			if (
+				currentModule &&
+				currentTopic &&
+				!currentTopic.userTopic &&
+				currentModule.userModule
+			) {
 				dispatch(
-					postCurrentTopic({
-						params: {
-							courseId: userCourse.id,
-							moduleId: currentModule.id,
+					postCurrentTopic(
+						{
+							params: {
+								userModuleId: currentModule.userModule.id,
+								topicId: topicId,
+							},
 						},
-					})
+						{
+							params: {
+								courseId: id,
+								userCourseId: userCourse.id,
+								groupId: myGroup.id,
+							},
+						}
+					)
 				);
 			}
 		}

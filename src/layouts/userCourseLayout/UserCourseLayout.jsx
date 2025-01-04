@@ -52,7 +52,6 @@ const UserCourseLayout = () => {
 
 		if (!topicId && modules.length) {
 			const topicModule = modules.find((module) => module.topics.length);
-			console.log(topicModule);
 			topicModule &&
 				navigate(`/course/${courseId}/${topicModule.topics[0].id}`);
 		}

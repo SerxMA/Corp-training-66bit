@@ -90,11 +90,12 @@ export const getModulesUser = (config) => {
 	};
 };
 
-export const postCurrentModule = (config) => {
+export const postCurrentModule = (config, secondConfig) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getModulesStarted());
 			await api.modules.postCurrentModule(config);
+			dispatch(getModulesUser(secondConfig));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
 			alert(
@@ -106,11 +107,12 @@ export const postCurrentModule = (config) => {
 	};
 };
 
-export const postCurrentTopic = (config) => {
+export const postCurrentTopic = (config, secondConfig) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getModulesStarted());
-			await api.modules.postCurrentTopic(config);
+			await api.lessons.postCurrentTopic(config);
+			dispatch(getModulesUser(secondConfig));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
 			alert(
