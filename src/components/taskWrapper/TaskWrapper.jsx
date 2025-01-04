@@ -26,6 +26,7 @@ const TaskWrapper = ({ element }) => {
 		description,
 		answers,
 		position,
+		userContent,
 	} = element;
 	const { role } = useAuth();
 	const [edit, setEdit] = useState(false);
@@ -39,6 +40,9 @@ const TaskWrapper = ({ element }) => {
 					question={description}
 					answers={answers}
 					role={role}
+					contentId={id}
+					userContent={userContent}
+					countAttempts={attempts}
 				/>
 			),
 			edit: (
@@ -58,6 +62,9 @@ const TaskWrapper = ({ element }) => {
 					question={description}
 					answers={answers}
 					role={role}
+					contentId={id}
+					userContent={userContent}
+					countAttempts={attempts}
 				/>
 			),
 			edit: (
@@ -72,7 +79,15 @@ const TaskWrapper = ({ element }) => {
 		},
 		DETAILED_ANSWER: {
 			title: 'Задание с кратким ответом',
-			children: <TaskDetailedAnswer question={description} role={role} />,
+			children: (
+				<TaskDetailedAnswer
+					question={description}
+					role={role}
+					contentId={id}
+					userContent={userContent}
+					countAttempts={attempts}
+				/>
+			),
 			edit: (
 				<NewTask
 					setOpen={setEdit}
@@ -85,7 +100,13 @@ const TaskWrapper = ({ element }) => {
 		},
 		FREEFORM_ANSWER: {
 			title: 'Задание с развернутым ответом',
-			children: <TaskFreeformAnswer question={description} />,
+			children: (
+				<TaskFreeformAnswer
+					question={description}
+					role={role}
+					contentId={id}
+				/>
+			),
 			edit: (
 				<NewTask
 					setOpen={setEdit}

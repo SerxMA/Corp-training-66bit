@@ -21,7 +21,7 @@ const CourseStructure = ({ currentScore }) => {
 			{role === 'USER' && (
 				<div className={styles.statistic}>
 					Это прогресс -{' '}
-					{calculatePercentage(course.score, currentScore)}
+					{calculatePercentage(course.score, currentScore)}%
 				</div>
 			)}
 			<div className={styles['course-structure']}>

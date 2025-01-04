@@ -1,20 +1,51 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { changeText } from '../../helpers/functions/formatText';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskFreeformAnswer.module.css';
+import { postContentsUser } from '../../store/actions/contents.js';
 
 const MAX_CHARS = {
 	answer: 256,
 };
 
-const TaskFreeformAnswer = ({ question, role }) => {
+const TaskFreeformAnswer = ({ question, role, contentId }) => {
 	const [file, setFile] = useState(null);
 	const [answer, setAnswer] = useState('');
+	const dispatch = useDispatch();
+	const { modules } = useSelector((state) => state.modules);
+	const { topicId } = useParams();
 
 	const handleFileChange = (e) => {
 		const selectedFile = e.target.files[0];
 		setFile(selectedFile);
+	};
+
+	const handleSubmit = () => {
+		const currentTopic = modules
+			.find(({ topics }) => topics.some(({ id }) => id === +topicId))
+			?.topics.find(({ id }) => id === +topicId);
+		if (currentTopic) {
+			const config = {
+				data: [answer],
+				params: {
+					contentId,
+					userTopicId: currentTopic.userTopic.id,
+					currentAttempts: -1,
+				},
+			};
+			console.log(config);
+			dispatch(
+				postContentsUser(config, {
+					params: {
+						topicId,
+						userTopicId: currentTopic.userTopic.id,
+					},
+				})
+			);
+		}
 	};
 
 	useEffect(() => {
@@ -78,6 +109,7 @@ const TaskFreeformAnswer = ({ question, role }) => {
 			{role === 'USER' && (
 				<div className={styles['btn-wrapper']}>
 					<MainButton
+						onClick={handleSubmit}
 						type={!answer ? 'disabled' : 'primary'}
 						disabled={!answer}
 					>

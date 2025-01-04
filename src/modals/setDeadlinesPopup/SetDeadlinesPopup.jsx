@@ -31,7 +31,7 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	const [search, setSearch] = useState('');
 	const [clickCompleted, setClickCompleted] = useState(false);
 
-	console.log(currModules);
+	console.log(modules);
 
 	const handleSubmitPost = () => {
 		const config = {

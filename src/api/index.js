@@ -29,6 +29,7 @@ import {
 	getContent,
 	getContentsUser,
 	postContentElement,
+	postContentsUser,
 	putContentElement,
 } from './content';
 import {
@@ -89,6 +90,7 @@ export const api = {
 		getContent,
 		getContentsUser,
 		postContentElement,
+		postContentsUser,
 		putContentElement,
 		deleteContentElement,
 	},

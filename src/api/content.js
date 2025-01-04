@@ -18,7 +18,10 @@ export const deleteContentElement = (config) => {
 	return makeRequest({ method: 'DELETE', ...config });
 };
 
-const URL_USER = 'user/content';
+const URL_USER = 'user/contents';
 
 export const getContentsUser = (config) =>
 	makeRequest({ method: 'GET', url: URL_USER, ...config });
+
+export const postContentsUser = (config) =>
+	makeRequest({ ...config, method: 'POST', url: URL_USER });

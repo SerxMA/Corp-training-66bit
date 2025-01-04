@@ -1,32 +1,80 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskMultiAnswer.module.css';
+import { postContentsUser } from '../../store/actions/contents.js';
 
-const TaskMultiAnswer = ({ question, answers, role }) => {
-	const [selectedOptions, setSelectedOptions] = useState([]);
-	const handleCheckboxChange = (id) => {
-		setSelectedOptions((prevSelected) =>
-			prevSelected.includes(id)
-				? prevSelected.filter((optionId) => optionId !== id)
-				: [...prevSelected, id]
+const TaskMultiAnswer = ({
+	question,
+	answers,
+	role,
+	contentId,
+	userContent,
+	countAttempts,
+}) => {
+	const dispatch = useDispatch();
+	const { modules } = useSelector((state) => state.modules);
+	const [currAnswers, setCurrAnswers] = useState(
+		answers ? answers.map((answer) => ({ ...answer, state: false })) : []
+	);
+	const { topicId } = useParams();
+
+	const toggleAnswerState = (answerId) => {
+		setCurrAnswers((cv) =>
+			cv.map((answer) =>
+				answer.id === answerId
+					? { ...answer, state: !answer.state }
+					: answer
+			)
 		);
 	};
 
-	const isOptionSelected = selectedOptions.length > 0;
+	const handleSubmit = () => {
+		const currentTopic = modules
+			.find(({ topics }) => topics.some(({ id }) => id === +topicId))
+			?.topics.find(({ id }) => id === +topicId);
+		if (currentTopic) {
+			const config = {
+				data: currAnswers
+					.filter((answer) => answer.state)
+					.map((answer) => answer.answer),
+				params: {
+					contentId,
+					userTopicId: currentTopic.userTopic.id,
+					currentAttempts: userContent
+						? userContent.currentAttempts
+						: countAttempts,
+				},
+			};
+			console.log(config);
+			dispatch(
+				postContentsUser(config, {
+					params: {
+						topicId,
+						userTopicId: currentTopic.userTopic.id,
+					},
+				})
+			);
+		}
+	};
+
+	const isOptionSelected = currAnswers.some((answer) => answer.state);
+
 	return (
 		<>
 			<p className={styles.question}>
 				{question || 'Это тестовый вопрос ы?'}
 			</p>
 			<ul className={styles.answers}>
-				{answers?.map((answer) => (
+				{currAnswers?.map((answer) => (
 					<li key={answer.id} className={styles.answer}>
 						<label>
 							<input
 								type="checkbox"
 								name="multiAnswer"
-								onChange={() => handleCheckboxChange(answer.id)}
+								onChange={() => toggleAnswerState(answer.id)}
 							/>
 							<span className={styles['custom-checkbox']}></span>
 							<p>{answer.answer}</p>
@@ -39,7 +87,7 @@ const TaskMultiAnswer = ({ question, answers, role }) => {
 								<input
 									type="checkbox"
 									name="singleAnswer"
-									onChange={() => handleCheckboxChange(index)}
+									onChange={() => toggleAnswerState(index)}
 								/>
 								<span
 									className={styles['custom-checkbox']}
@@ -52,6 +100,7 @@ const TaskMultiAnswer = ({ question, answers, role }) => {
 			{role === 'USER' && (
 				<div className={styles['btn-wrapper']}>
 					<MainButton
+						onClick={handleSubmit}
 						type={!isOptionSelected ? 'disabled' : 'primary'}
 						disabled={!isOptionSelected}
 					>
