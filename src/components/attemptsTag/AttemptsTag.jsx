@@ -19,7 +19,7 @@ const AttemptsTag = ({ children }) => {
 					strokeLinejoin="round"
 				/>
 			</svg>
-			<p>{children} попытки</p>
+			<p>Попыток: {children}</p>
 		</div>
 	);
 };

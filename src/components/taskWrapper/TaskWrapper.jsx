@@ -28,6 +28,7 @@ const TaskWrapper = ({ element }) => {
 		position,
 		userContent,
 	} = element;
+	console.log(element);
 	const { role } = useAuth();
 	const [edit, setEdit] = useState(false);
 	const [trash, setTrash] = useState(false);
@@ -178,7 +179,13 @@ const TaskWrapper = ({ element }) => {
 								<PointsTag>{points}</PointsTag>
 							)}
 							{!!attempts && (
-								<AttemptsTag>{attempts}</AttemptsTag>
+								<AttemptsTag>
+									{`${
+										userContent
+											? userContent.currentAttempts
+											: attempts
+									}/${attempts}`}
+								</AttemptsTag>
 							)}
 						</div>
 					)}

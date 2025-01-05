@@ -4,7 +4,7 @@ const PointsTag = ({ children }) => {
 	// окончания!!!
 	return (
 		<div className={styles['points-tag']}>
-			<p>{children} балл</p>
+			<p>Баллов: {children}</p>
 		</div>
 	);
 };

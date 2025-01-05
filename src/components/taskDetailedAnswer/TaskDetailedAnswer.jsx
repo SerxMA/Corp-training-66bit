@@ -6,6 +6,8 @@ import { changeText } from '../../helpers/functions/formatText';
 import { postContentsUser } from '../../store/actions/contents.js';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskDetailedAnswer.module.css';
+import Check from '../../UI/svg/check/Check.jsx';
+import Incorrect from '../../UI/svg/incorrect/Incorrect.jsx';
 
 const MAX_CHARS = {
 	answer: 128,
@@ -19,7 +21,7 @@ const TaskDetailedAnswer = ({
 }) => {
 	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
-	const [answer, setAnswer] = useState('');
+	const [answer, setAnswer] = useState(userContent ? userContent.answer : '');
 	const { topicId } = useParams();
 	const handleSubmit = () => {
 		const currentTopic = modules
@@ -66,6 +68,7 @@ const TaskDetailedAnswer = ({
 							(input) => setAnswer(input)
 						)
 					}
+					disabled={userContent?.completed}
 				/>
 				<span>Ваш ответ</span>
 			</div>
@@ -73,11 +76,17 @@ const TaskDetailedAnswer = ({
 				<div className={styles['btn-wrapper']}>
 					<MainButton
 						onClick={handleSubmit}
-						type={!answer ? 'disabled' : 'primary'}
-						disabled={!answer}
+						type={
+							!answer || userContent?.completed
+								? 'disabled'
+								: 'primary'
+						}
+						disabled={!answer || userContent?.completed}
 					>
 						Отправить
 					</MainButton>
+					{userContent?.success && <Check />}
+					{!userContent?.success && <Incorrect />}
 				</div>
 			)}
 		</>

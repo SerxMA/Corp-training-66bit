@@ -71,7 +71,16 @@ export const getContentsUser = (config) => {
 			const sortResponse = structuredClone(
 				response.data.map((data) => ({
 					...data.content,
-					userContent: data.userContent,
+					userContent:
+						data.userContent !== null
+							? {
+									...data.userContent,
+									answer: data.userContent.answer
+										.replace(/^\[/, '')
+										.replace(/\]$/, '')
+										.split(', '),
+							  }
+							: data.userContent,
 				}))
 			).sort((a, b) => a.position - b.position);
 			dispatch(getContentsSuccess(sortResponse));
