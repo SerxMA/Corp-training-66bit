@@ -85,8 +85,12 @@ const TaskDetailedAnswer = ({
 					>
 						Отправить
 					</MainButton>
-					{userContent?.success && <Check />}
-					{!userContent?.success && <Incorrect />}
+					{userContent?.completed && userContent?.success && (
+						<Check />
+					)}
+					{userContent?.completed && !userContent?.success && (
+						<Incorrect />
+					)}
 				</div>
 			)}
 		</>

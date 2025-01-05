@@ -6,18 +6,21 @@ import { changeText } from '../../helpers/functions/formatText';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './TaskFreeformAnswer.module.css';
 import { postContentsUser } from '../../store/actions/contents.js';
+import Check from '../../UI/svg/check/Check.jsx';
+import Incorrect from '../../UI/svg/incorrect/Incorrect.jsx';
 
 const MAX_CHARS = {
 	answer: 256,
 };
 
-const TaskFreeformAnswer = ({ question, role, contentId }) => {
+const TaskFreeformAnswer = ({ question, role, contentId, userContent }) => {
 	const [file, setFile] = useState(null);
-	const [answer, setAnswer] = useState('');
+	const [answer, setAnswer] = useState(
+		userContent ? userContent.answer[0] : ''
+	);
 	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
 	const { topicId } = useParams();
-
 	const handleFileChange = (e) => {
 		const selectedFile = e.target.files[0];
 		setFile(selectedFile);
@@ -49,7 +52,7 @@ const TaskFreeformAnswer = ({ question, role, contentId }) => {
 	};
 
 	useEffect(() => {
-		setAnswer(file ? `Выбранный файл: ${file.name}` : '');
+		setAnswer(file ? `Выбранный файл: ${file.name}` : answer);
 	}, [file]);
 
 	return (
@@ -115,6 +118,12 @@ const TaskFreeformAnswer = ({ question, role, contentId }) => {
 					>
 						Отправить
 					</MainButton>
+					{userContent?.completed && userContent?.success && (
+						<Check />
+					)}
+					{userContent?.completed && !userContent?.success && (
+						<Incorrect />
+					)}
 				</div>
 			)}
 		</>

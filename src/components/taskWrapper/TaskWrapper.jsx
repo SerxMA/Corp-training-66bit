@@ -106,6 +106,7 @@ const TaskWrapper = ({ element }) => {
 					question={description}
 					role={role}
 					contentId={id}
+					userContent={userContent}
 				/>
 			),
 			edit: (

@@ -19,9 +19,61 @@ const CourseStructure = ({ currentScore }) => {
 				<h3 className={styles['course-title']}>{course?.title}</h3>
 			</div>
 			{role === 'USER' && (
-				<div className={styles.statistic}>
-					Это прогресс -{' '}
-					{calculatePercentage(course.score, currentScore)}%
+				<div className={styles['statistic-wrapper']}>
+					<div className={styles.statistic}>
+						<h4>Прогресс</h4>
+						<div className={styles.progress}>
+							<svg
+								className={styles.circle}
+								width="142"
+								height="142"
+								viewBox="0 0 142 142"
+							>
+								<circle
+									r="61"
+									cx={71}
+									cy={71}
+									stroke="var(--accent-background)"
+									strokeWidth={18.5405}
+									fill="none"
+								/>
+							</svg>
+							<svg
+								className={styles['circle-progress']}
+								width="142"
+								height="142"
+								viewBox="0 0 142 142"
+								strokeDasharray="384"
+								strokeDashoffset={`${Math.abs(
+									Math.min(
+										(calculatePercentage(
+											course.score,
+											currentScore
+										) *
+											384) /
+											100,
+										384
+									) - 384
+								)}`}
+							>
+								<circle
+									r="61"
+									cx={71}
+									cy={71}
+									stroke="var(--accent-primary)"
+									strokeWidth={18.5405}
+									fill="none"
+								/>
+							</svg>
+							<h2>
+								{calculatePercentage(
+									course.score,
+									currentScore
+								)}
+								%
+							</h2>
+						</div>
+					</div>
 				</div>
 			)}
 			<div className={styles['course-structure']}>
