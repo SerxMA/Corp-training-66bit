@@ -6,7 +6,7 @@
 
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.375rem;
-	background: var(--blue-background);
+	background-color: var(--blue-background);
 
 	cursor: pointer;
 

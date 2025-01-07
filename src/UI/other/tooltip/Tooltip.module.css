@@ -5,6 +5,7 @@
 
 	background-color: var(--content-primary);
 	font: var(--body-medium14);
+	letter-spacing: 0.14px;
 	color: var(--background-primary);
 	white-space: nowrap;
 

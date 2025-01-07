@@ -28,7 +28,8 @@ const Authentication = () => {
 							type={'light'}
 							onClick={() =>
 								(window.location.href =
-									'http://localhost:8080/oauth2/authorization/gitlab')
+									import.meta.env.VITE_BASE_URL +
+									'/oauth2/authorization/gitlab')
 							}
 						>
 							<GitLab />
@@ -39,7 +40,8 @@ const Authentication = () => {
 							type={'light'}
 							onClick={() =>
 								(window.location.href =
-									'http://localhost:8080/oauth2/authorization/github')
+									import.meta.env.VITE_BASE_URL +
+									'/oauth2/authorization/github')
 							}
 						>
 							<GitLab />

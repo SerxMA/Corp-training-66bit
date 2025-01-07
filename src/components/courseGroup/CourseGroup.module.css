@@ -7,7 +7,7 @@
 	padding: 1rem;
 	padding-bottom: 0;
 
-	background: var(--background-sub-primary);
+	background-color: var(--background-sub-primary);
 }
 .group-table {
 	display: flex;

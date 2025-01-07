@@ -47,7 +47,7 @@
 			}
 		}
 		&:nth-child(2n) {
-			color: var(--System-error-primary, #f75c46);
+			color: var(--system-error-primary);
 
 			&:hover {
 				color: var(--system-error-secondary);
@@ -86,7 +86,7 @@
 	padding: 1rem;
 	padding-bottom: 0;
 
-	background: var(--background-sub-primary);
+	background-color: var(--background-sub-primary);
 
 	transform: translateX(-50%);
 	transition: top 0.3s ease-in-out;

@@ -143,11 +143,12 @@
 
 	padding: 0.625rem 1rem;
 
-	background: var(--background-secondary);
+	background-color: var(--background-secondary);
 
 	& > span {
 		width: calc((100% - 1rem) / 2);
 		font: var(--body-medium14);
+		letter-spacing: 0.14px;
 		color: var(--content-secondary);
 	}
 }
@@ -162,12 +163,13 @@
 	padding: 0px 1rem;
 	border-top: 1px solid var(--content-background);
 
-	background: var(--background-primary);
+	background-color: var(--background-primary);
 
 	& > span {
 		width: calc((100% - 1rem) / 2);
 
 		font: var(--body-regular16);
+		letter-spacing: 0.16px;
 
 		display: -webkit-box;
 		overflow: hidden;

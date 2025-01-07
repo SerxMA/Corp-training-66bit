@@ -10,7 +10,7 @@
 	border-radius: 0.5rem;
 	border: 1px solid var(--content-background);
 
-	background: var(--background-modal);
+	background-color: var(--background-modal);
 
 	font: var(--body-medium14);
 	letter-spacing: 0.14px;

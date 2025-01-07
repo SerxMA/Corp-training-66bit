@@ -63,7 +63,7 @@
 .table-title {
 	padding: 1rem;
 
-	background: var(--backround-secondary);
+	background-color: var(--background-secondary);
 
 	font: var(--body-medium14);
 	color: var(--content-secondary);

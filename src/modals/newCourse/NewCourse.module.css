@@ -64,11 +64,11 @@
 		height: 4px;
 	}
 	&::-webkit-scrollbar-track {
-		background: var(--content-subPrimary);
+		background-color: var(--content-subPrimary);
 		border-radius: 30px;
 	}
 	&::-webkit-scrollbar-thumb {
-		background: var(--system-success-primary);
+		background-color: var(--system-success-primary);
 		border-radius: 30px;
 	}
 }
@@ -108,6 +108,7 @@
 	border-radius: 0.25rem;
 
 	font: var(--body-medium14);
+	letter-spacing: 0.14px;
 
 	cursor: pointer;
 }

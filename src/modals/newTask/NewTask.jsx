@@ -179,20 +179,18 @@ const NewTask = ({ setOpen, type, position, data }) => {
 					<MainButton
 						onClick={handleSubmit}
 						type={
-							question &&
+							question.length &&
 							(type === 'multi' ||
 								(answer && attemptsTest >= 1)) &&
-							pointCorrect.length &&
 							pointCorrect >= 0
 								? 'primary'
 								: 'disabled'
 						}
 						disabled={
 							!(
-								question &&
+								question.length &&
 								(type === 'multi' ||
 									(answer && attemptsTest >= 1)) &&
-								pointCorrect.length &&
 								pointCorrect >= 0
 							)
 						}

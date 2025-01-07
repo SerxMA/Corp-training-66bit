@@ -8,7 +8,12 @@ const RedEllipse = ({ className }) => {
 			viewBox="0 0 5 5"
 			fill="none"
 		>
-			<circle cx="2.5" cy="2.5" r="2.5" fill="var(--error-primary)" />
+			<circle
+				cx="2.5"
+				cy="2.5"
+				r="2.5"
+				fill="var(--system-error-primary)"
+			/>
 		</svg>
 	);
 };

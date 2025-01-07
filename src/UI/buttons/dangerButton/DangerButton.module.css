@@ -28,23 +28,23 @@
 }
 /* types */
 .secondary {
-	color: var(--error-primary);
+	color: var(--system-error-primary);
 
 	box-shadow: 0px 0px 16px 0px rgba(33, 37, 41, 0.02);
 
 	&:hover {
-		background-color: var(--error-background);
+		background-color: var(--system-error-background);
 
-		box-shadow: 0px 0px 16px 0px var(--error-background);
+		box-shadow: 0px 0px 16px 0px var(--system-error-background);
 	}
 	&:active {
-		background-color: var(--error-background);
+		background-color: var(--system-error-background);
 
-		box-shadow: 0px 0px 16px 0px var(--error-background);
+		box-shadow: 0px 0px 16px 0px var(--system-error-background);
 	}
 
 	& > svg > path {
-		stroke: var(--error-primary);
+		stroke: var(--system-error-primary);
 	}
 }
 .disabled {

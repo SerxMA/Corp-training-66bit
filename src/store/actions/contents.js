@@ -4,6 +4,7 @@ import {
 	getContentsStarted,
 	getContentsSuccess,
 } from '../actionCreators/contents.js';
+import { getUserCourseSuccess } from '../actionCreators/userCourse.js';
 
 export const postContents = (topicId, config) => {
 	return async (dispatch) => {
@@ -26,8 +27,9 @@ export const postContentsUser = (config, secondConfig) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getContentsStarted());
-			await api.content.postContentsUser(config);
+			const result = await api.content.postContentsUser(config);
 			dispatch(getContentsUser(secondConfig));
+			dispatch(getUserCourseSuccess(result.data.course));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
 			alert(

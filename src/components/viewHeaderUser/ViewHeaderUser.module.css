@@ -63,8 +63,6 @@
 	justify-content: end;
 
 	gap: 0.75rem;
-	/* max-width: 711px;
-	width: 100%; */
 }
 .temp-tooltip {
 	position: relative;

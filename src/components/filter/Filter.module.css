@@ -10,14 +10,14 @@
 	gap: 0.5rem;
 
 	border-radius: 0.25rem;
-	background: var(--accent-background);
+	background-color: var(--accent-background);
 	color: var(--accent-primary);
 }
 
 .filter-btn:hover {
-	background: var(--accent-border);
+	background-color: var(--accent-border);
 }
 
 .filter-btn:active {
-	background: var(--accent-disabled);
+	background-color: var(--accent-disabled);
 }

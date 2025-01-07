@@ -26,6 +26,7 @@
 
 		& p {
 			font: var(--body-regular16);
+			letter-spacing: 0.16px;
 			color: var(--content-primary);
 			word-break: break-word;
 			overflow: hidden;

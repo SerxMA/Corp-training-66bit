@@ -10,6 +10,7 @@ import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
 import Dots from '../../UI/svg/dots/Dots.jsx';
 import ProgressBar from '../../UI/other/progressBar/ProgressBar.jsx';
 import CourseTag from '../courseTag/CourseTag.jsx';
+import { memberStatus } from '../../helpers/constants/memberStatus.js';
 
 const MemberRow = ({
 	member,
@@ -21,15 +22,8 @@ const MemberRow = ({
 	const [trash, setTrash] = useState(false);
 	const [relocate, setRelocate] = useState(false);
 
-	const tag = {
-		name: member.isCompleted ? 'Завершен' : 'Не завершен',
-		textColor: member.isCompleted
-			? 'var(--green-main)'
-			: 'var(--orange-main)',
-		color: member.isCompleted
-			? 'var(--green-background)'
-			: 'var(--orange-background)',
-	};
+	console.log(member);
+	const tag = memberStatus[member.status];
 
 	return (
 		<div className={styles.member} onClick={onClick}>
@@ -41,7 +35,6 @@ const MemberRow = ({
 					email={member.user.email}
 				/>
 			</span>
-			{/* <span>Это стата</span> */}
 			<span>
 				<CourseTag tag={tag} className={styles.tag} />
 			</span>

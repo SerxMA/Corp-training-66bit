@@ -8,7 +8,6 @@ import { postCourse } from '../../store/actions/courses.js';
 import { putCourse } from '../../store/actions/course.js';
 import ChooseImgModal from '../chooseImgModal/ChooseImgModal.jsx';
 import NewCourse from '../newCourse/NewCourse.jsx';
-import Cross from '../Cross.jsx';
 import styles from './WrapperCourseCreator.module.css';
 import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
 

@@ -65,7 +65,7 @@
 		margin-left: auto;
 		border-radius: 0.5rem;
 
-		background: var(--accent-background);
+		background-color: var(--accent-background);
 
 		font: var(--semiBold14);
 		color: var(--accent-primary);
@@ -93,11 +93,11 @@
 		width: 4px;
 	}
 	&::-webkit-scrollbar-track {
-		background: var(--content-subPrimary);
+		background-color: var(--content-subPrimary);
 		border-radius: 30px;
 	}
 	&::-webkit-scrollbar-thumb {
-		background: var(--system-success-primary);
+		background-color: var(--system-success-primary);
 		border-radius: 30px;
 	}
 }

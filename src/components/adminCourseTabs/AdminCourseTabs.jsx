@@ -48,14 +48,16 @@ const AdminCourseTabs = () => {
 			</div>
 			<div className={styles.buttons}>
 				<div className={styles['btn-secondary']}>
-					<SearchInputSmall
-						value={search}
-						onChange={(e) =>
-							changeText(e.target.value, 512, (text) =>
-								setSearch(text)
-							)
-						}
-					/>
+					{(isGroups || isPartic) && (
+						<SearchInputSmall
+							value={search}
+							onChange={(e) =>
+								changeText(e.target.value, 512, (text) =>
+									setSearch(text)
+								)
+							}
+						/>
+					)}
 					{(isGroups || isPartic) && (
 						<div className={styles['img-container']}>
 							<svg

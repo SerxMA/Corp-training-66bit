@@ -6,9 +6,9 @@
 	--content-primary: #212529;
 	--content-subPrimary: #555759;
 	--content-secondary: #8a8d8f;
-	--content-disabled: #bcbfc2;
-	--content-border: #d2d4d6;
-	--content-background: #f7f7f8;
+	--content-disabled: #cdcfd0;
+	--content-border: #dfe0e1;
+	--content-background: #eff0f0;
 
 	/* accent */
 	--accent-primary: #2a83f2;
@@ -19,7 +19,7 @@
 	--accent-background: #e1ecfa;
 
 	/* system */
-	--system-success-primary: #49cc93;
+	--system-success-primary: #24ce9f;
 	--system-success-background: #d2faef;
 	--system-error-primary: #f22a41;
 	--system-error-secondary: #f58070;
@@ -38,8 +38,10 @@
 
 	/* colors */
 	--red-main: #f22a41;
+	--red-border: #f8afba;
 	--red-background: #ffd6d8;
 	--green-main: #1fb784;
+	--green-border: #a9efd7;
 	--green-background: #d2f9e9;
 	--purple-main: #8c8cff;
 	--purple-border: #bab8f5;
@@ -48,11 +50,8 @@
 	--orange-border: #f5dcad;
 	--orange-background: #fcf0d4;
 	--blue-main: #2a83f2;
+	--blue-border: #bad9f7;
 	--blue-background: #e6effa;
-
-	/* something */
-	--error-primary: #f75c46;
-	--error-background: #ffeeeb;
 
 	/* fonts */
 	--heading1: 600 2.5rem/1.3 'IBM Plex Sans';
@@ -82,7 +81,6 @@
 	--content-disabled: #666666;
 	--content-border: #4d4d4d;
 	--content-background: #383838;
-	--content-background-2: #383838;
 
 	/* accent */
 	--accent-primary: #8c8cff;
@@ -105,14 +103,16 @@
 	--background-modal: #27282b;
 
 	/* colors */
+	--red-border: #672224;
 	--red-background: #38090e;
+	--green-border: #156549;
 	--green-background: #083327;
+	--purple-border: #282267;
 	--purple-background: #2a2a4d;
+	--orange-border: #60481a;
 	--orange-background: #332608;
+	--blue-border: #1e4267;
 	--blue-background: #081c35;
-
-	/* something */
-	--error-background: #38090e;
 }
 
 /* connect fonts */

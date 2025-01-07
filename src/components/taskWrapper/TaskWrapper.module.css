@@ -7,11 +7,11 @@
 	position: relative;
 	padding: 1.25rem;
 	border-radius: 0.75rem;
-	border: 1px solid var(--content-background-2);
+	border: 1px solid var(--content-background);
 
 	background-color: var(--background-modal);
 
-	color: var(--Content-content-subPrimary, #555759);
+	color: var(--content-subPrimary);
 
 	font: var(--body-regular16);
 	letter-spacing: 0.16px;

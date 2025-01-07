@@ -27,6 +27,7 @@
 
 	color: var(--content-primary);
 	font: var(--body-regular14);
+	letter-spacing: 0.14px;
 }
 
 .search-container:hover {

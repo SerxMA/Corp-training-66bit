@@ -1,7 +1,7 @@
 .question {
-	color: var(--content-secondary);
 	font: var(--body-medium16);
 	letter-spacing: 0.16px;
+	color: var(--content-secondary);
 }
 .input-box {
 	position: relative;

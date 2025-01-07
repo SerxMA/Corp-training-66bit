@@ -8,13 +8,25 @@ import styles from './Actions.module.css';
 
 const ACTIONS = [
 	{
-		icon: <Bell size={'medium'} />,
-		state: true,
+		icon: <Bell type={'disabled'} size={'medium'} />,
+		state: false,
 		inWorking: true,
 	},
-	{ icon: <Message size={'medium'} />, state: false, inWorking: true },
-	{ icon: <Settings size={'medium'} />, state: false, inWorking: true },
-	{ icon: <Help size={'medium'} />, state: false, inWorking: true },
+	{
+		icon: <Message type={'disabled'} size={'medium'} />,
+		state: false,
+		inWorking: true,
+	},
+	{
+		icon: <Settings type={'disabled'} size={'medium'} />,
+		state: false,
+		inWorking: true,
+	},
+	{
+		icon: <Help type={'disabled'} size={'medium'} />,
+		state: false,
+		inWorking: true,
+	},
 ];
 
 const Actions = () => {
