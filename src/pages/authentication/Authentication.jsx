@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import logo from '../../assets/images/logo.png';
 import styles from './Authentication.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import GitLab from '../../UI/svg/gitLab/GitLab.jsx';
 import Checkbox from '../../UI/inputs/checkbox/Checkbox.jsx';
 import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
 import LogoGrowIT from '../../UI/svg/logoGrowIT/LogoGrowIT.jsx';
+import useTheme from '../../customHooks/useTheme.js';
 
 const Authentication = () => {
+	const [theme, setTheme] = useTheme();
 	const [remember, setRemember] = useState(false);
 
 	const toggleState = () => {
 		setRemember((cv) => !cv);
 	};
 
+	useEffect(
+		() =>
+			theme === 'dark'
+				? document.body.classList.add('dark')
+				: document.body.classList.remove('dark'),
+		[theme]
+	);
 	return (
 		<div className={styles['auth-wrapper']}>
 			<div className={styles.content}>
