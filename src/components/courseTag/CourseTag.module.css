@@ -9,8 +9,6 @@
 }
 
 .text {
-	font-family: "Roboto Flex";
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 20px;
+	font: var(--body-medium14);
+	letter-spacing: 0.14px;
 }

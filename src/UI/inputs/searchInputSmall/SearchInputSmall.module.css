@@ -35,6 +35,11 @@
 }
 .search-input {
 	width: 0px;
+
+	font: var(--body-regular14);
+	letter-spacing: 0.14px;
+	color: var(--content-primary);
+
 	transition: width 0.5s ease-in-out;
 
 	&:not(:placeholder-shown) {

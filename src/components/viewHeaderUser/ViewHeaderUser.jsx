@@ -47,6 +47,7 @@ const ViewHeaderUser = () => {
 								setSearch(text)
 							)
 						}
+						inProgress
 					/>
 					<Filter />
 					<MainButton

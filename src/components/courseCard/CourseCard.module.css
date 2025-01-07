@@ -46,11 +46,7 @@
 	flex-wrap: wrap;
 }
 .title {
-	font-family: 'Roboto Flex';
 	height: 56px;
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 28px;
 
 	display: -webkit-box; /* Используем flexbox-эквивалент для обрезки */
 	-webkit-box-orient: vertical; /* Ориентируем flex-контейнер вертикально */
@@ -72,10 +68,7 @@
 	-webkit-line-clamp: 3; /* Ограничиваем количество видимых строк */ /* Межстрочный интервал */
 	word-break: break-word;
 
-	font-family: 'Roboto Flex';
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
+	font: var(--body-regular16);
 
 	color: var(--content-secondary);
 }

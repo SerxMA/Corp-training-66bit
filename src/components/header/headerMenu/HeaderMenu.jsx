@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../../../customHooks/useAuth.js';
 import UserPopup from '../../../modals/userPopup/UserPopup.jsx';
 import Actions from './actions/Actions.jsx';
-import avatar from '../../../assets/images/Avatar.jpg';
+import basicAvatar from '../../../assets/images/Avatar.jpg';
 import styles from './HeaderMenu.module.css';
 
 const HeaderMenu = () => {
@@ -20,7 +20,13 @@ const HeaderMenu = () => {
 					e.stopPropagation();
 				}}
 			>
-				<img src={avatarUrl || avatar} alt="Avatar" />
+				<img
+					src={avatarUrl}
+					alt="Avatar"
+					onError={(e) => {
+						e.currentTarget.src = basicAvatar;
+					}}
+				/>
 			</button>
 			<Actions />
 		</div>

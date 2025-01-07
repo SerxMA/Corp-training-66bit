@@ -56,6 +56,7 @@ const AdminCourseTabs = () => {
 									setSearch(text)
 								)
 							}
+							inProgress
 						/>
 					)}
 					{(isGroups || isPartic) && (
