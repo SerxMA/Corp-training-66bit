@@ -49,6 +49,8 @@
 .page {
 	transition: background-color 0.3s ease-in-out;
 
+	cursor: pointer;
+
 	&:hover {
 		background-color: var(--content-border);
 	}
@@ -56,6 +58,8 @@
 .page_current {
 	background-color: var(--accent-subPrimary);
 	color: var(--content-constant);
+
+	cursor: unset;
 
 	&:hover {
 		background-color: var(--accent-subPrimary);
