@@ -17,11 +17,6 @@ export const postEntity = (type, courseId, config) => {
 			dispatch(getModules(courseId));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -46,11 +41,6 @@ export const getModules = (courseId) => {
 			dispatch(getModulesSuccess(sortResponse));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -81,11 +71,6 @@ export const getModulesUser = (config) => {
 			dispatch(getModulesSuccess(sortResponse));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -98,11 +83,6 @@ export const postCurrentModule = (config, secondConfig) => {
 			dispatch(getModulesUser(secondConfig));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -115,11 +95,6 @@ export const postCurrentTopic = (config, secondConfig) => {
 			dispatch(getModulesUser(secondConfig));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -136,11 +111,6 @@ export const putEntity = (type, courseId, config) => {
 			dispatch(getModules(courseId));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -159,11 +129,6 @@ export const deleteEntity = (type, id, courseId) => {
 			dispatch(getModules(courseId));
 		} catch (error) {
 			dispatch(getModulesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

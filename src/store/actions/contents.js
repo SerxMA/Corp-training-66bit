@@ -14,11 +14,6 @@ export const postContents = (topicId, config) => {
 			dispatch(getContents(topicId));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -32,11 +27,6 @@ export const postContentsUser = (config, secondConfig) => {
 			dispatch(getUserCourseSuccess(result.data.course));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -56,11 +46,6 @@ export const getContents = (topicId) => {
 			dispatch(getContentsSuccess(sortResponse));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -88,11 +73,6 @@ export const getContentsUser = (config) => {
 			dispatch(getContentsSuccess(sortResponse));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -105,11 +85,6 @@ export const putContents = (topicId, config) => {
 			dispatch(getContents(topicId));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -122,11 +97,6 @@ export const deleteContents = (topicId, config) => {
 			dispatch(getContents(topicId));
 		} catch (error) {
 			dispatch(getContentsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

@@ -16,11 +16,6 @@ export const getMembers = (config, page = 0, limit = 20) => {
 			dispatch(getMembersSuccess(response.data));
 		} catch (error) {
 			dispatch(getMembersFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

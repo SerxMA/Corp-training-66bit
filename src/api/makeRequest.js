@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { getError } from '../helpers/functions/getError';
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 axios.defaults.withCredentials = true;
 
@@ -17,5 +19,5 @@ axios.interceptors.response.use(
 export const makeRequest = (config) => {
 	config.url = `${BASE_URL}/${config.url}`;
 
-	return axios(config);
+	return axios(config).catch((error) => getError(error));
 };

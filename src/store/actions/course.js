@@ -17,11 +17,6 @@ export const getCourse = (courseId) => {
 			dispatch(getCourseSuccess(response.data));
 		} catch (error) {
 			dispatch(getCourseFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -37,11 +32,6 @@ export const getCourseUser = (config, userCourseid) => {
 			dispatch(getMyGroupSuccess(response.data.group));
 		} catch (error) {
 			dispatch(getCourseFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -56,11 +46,6 @@ export const putCourse = (courseId, config, fieldType) => {
 			dispatch(getCourse(courseId));
 		} catch (error) {
 			dispatch(getCourseFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -74,11 +59,6 @@ export const deleteCourse = (courseId) => {
 			dispatch(deleteCourseSuccess());
 		} catch (error) {
 			dispatch(getCourseFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

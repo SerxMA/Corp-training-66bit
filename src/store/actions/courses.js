@@ -13,11 +13,6 @@ export const postCourse = (config, page) => {
 			dispatch(getCourses({ params: { page } }));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -30,11 +25,6 @@ export const getCourses = (config) => {
 			dispatch(getCoursesSuccess(response.data));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -50,11 +40,6 @@ export const getAllCoursesUser = (config, page = 0, limit = 18) => {
 			dispatch(getCoursesSuccess(response.data));
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -78,11 +63,6 @@ export const getMyCoursesUser = (config, page = 0, limit = 18) => {
 			);
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

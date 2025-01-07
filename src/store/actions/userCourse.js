@@ -13,11 +13,6 @@ export const getUserCourse = (config) => {
 			dispatch(getUserCourseSuccess(response.data));
 		} catch (error) {
 			dispatch(getUserCourseFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };

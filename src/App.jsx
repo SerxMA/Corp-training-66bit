@@ -3,6 +3,7 @@ import {
 	Navigate,
 	RouterProvider,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import CheckRole from './hoc/CheckRole.jsx';
 import UserMainLayout from './layouts/userMainLayout/UserMainLayout.jsx';
@@ -101,6 +102,7 @@ const router = createBrowserRouter([
 function App() {
 	return (
 		<div className="App">
+			<ToastContainer />
 			<RouterProvider router={router} />
 		</div>
 	);

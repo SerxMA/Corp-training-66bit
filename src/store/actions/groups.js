@@ -14,11 +14,6 @@ export const postGroup = (config, courseId) => {
 			dispatch(getGroups({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -33,11 +28,6 @@ export const getGroups = (config, page = 0, limit = 20) => {
 			dispatch(getGroupsSuccess(response.data));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -49,11 +39,6 @@ export const putGroupUsers = (config, courseId) => {
 			dispatch(getGroups({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -65,11 +50,6 @@ export const putGroupUsersFromUsersPage = (config, courseId) => {
 			dispatch(getMembers({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -81,11 +61,6 @@ export const putGroupDeadlines = (config, courseId) => {
 			dispatch(getGroups({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -97,11 +72,6 @@ export const putGroupMoveUsers = (config, courseId) => {
 			dispatch(getMembers({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -113,11 +83,6 @@ export const putGroupExcludeUsers = (config, courseId) => {
 			dispatch(getMembers({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
@@ -129,11 +94,6 @@ export const deleteGroup = (config, courseId) => {
 			dispatch(getGroups({ params: { courseId } }));
 		} catch (error) {
 			dispatch(getGroupsFailed(error.message));
-			alert(
-				`Статус - ${error.status}\nКод - ${error.code}\nСообщение - "${
-					error.response?.data.message || ''
-				}"`
-			);
 		}
 	};
 };
