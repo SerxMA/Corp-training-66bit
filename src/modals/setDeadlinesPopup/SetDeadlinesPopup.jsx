@@ -166,20 +166,6 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 						onClick={
 							data?.title ? handleSubmitPost : handleSubmitPut
 						}
-						type={
-							currModules.some(
-								(module) =>
-									module.deadlines.endTime.getTime() ==
-									new Date(0).getTime()
-							)
-								? 'sub-primary'
-								: 'primary'
-						}
-						disabled={currModules.some(
-							(module) =>
-								module.deadlines.endTime.getTime() ==
-								new Date(0).getTime()
-						)}
 					>
 						Готово
 					</MainButton>

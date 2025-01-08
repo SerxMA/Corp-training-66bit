@@ -73,6 +73,12 @@
 
 	cursor: pointer;
 }
+.some {
+	padding: 0.5rem 1rem;
+
+	font: var(--body-medium14);
+	color: var(--content-subPrimary);
+}
 .btn-wrapper {
 	display: flex;
 	flex-direction: row;

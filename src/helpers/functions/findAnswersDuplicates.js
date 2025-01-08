@@ -3,7 +3,10 @@ export const findAnswersDuplicates = (answers) => {
 
 	answers.forEach(({ answer }) => {
 		if (answer) {
-			answerCounts.set(answer, (answerCounts.get(answer) || 0) + 1);
+			answerCounts.set(
+				answer.trimEnd(),
+				(answerCounts.get(answer) || 0) + 1
+			);
 		}
 	});
 	const duplicates = Array.from(answerCounts.entries())

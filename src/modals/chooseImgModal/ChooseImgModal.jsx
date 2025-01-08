@@ -7,11 +7,13 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
+	console.log(type);
 
 	const handleDrop = (e) => {
 		e.preventDefault();
 		const droppedFile = e.dataTransfer.files[0];
-		changeData((cv) => ({ ...cv, file: droppedFile }));
+		droppedFile.type.split('/')?.[0] === 'image' &&
+			changeData((cv) => ({ ...cv, file: droppedFile }));
 	};
 
 	const handleFileChange = (e) => {

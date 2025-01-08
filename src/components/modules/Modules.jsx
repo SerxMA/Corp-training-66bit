@@ -13,7 +13,7 @@ const Modules = ({ type }) => {
 					<Module key={index} type={type} module={module} />
 				))
 			) : (
-				<h2 className={styles['modules-placeholder']}>Модулей нет</h2>
+				<h3 className={styles['modules-placeholder']}>Модулей нет</h3>
 			)}
 		</ul>
 	);

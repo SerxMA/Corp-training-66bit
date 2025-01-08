@@ -153,7 +153,7 @@ const TaskWrapper = ({ element }) => {
 			edit: (
 				<ChooseFile
 					setOpen={setEdit}
-					type={'photo'}
+					type={'image'}
 					position={position}
 					data={element}
 				/>

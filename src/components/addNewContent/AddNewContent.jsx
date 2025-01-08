@@ -100,7 +100,7 @@ const AddNewContent = ({ position }) => {
 			{photo && (
 				<ChooseFile
 					setOpen={setPhoto}
-					type={'photo'}
+					type={'image'}
 					position={position}
 				/>
 			)}

@@ -15,7 +15,6 @@ const Module = ({ type, module }) => {
 	const [newLesson, setNewLesson] = useState(false);
 	const [edit, setEdit] = useState(false);
 	const [trash, setTrash] = useState(false);
-
 	const handleClick = () => {
 		setExapnded(!expanded);
 	};
@@ -91,6 +90,12 @@ const Module = ({ type, module }) => {
 					setOpen={setNewLesson}
 					type={'lesson'}
 					id={module.id}
+					position={
+						module.topics.length
+							? +module.topics[module.topics.length - 1]
+									.position + 1
+							: 0
+					}
 				/>
 			)}
 		</div>

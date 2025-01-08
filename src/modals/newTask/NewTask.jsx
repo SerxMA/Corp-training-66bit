@@ -151,6 +151,8 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								value={pointCorrect}
 								max={2000000000}
 								onChange={(e) =>
+									e.nativeEvent.data !== '-' &&
+									e.nativeEvent.data !== '+' &&
 									e.target.value < 2000000000 &&
 									setPointCorrect(e.target.value)
 								}
@@ -166,6 +168,8 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									value={attemptsTest}
 									max={2000000000}
 									onChange={(e) =>
+										e.nativeEvent.data !== '-' &&
+										e.nativeEvent.data !== '+' &&
 										e.target.value < 2000000000 &&
 										setAttemptsTest(e.target.value)
 									}

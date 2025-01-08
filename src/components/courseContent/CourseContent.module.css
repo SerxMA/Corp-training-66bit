@@ -13,3 +13,6 @@
 	align-self: stretch;
 	row-gap: 0.75rem;
 }
+.some {
+	color: var(--content-secondary);
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
 
 import Dots from '../Dots.jsx';
 import CourseStructureActions from '../courseStructureActions/CourseStructureActions.jsx';
@@ -10,9 +11,9 @@ import styles from './EditCourseStructure.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 
 const EditCourseStructure = ({ setOpen, course }) => {
+	const { modules } = useSelector((state) => state.modules);
 	const [courseActions, setCourseActions] = useState(false);
 	const [newModule, setNewModule] = useState(false);
-
 	useEffect(() => {
 		const closePopup = () => {
 			console.log(12343234);
@@ -94,7 +95,11 @@ const EditCourseStructure = ({ setOpen, course }) => {
 						setOpen={setNewModule}
 						type={'module'}
 						id={course.id}
-						// position={}
+						position={
+							modules.length
+								? +modules[modules.length - 1].position + 1
+								: 0
+						}
 					/>
 				)}
 			</div>

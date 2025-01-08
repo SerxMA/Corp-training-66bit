@@ -63,11 +63,11 @@ const CourseContent = () => {
 						</div>
 					))
 				) : role === 'ADMIN' ? (
-					<li>
+					<li className={styles.some}>
 						<h3>Добавьте задания</h3>
 					</li>
 				) : (
-					<li>
+					<li className={styles.some}>
 						<h3>Заданий нет</h3>
 					</li>
 				)}

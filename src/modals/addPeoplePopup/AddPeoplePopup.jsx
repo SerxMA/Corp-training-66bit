@@ -71,7 +71,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 					</li>
 				))
 			) : (
-				<p className={styles['no-users']}> Пользователей нет</p>
+				<p className={styles['no-users']}>Пользователей нет</p>
 			)}
 		</ul>
 	);

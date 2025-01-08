@@ -14,7 +14,6 @@
 .course-title-block {
 	display: flex;
 	align-items: center;
-	justify-content: center;
 
 	padding: 15px;
 }
@@ -23,7 +22,7 @@
 	-webkit-box-orient: vertical; /* Ориентируем flex-контейнер вертикально */
 	overflow: hidden; /* Скрываем текст, который не помещается */
 	text-overflow: ellipsis; /* Добавляем троеточие */
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
 	word-break: break-word;
 
 	color: var(--content-primary);

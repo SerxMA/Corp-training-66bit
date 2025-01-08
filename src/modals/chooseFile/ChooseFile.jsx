@@ -14,7 +14,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 	const [file, setFile] = useState(null);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
-	console.log(data);
+	console.log(type);
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
@@ -22,7 +22,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 	const handleDrop = (e) => {
 		e.preventDefault();
 		const droppedFile = e.dataTransfer.files[0];
-		setFile(droppedFile);
+		droppedFile.type.split('/')?.[0] === type && setFile(droppedFile);
 	};
 
 	const handleFileChange = (e) => {
@@ -34,7 +34,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 		const content = {
 			title: 'Это заглушка title',
 			position: position,
-			type: type === 'photo' ? 'PICTURE' : 'VIDEO',
+			type: type === 'image' ? 'PICTURE' : 'VIDEO',
 			description: 'Это заглушка description',
 		};
 		const contentBlob = new Blob([JSON.stringify(content)], {
@@ -87,7 +87,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 			>
 				<div className={styles['top-block']}>
 					<h2 className={styles['title']}>
-						{type === 'photo' ? 'Новое фото' : 'Новое видео'}
+						{type === 'image' ? 'Новое фото' : 'Новое видео'}
 					</h2>
 					<ClosePopup onClick={() => setOpen(false)} />
 				</div>
@@ -104,7 +104,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 							<p className={styles['upload-text']}>
 								{file
 									? file.name
-									: type === 'photo'
+									: type === 'image'
 									? 'Перетащите изображение сюда'
 									: 'Перетащите видео сюда'}
 							</p>
@@ -114,7 +114,7 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 								<input
 									type="file"
 									accept={
-										type === 'photo'
+										type === 'image'
 											? '.jpg, .png, jpeg'
 											: '.mp4, .avi, .webm, .ogg, .quicktime'
 									}

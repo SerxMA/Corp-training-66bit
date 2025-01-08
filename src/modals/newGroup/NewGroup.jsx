@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import styles from './NewGroup.module.css';
 import AddPeoplePopup from '../addPeoplePopup/AddPeoplePopup.jsx';
@@ -11,6 +13,7 @@ const MAX_CHARS = {
 };
 
 const NewGroup = ({ setOpen }) => {
+	const { groups } = useSelector((state) => state.groups);
 	const [group, setGroup] = useState('');
 	const [next, setNext] = useState(false);
 
@@ -63,7 +66,17 @@ const NewGroup = ({ setOpen }) => {
 					</MainButton>
 					<MainButton
 						className={styles['half-parent']}
-						onClick={() => setNext(true)}
+						onClick={() => {
+							if (
+								groups.length &&
+								groups.some((obj) => obj.name === group)
+							) {
+								toast.error(
+									'Группа с таким названием существует'
+								);
+								setOpen(false);
+							} else setNext(true);
+						}}
 						type={group ? 'primary' : 'disabled'}
 						disabled={!group}
 						sequel

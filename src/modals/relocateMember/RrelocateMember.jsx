@@ -72,16 +72,24 @@ const RelocateMember = ({ setOpen, group, users, courseId }) => {
 					/>
 					{showGroups && (
 						<ul className={styles['group-menu']}>
-							{currGroups.map((group) => (
-								<li
-									key={group.id}
-									className={styles.group}
-									onClick={() => toggleStateGroup(group.id)}
-								>
-									<RadioButton state={group.state} />
-									{group.name}
+							{currGroups.length ? (
+								currGroups.map((group) => (
+									<li
+										key={group.id}
+										className={styles.group}
+										onClick={() =>
+											toggleStateGroup(group.id)
+										}
+									>
+										<RadioButton state={group.state} />
+										{group.name}
+									</li>
+								))
+							) : (
+								<li className={styles.some}>
+									<p>Альтернативных групп нет</p>
 								</li>
-							))}
+							)}
 						</ul>
 					)}
 				</div>
