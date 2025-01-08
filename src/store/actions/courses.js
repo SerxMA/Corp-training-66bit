@@ -37,7 +37,15 @@ export const getAllCoursesUser = (config, page = 0, limit = 18) => {
 				...config,
 				params: { ...config.params, page, limit },
 			});
-			dispatch(getCoursesSuccess(response.data));
+			dispatch(
+				getCoursesSuccess({
+					content: response.data.content.map((obj) => ({
+						...obj.course,
+						userCourse: obj.userCourse,
+					})),
+					totalPages: response.data.totalPages,
+				})
+			);
 		} catch (error) {
 			dispatch(getCoursesFailed(error.message));
 		}

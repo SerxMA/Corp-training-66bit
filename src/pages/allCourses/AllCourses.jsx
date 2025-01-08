@@ -64,7 +64,7 @@ const AllCourses = () => {
 								title={course.title}
 								id={course.id}
 								description={course.description}
-								enrolled={role === 'ADMIN'}
+								enrolled={role === 'ADMIN' || course.userCourse}
 							/>
 						))}
 					</ul>
