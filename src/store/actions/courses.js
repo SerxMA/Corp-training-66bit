@@ -17,6 +17,18 @@ export const postCourse = (config, page) => {
 	};
 };
 
+export const postSignUpCourse = (config, secondConfig) => {
+	return async (dispatch) => {
+		try {
+			dispatch(getCoursesStarted());
+			await api.courses.postSignUpCourse(config);
+			dispatch(getAllCoursesUser(secondConfig));
+		} catch (error) {
+			dispatch(getCoursesFailed(error.message));
+		}
+	};
+};
+
 export const getCourses = (config) => {
 	return async (dispatch) => {
 		try {

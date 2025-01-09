@@ -36,7 +36,14 @@ const CourseLayout = () => {
 		const topicId =
 			window.location.pathname.match(/\/course\/\d+\/(\d+)/)?.[1];
 
-		if (!topicId && modules.length) {
+		if (
+			(!topicId ||
+				(topicId &&
+					!modules.some((module) =>
+						module.topics.some((topic) => topic === +topicId)
+					))) &&
+			modules.length
+		) {
 			const topicModule = modules.find((module) => module.topics.length);
 			topicModule &&
 				navigate(`/course/${courseId}/${topicModule.topics[0].id}`);

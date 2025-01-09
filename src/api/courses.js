@@ -21,6 +21,9 @@ export const deleteCourse = (config) => {
 
 const URL_USER = 'user/courses';
 
+export const postSignUpCourse = (config) =>
+	makeRequest({ method: 'POST', url: URL_USER + '/subscribe', ...config });
+
 export const getAllCoursesUser = (config) =>
 	makeRequest({ method: 'GET', url: URL_USER, ...config });
 

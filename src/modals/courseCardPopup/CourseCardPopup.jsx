@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import { useDispatch } from 'react-redux';
 
+import { useAuth } from '../../customHooks/useAuth.js';
+import { postSignUpCourse } from '../../store/actions/courses.js';
 import CourseTag from '../../components/courseTag/CourseTag.jsx';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
-import styles from './CourseCardPopup.module.css';
 import ClosePopup from '../../UI/svg/closePopup/ClosePopup.jsx';
+import styles from './CourseCardPopup.module.css';
 
 const CourseCardPopup = ({
 	title,
@@ -16,8 +19,22 @@ const CourseCardPopup = ({
 	setOpen,
 	enrolled,
 }) => {
+	const dispatch = useDispatch();
+	const { username } = useAuth();
 	const setIsPopupClosed = () => {
 		setOpen(false);
+	};
+
+	const handleSignUp = () => {
+		const config = {
+			data: [username],
+			params: { courseId: id },
+		};
+		dispatch(
+			postSignUpCourse(config, {
+				params: { username: username, enrolled: false },
+			})
+		);
 	};
 
 	useEffect(() => {
@@ -57,7 +74,10 @@ const CourseCardPopup = ({
 						<MainButton sequel>К материалам курса</MainButton>
 					</NavLink>
 				) : (
-					<MainButton className={styles['continue-link']}>
+					<MainButton
+						className={styles['continue-link']}
+						onClick={handleSignUp}
+					>
 						Записаться
 					</MainButton>
 				)}
