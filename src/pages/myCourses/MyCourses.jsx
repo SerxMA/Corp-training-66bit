@@ -16,18 +16,26 @@ const MyCourses = () => {
 	const [page, setPage] = useState(
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
+	const title = searchParams.get('title') ? searchParams.get('title') : '';
 	const { username } = useAuth();
 
 	useEffect(() => {
 		if (page >= 1) {
 			dispatch(
 				getMyCoursesUser({
-					params: { username: username, enrolled: true },
+					params: { username: username, enrolled: true, title },
 				})
 			);
-			navigate(`/courses/my-courses?page=${page}`);
 		} else {
 			setPage(1);
+		}
+	}, [page, title]);
+
+	useEffect(() => {
+		if (page >= 1) {
+			title.length
+				? navigate(`/courses/my-courses?page=${page}&title=${title}`)
+				: navigate(`/courses/my-courses?page=${page}`);
 		}
 	}, [page]);
 

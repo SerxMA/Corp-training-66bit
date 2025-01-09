@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+	NavLink,
+	useLocation,
+	useNavigate,
+	useSearchParams,
+} from 'react-router-dom';
 
 import { changeText } from '../../helpers/functions/formatText.js';
 import Filter from '../filter/Filter.jsx';
-// import SearchField from '../searchField/SearchField.jsx';
 import styles from './ViewHeaderUser.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import LayoutList from '../../UI/svg/layoutList/LayoutList.jsx';
@@ -11,7 +15,35 @@ import SearchInputSmall from '../../UI/inputs/searchInputSmall/SearchInputSmall.
 import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
 
 const ViewHeaderUser = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+	const [searchParams] = useSearchParams();
 	const [search, setSearch] = useState('');
+
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			console.log(location.pathname);
+			console.log(
+				search.length &&
+					(location.pathname.includes('all-courses') ||
+						location.pathname.includes('my-courses'))
+			);
+			if (
+				location.pathname.includes('all-courses') ||
+				location.pathname.includes('my-courses')
+			) {
+				search.length
+					? navigate(`${location.pathname}?page=1&title=${search}`)
+					: navigate(
+							`${location.pathname}?page=${searchParams.get(
+								'page'
+							)}`
+					  );
+			}
+		}, 1000);
+
+		return () => clearTimeout(timeoutId);
+	}, [search]);
 
 	return (
 		<div className={styles['view-header-wrapper']}>
@@ -39,7 +71,6 @@ const ViewHeaderUser = () => {
 					</NavLink>
 				</div>
 				<div className={styles['buttons']}>
-					{/* <SearchField /> */}
 					<SearchInputSmall
 						value={search}
 						onChange={(e) =>
@@ -47,7 +78,6 @@ const ViewHeaderUser = () => {
 								setSearch(text)
 							)
 						}
-						inProgress
 					/>
 					<Filter />
 					<MainButton

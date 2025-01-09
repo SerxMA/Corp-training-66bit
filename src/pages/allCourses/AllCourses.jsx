@@ -25,7 +25,11 @@ const AllCourses = () => {
 				role === 'ADMIN'
 					? getCourses({ params: { page: page - 1, title } })
 					: getAllCoursesUser({
-							params: { username: username, enrolled: false },
+							params: {
+								username: username,
+								enrolled: false,
+								title,
+							},
 					  })
 			);
 		} else {
