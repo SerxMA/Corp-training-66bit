@@ -1,8 +1,5 @@
 import { toast } from 'react-toastify';
 
-export const getError = ({ status, response }) => {
-	toast.error(
-		`Статус - ${status}\n
-		Сообщение - "${response?.data?.message || ''}"`
-	);
+export const getError = ({ response }) => {
+	toast.error(`Сообщение - ${response?.data?.message || ''}`);
 };

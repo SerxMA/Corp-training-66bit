@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 export const findAnswersDuplicates = (answers) => {
 	const answerCounts = new Map();
 
@@ -14,7 +16,7 @@ export const findAnswersDuplicates = (answers) => {
 		.map(([answer]) => answer);
 
 	if (duplicates.length > 0) {
-		alert(`Присутствуют дубликаты: ${duplicates.join(', ')}`);
+		toast.error(`Присутствуют дубликаты: ${duplicates.join(', ')}`);
 		return false;
 	} else return true;
 };
