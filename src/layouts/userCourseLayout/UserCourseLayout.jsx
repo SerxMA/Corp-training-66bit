@@ -75,7 +75,10 @@ const UserCourseLayout = () => {
 
 	return (
 		<>
-			<CourseStructure currentScore={userCourse.currentScore} />
+			<CourseStructure
+				status={userCourse.status}
+				currentScore={userCourse.currentScore}
+			/>
 			<div className={styles['content-wrapper']}>
 				<Outlet />
 			</div>

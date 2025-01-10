@@ -41,8 +41,16 @@ const MemberRow = ({
 			<span>{member.group.name}</span>
 			<span>
 				<ProgressBar
-					maxScore={course.score}
-					currentScore={member.currentScore}
+					maxScore={
+						!course.score && member.status === 'FINISHED'
+							? 100
+							: course.score
+					}
+					currentScore={
+						!course.score && member.status === 'FINISHED'
+							? 100
+							: member.currentScore
+					}
 				/>
 			</span>
 			<button

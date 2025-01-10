@@ -23,7 +23,9 @@ const AllCourses = () => {
 		if (page >= 1) {
 			dispatch(
 				role === 'ADMIN'
-					? getCourses({ params: { page: page - 1, title } })
+					? getCourses({
+							params: { page: page - 1, title, limit: 18 },
+					  })
 					: getAllCoursesUser({
 							params: {
 								username: username,

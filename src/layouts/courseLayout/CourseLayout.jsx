@@ -52,6 +52,7 @@ const CourseLayout = () => {
 				const topicModule = modules.find(
 					(module) => module.topics.length
 				);
+				console.log(topicModule);
 				if (topicModule) {
 					topicModule &&
 						navigate(
