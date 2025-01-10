@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
-import { changeText } from '../../helpers/functions/formatText.js';
+import {
+	changeText,
+	changeTextSecond,
+} from '../../helpers/functions/formatText.js';
 import Cross from '../Cross.jsx';
 import styles from './NewText.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
@@ -106,7 +109,7 @@ const NewText = ({ setOpen, position, data }) => {
 							required
 							value={text}
 							onChange={(e) =>
-								changeText(
+								changeTextSecond(
 									e.target.value,
 									MAX_CHARS['text'],
 									setText

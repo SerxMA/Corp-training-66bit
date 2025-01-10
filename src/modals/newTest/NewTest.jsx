@@ -258,7 +258,11 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								value={pointCorrect}
 								max={2000000000}
 								onKeyDown={(e) => {
-									if (['-', '+', 'e', 'E'].includes(e.key)) {
+									if (
+										['-', '+', 'e', 'E', '.', ','].includes(
+											e.key
+										)
+									) {
 										e.preventDefault();
 									}
 								}}
@@ -274,6 +278,8 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								}}
 								onChange={(e) => {
 									return (
+										e.nativeEvent.data !== '.' &&
+										e.nativeEvent.data !== ',' &&
 										e.nativeEvent.data !== '-' &&
 										e.nativeEvent.data !== '+' &&
 										e.nativeEvent.data !== 'e' &&
@@ -292,7 +298,11 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								value={attemptsTest}
 								max={2000000000}
 								onKeyDown={(e) => {
-									if (['-', '+', 'e', 'E'].includes(e.key)) {
+									if (
+										['-', '+', 'e', 'E', '.', ','].includes(
+											e.key
+										)
+									) {
 										e.preventDefault();
 									}
 								}}
@@ -307,6 +317,8 @@ const NewTest = ({ setOpen, type, position, data }) => {
 									}
 								}}
 								onChange={(e) =>
+									e.nativeEvent.data !== '.' &&
+									e.nativeEvent.data !== ',' &&
 									e.nativeEvent.data !== '-' &&
 									e.nativeEvent.data !== '+' &&
 									e.nativeEvent.data !== 'e' &&

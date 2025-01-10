@@ -13,5 +13,7 @@
 	display: block;
 }
 .topics-placeholder {
+	margin-left: 2.5rem;
+
 	color: var(--content-subPrimary);
 }

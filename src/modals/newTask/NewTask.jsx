@@ -151,7 +151,11 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								value={pointCorrect}
 								max={2000000000}
 								onKeyDown={(e) => {
-									if (['-', '+', 'e', 'E'].includes(e.key)) {
+									if (
+										['-', '+', 'e', 'E', '.', ','].includes(
+											e.key
+										)
+									) {
 										e.preventDefault();
 									}
 								}}
@@ -166,6 +170,8 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									}
 								}}
 								onChange={(e) =>
+									e.nativeEvent.data !== '.' &&
+									e.nativeEvent.data !== ',' &&
 									e.nativeEvent.data !== '-' &&
 									e.nativeEvent.data !== '+' &&
 									e.nativeEvent.data !== 'e' &&
@@ -185,7 +191,14 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									max={2000000000}
 									onKeyDown={(e) => {
 										if (
-											['-', '+', 'e', 'E'].includes(e.key)
+											[
+												'-',
+												'+',
+												'e',
+												'E',
+												'.',
+												',',
+											].includes(e.key)
 										) {
 											e.preventDefault();
 										}
@@ -201,6 +214,8 @@ const NewTask = ({ setOpen, type, position, data }) => {
 										}
 									}}
 									onChange={(e) =>
+										e.nativeEvent.data !== '.' &&
+										e.nativeEvent.data !== ',' &&
 										e.nativeEvent.data !== '-' &&
 										e.nativeEvent.data !== '+' &&
 										e.nativeEvent.data !== 'e' &&
