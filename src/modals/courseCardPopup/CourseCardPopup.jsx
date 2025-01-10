@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +20,11 @@ const CourseCardPopup = ({
 	enrolled,
 }) => {
 	const dispatch = useDispatch();
+	const [searchParams] = useSearchParams();
 	const { username } = useAuth();
+	const page = searchParams.get('page') ? +searchParams.get('page') : 1;
+	const title2 = searchParams.get('title') ? searchParams.get('title') : '';
+
 	const setIsPopupClosed = () => {
 		setOpen(false);
 	};
@@ -32,7 +36,13 @@ const CourseCardPopup = ({
 		};
 		dispatch(
 			postSignUpCourse(config, {
-				params: { username: username, enrolled: false },
+				params: {
+					username: username,
+					enrolled: false,
+					page: page - 1,
+					limit: 20,
+					title: title2,
+				},
 			})
 		);
 	};

@@ -24,12 +24,14 @@ const AllCourses = () => {
 			dispatch(
 				role === 'ADMIN'
 					? getCourses({
-							params: { page: page - 1, title, limit: 18 },
+							params: { page: page - 1, title, limit: 20 },
 					  })
 					: getAllCoursesUser({
 							params: {
 								username: username,
 								enrolled: false,
+								page: page - 1,
+								limit: 20,
 								title,
 							},
 					  })

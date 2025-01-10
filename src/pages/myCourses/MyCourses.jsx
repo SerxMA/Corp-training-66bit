@@ -23,7 +23,13 @@ const MyCourses = () => {
 		if (page >= 1) {
 			dispatch(
 				getMyCoursesUser({
-					params: { username: username, enrolled: true, title },
+					params: {
+						username: username,
+						enrolled: true,
+						title,
+						page: page - 1,
+						limit: 20,
+					},
 				})
 			);
 		} else {

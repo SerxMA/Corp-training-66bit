@@ -41,13 +41,12 @@ export const getCourses = (config) => {
 	};
 };
 
-export const getAllCoursesUser = (config, page = 0, limit = 18) => {
+export const getAllCoursesUser = (config) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getCoursesStarted());
 			const response = await api.courses.getAllCoursesUser({
 				...config,
-				params: { ...config.params, page, limit },
 			});
 			dispatch(
 				getCoursesSuccess({
@@ -64,13 +63,12 @@ export const getAllCoursesUser = (config, page = 0, limit = 18) => {
 	};
 };
 
-export const getMyCoursesUser = (config, page = 0, limit = 18) => {
+export const getMyCoursesUser = (config) => {
 	return async (dispatch) => {
 		try {
 			dispatch(getCoursesStarted());
 			const response = await api.courses.getMyCoursesUser({
 				...config,
-				params: { ...config.params, page, limit },
 			});
 			dispatch(
 				getCoursesSuccess({
