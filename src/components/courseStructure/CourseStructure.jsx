@@ -12,21 +12,7 @@ const CourseStructure = ({ status, currentScore }) => {
 	const { course } = useSelector((state) => state.course);
 	const [editCourse, setEditCourse] = useState(false);
 	const { role } = useAuth();
-	// console.log((calculatePercentage(100, 100) * 384) / 100);
-	console.log(
-		Math.abs(
-			Math.min(
-				!course.score && status === 'FINISHED'
-					? (calculatePercentage(100, 100) * 384) / 100
-					: (calculatePercentage(course.score, currentScore) * 384) /
-							100
-			) - 384
-		)
-	);
-	// console.log((calculatePercentage(course.score, currentScore) * 384) / 100);
-	// console.log(!course.score);
-	// console.log(status === 'FINISHED');
-	// console.log(!course.score && status === 'FINISHED');
+
 	return (
 		<div className={styles['nav-panel']}>
 			<div className={styles['course-title-block']}>
