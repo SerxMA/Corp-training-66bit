@@ -14,7 +14,6 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 	const [file, setFile] = useState(null);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
-	console.log(type);
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
@@ -40,7 +39,6 @@ const ChooseFile = ({ setOpen, type, position, data }) => {
 		const contentBlob = new Blob([JSON.stringify(content)], {
 			type: 'application/json; charset=UTF-8',
 		});
-		console.log(content);
 
 		const formData = new FormData();
 		formData.append('content', contentBlob);

@@ -12,7 +12,6 @@ const GroupRow = ({ group, clickGroup, setClickGroup }) => {
 	const [deadlines, setDeadlines] = useState(false);
 	const [trash, setTrash] = useState(false);
 	const [trashExclude, setTrashExclude] = useState(false);
-	console.log(group);
 
 	return (
 		<div className={styles.group}>

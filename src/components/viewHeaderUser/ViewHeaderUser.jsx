@@ -22,12 +22,6 @@ const ViewHeaderUser = () => {
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
-			console.log(location.pathname);
-			console.log(
-				search.length &&
-					(location.pathname.includes('all-courses') ||
-						location.pathname.includes('my-courses'))
-			);
 			if (
 				location.pathname.includes('all-courses') ||
 				location.pathname.includes('my-courses')

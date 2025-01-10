@@ -51,7 +51,6 @@ const WrapperCourseCreator = ({ setOpen, stage, id, course }) => {
 
 		const config = { data: formData };
 		const currentPage = searchParams.get('page');
-		console.log(currentPage);
 		if (stage) {
 			dispatch(
 				putCourse(id, config, stage === 2 ? 'image' : 'fields')

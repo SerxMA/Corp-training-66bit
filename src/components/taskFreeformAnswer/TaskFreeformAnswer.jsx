@@ -39,7 +39,6 @@ const TaskFreeformAnswer = ({ question, role, contentId, userContent }) => {
 					currentAttempts: -1,
 				},
 			};
-			console.log(config);
 			dispatch(
 				postContentsUser(config, {
 					params: {

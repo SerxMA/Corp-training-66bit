@@ -19,9 +19,6 @@ const CourseGroup = () => {
 	);
 	const [clickGroup, setClickGroup] = useState(0);
 
-	console.log(totalPages);
-	console.log(groups);
-
 	useEffect(() => {
 		if (totalPages > 1 && page > totalPages) {
 			setPage(1);

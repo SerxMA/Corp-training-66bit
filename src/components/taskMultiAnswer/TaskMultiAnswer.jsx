@@ -58,7 +58,6 @@ const TaskMultiAnswer = ({
 						: countAttempts,
 				},
 			};
-			console.log(config);
 			dispatch(
 				postContentsUser(config, {
 					params: {

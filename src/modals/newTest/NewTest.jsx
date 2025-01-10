@@ -33,8 +33,6 @@ const NewTest = ({ setOpen, type, position, data }) => {
 	);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
-	console.log(pointCorrect);
-
 	const addAnswer = () => {
 		setAnswers((cv) =>
 			cv.find((obj) => obj.answer === '')
@@ -121,7 +119,6 @@ const NewTest = ({ setOpen, type, position, data }) => {
 					isRight: answer.isTrue,
 				})),
 			};
-			console.log(content);
 			const contentBlob = new Blob([JSON.stringify(content)], {
 				type: 'application/json; charset=UTF-8',
 			});

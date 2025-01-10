@@ -28,7 +28,6 @@ const TaskWrapper = ({ element }) => {
 		position,
 		userContent,
 	} = element;
-	console.log(element);
 	const { role } = useAuth();
 	const [edit, setEdit] = useState(false);
 	const [trash, setTrash] = useState(false);

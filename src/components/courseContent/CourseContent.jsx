@@ -16,8 +16,6 @@ const CourseContent = () => {
 	const { role } = useAuth();
 	const { topicId } = useParams();
 
-	console.log(contents);
-
 	useEffect(() => {
 		if (role === 'ADMIN') dispatch(getContents(topicId));
 		else {

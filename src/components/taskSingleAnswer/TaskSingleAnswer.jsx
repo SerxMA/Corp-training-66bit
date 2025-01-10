@@ -30,8 +30,6 @@ const TaskSingleAnswer = ({
 			: []
 	);
 	const { topicId } = useParams();
-	console.log(answers);
-	console.log(currAnswers);
 
 	const toggleAnswerState = (answerId) => {
 		setCurrAnswers((cv) =>
@@ -59,7 +57,6 @@ const TaskSingleAnswer = ({
 						: countAttempts,
 				},
 			};
-			console.log(config);
 			dispatch(
 				postContentsUser(config, {
 					params: {

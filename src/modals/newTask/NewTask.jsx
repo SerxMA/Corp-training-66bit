@@ -14,7 +14,6 @@ const MAX_CHARS = {
 
 const NewTask = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
-	console.log(data);
 	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [question, setQuestion] = useState(data ? data.description : '');
 	const [answer, setAnswer] = useState(data ? data.answers?.[0].answer : '');
@@ -43,7 +42,6 @@ const NewTask = ({ setOpen, type, position, data }) => {
 			content.countAttempts = attemptsTest;
 			content.answers = [{ answer, isRight: true }];
 		}
-		console.log(content);
 		const contentBlob = new Blob([JSON.stringify(content)], {
 			type: 'application/json; charset=UTF-8',
 		});

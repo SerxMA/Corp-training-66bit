@@ -21,8 +21,6 @@ const MemberRow = ({
 	const { course } = useSelector((state) => state.course);
 	const [trash, setTrash] = useState(false);
 	const [relocate, setRelocate] = useState(false);
-
-	console.log(member);
 	const tag = memberStatus[member.status];
 
 	return (

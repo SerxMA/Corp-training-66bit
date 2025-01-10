@@ -31,8 +31,6 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	const [search, setSearch] = useState('');
 	const [clickCompleted, setClickCompleted] = useState(false);
 
-	console.log(modules);
-
 	const handleSubmitPost = () => {
 		const config = {
 			params: { courseId: course.id },
@@ -53,14 +51,6 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 	};
 
 	const handleSubmitPut = () => {
-		console.log(
-			currModules.map((module) => ({
-				...module.deadlines,
-				startTime: toISOStringWithOffset(module.deadlines.startTime),
-				endTime: toISOStringWithOffset(module.deadlines.endTime),
-			})),
-			'Отправка'
-		);
 		const config = {
 			url: `/${data.id}/deadlines`,
 			data: currModules.map((module) => ({

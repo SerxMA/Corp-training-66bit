@@ -16,7 +16,6 @@ const EditCourseStructure = ({ setOpen, course }) => {
 	const [newModule, setNewModule] = useState(false);
 	useEffect(() => {
 		const closePopup = () => {
-			console.log(12343234);
 			setOpen(false);
 		};
 

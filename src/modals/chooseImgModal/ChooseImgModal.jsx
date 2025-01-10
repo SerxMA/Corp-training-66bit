@@ -7,7 +7,6 @@ const ChooseImgModal = ({ onPrev, onNext, changeData, data, type }) => {
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
-	console.log(type);
 
 	const handleDrop = (e) => {
 		e.preventDefault();

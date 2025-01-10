@@ -24,8 +24,6 @@ const NewText = ({ setOpen, position, data }) => {
 	const [text, setText] = useState(data ? data.description : '');
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
-	console.log(data);
-
 	const handleSubmit = () => {
 		const content = {
 			title: title,
@@ -36,7 +34,6 @@ const NewText = ({ setOpen, position, data }) => {
 		const contentBlob = new Blob([JSON.stringify(content)], {
 			type: 'application/json; charset=UTF-8',
 		});
-		console.log(content);
 
 		const formData = new FormData();
 		formData.append('content', contentBlob);

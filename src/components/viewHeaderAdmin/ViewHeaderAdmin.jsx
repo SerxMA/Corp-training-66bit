@@ -14,7 +14,6 @@ const ViewHeaderAdmin = () => {
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
-			console.log(search);
 			search.length
 				? navigate(`/courses/all-courses?page=1&title=${search}`)
 				: navigate(

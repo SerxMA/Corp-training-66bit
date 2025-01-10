@@ -45,12 +45,6 @@ const TopicLayout = () => {
 					)
 				);
 			}
-			console.log(
-				currentModule,
-				currentTopic,
-				!currentTopic.userTopic,
-				currentModule.userModule
-			);
 			if (
 				currentModule &&
 				currentTopic &&

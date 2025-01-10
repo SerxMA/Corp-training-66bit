@@ -38,7 +38,6 @@ const TaskDetailedAnswer = ({
 						: countAttempts,
 				},
 			};
-			console.log(config);
 			dispatch(
 				postContentsUser(config, {
 					params: {
