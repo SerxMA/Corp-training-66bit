@@ -150,9 +150,25 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								className={styles['number-input']}
 								value={pointCorrect}
 								max={2000000000}
+								onKeyDown={(e) => {
+									if (['-', '+', 'e', 'E'].includes(e.key)) {
+										e.preventDefault();
+									}
+								}}
+								onPaste={(e) => {
+									const pasteData =
+										e.clipboardData.getData('text');
+									if (
+										isNaN(pasteData) ||
+										+pasteData >= 2000000000
+									) {
+										e.preventDefault();
+									}
+								}}
 								onChange={(e) =>
 									e.nativeEvent.data !== '-' &&
 									e.nativeEvent.data !== '+' &&
+									e.nativeEvent.data !== 'e' &&
 									e.target.value < 2000000000 &&
 									setPointCorrect(e.target.value)
 								}
@@ -167,9 +183,27 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									className={styles['number-input']}
 									value={attemptsTest}
 									max={2000000000}
+									onKeyDown={(e) => {
+										if (
+											['-', '+', 'e', 'E'].includes(e.key)
+										) {
+											e.preventDefault();
+										}
+									}}
+									onPaste={(e) => {
+										const pasteData =
+											e.clipboardData.getData('text');
+										if (
+											isNaN(pasteData) ||
+											+pasteData >= 2000000000
+										) {
+											e.preventDefault();
+										}
+									}}
 									onChange={(e) =>
 										e.nativeEvent.data !== '-' &&
 										e.nativeEvent.data !== '+' &&
+										e.nativeEvent.data !== 'e' &&
 										e.target.value < 2000000000 &&
 										setAttemptsTest(e.target.value)
 									}

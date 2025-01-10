@@ -19,7 +19,6 @@ const MAX_CHARS = {
 
 const NewTest = ({ setOpen, type, position, data }) => {
 	const dispatch = useDispatch();
-	console.log(data);
 	const { isError, isLoading } = useSelector((state) => state.contents);
 	const [answersType, setAnswersType] = useState(type ? type : 'one');
 	const [question, setQuestion] = useState(data ? data.description : '');
@@ -33,6 +32,8 @@ const NewTest = ({ setOpen, type, position, data }) => {
 		data ? data.countAttempts : 1
 	);
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
+
+	console.log(pointCorrect);
 
 	const addAnswer = () => {
 		setAnswers((cv) =>
@@ -256,12 +257,30 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								className={styles['number-input']}
 								value={pointCorrect}
 								max={2000000000}
-								onChange={(e) =>
-									e.nativeEvent.data !== '-' &&
-									e.nativeEvent.data !== '+' &&
-									e.target.value < 2000000000 &&
-									setPointCorrect(e.target.value)
-								}
+								onKeyDown={(e) => {
+									if (['-', '+', 'e', 'E'].includes(e.key)) {
+										e.preventDefault();
+									}
+								}}
+								onPaste={(e) => {
+									const pasteData =
+										e.clipboardData.getData('text');
+									if (
+										isNaN(pasteData) ||
+										+pasteData >= 2000000000
+									) {
+										e.preventDefault();
+									}
+								}}
+								onChange={(e) => {
+									return (
+										e.nativeEvent.data !== '-' &&
+										e.nativeEvent.data !== '+' &&
+										e.nativeEvent.data !== 'e' &&
+										e.target.value < 2000000000 &&
+										setPointCorrect(e.target.value)
+									);
+								}}
 							/>
 							<span>Баллов за верный ответ</span>
 						</div>
@@ -272,9 +291,25 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								className={styles['number-input']}
 								value={attemptsTest}
 								max={2000000000}
+								onKeyDown={(e) => {
+									if (['-', '+', 'e', 'E'].includes(e.key)) {
+										e.preventDefault();
+									}
+								}}
+								onPaste={(e) => {
+									const pasteData =
+										e.clipboardData.getData('text');
+									if (
+										isNaN(pasteData) ||
+										+pasteData >= 2000000000
+									) {
+										e.preventDefault();
+									}
+								}}
 								onChange={(e) =>
 									e.nativeEvent.data !== '-' &&
 									e.nativeEvent.data !== '+' &&
+									e.nativeEvent.data !== 'e' &&
 									e.target.value < 2000000000 &&
 									setAttemptsTest(e.target.value)
 								}

@@ -102,7 +102,7 @@ const router = createBrowserRouter([
 function App() {
 	return (
 		<div className="App">
-			<ToastContainer />
+			<ToastContainer limit={7} />
 			<RouterProvider router={router} />
 		</div>
 	);

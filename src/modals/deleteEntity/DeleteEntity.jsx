@@ -160,8 +160,11 @@ const DeleteEntity = ({ setOpen, type, content, id, data }) => {
 						Это действие не может быть отменено.
 						<br />
 						Удалив{' '}
-						{identificationType[type]?.string || 'неизвестный тип'},
-						вы потеряете все внесенные данные.
+						{identificationType[type]?.string ||
+							'неизвестный тип'},{' '}
+						{type === 'member' || type === 'member'
+							? 'вы не сможете восстановить весь набранный прогресс.'
+							: 'вы потеряете все внесенные данные.'}
 					</p>
 				</div>
 				<div className={styles['btn-wrapper']}>

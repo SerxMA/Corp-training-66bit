@@ -5,7 +5,7 @@ export const findAnswersDuplicates = (answers) => {
 		if (answer) {
 			answerCounts.set(
 				answer.trimEnd(),
-				(answerCounts.get(answer) || 0) + 1
+				(answerCounts.get(answer.trimEnd()) || 0) + 1
 			);
 		}
 	});

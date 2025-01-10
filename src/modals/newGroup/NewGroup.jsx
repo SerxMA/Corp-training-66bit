@@ -69,7 +69,9 @@ const NewGroup = ({ setOpen }) => {
 						onClick={() => {
 							if (
 								groups.length &&
-								groups.some((obj) => obj.name === group)
+								groups.some(
+									(obj) => obj.name === group.trimEnd()
+								)
 							) {
 								toast.error(
 									'Группа с таким названием существует'

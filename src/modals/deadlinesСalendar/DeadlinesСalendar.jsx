@@ -2,9 +2,10 @@ import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { DateCalendar, MultiSectionDigitalClock } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 
+import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
 import styles from './DeadlinesСalendar.module.css';
-import MainButton from '../../UI/buttons/mainButton/MainButton';
 
 const formatDateTime = ({ date, time }) => {
 	const [hours, minutes] = time.split(':');
@@ -16,7 +17,6 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 	const [date, setDate] = useState(
 		data.date ? dayjs(data.date).format('YYYY-MM-DDTHH:mm:ss') : ''
 	);
-	console.log(date);
 
 	const dateChange = (newTime, field) => {
 		setDate((cv) => {
@@ -29,13 +29,18 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 						: new Date()
 					: currDateField.length > 1
 					? currDateField[1]
-					: '08:00';
+					: '23:55';
 
 			const updatedDate = formatDateTime({
 				[revField]: revFieldContent,
 				[field]: newTime,
 			});
-			return updatedDate;
+			if (new Date(updatedDate).getTime() < new Date().getTime()) {
+				toast.error('Нельзя установить дедлайн в прошлом!', {
+					toastId: 'bad_deadline',
+				});
+				return cv;
+			} else return updatedDate;
 		});
 	};
 
@@ -84,19 +89,45 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 									'0px 0px 16px 0px rgba(33, 37, 41, 0.06)',
 								'.css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel':
 									{
-										color: 'var(--content-disabled)',
+										color: 'var(--content-disabled);',
 									},
+								'.MuiTypography-root.MuiTypography-caption.MuiDayCalendar-weekDayLabel':
+									{
+										color: 'var(--content-disabled);',
+									},
+
 								'.css-cyfsxc-MuiPickersCalendarHeader-labelContainer':
 									{
 										font: 'var(--body-medium16)',
 									},
+								'.MuiPickersCalendarHeader-labelContainer': {
+									font: 'var(--body-medium16)',
+								},
+
 								'.css-xb7uwb-MuiPickersArrowSwitcher-spacer': {
 									width: '30px',
 								},
+								'.MuiPickersArrowSwitcher-spacer': {
+									width: '30px',
+								},
+
 								'.css-1ckov0h-MuiSvgIcon-root': {
 									color: 'var(--content-primary)',
 								},
+								'.MuiSvgIcon-root.MuiSvgIcon-fontSizeInherit.MuiPickersArrowSwitcher-leftArrowIcon':
+									{
+										color: 'var(--content-primary)',
+									},
+								'.MuiSvgIcon-root.MuiSvgIcon-fontSizeInherit.MuiPickersArrowSwitcher-rightArrowIcon':
+									{
+										color: 'var(--content-primary)',
+									},
+
 								'.css-17nrfho-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button':
+									{
+										border: '1px solid var(--content-border);',
+									},
+								'.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeMedium.MuiPickersArrowSwitcher-button.MuiPickersArrowSwitcher-nextIconButton':
 									{
 										border: '1px solid var(--content-border);',
 									},
@@ -105,7 +136,17 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 										backgroundColor:
 											'var(--content-background);',
 									},
+								'.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeMedium.MuiPickersArrowSwitcher-button.MuiPickersArrowSwitcher-nextIconButton:hover':
+									{
+										backgroundColor:
+											'var(--content-background);',
+									},
+
 								'.css-z4ns9w-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button':
+									{
+										border: '1px solid var(--content-border);',
+									},
+								'.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeMedium.MuiPickersArrowSwitcher-button.MuiPickersArrowSwitcher-previousIconButton':
 									{
 										border: '1px solid var(--content-border);',
 									},
@@ -114,11 +155,26 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 										backgroundColor:
 											'var(--content-background);',
 									},
+								'.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeMedium.MuiPickersArrowSwitcher-button.MuiPickersArrowSwitcher-previousIconButton:hover':
+									{
+										backgroundColor:
+											'var(--content-background);',
+									},
+
 								'.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root':
 									{
 										color: 'var(--content-primary);',
 									},
+								'.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin':
+									{
+										color: 'var(--content-primary);',
+									},
+
 								'.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root':
+									{
+										color: 'var(--content-primary);',
+									},
+								'.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today':
 									{
 										color: 'var(--content-primary);',
 									},
@@ -126,17 +182,27 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 									{
 										border: '1px solid var(--content-disabled);',
 									},
+								'.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today:not(.Mui-selected)':
+									{
+										border: '1px solid var(--content-disabled);',
+									},
+
 								'.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected':
 									{
-										color: 'var(--content-constant)',
+										color: 'var(--content-constant);',
 									},
+								'.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.Mui-selected':
+									{
+										color: 'var(--content-constant);',
+									},
+
 								'.css-iupya1-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton':
 									{
-										color: 'var(--content-subPrimary)',
+										color: 'var(--content-subPrimary);',
 									},
-								'.css-1rf3jwr-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton':
+								'.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeSmall.MuiPickersCalendarHeader-switchViewButton':
 									{
-										color: 'var(--content-subPrimary)',
+										color: 'var(--content-subPrimary);',
 									},
 							}}
 						/>
@@ -162,6 +228,17 @@ const DeadlinesСalendar = ({ setOpen, id, title, chengeDeadline, data }) => {
 											font: '500 1.5rem/1.25 "IBM Plex Sans"',
 											color: 'var(--blue-main)',
 										},
+									'.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root.MuiMenuItem-gutters.MuiMultiSectionDigitalClockSection-item':
+										{
+											font: '500 1.5rem/1.25 "IBM Plex Sans"',
+											color: 'var(--blue-main)',
+										},
+									'.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected.MuiMultiSectionDigitalClockSection-item':
+										{
+											font: '500 1.5rem/1.25 "IBM Plex Sans"',
+											color: 'var(--content-constant)',
+										},
+
 									'.MuiList-root:hover::-webkit-scrollbar': {
 										display: 'none',
 									},
