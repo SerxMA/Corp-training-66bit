@@ -16,9 +16,7 @@ const AdminCourseTabs = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const { id } = useParams();
-	const {
-		course: { published },
-	} = useSelector((state) => state.course);
+	const { course } = useSelector((state) => state.course);
 	const [addParticipants, setAddParticipants] = useState(false);
 	const [newGroup, setNewGroup] = useState(false);
 	const [search, setSearch] = useState('');
@@ -29,7 +27,7 @@ const AdminCourseTabs = () => {
 	const publish = () => {
 		api.courses
 			.putCoursePublish({
-				params: { publish: !published },
+				params: { publish: !course?.published },
 				url: `/${id}/publish`,
 			})
 			.then((res) => dispatch(getCourseSuccess(res.data)));
@@ -142,7 +140,9 @@ const AdminCourseTabs = () => {
 					</button>
 				) : (
 					<MainButton size="small" onClick={publish}>
-						{published ? 'Снять с публикации' : 'Опубликовать'}
+						{course?.published
+							? 'Снять с публикации'
+							: 'Опубликовать'}
 					</MainButton>
 				)}
 			</div>
