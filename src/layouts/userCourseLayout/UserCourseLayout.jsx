@@ -20,13 +20,13 @@ const UserCourseLayout = () => {
 	const { myGroup } = useSelector((state) => state.myGroup);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { username } = useAuth();
+	const { id } = useAuth();
 
 	useEffect(() => {
 		const courseId = window.location.pathname.match(/\/course\/(\d+)/)[1];
 		dispatch(
 			getUserCourse({
-				params: { username, courseId },
+				params: { userId: id, courseId },
 			})
 		);
 
@@ -41,7 +41,7 @@ const UserCourseLayout = () => {
 
 	useEffect(() => {
 		if (userCourse.id) {
-			dispatch(getCourseUser({ params: { username } }, userCourse.id));
+			dispatch(getCourseUser({ params: { userId: id } }, userCourse.id));
 		}
 	}, [userCourse]);
 

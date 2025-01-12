@@ -14,6 +14,13 @@ export const getCourse = (config) =>
 export const putCourse = (config) =>
 	makeRequest({ method: 'PUT', ...config, url: URL + config.url });
 
+export const putCoursePublish = (config) =>
+	makeRequest({
+		method: 'PUT',
+		...config,
+		url: URL + config.url,
+	});
+
 export const deleteCourse = (config) => {
 	config.url = URL + `${config.url}`;
 	return makeRequest({ method: 'DELETE', ...config });

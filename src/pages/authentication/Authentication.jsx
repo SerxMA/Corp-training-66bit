@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import styles from './Authentication.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
@@ -10,11 +12,16 @@ import useTheme from '../../customHooks/useTheme.js';
 
 const Authentication = () => {
 	const [theme, setTheme] = useTheme();
+	const [searchParams] = useSearchParams();
+	const error = searchParams.get('error') ? searchParams.get('error') : '';
 	// const [remember, setRemember] = useState(false);
 
 	// const toggleState = () => {
 	// 	setRemember((cv) => !cv);
 	// };
+	if (error.length) {
+		toast.error(error);
+	}
 
 	useEffect(
 		() =>

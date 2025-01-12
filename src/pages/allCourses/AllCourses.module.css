@@ -12,3 +12,10 @@
 
 	padding: 0.5rem;
 }
+.some {
+	align-self: center;
+
+	margin-top: 1rem;
+
+	color: var(--content-disabled);
+}

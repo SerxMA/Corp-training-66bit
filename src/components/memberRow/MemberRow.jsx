@@ -55,12 +55,12 @@ const MemberRow = ({
 				onClick={(e) => {
 					e.stopPropagation();
 					setMemberManagment((cv) =>
-						cv === member.user.username ? 0 : member.user.username
+						cv === member.user.id ? 0 : member.user.id
 					);
 				}}
 			>
 				<Dots />
-				{memberManagmentState === member.user.username && (
+				{memberManagmentState === member.user.id && (
 					<MemberManagment
 						isTop={false}
 						setOpen={setMemberManagment}
@@ -79,7 +79,7 @@ const MemberRow = ({
 					data={[
 						{
 							groupId: member.group.id,
-							username: member.user.username,
+							userId: member.user.id,
 						},
 					]}
 				/>
@@ -91,7 +91,7 @@ const MemberRow = ({
 					users={[
 						{
 							groupId: member.group.id,
-							username: member.user.username,
+							userId: member.user.id,
 						},
 					]}
 					courseId={course.id}

@@ -17,7 +17,7 @@ const AllCourses = () => {
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
 	const title = searchParams.get('title') ? searchParams.get('title') : '';
-	const { role, username } = useAuth();
+	const { role, id } = useAuth();
 
 	useEffect(() => {
 		if (page >= 1) {
@@ -28,7 +28,8 @@ const AllCourses = () => {
 					  })
 					: getAllCoursesUser({
 							params: {
-								username: username,
+								status: 'PUBLISHED',
+								userId: id,
 								enrolled: false,
 								page: page - 1,
 								limit: 20,
@@ -61,7 +62,7 @@ const AllCourses = () => {
 
 	return (
 		<div className={styles['all-courses']}>
-			{!!courses.length && (
+			{courses.length ? (
 				<>
 					<ul className={styles['courses-wrapper']}>
 						{courses.map((course) => (
@@ -82,6 +83,8 @@ const AllCourses = () => {
 						onPageChange={setPage}
 					/>
 				</>
+			) : (
+				<h2 className={styles.some}>Курсов нет</h2>
 			)}
 		</div>
 	);

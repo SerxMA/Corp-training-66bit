@@ -17,14 +17,15 @@ const MyCourses = () => {
 		searchParams.get('page') ? +searchParams.get('page') : 1
 	);
 	const title = searchParams.get('title') ? searchParams.get('title') : '';
-	const { username } = useAuth();
+	const { id } = useAuth();
 
 	useEffect(() => {
 		if (page >= 1) {
 			dispatch(
 				getMyCoursesUser({
 					params: {
-						username: username,
+						status: 'PUBLISHED',
+						userId: id,
 						enrolled: true,
 						title,
 						page: page - 1,

@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 
 export const useAuth = () => {
-	const { username, email, avatarUrl, role } = useSelector(
+	const { id, username, email, avatarUrl, role } = useSelector(
 		(state) => state.user
 	);
 
 	return {
+		id,
 		isAuth: !!role,
 		username,
 		email,

@@ -36,7 +36,7 @@ const SetDeadlinesPopup = ({ setOpen, allPopups, data }) => {
 			params: { courseId: course.id },
 			data: {
 				name: data.title,
-				usernames: data.people,
+				userIds: data.people,
 				deadlines: currModules.map((module) => ({
 					...module.deadlines,
 					startTime: toISOStringWithOffset(

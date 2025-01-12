@@ -29,10 +29,10 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 	const [people, setPeople] = useState([]);
 	const [clickCompleted, setClickCompleted] = useState(false);
 
-	const toggleStatePeople = (username) => {
+	const toggleStatePeople = (id) => {
 		setPeople((cv) =>
 			cv.map((obj) =>
-				obj.username === username ? { ...obj, state: !obj.state } : obj
+				obj.id === id ? { ...obj, state: !obj.state } : obj
 			)
 		);
 	};
@@ -45,7 +45,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 			},
 			data: people
 				.filter((people) => people.state)
-				.map((people) => people.username),
+				.map((people) => people.id),
 		};
 		data
 			? dispatch(putGroupUsers(config, course.id))
@@ -57,16 +57,16 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 		<ul className={styles['people-list']}>
 			{people.length ? (
 				people.map((obj) => (
-					<li key={obj.username} className={styles['people-elem']}>
+					<li key={obj.id} className={styles['people-elem']}>
 						<Checkbox
 							state={obj.state}
-							onClick={() => toggleStatePeople(obj.username)}
+							onClick={() => toggleStatePeople(obj.id)}
 						/>
 						<ProfileInfoCard
 							avatar={obj.avatarUrl}
 							username={obj.username}
 							email={obj.email}
-							onClick={() => toggleStatePeople(obj.username)}
+							onClick={() => toggleStatePeople(obj.id)}
 						/>
 					</li>
 				))
@@ -192,7 +192,7 @@ const AddPeoplePopup = ({ setOpen, allPopups, type, data }) => {
 						...data,
 						people: people
 							.filter((people) => people.state)
-							.map((people) => people.username),
+							.map((people) => people.id),
 					}}
 				/>
 			)}

@@ -10,6 +10,7 @@ import {
 	getCourseUser,
 	getUserCourseData,
 	postSignUpCourse,
+	putCoursePublish,
 } from './courses';
 import {
 	deleteModule,
@@ -62,6 +63,7 @@ export const api = {
 		getAllCoursesUser,
 		getMyCoursesUser,
 		putCourse,
+		putCoursePublish,
 		deleteCourse,
 	},
 	modules: {

@@ -21,7 +21,7 @@ const CourseCardPopup = ({
 }) => {
 	const dispatch = useDispatch();
 	const [searchParams] = useSearchParams();
-	const { username } = useAuth();
+	const { id: userId } = useAuth();
 	const page = searchParams.get('page') ? +searchParams.get('page') : 1;
 	const title2 = searchParams.get('title') ? searchParams.get('title') : '';
 
@@ -31,13 +31,14 @@ const CourseCardPopup = ({
 
 	const handleSignUp = () => {
 		const config = {
-			data: [username],
+			data: [userId],
 			params: { courseId: id },
 		};
 		dispatch(
 			postSignUpCourse(config, {
 				params: {
-					username: username,
+					status: 'PUBLISHED',
+					userId: userId,
 					enrolled: false,
 					page: page - 1,
 					limit: 20,

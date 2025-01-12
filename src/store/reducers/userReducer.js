@@ -1,6 +1,7 @@
 import { USER_ACTIONS } from '../actionCreators/user.js';
 
 const initialState = {
+	id: null,
 	username: null,
 	email: null,
 	avatarUrl: null,
@@ -12,6 +13,7 @@ const userReducer = (state = initialState, action) => {
 		case USER_ACTIONS.SET_USER:
 			return {
 				...state,
+				id: action.payload.id,
 				username: action.payload.username,
 				email: action.payload.email,
 				role: action.payload.role,
