@@ -123,13 +123,13 @@ const TaskWrapper = ({ element }) => {
 			children: (
 				<div className={styles['player-wrapper']}>
 					<ReactPlayer
-						light
+						// light
 						controls
 						url={fileUrl}
 						// url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
 						width="100%"
 						height="100%"
-						playing
+						// playing
 					/>
 				</div>
 			),

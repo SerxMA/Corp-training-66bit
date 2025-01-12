@@ -325,19 +325,21 @@ const NewTest = ({ setOpen, type, position, data }) => {
 							/>
 							<span>Попыток на тест</span>
 						</div>
-						<div className={styles['multiple-response-box']}>
-							<p>Множественный ответ</p>
-							<label className={styles.switch}>
-								<input
-									checked={answersType === 'multi'}
-									type="checkbox"
-									onChange={toggleSwitchChange}
-								/>
-								<span
-									className={`${styles.slider} ${styles.round}`}
-								></span>
-							</label>
-						</div>
+						{!data && (
+							<div className={styles['multiple-response-box']}>
+								<p>Множественный ответ</p>
+								<label className={styles.switch}>
+									<input
+										checked={answersType === 'multi'}
+										type="checkbox"
+										onChange={toggleSwitchChange}
+									/>
+									<span
+										className={`${styles.slider} ${styles.round}`}
+									></span>
+								</label>
+							</div>
+						)}
 					</div>
 				</div>
 				<div className={styles['btn-wrapper']}>
