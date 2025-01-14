@@ -4,6 +4,8 @@ import styles from './MainButton.module.css';
 const MainButton = ({
 	className,
 	onClick = () => {},
+	onMouseEnter = () => {},
+	onMouseLeave = () => {},
 	disabled = false,
 	children = 'button',
 	type = 'primary',
@@ -15,8 +17,10 @@ const MainButton = ({
 			className={`${styles.btn} ${styles[type]} ${styles[size]} ${
 				className ? className : ''
 			}`}
-			onClick={onClick}
-			disabled={disabled}
+			onClick={!disabled ? onClick : undefined}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			// disabled={disabled}
 		>
 			{children}
 			{sequel && <ArrowRight />}

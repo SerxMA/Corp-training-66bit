@@ -7,8 +7,8 @@ import NewTask from '../../modals/newTask/NewTask.jsx';
 import styles from './AddNewContent.module.css';
 import NewTest from '../../modals/newTest/NewTest.jsx';
 
-const AddNewContent = ({ position }) => {
-	const [isOpen, setIsOpen] = useState(false);
+const AddNewContent = ({ position, isOpen, setIsOpen }) => {
+	// const [isOpen, setIsOpen] = useState(false);
 	const [isPositionedTop, setIsPositionedTop] = useState(true);
 	const [photo, setPhoto] = useState(false);
 	const [video, setVideo] = useState(false);
@@ -30,7 +30,7 @@ const AddNewContent = ({ position }) => {
 	};
 
 	const clickHandler = (e) => {
-		setIsOpen(!isOpen);
+		setIsOpen((cv) => (cv === position ? -1 : position));
 		e.stopPropagation();
 	};
 
@@ -90,7 +90,7 @@ const AddNewContent = ({ position }) => {
 					/>
 				</svg>
 			</button>
-			{isOpen && (
+			{isOpen === position && (
 				<DropDownAddContent
 					isTop={isPositionedTop}
 					setOpen={setIsOpen}

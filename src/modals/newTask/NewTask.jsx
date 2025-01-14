@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
 import styles from './NewTask.module.css';
@@ -147,6 +148,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={pointCorrect}
+								min={0}
 								max={2000000000}
 								onKeyDown={(e) => {
 									if (
@@ -186,6 +188,7 @@ const NewTask = ({ setOpen, type, position, data }) => {
 									placeholder=""
 									className={styles['number-input']}
 									value={attemptsTest}
+									min={1}
 									max={2000000000}
 									onKeyDown={(e) => {
 										if (
@@ -237,6 +240,15 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								? 'primary'
 								: 'disabled'
 						}
+						onMouseEnter={() => {
+							if (!question) toast.error('Задайте вопрос!');
+							else if (!(type === 'multi' || answer))
+								toast.error('Добавьте ответ!');
+							else if (!(pointCorrect >= 0))
+								toast.error('Кол.-во быллов >= 0!');
+							else if (!(attemptsTest >= 1))
+								toast.error('Кол.-во попыток >= 1!');
+						}}
 						disabled={
 							!(
 								question.length &&

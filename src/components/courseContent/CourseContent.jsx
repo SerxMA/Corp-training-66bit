@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +13,7 @@ const CourseContent = () => {
 	const dispatch = useDispatch();
 	const { contents } = useSelector((state) => state.contents);
 	const { modules } = useSelector((state) => state.modules);
+	const [modalIsOpen, setModalIsOpen] = useState(-1);
 	const { role } = useAuth();
 	const { topicId } = useParams();
 
@@ -50,13 +51,23 @@ const CourseContent = () => {
 	return (
 		<div className={styles['content-wrapper']}>
 			<ul className={styles['content-list']}>
-				{role === 'ADMIN' && <AddNewContent position={0} />}
+				{role === 'ADMIN' && (
+					<AddNewContent
+						position={0}
+						isOpen={modalIsOpen}
+						setIsOpen={setModalIsOpen}
+					/>
+				)}
 				{contents.length ? (
 					contents.map((content, index) => (
 						<div key={index} className={styles.thisOneElement}>
 							<TaskWrapper element={content} />
 							{role === 'ADMIN' && (
-								<AddNewContent position={index + 1} />
+								<AddNewContent
+									position={index + 1}
+									isOpen={modalIsOpen}
+									setIsOpen={setModalIsOpen}
+								/>
 							)}
 						</div>
 					))

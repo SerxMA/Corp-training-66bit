@@ -171,6 +171,7 @@ const NewCourse = ({
 						<input
 							type="text"
 							name="tag"
+							autoComplete="off"
 							placeholder=""
 							className={styles['tag-input']}
 							value={tag}

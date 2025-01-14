@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { postContents, putContents } from '../../store/actions/contents.js';
 import { findAnswersDuplicates } from '../../helpers/functions/findAnswersDuplicates.js';
@@ -34,6 +35,8 @@ const NewTest = ({ setOpen, type, position, data }) => {
 	const [clickCompleted, setClickCompleted] = useState(false); // пока будет так
 
 	const addAnswer = () => {
+		if (answers.find((obj) => obj.answer === ''))
+			toast.error('Присутствует пустой вариант ответа');
 		setAnswers((cv) =>
 			cv.find((obj) => obj.answer === '')
 				? [...cv]
@@ -156,16 +159,24 @@ const NewTest = ({ setOpen, type, position, data }) => {
 					{answersType === 'one' ? (
 						<RadioButton
 							state={answer.isTrue}
-							onClick={() =>
-								answer.answer && toggleStateAnswer(answer.id)
-							}
+							onClick={() => {
+								!answer.answer &&
+									toast.error(
+										'Добавьте текст в вариант ответа!'
+									);
+								answer.answer && toggleStateAnswer(answer.id);
+							}}
 						/>
 					) : (
 						<Checkbox
 							state={answer.isTrue}
-							onClick={() =>
-								answer.answer && toggleStateAnswer(answer.id)
-							}
+							onClick={() => {
+								!answer.answer &&
+									toast.error(
+										'Добавьте текст в вариант ответа!'
+									);
+								answer.answer && toggleStateAnswer(answer.id);
+							}}
 						/>
 					)}
 					<input
@@ -253,6 +264,7 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={pointCorrect}
+								min={0}
 								max={2000000000}
 								onKeyDown={(e) => {
 									if (
@@ -293,6 +305,7 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								placeholder=""
 								className={styles['number-input']}
 								value={attemptsTest}
+								min={1}
 								max={2000000000}
 								onKeyDown={(e) => {
 									if (
@@ -354,6 +367,19 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								? 'primary'
 								: 'disabled'
 						}
+						onMouseEnter={() => {
+							if (!question) toast.error('Задайте вопрос!');
+							else if (!answers.length)
+								toast.error(
+									'Добавьте хотя бы один вариант ответа!'
+								);
+							else if (!answers.some((obj) => obj.isTrue))
+								toast.error('Выберите правильный ответ!');
+							else if (!(pointCorrect >= 0))
+								toast.error('Кол.-во быллов >= 0!');
+							else if (!(attemptsTest >= 1))
+								toast.error('Кол.-во попыток >= 1!');
+						}}
 						disabled={
 							!(
 								question &&
