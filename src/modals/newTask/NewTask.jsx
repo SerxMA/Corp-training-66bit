@@ -241,13 +241,22 @@ const NewTask = ({ setOpen, type, position, data }) => {
 								: 'disabled'
 						}
 						onMouseEnter={() => {
-							if (!question) toast.error('Задайте вопрос!');
+							if (!question)
+								toast.error('Задайте вопрос!', {
+									toastId: 'noQuestion',
+								});
 							else if (!(type === 'multi' || answer))
-								toast.error('Добавьте ответ!');
+								toast.error('Добавьте ответ!', {
+									toastId: 'noAnswer',
+								});
 							else if (!(pointCorrect >= 0))
-								toast.error('Кол.-во быллов >= 0!');
+								toast.error('Кол.-во быллов >= 0!', {
+									toastId: 'noPointCorrect',
+								});
 							else if (!(attemptsTest >= 1))
-								toast.error('Кол.-во попыток >= 1!');
+								toast.error('Кол.-во попыток >= 1!', {
+									toastId: 'noAttemptsTest',
+								});
 						}}
 						disabled={
 							!(

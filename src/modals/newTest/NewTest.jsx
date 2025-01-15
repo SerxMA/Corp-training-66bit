@@ -36,7 +36,9 @@ const NewTest = ({ setOpen, type, position, data }) => {
 
 	const addAnswer = () => {
 		if (answers.find((obj) => obj.answer === ''))
-			toast.error('Присутствует пустой вариант ответа');
+			toast.error('Присутствует пустой вариант ответа', {
+				toastId: 'emptyAnswer',
+			});
 		setAnswers((cv) =>
 			cv.find((obj) => obj.answer === '')
 				? [...cv]
@@ -162,7 +164,10 @@ const NewTest = ({ setOpen, type, position, data }) => {
 							onClick={() => {
 								!answer.answer &&
 									toast.error(
-										'Добавьте текст в вариант ответа!'
+										'Добавьте текст в вариант ответа!',
+										{
+											toastId: 'addText',
+										}
 									);
 								answer.answer && toggleStateAnswer(answer.id);
 							}}
@@ -173,7 +178,10 @@ const NewTest = ({ setOpen, type, position, data }) => {
 							onClick={() => {
 								!answer.answer &&
 									toast.error(
-										'Добавьте текст в вариант ответа!'
+										'Добавьте текст в вариант ответа!',
+										{
+											toastId: 'addText',
+										}
 									);
 								answer.answer && toggleStateAnswer(answer.id);
 							}}
@@ -368,17 +376,29 @@ const NewTest = ({ setOpen, type, position, data }) => {
 								: 'disabled'
 						}
 						onMouseEnter={() => {
-							if (!question) toast.error('Задайте вопрос!');
+							if (!question)
+								toast.error('Задайте вопрос!', {
+									toastId: 'noQuestion',
+								});
 							else if (!answers.length)
 								toast.error(
-									'Добавьте хотя бы один вариант ответа!'
+									'Добавьте хотя бы один вариант ответа!',
+									{
+										toastId: 'noAnswers',
+									}
 								);
 							else if (!answers.some((obj) => obj.isTrue))
-								toast.error('Выберите правильный ответ!');
+								toast.error('Выберите правильный ответ!', {
+									toastId: 'noCorrectAnswers',
+								});
 							else if (!(pointCorrect >= 0))
-								toast.error('Кол.-во быллов >= 0!');
+								toast.error('Кол.-во быллов >= 0!', {
+									toastId: 'noPointCorrect',
+								});
 							else if (!(attemptsTest >= 1))
-								toast.error('Кол.-во попыток >= 1!');
+								toast.error('Кол.-во попыток >= 1!', {
+									toastId: 'noAttemptsTest',
+								});
 						}}
 						disabled={
 							!(

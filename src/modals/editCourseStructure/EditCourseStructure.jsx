@@ -1,19 +1,55 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
+import { api } from '../../api/index.js';
+import { getCourseSuccess } from '../../store/actionCreators/course.js';
 import Dots from '../Dots.jsx';
 import CourseStructureActions from '../courseStructureActions/CourseStructureActions.jsx';
 import SearchField from '../../components/searchField/SearchField.jsx';
 import ChangeName from '../changeName/ChangeName.jsx';
 import Modules from '../../components/modules/Modules.jsx';
-import styles from './EditCourseStructure.module.css';
 import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
+import styles from './EditCourseStructure.module.css';
 
 const EditCourseStructure = ({ setOpen, course }) => {
+	const dispatch = useDispatch();
 	const { modules } = useSelector((state) => state.modules);
+	const { id } = useParams();
 	const [courseActions, setCourseActions] = useState(false);
 	const [newModule, setNewModule] = useState(false);
+
+	const toastTimeoutRef = useRef(null);
+
+	const publish = () => {
+		toast.dismiss();
+		api.courses
+			.putCoursePublish({
+				params: { publish: !course?.published },
+				url: `/${id}/publish`,
+			})
+			.then((res) => {
+				dispatch(getCourseSuccess(res.data));
+				if (toastTimeoutRef.current) {
+					clearTimeout(toastTimeoutRef.current);
+				}
+
+				toastTimeoutRef.current = setTimeout(() => {
+					if (res.data.published) {
+						toast.success('Курс опубликован', {
+							toastId: 'published',
+						});
+					} else {
+						toast.success('Курс снят с публикации', {
+							toastId: 'unPublished',
+						});
+					}
+				}, 250);
+			});
+	};
+
 	useEffect(() => {
 		const closePopup = () => {
 			setOpen(false);
@@ -80,13 +116,16 @@ const EditCourseStructure = ({ setOpen, course }) => {
 				</div>
 				<div className={styles['btn-wrapper']}>
 					<MainButton
+						className={styles.btn}
 						onClick={() => setOpen(false)}
 						type={'secondary'}
 					>
 						Назад
 					</MainButton>
-					<MainButton onClick={() => setOpen(false)}>
-						Готово
+					<MainButton className={styles.btn} onClick={publish}>
+						{course?.published
+							? 'Снять с публикации'
+							: 'Опубликовать курс'}
 					</MainButton>
 				</div>
 				{newModule && (

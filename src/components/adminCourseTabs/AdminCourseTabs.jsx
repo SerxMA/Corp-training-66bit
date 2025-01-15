@@ -1,37 +1,21 @@
 import { useState } from 'react';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import { api } from '../../api/index.js';
 import { changeText } from '../../helpers/functions/formatText.js';
 import NewGroup from '../../modals/newGroup/NewGroup.jsx';
 import AddPeoplePopup from '../../modals/addPeoplePopup/AddPeoplePopup.jsx';
 import styles from './AdminCourseTabs.module.css';
 import SearchInputSmall from '../../UI/inputs/searchInputSmall/SearchInputSmall.jsx';
 import Tooltip from '../../UI/other/tooltip/Tooltip.jsx';
-import MainButton from '../../UI/buttons/mainButton/MainButton.jsx';
-import { getCourseSuccess } from '../../store/actionCreators/course.js';
 
 const AdminCourseTabs = () => {
-	const dispatch = useDispatch();
 	const location = useLocation();
-	const { id } = useParams();
-	const { course } = useSelector((state) => state.course);
 	const [addParticipants, setAddParticipants] = useState(false);
 	const [newGroup, setNewGroup] = useState(false);
 	const [search, setSearch] = useState('');
 
 	const isGroups = location.pathname.includes('groups');
 	const isPartic = location.pathname.includes('participants');
-
-	const publish = () => {
-		api.courses
-			.putCoursePublish({
-				params: { publish: !course?.published },
-				url: `/${id}/publish`,
-			})
-			.then((res) => dispatch(getCourseSuccess(res.data)));
-	};
 
 	return (
 		<div className={styles['admin-tabs']}>
@@ -138,13 +122,7 @@ const AdminCourseTabs = () => {
 						</svg>
 						{isGroups ? 'Новая группа' : 'Добавить участников'}
 					</button>
-				) : (
-					<MainButton size="small" onClick={publish}>
-						{course?.published
-							? 'Снять с публикации'
-							: 'Опубликовать'}
-					</MainButton>
-				)}
+				) : null}
 			</div>
 			{newGroup && <NewGroup setOpen={setNewGroup} />}
 			{addParticipants && <AddPeoplePopup setOpen={setAddParticipants} />}
