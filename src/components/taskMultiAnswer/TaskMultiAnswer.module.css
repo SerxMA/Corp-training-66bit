@@ -1,0 +1,41 @@
+.question {
+	color: var(--content-secondary);
+	font: var(--body-medium16);
+	letter-spacing: 0.16px;
+}
+.answers {
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	gap: 1rem;
+
+	& label {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		column-gap: 0.625rem;
+		cursor: pointer;
+
+		font: var(--body-medium16);
+		letter-spacing: 0.16px;
+		color: var(--content-primary);
+
+		&:hover {
+			color: var(--content-subPrimary);
+		}
+
+		& p {
+			font: var(--body-regular16);
+			letter-spacing: 0.16px;
+			color: var(--content-primary);
+			word-break: break-word;
+			overflow: hidden;
+		}
+	}
+}
+.btn-wrapper {
+	display: flex;
+	flex-direction: row;
+
+	max-width: 250px;
+}

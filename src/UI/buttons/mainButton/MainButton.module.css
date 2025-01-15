@@ -1,0 +1,129 @@
+.btn {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.5rem;
+	flex-shrink: 0;
+	flex-grow: 1;
+
+	border-radius: 0.5rem;
+
+	user-select: none;
+
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
+		box-shadow 0.1s ease-in-out;
+
+	&:disabled {
+		cursor: auto;
+	}
+
+	& > svg {
+		flex-shrink: 0;
+
+		& > path {
+			transition: stroke 0.2s ease-in-out;
+		}
+	}
+}
+/* types */
+.primary {
+	background-color: var(--accent-primary);
+
+	color: var(--content-constant);
+
+	&:hover {
+		background-color: var(--accent-subPrimary);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+	&:active {
+		background-color: var(--accent-secondary);
+
+		box-shadow: 0px 0px 16px 0px var(--accent-border);
+	}
+
+	& > svg > path {
+		stroke: var(--content-constant);
+	}
+}
+.sub-primary {
+	background-color: var(--accent-background);
+
+	color: var(--accent-primary);
+
+	&:hover {
+		background-color: var(--accent-border);
+	}
+	&:active {
+		background-color: var(--accent-disabled);
+	}
+
+	& > svg > path {
+		stroke: var(--accent-primary);
+	}
+}
+.secondary {
+	background-color: var(--content-background);
+
+	color: var(--content-subPrimary);
+
+	&:hover {
+		background-color: var(--content-border);
+	}
+	&:active {
+		background-color: var(--content-disabled);
+	}
+
+	& > svg > path {
+		stroke: var(--content-subPrimary);
+	}
+}
+.light {
+	border: 1px solid var(--content-background);
+
+	color: var(--content-secondary);
+
+	box-shadow: 0px 0px 16px 0px rgba(33, 37, 41, 0.02);
+
+	&:hover {
+		background-color: var(--content-background);
+	}
+	&:active {
+		background-color: var(--content-border);
+	}
+
+	& > svg > path {
+		stroke: var(--content-secondary);
+	}
+}
+.disabled {
+	background-color: var(--content-background);
+
+	color: var(--content-disabled);
+
+	cursor: auto;
+
+	& > svg > path {
+		stroke: var(--content-disabled);
+	}
+}
+/* sizes */
+.big {
+	min-height: var(--size-button-big);
+	padding: 1rem;
+
+	font: var(--semiBold16);
+}
+.medium {
+	min-height: var(--size-button-medium);
+	padding: 0.625rem 1rem;
+
+	font: var(--semiBold14);
+}
+.small {
+	min-height: var(--size-button-small);
+	padding: 0.375rem 1rem;
+
+	font: var(--semiBold14);
+}

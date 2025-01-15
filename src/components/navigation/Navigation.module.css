@@ -1,0 +1,14 @@
+.nav {
+	position: fixed;
+	width: 100%;
+	max-width: 15rem;
+	height: 100%;
+	border-right: 1px solid var(--content-background);
+
+	background-color: var(--background-primary);
+}
+.nav__list {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 0.25rem;
+}

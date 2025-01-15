@@ -1,0 +1,19 @@
+.dropdown li {
+	display: block;
+
+	&:hover {
+		background-color: var(--content-background);
+	}
+}
+.dropdown {
+	width: 100%;
+	display: none;
+}
+.is-expanded {
+	display: block;
+}
+.topics-placeholder {
+	margin-left: 2.5rem;
+
+	color: var(--content-subPrimary);
+}

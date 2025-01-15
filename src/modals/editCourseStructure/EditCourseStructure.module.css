@@ -1,0 +1,114 @@
+.modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--background-overlay-dark);
+
+	z-index: 49;
+}
+.popup {
+	display: flex;
+	flex-direction: column;
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 640px;
+	border-radius: 1.25rem;
+	border: 1px solid var(--content-background);
+
+	background-color: var(--background-modal);
+
+	transform: translateX(-50%) translateY(-50%);
+}
+.top-block {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	position: relative;
+	padding: 2rem 2rem 1.5rem;
+}
+.title {
+	color: var(--content-primary);
+}
+.dots {
+	display: flex;
+	flex-shrink: 0;
+}
+.describe-block {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+
+	padding: 0.5rem 2rem 0;
+	border-top: 1px solid var(--content-background);
+	border-bottom: 1px solid var(--content-background);
+
+	font: var(--body-regular16);
+	letter-spacing: 0.16px;
+}
+.manage-block {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.5rem;
+
+	& button {
+		display: flex;
+		flex-direction: row;
+		column-gap: 0.5rem;
+
+		padding: 0.475rem 1rem;
+		margin-left: auto;
+		border-radius: 0.5rem;
+
+		background-color: var(--accent-background);
+
+		font: var(--semiBold14);
+		color: var(--accent-primary);
+
+		transition: background-color 0.2s ease-in-out;
+
+		&:hover {
+			background-color: var(--accent-border);
+		}
+		&:active {
+			background-color: var(--accent-disabled);
+		}
+	}
+}
+.table-box {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.5rem;
+
+	max-height: 476px;
+	min-height: 100px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	&::-webkit-scrollbar-track {
+		background-color: var(--content-subPrimary);
+		border-radius: 30px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--system-success-primary);
+		border-radius: 30px;
+	}
+}
+.btn-wrapper {
+	display: flex;
+	flex-direction: row;
+	column-gap: 1.5rem;
+
+	padding: 2rem 2rem 1.5rem;
+}
+
+.btn {
+	width: calc((100% - 1.5rem) / 2);
+}

@@ -1,0 +1,18 @@
+.points-tag {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.25rem;
+
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.375rem;
+	background-color: var(--blue-background);
+
+	cursor: pointer;
+
+	& > p {
+		font: var(--body-medium14);
+		letter-spacing: 0.14px;
+		color: var(--blue-main);
+	}
+}

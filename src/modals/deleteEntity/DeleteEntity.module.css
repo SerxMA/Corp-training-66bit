@@ -1,0 +1,70 @@
+.modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--background-overlay-dark);
+
+	z-index: 49;
+}
+.popup {
+	display: flex;
+	flex-direction: column;
+	align-self: baseline;
+	gap: 1.5rem;
+
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 480px;
+	padding: 2rem;
+	border-radius: 1.25rem;
+	border: 1px solid var(--content-background);
+
+	background-color: var(--background-modal);
+
+	transform: translateX(-50%) translateY(-50%);
+}
+.top-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: center;
+	justify-content: center;
+
+	width: 85px;
+	height: 85px;
+}
+.body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 0.75rem;
+}
+.question {
+	font: var(--body-medium16);
+	color: var(--content-primary);
+	letter-spacing: 0.16px;
+	text-align: center;
+
+	& span {
+		color: var(--accent-primary);
+		word-break: break-word;
+		/* overflow: hidden; */
+	}
+}
+.desciption {
+	font: var(--body-regular14);
+	color: var(--content-secondary);
+	letter-spacing: 0.14px;
+	text-align: center;
+}
+.btn-wrapper {
+	display: flex;
+	flex-direction: row;
+	column-gap: 1.5rem;
+}
+.half-parent {
+	width: calc((100% - 1.5rem) / 2);
+}

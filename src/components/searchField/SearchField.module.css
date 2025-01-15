@@ -1,0 +1,45 @@
+.search-container {
+	display: flex;
+	align-items: center;
+
+	position: relative;
+	height: 2rem;
+
+	border-radius: 0.5rem;
+	border: 1px solid var(--content-background);
+
+	background-color: var(--background-primary);
+
+	box-shadow: 0px 0px 4px 0px rgba(118, 120, 122, 0.1);
+}
+
+.loupe {
+	display: flex;
+	padding: 0.375rem;
+	flex-shrink: 0; /* Запрещает уменьшение размера лупы */
+	cursor: pointer;
+}
+
+.search-input {
+	width: 100%;
+	font-size: 14px;
+	height: 2rem;
+
+	color: var(--content-primary);
+	font: var(--body-regular14);
+	letter-spacing: 0.14px;
+}
+
+.search-container:hover {
+	outline: 3px solid var(--accent-background);
+	border-radius: 0.5rem;
+	transition: border 0.1s ease-in-out;
+}
+
+.input-filled {
+	border: 1px solid var(--accent-background);
+}
+
+.expanded {
+	flex-grow: 1;
+}

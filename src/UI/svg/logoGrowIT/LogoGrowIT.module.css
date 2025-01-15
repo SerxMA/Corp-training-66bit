@@ -1,0 +1,15 @@
+.logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0.375rem;
+
+	cursor: pointer;
+
+	& > svg {
+		flex-shrink: 1;
+	}
+	& > svg:last-child {
+		margin-top: 3.7px;
+	}
+}

@@ -1,0 +1,60 @@
+.drop-down {
+	display: flex;
+	flex-direction: column;
+
+	position: absolute;
+	top: 100%;
+	left: -400%;
+	min-width: 220px;
+	padding: 0.25rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--content-background);
+
+	background-color: var(--background-modal);
+
+	font: var(--body-medium14);
+	letter-spacing: 0.14px;
+
+	box-shadow: 0px 0px 16px 0px rgba(33, 37, 41, 0.02);
+	transform: translateX(-50%);
+	z-index: 9;
+	cursor: auto;
+
+	& button {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		column-gap: 0.5rem;
+
+		height: 32px;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+
+		color: var(--content-primary);
+
+		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+		&:nth-child(2n):hover,
+		&:nth-child(1n):hover {
+			background-color: var(--background-secondary);
+		}
+
+		&:nth-child(4n):hover,
+		&:nth-child(3n):hover {
+			background-color: var(--red-background);
+
+			color: var(--red-main);
+
+			& path {
+				stroke: var(--system-error-primary);
+			}
+		}
+
+		& path {
+			transition: stroke 0.2s ease-in-out;
+		}
+	}
+}
+.position-top {
+	bottom: 100%;
+}

@@ -1,0 +1,39 @@
+.lesson {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 0.75rem;
+
+	cursor: pointer;
+
+	& span {
+		max-width: 80%;
+		word-break: break-word;
+
+		font: var(--body-regular14);
+		letter-spacing: 0.14px;
+		color: var(--content-primary);
+	}
+}
+.lesson_current {
+	background-color: var(--content-border);
+}
+.managment-btn {
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.5rem;
+
+	margin-left: auto;
+	margin-right: 0.25rem;
+
+	& button {
+		flex-shrink: 0;
+
+		&:hover {
+			& path {
+				transition: stroke 0.2s ease-in-out;
+				stroke: var(--accent-subPrimary);
+			}
+		}
+	}
+}

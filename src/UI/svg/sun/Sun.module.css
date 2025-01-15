@@ -1,0 +1,8 @@
+.svg {
+	& > path {
+		transition: stroke 0.2s ease-in-out;
+	}
+	&:hover > path {
+		stroke: var(--orange-border);
+	}
+}

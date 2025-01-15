@@ -1,0 +1,14 @@
+.tag {
+	display: flex;
+	align-self: baseline;
+	align-items: center;
+	column-gap: 0.25rem;
+
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.5rem;
+}
+
+.text {
+	font: var(--body-medium14);
+	letter-spacing: 0.14px;
+}
