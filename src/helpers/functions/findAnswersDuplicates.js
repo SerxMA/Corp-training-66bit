@@ -16,7 +16,9 @@ export const findAnswersDuplicates = (answers) => {
 		.map(([answer]) => answer);
 
 	if (duplicates.length > 0) {
-		toast.error(`Присутствуют дубликаты: ${duplicates.join(', ')}`);
+		toast.error(`Присутствуют дубликаты: ${duplicates.join(', ')}`, {
+			toastId: `duble-${duplicates.join(', ')}`,
+		});
 		return false;
 	} else return true;
 };
