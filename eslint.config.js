@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import importPlugin from 'eslint-plugin-import';
 
 export default [
-	js.configs.recommended, 
+	js.configs.recommended,
 	importPlugin.flatConfigs.recommended,
 
 	{ ignores: ['dist'] },
@@ -21,7 +21,24 @@ export default [
 				sourceType: 'module',
 			},
 		},
-		settings: { react: { version: '18.3' } },
+		settings: {
+			react: { version: '18.3' },
+			'import/resolver': {
+				node: { paths: ['src'] },
+				alias: {
+					map: [
+						['pages', './src/pages'],
+						['components', './src/components'],
+						['molecules', './src/molecules'],
+						['UI', './src/UI'],
+						['assets', './src/assets'],
+						['customHooks', './src/customHooks'],
+						['utils', './src/utils'],
+					],
+					extensions: ['.js', '.jsx', '.json'],
+				},
+			},
+		},
 		plugins: {
 			react,
 			'react-hooks': reactHooks,
@@ -42,21 +59,21 @@ export default [
 			quotes: ['error', 'single'],
 			'jsx-quotes': ['error', 'prefer-double'],
 
-			'import/newline-after-import': [ 
-				'error', 
-				{ count: 1, exactCount: true }, 
-			], 
-			'import/order': [ 
-				'error', 
-				{ 
-				groups: [ 
-				'builtin', 
-				'external', 
-				'internal', 
-				['parent', 'sibling', 'index', 'type', 'unknown'], 
-				], 
-				'newlines-between': 'always', 
-				}, 
+			'import/newline-after-import': [
+				'error',
+				{ count: 1, exactCount: true },
+			],
+			'import/order': [
+				'error',
+				{
+					groups: [
+						'builtin',
+						'external',
+						'internal',
+						['parent', 'sibling', 'index', 'type', 'unknown'],
+					],
+					'newlines-between': 'always',
+				},
 			],
 		},
 	},
